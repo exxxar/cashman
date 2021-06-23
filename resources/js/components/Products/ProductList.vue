@@ -10,7 +10,12 @@
         <div class="section mt-2 text-center">
         <h4>Categories</h4>
         </div>
-    <CategoryList></CategoryList>
+
+        <ul class="listview link-listview inset">
+            <CategoryList></CategoryList>
+            <CategoryList></CategoryList>
+            <CategoryList></CategoryList>
+        </ul>
         <div class="section mt-2 text-center">
         <h4>Products</h4>
         </div>

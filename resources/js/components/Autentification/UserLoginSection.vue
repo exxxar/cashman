@@ -2,7 +2,7 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a href='/' class="headerButton goBack">
+                <a href='#' class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -12,37 +12,34 @@
             <h4>Fill the form to log in</h4>
         </div>
         <div class="section mb-5 p-2" >
-            <form @submit.prevent="checkForm">
+            <AlertErrors :form="form"></AlertErrors>
+            <form @submit.prevent="loginUser"
+                  @keydown="form.onKeydown($event)">
                 <div class="card" >
                     <div class="card-body pb-1">
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="email">E-mail</label>
-                                <input  type="email"  name="email"  id="email" placeholder="Your e-mail"
-                                       class="form-control"  :class="$v.user.email.$error ? 'is-invalid' : ''"
-                                       v-model.trim="user.email">
-                                <p v-if="!$v.user.email.required" class="invalid-feedback">
-                                    Field is required
-                                </p>
-                                <p v-if=" !$v.user.email.email" class="invalid-feedback">
-                                    Email is incorrect
-                                </p>
-
+                                <input v-model="form.email"  type="email"  name="email"  id="email" placeholder="Your e-mail"
+                                       class="form-control">
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                </i>
                             </div>
+                            <HasError :form="form" field="email"/>
                         </div>
 
                         <div class="form-group basic" >
                             <div class="input-wrapper">
                                 <label class="label" for="password">Password</label>
-                                <input  type="password"   id="password" name="password"  autocomplete="off"
+                                <input  v-model="form.password" type="password"   id="password" name="password"  autocomplete="off"
                                        placeholder="Your password"
-                                       class="form-control" :class="$v.user.password.$error ? 'is-invalid' : ''"
-                                        v-model.trim="user.password">
-                                <p v-if="!$v.user.password.required" class="invalid-feedback">
-                                    Field is required
-                                </p>
-
+                                       class="form-control">
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                </i>
                             </div>
+                            <HasError :form="form" field="password"/>
                         </div>
 
                     </div>
@@ -59,40 +56,29 @@
                 <div class="form-button-group  transparent">
                     <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
                 </div>
-                <div class="section mt-2 mb-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="p-1">
-                                <div class="text-center">
-                                    <h2 class="text-primary mb-2">Authorize via social networks</h2>
-
-                                    <a href="/auth/facebook" class="btn btn-facebook btn-icon me-05">
-                                        <ion-icon name="logo-facebook"></ion-icon>
-                                    </a>
-
-                                    <a href="/auth/twitter" class="btn btn-twitter btn-icon me-05">
-                                        <ion-icon name="logo-twitter"></ion-icon>
-                                    </a>
-
-                                    <a href="/auth/google" class="btn btn-whatsapp btn-icon me-05">
-                                        <ion-icon name="logo-google"></ion-icon>
-                                    </a>
-
-                                    <a href="/auth/vkontakte" class="btn btn-linkedin btn-icon me-05">
-                                        <ion-icon name="logo-vk"></ion-icon>
-                                    </a>
-
-                                    <a href="/auth/telegram" class="btn btn-instagram btn-icon me-05">
-                                        <ion-icon name="logo-instagram"></ion-icon>
-                                    </a>
-
-                                    <a href="/auth/yandex" class="btn btn-twitch btn-icon me-05">
-                                        <ion-icon name="logo-twitch"></ion-icon>
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
+                <div id="social_icon">
+                    <div class="section mt-2 text-center border-bottom">
+                        <h2>or</h2>
+                    </div>
+                    <div class="section p-2 text-center">
+                        <a class="btn btn-icon btn-facebook  me-05" href='/auth/facebook'>
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-icon btn-twitter me-05" href="/auth/twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-icon btn-google me-05" href="/auth/google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a class="btn btn-icon btn-vk me-05" href="/auth/vkontakte">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a class="btn btn-icon btn-telegram me-05" href="/auth/telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a class="btn btn-icon btn-yandex me-05" href="/auth/yandex">
+                            <i class="fab fa-yandex"></i>
+                        </a>
                     </div>
                 </div>
             </form>
@@ -101,48 +87,30 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, minLength, email } from 'vuelidate/lib/validators'
+
 import Header from "../LayoutComponents/Header";
+import Form from "vform"
+import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
+
 
 export default {
-    mixins: [validationMixin],
+
     name: "UserLoginSection",
-    components:{Header},
-    data() {
+    components: { Header, HasError, AlertErrors},
+    data: function () {
         return {
-            user: {
+            form: new Form({
                 email: '',
-                password: '',
-            },
-
-
-        };
-    },
-    validations: {
-        user: {
-            email: {
-                required,
-                email
-            },
-            password: {
-                required
-            }
+                password: ''
+            })
         }
     },
     methods: {
-        checkForm() {
-            this.$v.user.$touch()
-            if (!this.$v.user.$error) {
-                axios({
-                    method: 'post',
-                    url: '/login',
-                    data: this.user
-                })
-            }
-
-        }
+        async loginUser() {
+            await this.form.post('/login')
+        },
     }
+
 }
 
 </script>

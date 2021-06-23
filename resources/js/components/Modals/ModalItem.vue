@@ -9,17 +9,18 @@
                 </div>
                 <div class="modal-body">
                     <div class="action-sheet-content">
-                        <form>
+                        <form @submit.prevent="buySubscription"
+                              @keydown="form.onKeydown($event)">
                             <div class="form-group basic">
                                 <div class="input-wrapper">
                                     <slot name="first">
                                         <label class="label" for="account2d">From</label>
-                                        <select class="form-control custom-select" id="account2d">
-                                            <option value="0">Savings (*** 5019)</option>
-                                            <option value="1">Investment (*** 6212)</option>
-                                            <option value="2">Mortgage (*** 5021)</option>
-                                        </select>
+                                        <input v-model="form.from" type="email" class="form-control" id="account2d" placeholder="Enter IBAN">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i>
                                     </slot>
+                                    <HasError :form="form" field="from"/>
                                 </div>
                             </div>
 
@@ -27,11 +28,12 @@
                                 <div class="input-wrapper">
                                     <slot name="second">
                                         <label class="label" for="text11d">To</label>
-                                        <input type="email" class="form-control" id="text11d" placeholder="Enter IBAN">
+                                        <input v-model="form.to" type="email" class="form-control" id="text11d" placeholder="Enter IBAN">
                                         <i class="clear-input">
                                             <ion-icon name="close-circle"></ion-icon>
                                         </i>
                                     </slot>
+                                    <HasError :form="form" field="to"/>
                                 </div>
                             </div>
 
@@ -40,14 +42,19 @@
                                    <label class="label">Enter Amount</label>
                                    <div class="input-group mb-2">
                                        <span class="input-group-text" id="basic-addonb1">$</span>
-                                       <input type="text" class="form-control" placeholder="Enter an amount"
+                                       <input v-model="form.amount" type="text" class="form-control" placeholder="Enter an amount"
                                               value="100">
                                    </div>
                                </slot>
+                                <HasError :form="form" field="amount"/>
                             </div>
 
                             <div class="form-group basic">
-                               <slot name="button"></slot>
+                               <slot name="button">
+                                   <button type="button" class="btn btn-primary btn-block btn-lg"
+                                           data-bs-dismiss="modal">Buy
+                                   </button>
+                               </slot>
                             </div>
                         </form>
                     </div>
@@ -59,8 +66,25 @@
 </template>
 
 <script>
+import Form from "vform"
+import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
 export default {
-    name: "ModalItem"
+    name: "ModalItem",
+    components: { HasError, AlertErrors},
+    data: function () {
+        return {
+            form: new Form({
+                from: '',
+                to: '',
+                amount: ''
+            })
+        }
+    },
+    methods: {
+        async buySubscription() {
+            await this.form.post('api/buy/subscription')
+        },
+    }
 }
 </script>
 

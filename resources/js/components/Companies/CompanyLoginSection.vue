@@ -2,7 +2,7 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a href='/' class="headerButton goBack">
+                <a href='#' class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -12,18 +12,20 @@
             <h4>Fill the form to log in</h4>
         </div>
         <div class="section mb-5 p-2">
-
-            <form action="index.html">
+            <AlertErrors :form="form"></AlertErrors>
+            <form @submit.prevent="loginCompany" @keydown="form.onKeydown($event)">
                 <div class="card">
                     <div class="card-body pb-1">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="email1">Domain</label>
-                                <input type="email" class="form-control" id="email1" placeholder="Your domain">
+                                <label class="label" for="domain">Domain</label>
+                                <input v-model="form.domain" type="text" class="form-control"
+                                       id="domain" placeholder="Your domain" name="domain">
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle"></ion-icon>
+                                    <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
                             </div>
+                            <HasError :form="form" field="domain"/>
                         </div>
                     </div>
                 </div>
@@ -31,7 +33,7 @@
 
                 <div class="form-links mt-2">
                     <div>
-                        <a href="app-register.html">Register Your Company Now</a>
+                        <a href="/register-company">Register Your Company Now</a>
                     </div>
                 </div>
 
@@ -47,10 +49,24 @@
 
 <script>
 import Header from "../LayoutComponents/Header";
+import Form from "vform"
+import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
 
 export default {
     name: "CompanyLoginSection",
-    components: {Header}
+    components: {Header, HasError, AlertErrors},
+    data: function () {
+        return {
+            form: new Form({
+                domain: ''
+            })
+        }
+    },
+    methods: {
+        async loginCompany() {
+            await this.form.post('api/company/login')
+        },
+    }
 }
 </script>
 

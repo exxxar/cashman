@@ -2,12 +2,12 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a href='/' class="headerButton goBack">
+                <a href='#' class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:right>
-                <a href='' class="headerButton">
+                <a href='/login-company' class="headerButton">
                     Login
                 </a>
             </template>
@@ -17,50 +17,61 @@
             <h4>Create an company account</h4>
         </div>
         <div class="section mb-5 p-2">
-            <form  @submit.prevent=sendData()>
+            <AlertErrors :form="form"></AlertErrors>
+            <form @submit.prevent="registerCompany"
+                  @keydown="form.onKeydown($event)"
+                 >
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="title">Title</label>
-                                <input v-model="form.title" type="text" class="form-control" id="title" placeholder="Your company title"
-                                       :class="{ 'is-invalid': form.errors.has('title') }">
-                                <has-error :form="form" field="title"></has-error>
+                                <input v-model="form.title" type="text" class="form-control" id="title"
+                                       placeholder="Your company title"
+                                       name="title">
+                                <HasError :form="form" field="title"/>
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle"></ion-icon>
+                                    <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
                             </div>
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="domain">Domain</label>
-                                <input v-model="form.domain" type="text" class="form-control" id="domain" placeholder="Your company domain"
-                                       :class="{ 'is-invalid': form.errors.has('domain') }">
-                                <has-error :form="form" field="domain"></has-error>
+                                <input v-model="form.domain" type="text" class="form-control" id="domain"
+                                       placeholder="Your company domain"
+                                       name="domain">
+                                <HasError :form="form" field="domain"/>
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle"></ion-icon>
+                                    <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
                             </div>
                         </div>
+                        <div class="form-group basic">
                         <div class="custom-file-upload" id="fileUpload1">
-                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                            <input name ="file" type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg" @change="handleFile">
                             <label for="fileuploadInput">
                                 <span>
                                     <strong>
                                         <ion-icon name="arrow-up-circle-outline"></ion-icon>
-                                        <i>Upload a Logo</i>
+                                        <i>Upload a Photo</i>
                                     </strong>
                                 </span>
                             </label>
                         </div>
+                            <HasError :form="form" field="logo"/>
+                        </div>
+
 
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="textarea4">Description</label>
-                                <textarea id="textarea4" rows="2" class="form-control"
-                                          placeholder="Description"></textarea>
+                                <textarea v-model="form.description" id="textarea4" rows="2" class="form-control"
+                                          placeholder="Description"
+                                          name="description"></textarea>
+                                <HasError :form="form" field="description"/>
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle"></ion-icon>
+                                    <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
                             </div>
                         </div>
@@ -72,11 +83,12 @@
                         </div>
                         <div class="custom-control custom-checkbox mt-2 mb-1">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="customCheckb1">
+                                <input  v-model="form.confirmed" type="checkbox" class="form-check-input" id="customCheckb1">
                                 <label class="form-check-label" for="customCheckb1">
                                     I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
                                     conditions</a>
                                 </label>
+                                <HasError :form="form" field="confirmed"/>
                             </div>
                         </div>
 
@@ -84,18 +96,12 @@
                 </div>
 
                 <div class="form-button transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg" >Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
                 </div>
 
             </form>
         </div>
-        <ModalItem>
-            <template v-slot:button>
-                <button type="button" class="btn btn-primary btn-block btn-lg"
-                        data-bs-dismiss="modal">Buy
-                </button>
-            </template>
-        </ModalItem>
+        <ModalItem></ModalItem>
         <InformModal></InformModal>
     </div>
 </template>
@@ -104,23 +110,30 @@
 import ModalItem from "../Modals/ModalItem";
 import InformModal from "../Modals/InformModal";
 import Header from "../LayoutComponents/Header";
+import Form from "vform"
+import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
 
 export default {
     name: "CompanyRegisterSection",
-    components: {InformModal, ModalItem, Header},
-    data: function(){
-        return{
-            form:new Form({
+    components: {InformModal, ModalItem, Header,
+     HasError, AlertErrors},
+    data: function () {
+        return {
+            form: new Form({
                 title: '',
                 domain: '',
                 description: '',
-                logo: ''
+                logo: null,
+                confirmed: ''
             })
         }
     },
-    methods:{
-        sendData(){
-            this.form.post('api/company/register')
+    methods: {
+        async registerCompany() {
+            await this.form.post('api/company/register')
+        },
+        handleFile(event){
+            this.form.logo=event.target.files[0]
         }
     }
 }

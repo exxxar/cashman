@@ -23,7 +23,7 @@
         <SideMenu></SideMenu>
         <div id="appCapsule">
 
-
+            <CallbackForm></CallbackForm>
             <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
@@ -35,10 +35,11 @@ import Header from "../LayoutComponents/Header";
 import SideMenu from "../LayoutComponents/SideMenu";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import Footer from "../LayoutComponents/Footer";
+import CallbackForm from "../Callback/CallbackForm";
 
 export default {
     name: "MainPageComponent",
-    components: {Footer, BottomMenu, SideMenu, Header}
+    components: {CallbackForm, Footer, BottomMenu, SideMenu, Header}
 }
 </script>
 
