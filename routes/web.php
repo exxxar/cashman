@@ -22,6 +22,15 @@ use TCG\Voyager\Facades\Voyager;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login-company', function () {
+    return view('companies/LoginCompanyPage');
+});
+Route::get('/register-company', function () {
+    return view('companies/RegistrationCompanyPage');
+});
+Route::get('/products', function () {
+    return view('products/ProductsPage');
+});
 
 Auth::routes();
 

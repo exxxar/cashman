@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::post('company/register', [\App\Http\Controllers\Companies\CompanyAuthController::class, 'register']);
+Route::post('company/login', [\App\Http\Controllers\Companies\CompanyAuthController::class, 'login']);

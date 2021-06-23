@@ -1,7 +1,18 @@
 <template>
     <!-- App Capsule -->
     <div id="appCapsule">
-
+        <Header>
+            <template v-slot:left>
+                <a href='/' class="headerButton goBack">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </a>
+            </template>
+            <template v-slot:right>
+                <a href='/login' class="headerButton">
+                    Login
+                </a>
+            </template>
+        </Header>
         <div class="section mt-2 text-center">
             <h1>Register now</h1>
             <h4>Create an account</h4>
@@ -53,21 +64,22 @@
                                 <input type="password" class="form-control" id="password-confirm" autocomplete="off"
                                        placeholder="Type password again"  :class="$v.user.submitPassword.$error ? 'is-invalid' : ''"
                                        v-model.trim="user.submitPassword">
-                                <p class="error" v-if="!$v.user.submitPassword.required">this field is required</p>
-                                <p class="error" v-if="!$v.user.submitPassword.sameAsPassword">The passwords do not match.</p>
+                                <p v-if="!$v.user.submitPassword.required" class="invalid-feedback">Field is required</p>
+                                <p v-if="!$v.user.submitPassword.sameAsPassword" class="invalid-feedback">The passwords do not match.</p>
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
                             </div>
                         </div>
-
                         <div class="custom-control custom-checkbox mt-2 mb-1">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="customCheckb1">
+                                <input type="checkbox" class="form-check-input" id="customCheckb1" :class="$v.user.submit.$error ? 'is-invalid' : ''"
+                                       v-model.trim="user.submit">
                                 <label class="form-check-label" for="customCheckb1">
-                                    I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
-                                    conditions</a>
+                                    <p style="color: #000; display: inline">I agree</p> <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
+                                       conditions</a>
                                 </label>
+                                <p v-if="!$v.user.submit.sameAs" class="invalid-feedback">Submit our terms and conditions</p>
                             </div>
                         </div>
 
@@ -78,16 +90,20 @@
                 </div>
 
             </form>
-        </div>
 
+        </div>
+        <InformModal></InformModal>
     </div>
 </template>
 
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, sameAs, email } from 'vuelidate/lib/validators'
+import InformModal from "../Modals/InformModal";
+import Header from "../LayoutComponents/Header";
 
 export default {
+    components: {InformModal, Header},
     mixins: [validationMixin],
 name: "UserRegisterSection",
     data() {
@@ -95,11 +111,14 @@ name: "UserRegisterSection",
             user: {
                 email: '',
                 password: '',
-                submitPassword: ''
+                submitPassword: '',
+                submit: false
             },
+
 
         }
     },
+
     validations: {
         user: {
             email: {
@@ -121,6 +140,9 @@ name: "UserRegisterSection",
             submitPassword: {
                 required,
                 sameAsPassword: sameAs("password")
+            },
+            submit:{
+                sameAs: sameAs( () => true )
             }
         },
     },
@@ -135,6 +157,7 @@ name: "UserRegisterSection",
                     })
                 }
             },
+
         }
 }
 </script>

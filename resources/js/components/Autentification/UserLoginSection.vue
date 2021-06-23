@@ -1,5 +1,12 @@
 <template>
     <div id="appCapsule">
+        <Header>
+            <template v-slot:left>
+                <a href='/' class="headerButton goBack">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </a>
+            </template>
+        </Header>
         <div class="section mt-2 text-center">
             <h1>Log in</h1>
             <h4>Fill the form to log in</h4>
@@ -52,27 +59,56 @@
                 <div class="form-button-group  transparent">
                     <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
                 </div>
-                <div class="form-links mt-2">
-                        Login with
-                        <a href='/auth/vkontakte' class="text-muted"><i class="fab fa-vk" aria-hidden="true"></i> VK</a>
-                        <a href='/auth/facebook' class="text-muted"><i class="fab fa-facebook-f" aria-hidden="true"></i>Facebook</a>
-                        <a href='/auth/google' class="text-muted"><i class="fab fa-google" aria-hidden="true"></i>Google</a>
-                        <a href='/auth/telegram' class="text-muted"><i class="fab fa-telegram-plane" aria-hidden="true"></i>Telegram</a>
-                        <a href='/auth/twitter' class="text-muted"><i class="fab fa-twitter" aria-hidden="true"></i>Twitter</a>
-                        <a href='/auth/yandex' class="text-muted"><i class="fab fa-yandex-international" aria-hidden="true"></i>Yandex</a>
+                <div class="section mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="p-1">
+                                <div class="text-center">
+                                    <h2 class="text-primary mb-2">Authorize via social networks</h2>
+
+                                    <a href="/auth/facebook" class="btn btn-facebook btn-icon me-05">
+                                        <ion-icon name="logo-facebook"></ion-icon>
+                                    </a>
+
+                                    <a href="/auth/twitter" class="btn btn-twitter btn-icon me-05">
+                                        <ion-icon name="logo-twitter"></ion-icon>
+                                    </a>
+
+                                    <a href="/auth/google" class="btn btn-whatsapp btn-icon me-05">
+                                        <ion-icon name="logo-google"></ion-icon>
+                                    </a>
+
+                                    <a href="/auth/vkontakte" class="btn btn-linkedin btn-icon me-05">
+                                        <ion-icon name="logo-vk"></ion-icon>
+                                    </a>
+
+                                    <a href="/auth/telegram" class="btn btn-instagram btn-icon me-05">
+                                        <ion-icon name="logo-instagram"></ion-icon>
+                                    </a>
+
+                                    <a href="/auth/yandex" class="btn btn-twitch btn-icon me-05">
+                                        <ion-icon name="logo-twitch"></ion-icon>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
-
     </div>
 </template>
 
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, minLength, email } from 'vuelidate/lib/validators'
+import Header from "../LayoutComponents/Header";
+
 export default {
     mixins: [validationMixin],
     name: "UserLoginSection",
+    components:{Header},
     data() {
         return {
             user: {

@@ -1,9 +1,8 @@
 @extends('layouts.layout')
 @section('title')
-    Main Page
+   Products
 @endsection
 
 @section('content')
-        <main-page></main-page>
+   <products></products>
 @endsection
-

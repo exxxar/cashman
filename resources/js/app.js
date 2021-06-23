@@ -4,10 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import {req} from "vuelidate/lib/validators/common";
+
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-import { ValidationProvider } from 'vee-validate';
+import Fragment from 'vue-fragment'
+import {Form, HasError, AlertError} from 'vform';
+Vue.use(Fragment.Plugin)
+window.Form = Form;
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,7 +28,11 @@ import { ValidationProvider } from 'vee-validate';
 
 Vue.component('user-login-component', require('./components/Autentification/UserLoginSection').default);
 Vue.component('user-register-component', require('./components/Autentification/UserRegisterSection').default);
-Vue.component('reset-password-component', require('./components/Autentification/ResetPasswordSection').default);
+
+Vue.component('main-page', require('./components/MainPage/MainPageComponent').default);
+Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);
+Vue.component('company-login-component', require('./components/Companies/CompanyLoginSection').default);
+Vue.component('products', require('./components/Products/ProductList').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

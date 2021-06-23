@@ -1,9 +1,8 @@
 @extends('layouts.layout')
 @section('title')
-    Main Page
+    Company Login
 @endsection
 
 @section('content')
-        <main-page></main-page>
+    <company-login-component></company-login-component>
 @endsection
-
