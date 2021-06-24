@@ -8,39 +8,24 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-        <h4>Categories</h4>
+        <h4>Категории</h4>
         </div>
 
-        <ul class="listview link-listview inset">
-            <CategoryList></CategoryList>
-            <CategoryList></CategoryList>
-            <CategoryList></CategoryList>
+        <ul class="listview link-listview inset" v-for="category in categories">
+            <CategoryList :category=category></CategoryList>
         </ul>
         <div class="section mt-2 text-center">
-        <h4>Products</h4>
+        <h4>Продукты</h4>
         </div>
         <div class="section tab-content mt-2 mb-1">
 
             <!-- waiting tab -->
             <div class="tab-pane fade show active" id="waiting" role="tabpanel">
                 <div class="row">
-
-                    <ProductItem :image="image"
-                                 :description="description"
-                                 :price="price"
-                    ></ProductItem>
-                    <ProductItem :image="image"
-                                 :description="description"
-                                 :price="price"
-                    ></ProductItem>
-                    <ProductItem :image="image"
-                                 :description="description"
-                                 :price="price"
-                    ></ProductItem>
-                    <ProductItem :image="image"
-                                 :description="description"
-                                 :price="price"
-                    ></ProductItem>
+                    <div class="col-6 mb-2" v-for="item in items">
+                        <ProductItem :items=item
+                        ></ProductItem>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,9 +42,27 @@ export default {
     components: {CategoryList, ProductItem,  Header},
     data: function () {
         return {
-            image: "assets/sample/brand/2.jpg",
-            price: 14,
-            description: "Music Monthly Subscription"
+            items: [
+                {image: "assets/sample/brand/2.jpg",
+                    price: 14,
+                    description: "Music Monthly Subscription"},
+                {image: "assets/sample/brand/2.jpg",
+                    price: 14,
+                    description: "Music Monthly Subscription"},
+                {image: "assets/sample/brand/2.jpg",
+                    price: 14,
+                    description: "Music Monthly Subscription"},
+                {image: "assets/sample/brand/2.jpg",
+                    price: 14,
+                    description: "Music Monthly Subscription"},
+            ],
+            categories:[
+                {title: "Категория 1", number: 1},
+                {title: "Категория 2", number: 2},
+                {title: "Категория 2", number: 2},
+            ]
+
+
         }
     }
 }

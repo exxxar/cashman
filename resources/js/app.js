@@ -11,6 +11,7 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
+export const eventBus = new Vue()
 
 /**
  * The following block of code may be used to automatically register your

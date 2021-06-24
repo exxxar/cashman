@@ -22,7 +22,10 @@
         </Header>
         <SideMenu></SideMenu>
         <div id="appCapsule">
-
+            <ActivityHistoryList></ActivityHistoryList>
+            <StoryList></StoryList>
+            <ProductTile></ProductTile>
+            <UserList></UserList>
             <CallbackForm></CallbackForm>
             <Footer></Footer>
         </div>
@@ -36,10 +39,17 @@ import SideMenu from "../LayoutComponents/SideMenu";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import Footer from "../LayoutComponents/Footer";
 import CallbackForm from "../Callback/CallbackForm";
+import ProductTile from "../Products/ProductTile";
+import StoryList from "../Stories/StoryList";
+import ActivityHistoryList from "../ActivityHistory/ActivityHistoryList";
+import UserList from "../Users/UserList";
 
 export default {
     name: "MainPageComponent",
-    components: {CallbackForm, Footer, BottomMenu, SideMenu, Header}
+    components: {
+
+        UserList,
+        ActivityHistoryList, StoryList, ProductTile, CallbackForm, Footer, BottomMenu, SideMenu, Header}
 }
 </script>
 

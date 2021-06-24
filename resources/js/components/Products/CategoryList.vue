@@ -1,15 +1,21 @@
 <template>
         <li>
             <a href="#">
-                Frank Sjögren
-                <span class="badge badge-primary">3</span>
+                {{category.title}}
+                <span class="badge badge-primary">{{category.number}}</span>
             </a>
         </li>
 </template>
 
 <script>
 export default {
-    name: "CategoryList"
+    name: "CategoryList",
+    props:{
+       category:{
+           required: true,
+           type: Object
+       }
+    }
 }
 </script>
 
