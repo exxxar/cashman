@@ -51,6 +51,7 @@
 }
 
 .story-block .splide__slide {
+  width: 100px !important;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 26px !important;

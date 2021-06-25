@@ -1,7 +1,10 @@
 <template>
     <div class="section full mt-3">
-        <div class="section-title">Story Block</div>
-        <div class="wide-block p-0 pt-2 pb-2">
+        <div class="section-heading padding">
+            <h2 class="title">Истории</h2>
+            <a href="javascript:;" class="link">Просмотр</a>
+        </div>
+        <div class="p-0 pt-2 pb-2">
 
             <!-- story-block -->
             <div class="story-block splide">
@@ -37,6 +40,15 @@ name: "StoryList",
                 name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
                 description: "This is simple text for the story"},
             {avatar: "assets/sample/avatar/avatar3.jpg", image: "assets/sample/photo/vector3.png",
+                name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
+                description: "This is simple text for the story"},
+            {avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
+                name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
+                description: "This is simple text for the story"},
+            {avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
+                name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
+                description: "This is simple text for the story"},
+            {avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
                 name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
                 description: "This is simple text for the story"},
             {avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",

@@ -1,5 +1,5 @@
 <template>
-    <div class="appHeader no-border transparent position-absolute">
+    <div class="appHeader">
         <div class="left">
             <slot name="left"></slot>
         </div>

@@ -24,13 +24,24 @@ export const eventBus = new Vue()
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+//User Authentication
 Vue.component('user-login-component', require('./components/Autentification/UserLoginSection').default);
 Vue.component('user-register-component', require('./components/Autentification/UserRegisterSection').default);
 
-Vue.component('main-page', require('./components/MainPage/MainPageComponent').default);
+//Pages
+Vue.component('main-page', require('./components/Pages/MainPageComponent').default);
+Vue.component('user-page', require('./components/Pages/UserPageComponent').default);
+Vue.component('user-settings', require('./components/Pages/UserSettingsPage').default);
+Vue.component('achievement', require('./components/Pages/AchievemantPage').default);
+Vue.component('achievement-detail', require('./components/Achievements/AchievementDetail').default);
+
+//Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);
 Vue.component('company-login-component', require('./components/Companies/CompanyLoginSection').default);
+
+//Products
 Vue.component('products', require('./components/Products/ProductList').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -47,7 +47,6 @@ import UserList from "../Users/UserList";
 export default {
     name: "MainPageComponent",
     components: {
-
         UserList,
         ActivityHistoryList, StoryList, ProductTile, CallbackForm, Footer, BottomMenu, SideMenu, Header}
 }

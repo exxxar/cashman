@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Achievements\AchievementController;
 use App\Http\Controllers\Social\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,17 +21,27 @@ use TCG\Voyager\Facades\Voyager;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages/welcome');
 });
 Route::get('/login-company', function () {
-    return view('companies/LoginCompanyPage');
+    return view('pages/companies/LoginCompanyPage');
 });
 Route::get('/register-company', function () {
-    return view('companies/RegistrationCompanyPage');
+    return view('pages/companies/RegistrationCompanyPage');
 });
 Route::get('/products', function () {
-    return view('products/ProductsPage');
+    return view('pages/products/ProductsPage');
 });
+Route::get('/user-profile', function () {
+    return view('pages/userProfile/userProfilePage');
+});
+Route::get('/user-settings', function () {
+    return view('pages/userProfile/userSettingsPage');
+});
+Route::get('/achievements', function () {
+    return view('pages/userProfile/achievements/achievementPage');
+});
+Route::get('/achievements/{id}', [AchievementController::class, 'getAchievement']);
 
 Auth::routes();
 

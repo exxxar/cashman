@@ -1,0 +1,34 @@
+<template>
+    <fragment>
+    <Header>
+        <template v-slot:left>
+            <a href='#' class="headerButton goBack">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </a>
+        </template>
+        <template v-slot:title>
+          Достижения
+        </template>
+    </Header>
+        <div id="appCapsule">
+        <AchievementList :show-detail="true"></AchievementList>
+        </div>
+        <BottomMenu></BottomMenu>
+    </fragment>
+</template>
+
+<script>
+import Header from "../LayoutComponents/Header";
+import AchievementList from "../Achievements/AchievementList";
+import BottomMenu from "../LayoutComponents/BottomMenu";
+
+
+export default {
+    name: "AchievemantPage",
+    components:{BottomMenu, AchievementList, Header}
+}
+</script>
+
+<style scoped>
+
+</style>

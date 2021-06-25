@@ -21,3 +21,4 @@ Route::post('company/register', [\App\Http\Controllers\Companies\CompanyAuthCont
 Route::post('company/login', [\App\Http\Controllers\Companies\CompanyAuthController::class, 'login']);
 Route::post('buy/subscription', [\App\Http\Controllers\Subscription\BuySubscriptionController::class, 'index']);
 Route::post('send/message', [\App\Http\Controllers\Callback\CallbackController::class, 'index']);
+
