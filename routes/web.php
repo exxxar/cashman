@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Achievements\AchievementController;
+use App\Http\Controllers\HistoryAction\HistoryActionController;
 use App\Http\Controllers\Social\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,10 +39,23 @@ Route::get('/user-profile', function () {
 Route::get('/user-settings', function () {
     return view('pages/userProfile/userSettingsPage');
 });
+
+Route::get('/achievements/achievements-{id}', [AchievementController::class, 'getAchievement']);
+
+Route::get('/history/action-{id}', [HistoryActionController::class, 'getActionDetail']);
+
 Route::get('/achievements', function () {
     return view('pages/userProfile/achievements/achievementPage');
 });
-Route::get('/achievements/{id}', [AchievementController::class, 'getAchievement']);
+Route::get('/history', function () {
+    return view('pages/userProfile/actions/userActionHistoryPage');
+});
+Route::get('/friends', function(){
+    return view('pages/userProfile/friends/userFriendsPage');
+});
+Route::get('/friends-tree', function(){
+    return view('pages/userProfile/friends/usersFriendsTreePage');
+});
 
 Auth::routes();
 

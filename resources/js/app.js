@@ -29,12 +29,15 @@ Vue.component('user-login-component', require('./components/Autentification/User
 Vue.component('user-register-component', require('./components/Autentification/UserRegisterSection').default);
 
 //Pages
-Vue.component('main-page', require('./components/Pages/MainPageComponent').default);
-Vue.component('user-page', require('./components/Pages/UserPageComponent').default);
+Vue.component('main-page', require('./components/Pages/MainPage').default);
+Vue.component('user-page', require('./components/Pages/UserProfilePage').default);
 Vue.component('user-settings', require('./components/Pages/UserSettingsPage').default);
-Vue.component('achievement', require('./components/Pages/AchievemantPage').default);
+Vue.component('achievement', require('./components/Pages/AchievemеntPage').default);
 Vue.component('achievement-detail', require('./components/Achievements/AchievementDetail').default);
-
+Vue.component('history', require('./components/Pages/HistoryPage').default);
+Vue.component('history-action-detail', require('./components/HistoryAction/HistoryActionDetail').default);
+Vue.component('user-friends', require('./components/Users/UserFriendsList').default);
+Vue.component('user-tree', require('./components/Users/UserFriendsTree').default);
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);
 Vue.component('company-login-component', require('./components/Companies/CompanyLoginSection').default);

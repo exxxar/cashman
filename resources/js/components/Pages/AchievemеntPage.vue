@@ -24,7 +24,7 @@ import BottomMenu from "../LayoutComponents/BottomMenu";
 
 
 export default {
-    name: "AchievemantPage",
+    name: "AchievementPage",
     components:{BottomMenu, AchievementList, Header}
 }
 </script>

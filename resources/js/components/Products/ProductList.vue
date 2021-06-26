@@ -2,9 +2,12 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a href='/' class="headerButton goBack">
+                <a href='#' class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
+            </template>
+            <template v-slot:title>
+                Акции
             </template>
         </Header>
         <div class="section mt-2 text-center">
@@ -14,6 +17,10 @@
         <ul class="listview link-listview inset" v-for="category in categories">
             <CategoryList :category=category></CategoryList>
         </ul>
+        <div class="section mt-2 text-center">
+            <h4>Истории</h4>
+        </div>
+        <StoryList></StoryList>
         <div class="section mt-2 text-center">
         <h4>Продукты</h4>
         </div>
@@ -36,10 +43,11 @@
 import ProductItem from "./ProductItem";
 import CategoryList from "./CategoryList";
 import Header from "../LayoutComponents/Header";
+import StoryList from "../Stories/StoryList";
 
 export default {
     name: "ProductList",
-    components: {CategoryList, ProductItem,  Header},
+    components: {StoryList, CategoryList, ProductItem,  Header},
     data: function () {
         return {
             items: [

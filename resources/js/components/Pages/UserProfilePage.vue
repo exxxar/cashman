@@ -14,7 +14,7 @@
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
                     <span class="badge badge-danger">4</span>
                 </a>
-                <a href="app-settings.html" class="headerButton">
+                <a href="/user-settings" class="headerButton">
                     <img src="assets/sample/avatar/avatar1.jpg" alt="image" class="imaged w32">
                     <span class="badge badge-danger">6</span>
                 </a>
@@ -22,11 +22,14 @@
         </Header>
         <SideMenu></SideMenu>
         <div id="appCapsule">
-            <ActivityHistoryList></ActivityHistoryList>
+            <br/>
+            <MainStatisctic></MainStatisctic>
+            <HistoryActionList :show-detail="false"></HistoryActionList>
+            <AchievementList :show-detail="false"></AchievementList>
+            <CashBackList></CashBackList>
             <StoryList></StoryList>
             <ProductTile></ProductTile>
-            <UserList></UserList>
-            <CallbackForm></CallbackForm>
+            <UserList :show-friends="true"></UserList>
             <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
@@ -35,20 +38,24 @@
 
 <script>
 import Header from "../LayoutComponents/Header";
+import AchievementList from "../Achievements/AchievementList";
 import SideMenu from "../LayoutComponents/SideMenu";
-import BottomMenu from "../LayoutComponents/BottomMenu";
-import Footer from "../LayoutComponents/Footer";
-import CallbackForm from "../Callback/CallbackForm";
-import ProductTile from "../Products/ProductTile";
-import StoryList from "../Stories/StoryList";
-import ActivityHistoryList from "../ActivityHistory/ActivityHistoryList";
 import UserList from "../Users/UserList";
-
+import StoryItem from "../Stories/StoryItem";
+import ProductTile from "../Products/ProductTile";
+import CashBackList from "../CashBack/CashBackList";
+import Footer from "../LayoutComponents/Footer";
+import BottomMenu from "../LayoutComponents/BottomMenu";
+import HistoryActionList from "../HistoryAction/HistoryActionList";
+import StoryList from "../Stories/StoryList";
+import MainStatisctic from "../UserStatistic/MainStatistic";
 export default {
-    name: "MainPageComponent",
+    name: "UserPageComponent",
     components: {
-        UserList,
-        ActivityHistoryList, StoryList, ProductTile, CallbackForm, Footer, BottomMenu, SideMenu, Header}
+        MainStatisctic,
+        StoryList,
+        HistoryActionList,
+        BottomMenu, Footer, CashBackList, ProductTile,  UserList, AchievementList, Header, SideMenu}
 }
 </script>
 

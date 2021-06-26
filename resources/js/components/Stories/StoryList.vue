@@ -2,7 +2,6 @@
     <div class="section full mt-3">
         <div class="section-heading padding">
             <h2 class="title">Истории</h2>
-            <a href="javascript:;" class="link">Просмотр</a>
         </div>
         <div class="p-0 pt-2 pb-2">
 

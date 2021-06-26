@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4">
-        <div class="section-heading">
-            <h2 v-if="!showDetail" class="title">Достижения</h2>
-            <a v-if="!showDetail" href="/achievements" class="link">View All</a>
+        <div v-if="!showDetail" class="section-heading">
+            <h2 class="title">Достижения</h2>
+            <a :href="'/achievements'" class="link">View All</a>
         </div>
         <div class="goals" >
             <div class="item" v-for="achievement in achievements">

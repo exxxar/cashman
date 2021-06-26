@@ -2,7 +2,7 @@
     <div class="section full mt-4">
         <div class="section-heading padding">
             <h2 class="title">Пользователи</h2>
-            <a href="javascript:;" class="link">Просмотр</a>
+            <a v-if="showFriends" href="/friends" class="link">Просмотр</a>
         </div>
         <!-- carousel small -->
         <div class="carousel-small splide">
@@ -37,6 +37,12 @@ export default {
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
             ]
+        }
+    },
+    props: {
+        showFriends:{
+            required: true,
+            type: Boolean
         }
     }
 }

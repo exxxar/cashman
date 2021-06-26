@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <history></history>
+    <history-action-detail :action='{!! json_encode($action) !!}'></history-action-detail>
 @endsection

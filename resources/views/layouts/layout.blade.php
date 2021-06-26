@@ -9,11 +9,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
-    <title>Cashman - @yield('title')</title>
+    <title>CashMan - @yield('title')</title>
     <meta name="description" content="Finapp HTML Mobile Template">
     <meta name="keywords"
           content="bootstrap, wallet, banking, fintech mobile template, cordova, phonegap, mobile, html, responsive" />
-    <link rel="icon" type="image/png" href="{{asset('assets/icon.png')}}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('assets/icon.png') }}" sizes="32x32">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
           integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
@@ -23,7 +23,7 @@
 <div id="app">
     <!-- loader -->
     <div id="loader">
-        <img src="./assets/logo-icon.png" alt="icon" class="loading-icon">
+        <img src="{{ asset('assets/logo-icon.png') }}" alt="icon" class="loading-icon">
     </div>
     <!-- * loader -->
 @yield('content')

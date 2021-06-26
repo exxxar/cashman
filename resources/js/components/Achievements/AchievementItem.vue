@@ -6,7 +6,7 @@
                 <p>{{achievement.achievement_description}}</p>
             </div>
             <div class="price">$ {{achievement.value}}
-                <button v-if="showDetail" type="button" class="btn btn-text-primary me-1 mb-1" @click="showAchievementDetail">View</button>
+                <a :href="'achievements/achievements-' + this.achievement.id" v-if="showDetail" type="button" class="btn btn-text-primary me-1 mb-1" @click="showAchievementDetail">View</a>
             </div>
 
         </div>
@@ -33,7 +33,7 @@ export default {
     methods:{
         showAchievementDetail()
         {
-            axios.get('achievements/' + this.achievement.id)
+            axios.get('achievements/achievements-' + this.achievement.id)
         }
     }
 

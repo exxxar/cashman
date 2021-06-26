@@ -1,35 +1,40 @@
 <template>
-    <div id="appCapsule">
-
-        <div class="section full">
-
+        <div class="section mt-4">
+            <div v-if="!showDetail" class="section-heading">
+                <h2 class="title">История последних действий</h2>
+                <a :href="'/history'" class="link">View All</a>
+            </div>
             <ul class="listview image-listview flush">
-                <li class="active">
-                    <a href="app-notification-detail.html" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="arrow-down-outline"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div>
-                                <div class="mb-05"><strong>Payment Received</strong></div>
-                                <div class="text-small mb-05">John sent you <b>$ 50</b></div>
-                                <div class="text-xsmall">5/3/2020 10:30 AM</div>
-                            </div>
-                            <span class="badge badge-primary badge-empty"></span>
-                        </div>
-                    </a>
+                <li class="active" v-for="action in actions">
+                   <HistoryActionItem :action = action></HistoryActionItem>
                 </li>
             </ul>
 
         </div>
 
-    </div>
-    <!-- * App Capsule -->
 </template>
 
 <script>
+import HistoryActionItem from "./HistoryActionItem";
 export default {
-    name: "HistoryActionList"
+    name: "HistoryActionList",
+    components: {HistoryActionItem},
+    data: function(){
+        return{
+            actions:[
+                {id: 1, logo: "assets/sample/brand/1.jpg", value: "Payment Received", money_in_check: "200", description: "John sent you", type: "Payment Received", created_at: "5/3/2020 10:30 AM"},
+                {id: 2,logo: "assets/sample/brand/2.jpg", value: "Payment Received", money_in_check: "200", description: "John sent you", type: "Payment Received", created_at: "5/3/2020 10:30 AM"},
+                {id: 3,logo: "assets/sample/brand/3.jpg", value: "Payment Received", money_in_check: "200", description: "John sent you", type: "Payment Received", created_at: "5/3/2020 10:30 AM"},
+                {id: 4,logo: "assets/sample/brand/4.jpg", value: "Payment Received", money_in_check: "200", description: "John sent you", type: "Payment Received", created_at: "5/3/2020 10:30 AM"}
+              ]
+        }
+    },
+    props:{
+        showDetail:{
+            required: true,
+            type: Boolean
+        }
+    }
 }
 </script>
 

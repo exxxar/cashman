@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Детали Достижения
+                {{achievement.title}}
             </template>
         </Header>
     <div id="appCapsule" class="full-height">
@@ -18,7 +18,7 @@
             <div class="listed-detail mt-3">
                 <div class="icon-wrapper">
                     <div class="iconbox">
-                        <img :src="achievement.achievement_image_url" alt="img" class="image-block imaged w48">
+                        <img :src="achievement.achievement_image_url" alt="image" class="imaged w76 rounded">
                     </div>
                 </div>
                 <h3 class="text-center mt-2">{{achievement.title}}</h3>
@@ -35,7 +35,11 @@
                 </li>
                 <li>
                     <strong>Prize image</strong>
-                    <span>{{achievement.prize_image_url}}</span>
+                    <div class="icon-wrapper">
+                        <div class="iconbox">
+                            <img :src="achievement.prize_image_url" alt="image" class="imaged w200 square">
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <strong>Prize Description</strong>
@@ -47,7 +51,7 @@
                 </li>
                 <li>
                     <strong>Date</strong>
-                    <span>Sep 25, 2020 10:45 AM</span>
+                    <span>{{achievement.created_at}}</span>
                 </li>
                 <li>
                     <strong>Amount</strong>
@@ -59,16 +63,20 @@
         </div>
 
     </div>
+        <BottomMenu></BottomMenu>
     </fragment>
 </template>
 
 <script>
+import Header from "../LayoutComponents/Header";
+import BottomMenu from "../LayoutComponents/BottomMenu";
+
 export default {
     name: "AchievementDetail",
+    components:{Header, BottomMenu},
     props:{
         achievement:{
-            required: true,
-            type: Object
+            required: true
         },
     },
 }

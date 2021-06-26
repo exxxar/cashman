@@ -2,7 +2,7 @@
     <div class="section full mt-4">
         <div class="section-heading padding">
             <h2 class="title">Акции</h2>
-            <a href="/products" class="link">Посмотреть все</a>
+            <a :href="'products'" class="link">Посмотреть все</a>
         </div>
         <!-- carousel multiple -->
         <div class="carousel-multiple splide">
