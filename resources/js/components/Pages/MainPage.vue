@@ -25,6 +25,7 @@
             <ActivityHistoryList></ActivityHistoryList>
             <StoryList></StoryList>
             <ProductTile></ProductTile>
+            <NewsList></NewsList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
             <Footer></Footer>
@@ -43,10 +44,12 @@ import ProductTile from "../Products/ProductTile";
 import StoryList from "../Stories/StoryList";
 import ActivityHistoryList from "../ActivityHistory/ActivityHistoryList";
 import UserList from "../Users/UserList";
+import NewsList from "../News/NewsList";
 
 export default {
     name: "MainPageComponent",
     components: {
+        NewsList,
         UserList,
         ActivityHistoryList, StoryList, ProductTile, CallbackForm, Footer, BottomMenu, SideMenu, Header}
 }

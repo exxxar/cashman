@@ -10,7 +10,7 @@
             {{action.type}}
         </template>
         <template v-slot:right>
-            <a href="javascript:;" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogBasic">
+            <a href="javascript:;" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogIconedButtonInline">
                 <ion-icon name="trash-outline"></ion-icon>
             </a>
         </template>
@@ -51,15 +51,17 @@
 
     </div>
         <BottomMenu></BottomMenu>
+        <ConfirmActionModal :action="'Удалить ' + action.value + ' из истории действий?' "></ConfirmActionModal>
     </fragment>
 </template>
 
 <script>
 import Header from "../LayoutComponents/Header";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import ConfirmActionModal from "../Modals/ConfirmActionModal";
 export default {
     name: "HistoryActionDetail",
-    components: {BottomMenu, Header},
+    components: {ConfirmActionModal, BottomMenu, Header},
     props:{
         action:{
             required: true,

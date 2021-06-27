@@ -101,21 +101,21 @@
 
             </form>
         </div>
-        <ModalItem></ModalItem>
+        <TransactionsModal title="Купить подписку" ></TransactionsModal>
         <InformModal></InformModal>
     </div>
 </template>
 
 <script>
-import ModalItem from "../Modals/ModalItem";
 import InformModal from "../Modals/InformModal";
 import Header from "../LayoutComponents/Header";
 import Form from "vform"
 import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
+import TransactionsModal from "../Modals/TransactionsModal";
 
 export default {
     name: "CompanyRegisterSection",
-    components: {InformModal, ModalItem, Header,
+    components: {InformModal, TransactionsModal, Header,
      HasError, AlertErrors},
     data: function () {
         return {

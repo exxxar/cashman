@@ -1,5 +1,6 @@
 <template>
-    <a href="#" class="item">
+    <fragment>
+    <div class="item">
         <img :src="user.avatar" alt="image" class="imaged w86 rounded">
         <div class="in">
             <div>
@@ -7,16 +8,20 @@
                 <header>{{user.name}}</header>
                 <footer>{{user.region}}</footer>
             </div>
-            <span class="text-muted">Profile</span>
+            <a href="javascript:;" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogIconedButtonInline">
+                <ion-icon name="trash-outline"></ion-icon>
+            </a>
         </div>
-    </a>
+    </div>
+        <ConfirmActionModal :action="'Удалить ' + user.name + ' из друзей?' "></ConfirmActionModal>
+    </fragment>
 </template>
 
 <script>
-import Header from "../LayoutComponents/Header";
+import ConfirmActionModal from "../Modals/ConfirmActionModal";
 export default {
     name: "FriendItem",
-    components: {Header},
+    components: {ConfirmActionModal},
     props: {
         user:
             {

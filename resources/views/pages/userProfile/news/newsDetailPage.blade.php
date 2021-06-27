@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 @section('title')
-    Your Referrals
+    News
 @endsection
 
 @section('content')
-    <users-friends-tree></users-friends-tree>
+<news-detail :item='{!! json_encode($news) !!}'></news-detail>
 @endsection

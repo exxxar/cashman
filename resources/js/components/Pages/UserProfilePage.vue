@@ -22,6 +22,7 @@
         </Header>
         <SideMenu></SideMenu>
         <div id="appCapsule">
+            <StatisticsSummary :cashback="1500"></StatisticsSummary>
             <br/>
             <MainStatisctic></MainStatisctic>
             <HistoryActionList :show-detail="false"></HistoryActionList>
@@ -30,6 +31,7 @@
             <StoryList></StoryList>
             <ProductTile></ProductTile>
             <UserList :show-friends="true"></UserList>
+            <NewsList></NewsList>
             <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
@@ -41,7 +43,6 @@ import Header from "../LayoutComponents/Header";
 import AchievementList from "../Achievements/AchievementList";
 import SideMenu from "../LayoutComponents/SideMenu";
 import UserList from "../Users/UserList";
-import StoryItem from "../Stories/StoryItem";
 import ProductTile from "../Products/ProductTile";
 import CashBackList from "../CashBack/CashBackList";
 import Footer from "../LayoutComponents/Footer";
@@ -49,9 +50,13 @@ import BottomMenu from "../LayoutComponents/BottomMenu";
 import HistoryActionList from "../HistoryAction/HistoryActionList";
 import StoryList from "../Stories/StoryList";
 import MainStatisctic from "../UserStatistic/MainStatistic";
+import StatisticsSummary from "../UserStatistic/StatisticsSummary";
+import NewsList from "../News/NewsList";
 export default {
     name: "UserPageComponent",
     components: {
+        NewsList,
+        StatisticsSummary,
         MainStatisctic,
         StoryList,
         HistoryActionList,

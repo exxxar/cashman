@@ -10,6 +10,7 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import Fragment from 'vue-fragment'
+
 Vue.use(Fragment.Plugin)
 export const eventBus = new Vue()
 
@@ -37,7 +38,10 @@ Vue.component('achievement-detail', require('./components/Achievements/Achieveme
 Vue.component('history', require('./components/Pages/HistoryPage').default);
 Vue.component('history-action-detail', require('./components/HistoryAction/HistoryActionDetail').default);
 Vue.component('user-friends', require('./components/Users/UserFriendsList').default);
-Vue.component('user-tree', require('./components/Users/UserFriendsTree').default);
+Vue.component('users-friends-tree', require('./components/Users/UsersFriendsTree').default);
+Vue.component('news', require('./components/Pages/NewsPage').default);
+Vue.component('news-detail', require('./components/News/NewsDetail').default);
+
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);
 Vue.component('company-login-component', require('./components/Companies/CompanyLoginSection').default);

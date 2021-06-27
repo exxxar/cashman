@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: "UserFriendsTreeItem",
+    name: "UserFriendsAddHistoryItem",
     props:{
         friend:{
             required: true,

@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Achievements\AchievementController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
+use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Social\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,12 @@ Route::get('/friends', function(){
 });
 Route::get('/friends-tree', function(){
     return view('pages/userProfile/friends/usersFriendsTreePage');
+});
+
+Route::get('/news/{id}', [NewsController::class, 'getNewsItem']);
+
+Route::get('/news', function () {
+    return view('pages/userProfile/news/newsPage');
 });
 
 Auth::routes();
