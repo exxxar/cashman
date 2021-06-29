@@ -1,8 +1,8 @@
 <template>
-    <div class="section full mt-4">
+    <div class="section mt-4">
         <div class="section-heading padding">
             <h2 class="title">Пользователи</h2>
-            <a v-if="showFriends" href="/friends" class="link">Просмотр</a>
+            <a v-if="showFriends" :href="'friends'" class="link">Просмотр</a>
         </div>
         <!-- carousel small -->
         <div class="carousel-small splide">
@@ -20,11 +20,12 @@
 
 <script>
 import UserItem from "./UserItem";
+
 export default {
     name: "UserList",
     components: {UserItem},
-    data: function(){
-        return{
+    data: function () {
+        return {
             users: [
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
@@ -40,14 +41,10 @@ export default {
         }
     },
     props: {
-        showFriends:{
+        showFriends: {
             required: true,
             type: Boolean
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

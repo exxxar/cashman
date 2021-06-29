@@ -1,6 +1,6 @@
 <template>
     <fragment>
-        <Header>
+        <Header class="bg-primary text-light">
             <template v-slot:left>
                 <a :href="'#'" class="headerButton" data-bs-toggle="modal" data-bs-target="#sidebarPanel">
                     <ion-icon name="menu-outline"></ion-icon>
@@ -26,6 +26,7 @@
             <StoryList></StoryList>
             <ProductTile></ProductTile>
             <NewsList></NewsList>
+            <CompanyList></CompanyList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
             <Footer></Footer>
@@ -45,16 +46,22 @@ import StoryList from "../Stories/StoryList";
 import ActivityHistoryList from "../ActivityHistory/ActivityHistoryList";
 import UserList from "../Users/UserList";
 import NewsList from "../News/NewsList";
+import CompanyList from "../Companies/CompanyList/CompanyList";
 
 export default {
     name: "MainPageComponent",
     components: {
+        CompanyList,
         NewsList,
         UserList,
-        ActivityHistoryList, StoryList, ProductTile, CallbackForm, Footer, BottomMenu, SideMenu, Header}
+        ActivityHistoryList,
+        StoryList,
+        ProductTile,
+        CallbackForm,
+        Footer,
+        BottomMenu,
+        SideMenu,
+        Header
+    }
 }
 </script>
-
-<style scoped>
-
-</style>

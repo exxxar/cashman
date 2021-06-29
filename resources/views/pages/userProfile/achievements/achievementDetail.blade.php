@@ -5,5 +5,4 @@
 
 @section('content')
     <achievement-detail :achievement='{!! json_encode($achievement) !!}'></achievement-detail>
-
 @endsection

@@ -1,6 +1,6 @@
 <template>
     <div class="item">
-        <span class="time">{{friend.created_at}}</span>
+        <span class="time">{{ friend.created_at }}</span>
         <div class="dot bg-danger"></div>
         <div class="content">
             <h4 class="title">Your referrals</h4>
@@ -14,15 +14,11 @@
 <script>
 export default {
     name: "UserFriendsAddHistoryItem",
-    props:{
-        friend:{
+    props: {
+        friend: {
             required: true,
             type: Object
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-<news-detail :item='{!! json_encode($news) !!}'></news-detail>
+    <news-detail :item='{!! json_encode($news) !!}'></news-detail>
 @endsection

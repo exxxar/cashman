@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Callback\CallbackController;
+use App\Http\Controllers\Companies\CompanyAuthController;
+use App\Http\Controllers\Subscription\BuySubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('company/register', [\App\Http\Controllers\Companies\CompanyAuthController::class, 'register']);
-Route::post('company/login', [\App\Http\Controllers\Companies\CompanyAuthController::class, 'login']);
-Route::post('buy/subscription', [\App\Http\Controllers\Subscription\BuySubscriptionController::class, 'index']);
-Route::post('send/message', [\App\Http\Controllers\Callback\CallbackController::class, 'index']);
+Route::post('company/register', [CompanyAuthController::class, 'register']);
+Route::post('company/login', [CompanyAuthController::class, 'login']);
+Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
+Route::post('send/message', [CallbackController::class, 'index']);
 

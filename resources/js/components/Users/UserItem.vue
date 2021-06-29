@@ -1,6 +1,6 @@
 <template>
-    <a href="#" >
-        <div  class="user-card">
+    <a :href="'#'">
+        <div class="user-card">
             <img :src="user.avatar" alt="img" class="imaged w-100">
             <strong>{{ user.name }}</strong>
         </div>
@@ -16,11 +16,6 @@ export default {
                 required: true,
                 type: Object
             },
-
     }
 }
 </script>
-
-<style scoped>
-
-</style>

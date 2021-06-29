@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a href='#' class="headerButton goBack">
+                <a :href="'#'" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-
 import Header from "../LayoutComponents/Header";
 import FriendItem from "./FriendItem";
 import UserFriendsAddHistory from "./UserFriendsAddHistory";
@@ -58,13 +57,8 @@ export default {
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-
             ]
         }
     },
 }
 </script>
-
-<style scoped>
-
-</style>

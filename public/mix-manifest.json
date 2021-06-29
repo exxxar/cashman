@@ -1,8 +1,18 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/base.js": "/js/base.js",
+    "/js/landing.js": "/js/landing.js",
     "/css/app.css": "/css/app.css",
+    "/css/landing-app.css": "/css/landing-app.css",
     "/assets/favicon.png": "/assets/favicon.png",
     "/assets/icon.png": "/assets/icon.png",
     "/assets/logo-icon.png": "/assets/logo-icon.png",
-    "/assets/logo.png": "/assets/logo.png"
+    "/assets/logo.png": "/assets/logo.png",
+    "/assets/landing-img/IconBig.png": "/assets/landing-img/IconBig.png",
+    "/assets/landing-img/IconSmall.png": "/assets/landing-img/IconSmall.png",
+    "/assets/landing-img/IconStroke.png": "/assets/landing-img/IconStroke.png",
+    "/assets/landing-img/kdEdf847VD8.jpg": "/assets/landing-img/kdEdf847VD8.jpg",
+    "/assets/landing-img/lDjcOncYLW0.jpg": "/assets/landing-img/lDjcOncYLW0.jpg",
+    "/assets/landing-img/LOJ8h8OiApg.jpg": "/assets/landing-img/LOJ8h8OiApg.jpg",
+    "/assets/landing-img/RU3sAJPtVZU.jpg": "/assets/landing-img/RU3sAJPtVZU.jpg"
 }

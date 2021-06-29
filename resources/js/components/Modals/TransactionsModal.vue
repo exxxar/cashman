@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <slot name="header">
-                        <h5 class="modal-title">{{title}}</h5>
+                        <h5 class="modal-title">{{ title }}</h5>
                     </slot>
                 </div>
                 <div class="modal-body">
@@ -24,7 +24,6 @@
                                     <HasError :form="form" field="from"/>
                                 </div>
                             </div>
-
                             <div v-if="recipient && exchange===false" class="form-group basic">
                                 <div class="input-wrapper">
                                     <slot name="second">
@@ -49,7 +48,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="form-group basic">
                                 <slot name="third">
                                     <label class="label">Enter Amount</label>
@@ -62,17 +60,15 @@
                                 </slot>
                                 <HasError :form="form" field="amount"/>
                             </div>
-
                             <div class="form-group basic">
                                 <slot name="button">
                                     <button type="button" class="btn btn-primary btn-block btn-lg"
-                                            data-bs-dismiss="modal">{{title}}
+                                            data-bs-dismiss="modal">{{ title }}
                                     </button>
                                 </slot>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -106,22 +102,18 @@ export default {
                 required: true,
                 type: String
             },
-            recipient:{
+            recipient: {
                 default: true,
                 type: Boolean
             },
-            exchange:{
-                default:false,
+            exchange: {
+                default: false,
                 type: Boolean
             },
-            modalID:{
+            modalID: {
                 type: String,
                 default: "withdrawActionSheet"
             }
         }
 }
 </script>
-
-<style scoped>
-
-</style>

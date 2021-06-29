@@ -2,12 +2,12 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton" data-bs-toggle="modal" data-bs-target="#sidebarPanel">
-                    <ion-icon name="menu-outline"></ion-icon>
+                <a :href="'#'" class="headerButton goBack">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:title>
-               Дерево друзей
+                Дерево друзей
             </template>
         </Header>
         <div id="appCapsule">
@@ -54,7 +54,7 @@ export default {
                                 children: [
                                     {
                                         name: 'child grand',
-                                        image_url:  "https://izobrazhenie.net/photo/0-0/6250_62448743.jpg"
+                                        image_url: "https://izobrazhenie.net/photo/0-0/6250_62448743.jpg"
                                     }
                                 ]
                             },

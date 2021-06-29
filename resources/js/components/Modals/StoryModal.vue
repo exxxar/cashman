@@ -6,22 +6,22 @@
                     <img :src="story.image" alt="image">
                 </div>
                 <div class="modal-header">
-                    <a href="#" class="profile-detail">
+                    <a :href="'#'" class="profile-detail">
                         <img :src="story.avatar" alt="avatar"
                              class="imaged w36 rounded me-1">
                         <div>
-                            <h4>{{story.name}}</h4>
-                            <span class="text-muted">{{story.created_at}}</span>
+                            <h4>{{ story.name }}</h4>
+                            <span class="text-muted">{{ story.created_at }}</span>
                         </div>
                     </a>
-                    <a href="#" data-bs-dismiss="modal" >
+                    <a :href="'#'" data-bs-dismiss="modal">
                         <ion-icon name="close"></ion-icon>
                     </a>
                 </div>
                 <div class="modal-body">
-                    <h1>{{story.title}}</h1>
-                    <p>{{story.description}}</p>
-                    <a href="#" class="fixed-btn btn btn-primary">Fixed Button</a>
+                    <h1>{{ story.title }}</h1>
+                    <p>{{ story.description }}</p>
+                    <a :href="'#'" class="fixed-btn btn btn-primary">Fixed Button</a>
                 </div>
             </div>
         </div>
@@ -32,15 +32,11 @@
 <script>
 export default {
     name: "StoryModal",
-      props:{
-        story:{
+    props: {
+        story: {
             required: true
         }
-      }
+    }
 
 }
 </script>
-
-<style scoped>
-
-</style>

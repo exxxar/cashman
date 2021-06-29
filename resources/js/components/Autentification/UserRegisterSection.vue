@@ -3,14 +3,12 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a href='#' class="headerButton goBack">
+                <a :href="'#'" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:right>
-                <a href='/login' class="headerButton">
-                    Login
-                </a>
+                <a :href="'login'" class="headerButton">Login</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
@@ -34,7 +32,6 @@
                             </div>
                             <HasError :form="form" field="email"/>
                         </div>
-
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="password">Password</label>
@@ -47,15 +44,14 @@
                             </div>
                             <HasError :form="form" field="password"/>
                         </div>
-
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="password-confirmation">Password Again</label>
-                                <input type="password" class="form-control" id="password-confirmation" autocomplete="new-password"
+                                <input type="password" class="form-control" id="password-confirmation"
+                                       autocomplete="new-password"
                                        placeholder="Type password again"
                                        name="password_confirmation"
                                        v-model="form.password_confirmation">
-
                                 <i class="clear-input">
                                     <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
@@ -67,22 +63,20 @@
                                 <input type="checkbox" class="form-check-input" id="customCheckb1"
                                        v-model="form.submitted">
                                 <label class="form-check-label" for="customCheckb1">
-                                    <p style="color: #000; display: inline">I agree</p> <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
-                                       conditions</a>
+                                    <a>I agree</a>
+                                    <a :href="'#'" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                        terms and conditions
+                                    </a>
                                 </label>
                                 <HasError :form="form" field="submitted"/>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="form-button-group transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg"> Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
                 </div>
-
             </form>
-
         </div>
         <InformModal></InformModal>
     </div>
@@ -90,13 +84,13 @@
 
 <script>
 import Form from "vform"
-import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
+import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
 import InformModal from "../Modals/InformModal";
 import Header from "../LayoutComponents/Header";
 
 export default {
     components: {InformModal, Header, AlertErrors, HasError},
-name: "UserRegisterSection",
+    name: "UserRegisterSection",
     data: function () {
         return {
             form: new Form({
@@ -114,7 +108,3 @@ name: "UserRegisterSection",
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -14,6 +14,7 @@ import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
 export const eventBus = new Vue()
 
+Vue.config.ignoredElements = [/^ion-/]
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -41,6 +42,12 @@ Vue.component('user-friends', require('./components/Users/UserFriendsList').defa
 Vue.component('users-friends-tree', require('./components/Users/UsersFriendsTree').default);
 Vue.component('news', require('./components/Pages/NewsPage').default);
 Vue.component('news-detail', require('./components/News/NewsDetail').default);
+Vue.component('page-not-found', require('./components/Pages/NotFoundPage').default);
+Vue.component('promo-code', require('./components/Promocode/PromoCodeBlock').default);
+Vue.component('about-page', require('./components/Pages/AboutPage').default);
+Vue.component('landing-page', require('./components/Pages/LandingPage').default);
+Vue.component('company-profile', require('./components/Companies/CompanyProfile').default);
+Vue.component('ad-list', require('./components/Companies/ADComponents/Stepper').default);
 
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);

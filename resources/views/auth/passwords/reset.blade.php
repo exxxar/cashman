@@ -13,10 +13,8 @@
         </div>
     </div>
     <!-- * App Header -->
-
     <!-- App Capsule -->
     <div id="appCapsule">
-
         <div class="section mt-2 text-center">
             <h1>Reset password</h1>
             <h4>Type your new password</h4>
@@ -24,7 +22,6 @@
         <div class="section mb-5 p-2">
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
-
                 <input type="hidden" name="token" value="{{ $token }}">
                 <div class="card">
                     <div class="card-body pb-1">
@@ -34,7 +31,6 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                        name="email" value="{{ $email ?? old('email') }}" required autocomplete="email"
                                        autofocus>
-
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,14 +38,12 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group basic">
                             <label for="password" class="label">{{ __('Password') }}</label>
                             <div class="input-wrapper">
                                 <input id="password" type="password"
                                        class="form-control @error('password') is-invalid @enderror" name="password"
                                        required autocomplete="new-password">
-
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -57,10 +51,8 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group basic">
                             <label for="password-confirm" class="label">{{ __('Confirm Password') }}</label>
-
                             <div class="input-wrapper">
                                 <input id="password-confirm" type="password" class="form-control"
                                        name="password_confirmation" required autocomplete="new-password">

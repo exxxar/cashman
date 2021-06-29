@@ -7,22 +7,21 @@
             </div>
             <div class="balance">
                 <span class="label">Сумма</span>
-                <h1 class="title">$ {{cashback.value}}</h1>
-
+                <h1 class="title">$ {{ cashback.value }}</h1>
             </div>
             <div class="in">
                 <div class="card-number">
                     <span class="label">Описание</span>
-                    {{cashback.description}}
+                    {{ cashback.description }}
                 </div>
                 <div class="bottom">
                     <div class="card-expiry">
                         <span class="label">Кешбэк</span>
-                       $ {{cashback.money_in_check}}
+                        $ {{ cashback.money_in_check }}
                     </div>
                     <div class="card-ccv">
                         <span class="label">Тип</span>
-                        {{cashback.type}}
+                        {{ cashback.type }}
                     </div>
                 </div>
             </div>
@@ -34,15 +33,11 @@
 <script>
 export default {
     name: "CashBackItem",
-    props:{
-        cashback:{
+    props: {
+        cashback: {
             type: Object,
             required: true
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

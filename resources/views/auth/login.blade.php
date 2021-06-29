@@ -3,8 +3,6 @@
     Log in
 @endsection
 @section('content')
-
-        <user-login-component></user-login-component>
-
+    <user-login-component></user-login-component>
 @endsection
 

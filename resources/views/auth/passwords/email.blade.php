@@ -12,10 +12,8 @@
         </div>
     </div>
     <!-- * App Header -->
-
     <!-- App Capsule -->
     <div id="appCapsule">
-
         <div class="section mt-2 text-center">
             <h1>Forgot password</h1>
             <h4>Type your e-mail to reset your password</h4>
@@ -26,7 +24,6 @@
                     {{ session('status') }}
                 </div>
             @endif
-
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf
                 <div class="card">
@@ -34,7 +31,6 @@
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="email">{{ __('E-Mail Address') }}</label>
-
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                        name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 <i class="clear-input">
@@ -47,7 +43,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-button-group transparent">
                             <button type="submit" class="btn btn-primary btn-block btn-lg">Reset Password</button>
                         </div>
@@ -55,7 +50,5 @@
                 </div>
             </form>
         </div>
-
     </div>
-
 @endsection

@@ -4,6 +4,5 @@
 @endsection
 
 @section('content')
-        <main-page></main-page>
+    <main-page></main-page>
 @endsection
-

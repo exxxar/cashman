@@ -37,7 +37,6 @@ export default {
             type: String
         },
         icon: {
-            required: true,
             type: String
         },
         description: {

@@ -2,7 +2,7 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a href='#' class="headerButton goBack">
+                <a :href="'#'" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -29,28 +29,23 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="form-links mt-2">
                     <div>
-                        <a href="/register-company">Register Your Company Now</a>
+                        <a :href="'register-company'">Register Your Company Now</a>
                     </div>
                 </div>
-
                 <div class="form-button-group  transparent">
                     <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
                 </div>
-
             </form>
         </div>
     </div>
-
 </template>
 
 <script>
 import Header from "../LayoutComponents/Header";
 import Form from "vform"
-import {AlertErrors,  HasError} from "vform/src/components/bootstrap5"
+import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
 
 export default {
     name: "CompanyLoginSection",
@@ -69,7 +64,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

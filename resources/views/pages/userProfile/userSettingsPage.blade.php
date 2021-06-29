@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 @section('title')
-   Settings Page
+    Settings Page
 @endsection
 
 @section('content')
-<user-settings></user-settings>
+    <user-settings></user-settings>
 @endsection
