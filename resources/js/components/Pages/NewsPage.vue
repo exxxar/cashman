@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div>
-                    <a :href="'javascript:;'" class="btn btn-block btn-primary btn-lg">Load More</a>
+                    <a href="javascript:;" class="btn btn-block btn-primary btn-lg">Load More</a>
                 </div>
             </div>
         </div>

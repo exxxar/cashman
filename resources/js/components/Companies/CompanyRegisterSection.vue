@@ -2,12 +2,12 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:right>
-                <a :href="'login-company'" class="headerButton">Login</a>
+                <a href="login-company" class="headerButton">Login</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group basic">
                             <label class="form-check-label" for="customCheckb1">
-                                <a :href="'#'" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">Buy
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">Buy
                                     subscription now</a>
                             </label>
                         </div>
@@ -128,6 +128,7 @@ export default {
     methods: {
         async registerCompany() {
             await this.form.post('api/company/register')
+            window.location.href = 'company-profile';
         },
         handleFile(event) {
             this.form.logo = event.target.files[0]

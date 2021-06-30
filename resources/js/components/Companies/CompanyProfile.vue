@@ -2,7 +2,7 @@
     <fragment>
         <Header class="bg-primary text-light">
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>

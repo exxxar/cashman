@@ -8,7 +8,7 @@
                     <header>{{ user.name }}</header>
                     <footer>{{ user.region }}</footer>
                 </div>
-                <a :href="'javascript:;'" class="headerButton" data-bs-toggle="modal"
+                <a href="javascript:;" class="headerButton" data-bs-toggle="modal"
                    data-bs-target="#DialogIconedButtonInline">
                     <ion-icon name="trash-outline"></ion-icon>
                 </a>

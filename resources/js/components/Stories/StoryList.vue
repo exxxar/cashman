@@ -9,7 +9,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         <li v-if="addNew" class="splide__slide" >
-                            <a :href="'/add-advertising'" >
+                            <a href="/add-advertising" >
                                 <img src="assets/icon/plus.png" alt="alt"
                                      class="imaged w-100 rounded" style="box-shadow: none !important">
                             </a>

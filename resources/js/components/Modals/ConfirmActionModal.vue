@@ -11,11 +11,11 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-inline">
-                        <a :href="'#'" class="btn btn-text-danger" data-bs-dismiss="modal">
+                        <a href="#" class="btn btn-text-danger" data-bs-dismiss="modal">
                             <ion-icon name="close-outline"></ion-icon>
                             ОТМЕНА
                         </a>
-                        <a :href="'#'" class="btn btn-text-primary" data-bs-dismiss="modal">
+                        <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal">
                             <ion-icon name="checkmark-outline"></ion-icon>
                             ДА
                         </a>

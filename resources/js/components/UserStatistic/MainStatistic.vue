@@ -2,7 +2,7 @@
     <div class="section">
         <div class="section-heading">
             <h2 class="title">Статистика</h2>
-            <a :href="'#'" class="link">View All</a>
+            <a href="#" class="link">View All</a>
         </div>
         <div class="row mt-2">
             <div class="col-6" v-for="statistic in statistics">

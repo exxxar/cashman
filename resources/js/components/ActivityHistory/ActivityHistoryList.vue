@@ -2,10 +2,10 @@
     <div class="section mt-4">
         <div class="section-heading padding">
             <h2 class="title">History Activity</h2>
-            <a :href="'app-transactions.html'" class="link">View All</a>
+            <a href="app-transactions.html" class="link">View All</a>
         </div>
         <div class="transactions">
-            <a :href="'app-transaction-detail.html'" class="item" v-for="item in activity">
+            <a href="app-transaction-detail.html" class="item" v-for="item in activity">
                 <ActivityHistoryItem :activity=item></ActivityHistoryItem>
             </a>
         </div>

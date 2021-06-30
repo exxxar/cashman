@@ -2,7 +2,7 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -46,14 +46,14 @@
                 </div>
                 <div class="form-links mt-2">
                     <div>
-                        <a :href="'register'">Register Now</a>
+                        <a href="register">Register Now</a>
                     </div>
                     <div>
-                        <a :href="'password/reset'" class="text-muted">Forgot Password?</a>
+                        <a href="password/reset" class="text-muted">Forgot Password?</a>
                     </div>
                 </div>
                 <div class="form-button-group  transparent">
-                    <button :href="'#'" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
                 </div>
                 <div id="social_icon">
                     <div class="section mt-2 text-center border-bottom">
@@ -103,7 +103,8 @@ export default {
     },
     methods: {
         async loginUser() {
-            await this.form.post('/login')
+            await this.form.post('login')
+            window.location.href = 'user-profile';
         },
     }
 }

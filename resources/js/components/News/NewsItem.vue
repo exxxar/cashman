@@ -1,5 +1,5 @@
 <template>
-    <a :href="'news/' + this.item.id" v-on:click="getNewsItem">
+    <a :href="'news/' + this.item.id">
         <div class="blog-card">
             <img :src="item.image" alt="image" class="imaged w-100">
             <div class="text">
@@ -16,11 +16,6 @@ export default {
         item: {
             type: Object,
             required: true
-        }
-    },
-    methods: {
-        getNewsItem() {
-            axios.get('news/' + this.item.id)
         }
     }
 }

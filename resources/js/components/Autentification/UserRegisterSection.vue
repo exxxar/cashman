@@ -3,12 +3,12 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:right>
-                <a :href="'login'" class="headerButton">Login</a>
+                <a href="login" class="headerButton">Login</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
@@ -104,6 +104,7 @@ export default {
     methods: {
         async registerUser() {
             await this.form.post('/register')
+            window.location.href = 'user-profile';
         },
     }
 }

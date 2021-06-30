@@ -1,5 +1,5 @@
 <template>
-    <a :href="'#'">
+    <a href="#">
         <div class="blog-card">
             <img :src="company.image" alt="image" class="imaged w-100">
             <div class="text text-center">

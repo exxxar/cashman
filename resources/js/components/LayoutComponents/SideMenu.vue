@@ -12,7 +12,7 @@
                             <strong>Sebastian Doe</strong>
                             <div class="text-muted">4029209</div>
                         </div>
-                        <a :href="'#'" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
+                        <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
                             <ion-icon name="close-outline"></ion-icon>
                         </a>
                     </div>
@@ -28,7 +28,7 @@
 
                     <!-- action group -->
                     <div class="action-group">
-                        <a :href="'index.html'" class="action-button">
+                        <a href="index.html" class="action-button">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="add-outline"></ion-icon>
@@ -36,7 +36,7 @@
                                 Deposit
                             </div>
                         </a>
-                        <a :href="'index.html'" class="action-button">
+                        <a href="index.html" class="action-button">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="arrow-down-outline"></ion-icon>
@@ -44,7 +44,7 @@
                                 Withdraw
                             </div>
                         </a>
-                        <a :href="'index.html'" class="action-button">
+                        <a href="index.html" class="action-button">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -52,7 +52,7 @@
                                 Send
                             </div>
                         </a>
-                        <a :href="'app-cards.html'" class="action-button">
+                        <a href="app-cards.html" class="action-button">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="card-outline"></ion-icon>
@@ -63,46 +63,75 @@
                     </div>
                     <!-- * action group -->
                     <!-- menu -->
-                    <div class="listview-title mt-1">Menu</div>
+                    <div class="listview-title mt-1">Меню</div>
                     <ul class="listview flush transparent no-line image-listview">
                         <li>
-                            <a :href="'index.html'" class="item">
-                                <div class="icon-box bg-primary">
-                                    <ion-icon name="pie-chart-outline"></ion-icon>
-                                </div>
-                                <div class="in">
-                                    Overview
-                                    <span class="badge badge-primary">10</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a :href="'app-pages.html'" class="item">
+                            <a href="user-profile" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    Pages
+                                    Профиль пользователя
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a :href="'app-components.html'" class="item">
+                            <a href="history" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="apps-outline"></ion-icon>
+                                    <ion-icon name="document-text-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    Components
+                                    История действий
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a :href="'app-cards.html'" class="item">
+                            <a href="achievements" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="card-outline"></ion-icon>
+                                    <ion-icon name="document-text-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    My Cards
+                                    Достижения
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="document-text-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Акции
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="search-company" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="document-text-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Компании
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="friends" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="document-text-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Друзья
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="news" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="document-text-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Новости
                                 </div>
                             </a>
                         </li>
@@ -110,69 +139,40 @@
                     <!-- * menu -->
 
                     <!-- others -->
-                    <div class="listview-title mt-1">Others</div>
+                    <div class="listview-title mt-1">Разное</div>
                     <ul class="listview flush transparent no-line image-listview">
                         <li>
-                            <a :href="'app-settings.html'" class="item">
+                            <a href="user-settings" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="settings-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    Settings
+                                    Настройки профиля
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a :href="'component-messages.html'" class="item">
+                            <a href="about-project" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="chatbubble-outline"></ion-icon>
+                                    <ion-icon name="document-text-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    Support
+                                    О нас
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a :href="'app-login.html'" class="item">
+                            <a href="#" @click.prevent="logout" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="log-out-outline"></ion-icon>
                                 </div>
                                 <div class="in">
-                                    Log out
+                                    Выйти
                                 </div>
                             </a>
                         </li>
                     </ul>
                     <!-- * others -->
-                    <!-- send money -->
-                    <div class="listview-title mt-1">Send Money</div>
-                    <ul class="listview image-listview flush transparent no-line">
-                        <li>
-                            <a :href="'#'" class="item">
-                                <img :src="'assets/sample/avatar/avatar2.jpg'" alt="image" class="image">
-                                <div class="in">
-                                    <div>Artem Sazonov</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a :href="'#'" class="item">
-                                <img :src="'assets/sample/avatar/avatar4.jpg'" alt="image" class="image">
-                                <div class="in">
-                                    <div>Sophie Asveld</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a :href="'#'" class="item">
-                                <img :src="'assets/sample/avatar/avatar3.jpg'" alt="image" class="image">
-                                <div class="in">
-                                    <div>Kobus van de Vegte</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- * send money -->
                 </div>
             </div>
         </div>
@@ -181,6 +181,23 @@
 
 <script>
 export default {
-    name: "SideMenu"
+    name: "SideMenu",
+    data: () => ({
+        csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    }),
+    methods: {
+        logout: function () {
+            axios.post('logout').then(response => {
+                if (response.status === 302 || 401) {
+                    window.location.href = 'login';
+                    console.log('logout')
+                } else {
+                    // throw error and go to catch block
+                }
+            }).catch(error => {
+
+            });
+        },
+    },
 }
 </script>

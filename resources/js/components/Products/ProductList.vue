@@ -2,7 +2,7 @@
     <div id="appCapsule">
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,18 +10,21 @@
                 Акции
             </template>
         </Header>
-        <div class="section mt-2 text-center">
-            <h4>Категории</h4>
+        <div class="section-heading padding">
+            <h2 class="title">Категории</h2>
         </div>
-        <ul class="listview link-listview inset" v-for="category in categories">
-            <CategoryList :category=category></CategoryList>
+        <ul class="listview link-listview inset">
+            <li v-for="category in categories">
+                <a href="#">
+                    {{ category.title }}
+                    <span class="badge badge-primary">{{ category.number }}</span>
+                </a>
+            </li>
         </ul>
-        <div class="section mt-2 text-center">
-            <h4>Истории</h4>
-        </div>
         <StoryList></StoryList>
-        <div class="section mt-2 text-center">
-            <h4>Продукты</h4>
+
+        <div class="section-heading padding">
+            <h2 class="title">Акции</h2>
         </div>
         <div class="section tab-content mt-2 mb-1">
             <!-- waiting tab -->
@@ -38,13 +41,12 @@
 
 <script>
 import ProductItem from "./ProductItem";
-import CategoryList from "./CategoryList";
 import Header from "../LayoutComponents/Header";
 import StoryList from "../Stories/StoryList";
 
 export default {
     name: "ProductList",
-    components: {StoryList, CategoryList, ProductItem, Header},
+    components: {StoryList,  ProductItem, Header},
     data: function () {
         return {
             items: [

@@ -2,7 +2,7 @@
     <div class="section mt-4">
         <div v-if="!showDetail" class="section-heading">
             <h2 class="title">История последних действий</h2>
-            <a :href="'history'" class="link">View All</a>
+            <a href="history" class="link">View All</a>
         </div>
         <ul class="listview image-listview flush">
             <li class="active" v-for="action in actions">

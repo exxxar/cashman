@@ -5,7 +5,7 @@
         </div>
         <div class="price">{{ items.price }}</div>
         <p>{{ items.description }}</p>
-        <a v-if="action" :href="'#'" class="btn btn-primary btn-block btn-sm">Купить</a>
+        <a v-if="action" href="#" class="btn btn-primary btn-block btn-sm">Купить</a>
     </div>
 </template>
 

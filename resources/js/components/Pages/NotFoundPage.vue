@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -13,7 +13,7 @@
         <div id="appCapsule">
             <div class="section">
                 <div class="splash-page mt-5 mb-5">
-                    <img :src="'assets/logo-icon.png'" alt="image" class="imaged w140 ">
+                    <img src="assets/logo-icon.png" alt="image" class="imaged w140 ">
                     <h1>404</h1>
                     <h2 class="mb-2">Страница не найдена</h2>
                     <p>Подождите несколько минут и совершите повторную попытку загрузки страницы или свяжитесь со
@@ -23,10 +23,10 @@
             <div class="fixed-bar">
                 <div class="row">
                     <div class="col-6">
-                        <a :href="'#'" class="btn btn-lg btn-outline-secondary btn-block goBack">Назад</a>
+                        <a href="#" class="btn btn-lg btn-outline-secondary btn-block goBack">Назад</a>
                     </div>
                     <div class="col-6">
-                        <a :href="'#'" v-on:click="reloadPage" class="btn btn-lg btn-primary btn-block">Попробовать
+                        <a href="#" v-on:click="reloadPage" class="btn btn-lg btn-primary btn-block">Попробовать
                             снова</a>
                     </div>
                 </div>

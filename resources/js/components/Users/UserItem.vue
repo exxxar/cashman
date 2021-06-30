@@ -1,5 +1,5 @@
 <template>
-    <a :href="'#'">
+    <a href="#">
         <div class="user-card">
             <img :src="user.avatar" alt="img" class="imaged w-100">
             <strong>{{ user.name }}</strong>

@@ -20,6 +20,7 @@ class CompanyAuthController extends Controller
             'description' => ['required', 'string', 'max:255'],
             'confirmed' => ['accepted']
         ]);
+
     }
 
     /**
@@ -31,5 +32,6 @@ class CompanyAuthController extends Controller
         $this->validate($request, [
             'domain' => ['required', 'string'],
         ]);
+
     }
 }

@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,17 +10,17 @@
                 Settings
             </template>
             <template v-slot:right>
-                <a :href="'app-notifications.html'" class="headerButton">
+                <a href="#" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                    <span class="badge badge-danger">4</span>
+                    <span class="badge badge-danger">1</span>
                 </a>
             </template>
         </Header>
         <div id="appCapsule">
             <div class="section mt-3 text-center">
                 <div class="avatar-section">
-                    <a :href="'#'">
-                        <img :src="'assets/sample/avatar/avatar1.jpg'" alt="avatar" class="imaged w100 rounded">
+                    <a href="#">
+                        <img src="assets/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w100 rounded">
                         <span class="button">
                         <ion-icon name="camera-outline"></ion-icon>
                     </span>
@@ -41,29 +41,29 @@
                     </div>
                 </li>
             </ul>
-            <div class="listview-title mt-1">Notifications</div>
+            <div class="listview-title mt-1">Компании</div>
             <ul class="listview image-listview text inset">
                 <li>
-                    <div class="item">
+                    <a href="register-company" class="item">
                         <div class="in">
                             <div>
-                                Payment Alert
+                                Регистрация компании
                                 <div class="text-muted">
-                                    Send notification when new payment received
+                                    Здесь вы можете добавить свою новую компанию
                                 </div>
                             </div>
-                            <div class="form-check form-switch  ms-2">
-                                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault1">
-                                <label class="form-check-label" for="SwitchCheckDefault1"></label>
-                            </div>
                         </div>
-                    </div>
+                    </a>
                 </li>
                 <li>
-                    <a :href="'#'" class="item">
+                    <a href="login-company" class="item">
                         <div class="in">
-                            <div>Notification Sound</div>
-                            <span class="text-primary">Beep</span>
+                            <div>
+                                Авторизация компании
+                                <div class="text-muted">
+                                    Здесь вы можете войти в свою новую компанию
+                                </div>
+                            </div>
                         </div>
                     </a>
                 </li>
@@ -71,45 +71,32 @@
             <div class="listview-title mt-1">Profile Settings</div>
             <ul class="listview image-listview text inset">
                 <li>
-                    <a :href="'#'" class="item">
+                    <a href="#" class="item">
                         <div class="in">
                             <div>Change Username</div>
                         </div>
                     </a>
                 </li>
                 <li>
-                    <a :href="'#'" class="item">
+                    <a href="#" class="item">
                         <div class="in">
                             <div>Update E-mail</div>
                         </div>
                     </a>
                 </li>
                 <li>
-                    <a :href="'#'" class="item">
+                    <a href="#" class="item">
                         <div class="in">
                             <div>Address</div>
                             <span class="text-primary">Edit</span>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <div class="item">
-                        <div class="in">
-                            <div>
-                                Private Profile
-                            </div>
-                            <div class="form-check form-switch ms-2">
-                                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault2">
-                                <label class="form-check-label" for="SwitchCheckDefault2"></label>
-                            </div>
-                        </div>
-                    </div>
-                </li>
             </ul>
             <div class="listview-title mt-1">Security</div>
             <ul class="listview image-listview text mb-2 inset">
                 <li>
-                    <a :href="'#'" class="item">
+                    <a href="password/reset" class="item">
                         <div class="in">
                             <div>Update Password</div>
                         </div>
@@ -129,9 +116,9 @@
                     </div>
                 </li>
                 <li>
-                    <a :href="'#'" class="item">
+                    <a href="#" @click.prevent="logout" class="item">
                         <div class="in">
-                            <div>Log out all devices</div>
+                            <div>Выйти со всех устройств</div>
                         </div>
                     </a>
                 </li>
@@ -147,6 +134,22 @@ import Footer from "../LayoutComponents/Footer";
 
 export default {
     name: "UserSettingsPage",
-    components: {Header, Footer}
+    components: {Header, Footer},
+    data: () => ({
+        csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    }),
+    methods: {
+        logout: function () {
+            axios.post('logout').then(response => {
+                if (response.status === 302 || 401) {
+                    window.location.href = 'login';
+                } else {
+                    // throw error and go to catch block
+                }
+            }).catch(error => {
+
+            });
+        },
+    },
 }
 </script>

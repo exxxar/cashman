@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,7 +10,7 @@
                 О нас
             </template>
             <template v-slot:right>
-                <a :href="'history'" class="headerButton">
+                <a href="history" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
                     <span class="badge badge-danger">4</span>
                 </a>
@@ -18,7 +18,7 @@
         </Header>
         <div id="appCapsule">
             <div class="section full">
-                <img :src="'assets/sample/photo/wide3.jpg'" alt="image" class="imaged w-100 square">
+                <img src="assets/sample/photo/wide3.jpg" alt="image" class="imaged w-100 square">
             </div>
             <div class="section mt-3 mb-3">
                 <div class="card">
@@ -47,15 +47,15 @@
                         <ul class="splide__list">
 
                             <li class="splide__slide">
-                                <img :src="'assets/sample/photo/wide1.jpg'" alt="alt" class="imaged w-100">
+                                <img src="assets/sample/photo/wide1.jpg" alt="alt" class="imaged w-100">
                             </li>
 
                             <li class="splide__slide">
-                                <img :src="'assets/sample/photo/wide2.jpg'" alt="alt" class="imaged w-100">
+                                <img src="assets/sample/photo/wide2.jpg" alt="alt" class="imaged w-100">
                             </li>
 
                             <li class="splide__slide">
-                                <img :src="'assets/sample/photo/wide3.jpg'" alt="alt" class="imaged w-100">
+                                <img src="assets/sample/photo/wide3.jpg" alt="alt" class="imaged w-100">
                             </li>
                         </ul>
                     </div>
@@ -84,22 +84,22 @@
                         <div class="p-1">
                             <div class="text-center">
                                 <h2 class="text-primary mb-2">Social Profiles</h2>
-                                <a class="btn btn-icon btn-facebook  me-05" :href="'#'">
+                                <a class="btn btn-icon btn-facebook  me-05" href="#">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a class="btn btn-icon btn-twitter me-05" :href="'#'">
+                                <a class="btn btn-icon btn-twitter me-05" href="#">
                                     <i class="fab fa-twitter"></i>
                                 </a>
-                                <a class="btn btn-icon btn-google me-05" :href="'#'">
+                                <a class="btn btn-icon btn-google me-05" href="#">
                                     <i class="fab fa-google"></i>
                                 </a>
-                                <a class="btn btn-icon btn-vk me-05" :href="'#'">
+                                <a class="btn btn-icon btn-vk me-05" href="#">
                                     <i class="fab fa-vk"></i>
                                 </a>
-                                <a class="btn btn-icon btn-telegram me-05" :href="'#'">
+                                <a class="btn btn-icon btn-telegram me-05" href="#">
                                     <i class="fab fa-telegram"></i>
                                 </a>
-                                <a class="btn btn-icon btn-yandex me-05" :href="'#'">
+                                <a class="btn btn-icon btn-yandex me-05" href="#">
                                     <i class="fab fa-yandex"></i>
                                 </a>
                             </div>

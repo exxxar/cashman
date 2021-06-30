@@ -2,7 +2,7 @@
     <fragment>
         <Header class="no-border">
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,7 +10,7 @@
                 PromoCode Activation
             </template>
             <template v-slot:right>
-                <a :href="'#'" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogNotification">Help</a>
+                <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogNotification">Help</a>
             </template>
         </Header>
         <div id="appCapsule">
@@ -28,7 +28,7 @@
             <div class="fixed-bar">
                 <div class="row">
                     <div class="col-12">
-                        <a :href="'#'" class="btn btn-lg btn-outline-secondary btn-block goBack">Go Back</a>
+                        <a href="#" class="btn btn-lg btn-outline-secondary btn-block goBack">Go Back</a>
                     </div>
                 </div>
             </div>

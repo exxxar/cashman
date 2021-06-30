@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,7 +10,7 @@
                 Ваши друзья
             </template>
             <template v-slot:right>
-                <a :href="'/friends-tree'" type="button" class="btn btn-text-primary me-1 mb-1">Friends Tree</a>
+                <a href="/friends-tree" type="button" class="btn btn-text-primary me-1 mb-1">Friends Tree</a>
             </template>
         </Header>
         <br/>

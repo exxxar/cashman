@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,7 +10,7 @@
                 История
             </template>
             <template v-slot:right>
-                <a :href="'javascript:;'" class="headerButton" onclick="toastbox('toast-example-1', 3000)">
+                <a href="javascript:;" class="headerButton" onclick="toastbox('toast-example-1', 3000)">
                     <ion-icon name="notifications-off-outline"></ion-icon>
                 </a>
             </template>

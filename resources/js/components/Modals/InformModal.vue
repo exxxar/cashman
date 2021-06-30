@@ -6,7 +6,7 @@
                     <slot name="header">
                         <h5 class="modal-title">Terms and Conditions</h5>
                     </slot>
-                    <a :href="'javascript:;'" data-bs-dismiss="modal">Close</a>
+                    <a href="javascript:;" data-bs-dismiss="modal">Close</a>
                 </div>
                 <div class="modal-body">
                     <slot name="body">

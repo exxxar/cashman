@@ -2,7 +2,7 @@
     <div class="section mb-3 mt-4">
         <div class="section-heading padding">
             <h2 class="title">Companies</h2>
-            <a :href="'/search-company'" class="link">View All</a>
+            <a href="/search-company" class="link">View All</a>
         </div>
         <!-- carousel single -->
         <div class="carousel-multiple splide">

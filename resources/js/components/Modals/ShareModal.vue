@@ -8,7 +8,7 @@
                 <div class="modal-body">
                     <ul class="action-button-list">
                         <li>
-                            <a :href="'#'" class="btn btn-list" data-bs-dismiss="modal">
+                            <a href="#" class="btn btn-list" data-bs-dismiss="modal">
                                 <span>
                                     <ion-icon name="logo-facebook"></ion-icon>
                                     Facebook
@@ -16,7 +16,7 @@
                             </a>
                         </li>
                         <li>
-                            <a :href="'#'" class="btn btn-list" data-bs-dismiss="modal">
+                            <a href="#" class="btn btn-list" data-bs-dismiss="modal">
                                 <span>
                                     <ion-icon name="logo-twitter"></ion-icon>
                                     Twitter
@@ -24,7 +24,7 @@
                             </a>
                         </li>
                         <li>
-                            <a :href="'#'" class="btn btn-list" data-bs-dismiss="modal">
+                            <a href="#" class="btn btn-list" data-bs-dismiss="modal">
                                 <span>
                                     <ion-icon name="logo-instagram"></ion-icon>
                                     Instagram
@@ -32,7 +32,7 @@
                             </a>
                         </li>
                         <li>
-                            <a :href="'#'" class="btn btn-list" data-bs-dismiss="modal">
+                            <a href="#" class="btn btn-list" data-bs-dismiss="modal">
                                 <span>
                                     <ion-icon name="logo-linkedin"></ion-icon>
                                     Linkedin

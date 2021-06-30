@@ -1,6 +1,6 @@
 <template>
     <fragment>
-        <a :href="'#'" v-if="link===null" v-on:click="showModal(title, exchange)" data-bs-toggle="modal"
+        <a href="#" v-if="link===null" v-on:click="showModal(title, exchange)" data-bs-toggle="modal"
            data-bs-target="#withdrawActionSheet">
             <div v-if="icon==='withdraw'" class="icon-wrapper bg-danger">
                 <ion-icon name="arrow-down-outline"></ion-icon>

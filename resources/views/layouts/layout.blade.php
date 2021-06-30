@@ -15,6 +15,10 @@
           content="bootstrap, wallet, banking, fintech mobile template, cordova, phonegap, mobile, html, responsive"/>
     <link rel="icon" type="image/png" href="{{ asset('assets/icon.png') }}" sizes="32x32">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @if (Illuminate\Support\Facades\Auth::check())
+    <meta name="user" content="{{ App\Models\User::self() }}"/>
+    @endif
 </head>
 <body>
 <div id="app">

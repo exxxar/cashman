@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a :href="'#'" class="headerButton goBack">
+                <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -10,7 +10,7 @@
                 {{ action.type }}
             </template>
             <template v-slot:right>
-                <a :href="'javascript:;'" class="headerButton" data-bs-toggle="modal"
+                <a href="javascript:;" class="headerButton" data-bs-toggle="modal"
                    data-bs-target="#DialogIconedButtonInline">
                     <ion-icon name="trash-outline"></ion-icon>
                 </a>

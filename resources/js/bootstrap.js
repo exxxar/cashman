@@ -39,3 +39,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+window.user = document.head.querySelector('meta[name="user"]') != null ?
+    document.head.querySelector('meta[name="user"]').content : null;
+
+if (window.user) {
+    window.user = JSON.parse(window.user)
+
+}

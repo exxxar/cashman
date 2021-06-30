@@ -9,7 +9,7 @@
                         <h1 class="total">$ {{ cashback }}</h1>
                     </div>
                     <div class="right">
-                        <a :href="'#'" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
+                        <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
                             <ion-icon name="add-outline"></ion-icon>
                         </a>
                     </div>

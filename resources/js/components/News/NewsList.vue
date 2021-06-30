@@ -2,7 +2,7 @@
     <div class="section mt-4">
         <div class="section-heading padding">
             <h2 class="title">Lastest News</h2>
-            <a :href="'news'" class="link">View All</a>
+            <a href="news" class="link">View All</a>
         </div>
         <!-- carousel multiple -->
         <div class="carousel-multiple splide">
