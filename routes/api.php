@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Callback\CallbackController;
 use App\Http\Controllers\Companies\CompanyAuthController;
+use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\Subscription\BuySubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,5 @@ Route::post('company/register', [CompanyAuthController::class, 'register']);
 Route::post('company/login', [CompanyAuthController::class, 'login']);
 Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'index']);
+Route::post('/add-story', [StoryController::class, 'addStory']);
 

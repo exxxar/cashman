@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
-    //
+    public function addStory(){
+
+    }
 }

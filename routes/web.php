@@ -81,6 +81,11 @@ Route::get('/add-advertising', function(){
     return view('pages/companyProfile/addCompanyAdvertising');
 });
 
+Route::get('/search-company', function(){
+    return view('pages/companies/searchCompanyPage');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

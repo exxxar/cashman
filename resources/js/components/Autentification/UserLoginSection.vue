@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="form-button-group  transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                    <button :href="'#'" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
                 </div>
                 <div id="social_icon">
                     <div class="section mt-2 text-center border-bottom">

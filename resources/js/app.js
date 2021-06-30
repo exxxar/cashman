@@ -48,6 +48,7 @@ Vue.component('about-page', require('./components/Pages/AboutPage').default);
 Vue.component('landing-page', require('./components/Pages/LandingPage').default);
 Vue.component('company-profile', require('./components/Companies/CompanyProfile').default);
 Vue.component('ad-list', require('./components/Companies/ADComponents/Stepper').default);
+Vue.component('search-company', require('./components/Companies/SearchCompanySection').default);
 
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);

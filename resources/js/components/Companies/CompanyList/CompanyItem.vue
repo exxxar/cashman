@@ -1,24 +1,19 @@
 <template>
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img :src="company.image" alt="avatar">
-            </div>
-            <div class="col-md-4">
-                <div class="card-body">
-                    <h5 class="card-title">{{company.title}}</h5>
-                    <p class="card-text">{{company.description}}</p>
-                </div>
+    <a :href="'#'">
+        <div class="blog-card">
+            <img :src="company.image" alt="image" class="imaged w-100">
+            <div class="text text-center">
+                <h3>{{ company.title }}</h3>
             </div>
         </div>
-    </div>
+    </a>
 </template>
 
 <script>
 export default {
     name: "CompanyItem",
-    props:{
-        company:{
+    props: {
+        company: {
             type: Object,
             required: true
         }
