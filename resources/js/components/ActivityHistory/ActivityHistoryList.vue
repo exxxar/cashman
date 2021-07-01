@@ -1,11 +1,11 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">History Activity</h2>
-            <a href="app-transactions.html" class="link">View All</a>
+            <h2 class="title">История активности</h2>
+            <a href="#" class="link">Посмотреть все</a>
         </div>
-        <div class="transactions">
-            <a href="app-transaction-detail.html" class="item" v-for="item in activity">
+        <div class="transactions mx-3">
+            <a href="#" class="item" v-for="item in activity">
                 <ActivityHistoryItem :activity=item></ActivityHistoryItem>
             </a>
         </div>

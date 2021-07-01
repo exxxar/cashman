@@ -1,7 +1,7 @@
 <template>
     <!-- App Capsule -->
     <div id="appCapsule">
-        <Header>
+        <Header class="bg-transparent border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
@@ -16,7 +16,7 @@
             <h4>Create an account</h4>
         </div>
         <div class="section mb-5 p-2">
-            <AlertErrors :form="form"></AlertErrors>
+            <AlertErrors :form="form" class="mb-2"></AlertErrors>
             <form @submit.prevent="registerUser"
                   @keydown="form.onKeydown($event)">
                 <div class="card">
@@ -27,7 +27,7 @@
                                 <input type="email" class="form-control" id="email" placeholder="Your e-mail"
                                        v-model="form.email" name="email">
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                    <ion-icon name="close-circle"></ion-icon>
                                 </i>
                             </div>
                             <HasError :form="form" field="email"/>
@@ -39,7 +39,7 @@
                                        placeholder="Your password" name="password"
                                        v-model="form.password">
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                    <ion-icon name="close-circle"></ion-icon>
                                 </i>
                             </div>
                             <HasError :form="form" field="password"/>
@@ -53,7 +53,7 @@
                                        name="password_confirmation"
                                        v-model="form.password_confirmation">
                                 <i class="clear-input">
-                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                    <ion-icon name="close-circle"></ion-icon>
                                 </i>
                             </div>
                             <HasError :form="form" field="password_confirmation"/>
@@ -64,7 +64,7 @@
                                        v-model="form.submitted">
                                 <label class="form-check-label" for="customCheckb1">
                                     <a>I agree</a>
-                                    <a :href="'#'" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
                                         terms and conditions
                                     </a>
                                 </label>

@@ -3,25 +3,23 @@
         <div class="section-heading padding">
             <h2 class="title">Истории</h2>
         </div>
-        <div class="p-0">
-            <!-- story-block -->
-            <div class="mb-0 story-block splide">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        <li v-if="addNew" class="splide__slide" >
-                            <a href="/add-advertising" >
-                                <img src="assets/icon/plus.png" alt="alt"
-                                     class="imaged w-100 rounded" style="box-shadow: none !important">
-                            </a>
-                        </li>
-                        <li class="splide__slide" v-for="story in stories">
-                            <StoryItem :story=story></StoryItem>
-                        </li>
-                    </ul>
-                </div>
+        <!-- story-block -->
+        <div class="mb-0 story-block splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li v-if="addNew" class="splide__slide">
+                        <a href="/add-advertising">
+                            <img src="assets/icon/plus.png" alt="alt"
+                                 class="imaged w-100 rounded shadow-none">
+                        </a>
+                    </li>
+                    <li class="splide__slide" v-for="story in stories">
+                        <StoryItem :story=story></StoryItem>
+                    </li>
+                </ul>
             </div>
-            <!-- * story-block -->
         </div>
+        <!-- * story-block -->
         <StoryModal :story="currentStory"/>
     </div>
 </template>
@@ -34,8 +32,8 @@ import StoryModal from "../Modals/StoryModal";
 export default {
     name: "StoryList",
     components: {StoryModal, StoryItem},
-    props:{
-        addNew:{
+    props: {
+        addNew: {
             default: false,
             type: Boolean
         }

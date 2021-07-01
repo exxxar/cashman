@@ -1,11 +1,11 @@
 <template>
     <div class="section mt-4">
-        <div v-if="!showDetail" class="section-heading">
+        <div v-if="!showDetail" class="section-heading padding">
             <h2 class="title">История последних действий</h2>
-            <a href="history" class="link">View All</a>
+            <a href="history" class="link">Посмотреть все</a>
         </div>
-        <ul class="listview image-listview flush">
-            <li class="active" v-for="action in actions">
+        <ul class="listview image-listview inset mx-1">
+            <li v-for="action in actions">
                 <HistoryActionItem :action=action></HistoryActionItem>
             </li>
         </ul>
@@ -56,7 +56,25 @@ export default {
                     description: "John sent you",
                     type: "Payment Received",
                     created_at: "5/3/2020 10:30 AM"
-                }
+                },
+                {
+                    id: 5,
+                    logo: "assets/sample/brand/4.jpg",
+                    value: "Payment Received",
+                    money_in_check: "200",
+                    description: "John sent you",
+                    type: "Payment Received",
+                    created_at: "5/3/2020 10:30 AM"
+                },
+                {
+                    id: 6,
+                    logo: "assets/sample/brand/4.jpg",
+                    value: "Payment Received",
+                    money_in_check: "200",
+                    description: "John sent you",
+                    type: "Payment Received",
+                    created_at: "5/3/2020 10:30 AM"
+                },
             ]
         }
     },

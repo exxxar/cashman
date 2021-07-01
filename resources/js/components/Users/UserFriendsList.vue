@@ -7,10 +7,10 @@
                 </a>
             </template>
             <template v-slot:title>
-                Ваши друзья
+                You Friends
             </template>
             <template v-slot:right>
-                <a href="/friends-tree" type="button" class="btn btn-text-primary me-1 mb-1">Friends Tree</a>
+                <a href="/friends-tree" type="button" class="btn btn-text-primary">Friends Tree</a>
             </template>
         </Header>
         <br/>
@@ -37,7 +37,9 @@
                     <FriendItem :user=friend></FriendItem>
                 </li>
             </ul>
+            <Footer></Footer>
         </div>
+        <BottomMenu></BottomMenu>
     </fragment>
 </template>
 
@@ -45,10 +47,12 @@
 import Header from "../LayoutComponents/Header";
 import FriendItem from "./FriendItem";
 import UserFriendsAddHistory from "./UserFriendsAddHistory";
+import BottomMenu from "../LayoutComponents/BottomMenu";
+import Footer from "../LayoutComponents/Footer";
 
 export default {
     name: "UserFriendsList",
-    components: {UserFriendsAddHistory, FriendItem, Header},
+    components: {Footer, BottomMenu, UserFriendsAddHistory, FriendItem, Header},
     data: function () {
         return {
             friends: [

@@ -12,6 +12,7 @@
         </Header>
         <div id="appCapsule">
             <AchievementList :show-detail="true"></AchievementList>
+            <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
     </fragment>
@@ -21,9 +22,10 @@
 import Header from "../LayoutComponents/Header";
 import AchievementList from "../Achievements/AchievementList";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import Footer from "../LayoutComponents/Footer";
 
 export default {
     name: "AchievementPage",
-    components: {BottomMenu, AchievementList, Header}
+    components: {Footer, BottomMenu, AchievementList, Header}
 }
 </script>

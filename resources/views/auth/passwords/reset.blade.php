@@ -1,10 +1,12 @@
-@extends('layouts.app')
-
+@extends('layouts.layout')
+@section('title')
+    Reset password
+@endsection
 @section('content')
     <!-- App Header -->
     <div class="appHeader no-border transparent position-absolute">
         <div class="left">
-            <a href="/" class="headerButton goBack">
+            <a href="#" class="headerButton goBack">
                 <ion-icon name="chevron-back-outline"></ion-icon>
             </a>
         </div>

@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                История
+                History
             </template>
             <template v-slot:right>
                 <a href="javascript:;" class="headerButton" onclick="toastbox('toast-example-1', 3000)">
@@ -17,6 +17,7 @@
         </Header>
         <div id="appCapsule">
             <HistoryActionList :show-detail="true"></HistoryActionList>
+            <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
     </fragment>
@@ -26,9 +27,10 @@
 import Header from "../LayoutComponents/Header";
 import HistoryActionList from "../HistoryAction/HistoryActionList";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import Footer from "../LayoutComponents/Footer";
 
 export default {
     name: "HistoryActionPage",
-    components: {BottomMenu, HistoryActionList, Header}
+    components: {Footer, BottomMenu, HistoryActionList, Header}
 }
 </script>

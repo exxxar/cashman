@@ -12,10 +12,9 @@
                 <strong>Акции</strong>
             </div>
         </a>
-        <a href="news" class="item active">
+        <a href="#" class="item active">
             <div class="col">
                 <ion-icon name="apps-outline"></ion-icon>
-                <strong>Новости</strong>
             </div>
         </a>
         <a href="search-company" class="item">
@@ -24,10 +23,10 @@
                 <strong>Компании</strong>
             </div>
         </a>
-        <a href="user-settings" class="item">
+        <a href="news" class="item">
             <div class="col">
                 <ion-icon name="settings-outline"></ion-icon>
-                <strong>Настройки профиля</strong>
+                <strong>Новости</strong>
             </div>
         </a>
     </div>

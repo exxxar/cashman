@@ -1,6 +1,6 @@
 <template>
     <div id="appCapsule">
-        <Header>
+        <Header class="bg-transparent border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
@@ -12,7 +12,7 @@
             <h4>Fill the form to log in</h4>
         </div>
         <div class="section mb-5 p-2">
-            <AlertErrors :form="form"></AlertErrors>
+            <AlertErrors :form="form" class="mb-2"></AlertErrors>
             <form @submit.prevent="loginCompany" @keydown="form.onKeydown($event)">
                 <div class="card">
                     <div class="card-body pb-1">

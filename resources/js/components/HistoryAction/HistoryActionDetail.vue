@@ -1,13 +1,13 @@
 <template>
     <fragment>
-        <Header>
+        <Header class="border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:title>
-                {{ action.type }}
+                History Action — {{ action.type }}
             </template>
             <template v-slot:right>
                 <a href="javascript:;" class="headerButton" data-bs-toggle="modal"
@@ -26,7 +26,7 @@
                     </div>
                     <h3 class="text-center mt-2">{{ action.value }}</h3>
                 </div>
-                <ul class="listview flush transparent simple-listview no-space mt-3">
+                <ul class="listview simple-listview no-space mt-3">
                     <li>
                         <span>Description</span>
                         <strong>{{ action.description }}</strong>
@@ -64,6 +64,9 @@ export default {
             required: true,
             type: Object
         }
+    },
+    mounted() {
+        document.querySelector('body').classList.add('bg-white');
     }
 }
 </script>

@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                О нас
+                About us
             </template>
             <template v-slot:right>
                 <a href="history" class="headerButton">

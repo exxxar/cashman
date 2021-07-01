@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Новости
+                News
             </template>
         </Header>
         <div id="appCapsule">
@@ -21,6 +21,7 @@
                     <a href="javascript:;" class="btn btn-block btn-primary btn-lg">Load More</a>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
     </fragment>
@@ -30,10 +31,11 @@
 import NewsItem from "../News/NewsItem";
 import Header from "../LayoutComponents/Header";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import Footer from "../LayoutComponents/Footer";
 
 export default {
     name: "NewsPage",
-    components: {BottomMenu, NewsItem, Header},
+    components: {Footer, BottomMenu, NewsItem, Header},
     data: function () {
         return {
             items: [

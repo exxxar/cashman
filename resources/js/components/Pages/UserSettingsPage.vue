@@ -125,16 +125,18 @@
             </ul>
             <Footer></Footer>
         </div>
+        <BottomMenu></BottomMenu>
     </fragment>
 </template>
 
 <script>
 import Header from "../LayoutComponents/Header";
 import Footer from "../LayoutComponents/Footer";
+import BottomMenu from "../LayoutComponents/BottomMenu";
 
 export default {
     name: "UserSettingsPage",
-    components: {Header, Footer},
+    components: {Header, Footer, BottomMenu},
     data: () => ({
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
     }),

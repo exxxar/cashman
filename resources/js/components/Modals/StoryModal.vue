@@ -21,7 +21,7 @@
                 <div class="modal-body">
                     <h1>{{ story.title }}</h1>
                     <p>{{ story.description }}</p>
-                    <a href="#" class="fixed-btn btn btn-primary">Fixed Button</a>
+                    <a href="#" class="fixed-btn btn btn-primary">Button</a>
                 </div>
             </div>
         </div>
@@ -37,6 +37,5 @@ export default {
             required: true
         }
     }
-
 }
 </script>

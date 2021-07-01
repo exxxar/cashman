@@ -1,13 +1,13 @@
 <template>
     <fragment>
-        <Header>
+        <Header class="border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
             <template v-slot:title>
-                {{ achievement.title }}
+                Achievement — {{ achievement.title }}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -20,7 +20,7 @@
                     </div>
                     <h3 class="text-center mt-2">{{ achievement.title }}</h3>
                 </div>
-                <ul class="listview flush transparent simple-listview no-space mt-3">
+                <ul class="listview simple-listview no-space mt-3">
                     <li>
                         <strong>Position</strong>
                         <span class="text-success">{{ achievement.position }}</span>
@@ -55,6 +55,7 @@
                     </li>
                 </ul>
             </div>
+            <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
     </fragment>
@@ -63,14 +64,18 @@
 <script>
 import Header from "../LayoutComponents/Header";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import Footer from "../LayoutComponents/Footer";
 
 export default {
     name: "AchievementDetail",
-    components: {Header, BottomMenu},
+    components: {Footer, Header, BottomMenu},
     props: {
         achievement: {
             required: true
         },
     },
+    mounted() {
+        document.querySelector('body').classList.add('bg-white');
+    }
 }
 </script>

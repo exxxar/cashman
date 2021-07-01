@@ -76,6 +76,16 @@
                             </a>
                         </li>
                         <li>
+                            <a href="user-settings" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="document-text-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Настройки профиля
+                                </div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="history" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>

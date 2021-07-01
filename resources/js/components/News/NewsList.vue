@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">Lastest News</h2>
-            <a href="news" class="link">View All</a>
+            <h2 class="title">Последние новости</h2>
+            <a href="news" class="link">Посмотреть все</a>
         </div>
         <!-- carousel multiple -->
         <div class="carousel-multiple splide">

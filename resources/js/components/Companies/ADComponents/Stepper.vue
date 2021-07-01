@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Добавить рекламу
+                Add Advertising
             </template>
         </Header>
         <br/>
@@ -122,7 +122,7 @@ export default {
                 maxFilesize: 0.5,
                 addRemoveLinks: true,
                 maxFiles: 1,
-                dictDefaultMessage: "<i class='fa fa-cloud-upload'></i>UPLOAD ME"
+                dictDefaultMessage: "<i class='fas fa-cloud-upload-alt'></i>UPLOAD ME"
             },
             show: false,
         }
@@ -148,7 +148,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="appFooter">
+    <div class="appFooter mt-4">
         <div class="footer-title">
             Copyright © 2021. All Rights Reserved.
         </div>

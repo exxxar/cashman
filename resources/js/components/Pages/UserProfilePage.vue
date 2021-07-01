@@ -10,7 +10,7 @@
                 <img src="assets/logo.png" alt="logo" class="logo">
             </template>
             <template v-slot:right>
-                <a href="app-notifications.html" class="headerButton">
+                <a href="#" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
                     <span class="badge badge-danger">4</span>
                 </a>
@@ -23,7 +23,6 @@
         <SideMenu></SideMenu>
         <div id="appCapsule">
             <StatisticsSummary :cashback="1500"></StatisticsSummary>
-            <br/>
             <MainStatisctic></MainStatisctic>
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>

@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Дерево друзей
+                Friends Tree
             </template>
         </Header>
         <div id="appCapsule">

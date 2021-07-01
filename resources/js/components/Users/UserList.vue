@@ -2,7 +2,7 @@
     <div class="section mt-4">
         <div class="section-heading padding">
             <h2 class="title">Пользователи</h2>
-            <a v-if="showFriends" href="friends" class="link">Просмотр</a>
+            <a v-if="showFriends" href="friends" class="link">Просмотреть все</a>
         </div>
         <!-- carousel small -->
         <div class="carousel-small splide">

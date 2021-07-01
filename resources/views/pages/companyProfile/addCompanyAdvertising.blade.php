@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Создание рекламы
+    Add Advertising
 @endsection
 
 @section('content')
