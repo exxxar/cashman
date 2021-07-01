@@ -147,9 +147,16 @@
                     <div class="tab-pane fade" id="settings" role="tabpanel">
                         <ul class="listview image-listview text flush transparent pt-1">
                             <li>
-                                <a href="#" class="item">
+                                <a href="/company-edit" class="item">
                                     <div class="in">
                                         <div class="text-danger">Настройки профиля компании</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/company-admin-menu" class="item">
+                                    <div class="in">
+                                        <div class="text-danger">Меню админа компании</div>
                                     </div>
                                 </a>
                             </li>

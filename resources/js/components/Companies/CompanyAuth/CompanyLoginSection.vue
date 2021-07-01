@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import Header from "../LayoutComponents/Header";
+import Header from "../../LayoutComponents/Header";
 import Form from "vform"
 import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
 

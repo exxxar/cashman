@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Achievements\AchievementController;
+use App\Http\Controllers\Companies\CompanyEditSectionController;
 use App\Http\Controllers\Companies\CompanyProfileController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Social\SocialController;
+use App\Http\Controllers\Users\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
@@ -59,6 +61,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/user-settings', function () {
             return view('pages/userProfile/userSettingsPage');
         });
+        /*Страница редактирования данных о профиле пользователя*/
+        Route::get('/user-edit', [UserProfileController::class, 'index']);
         /* Достижения пользователя */
         Route::get('/achievements', function () {
             return view('pages/userProfile/achievements/achievementPage');
@@ -96,11 +100,17 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/add-advertising', function () {
             return view('pages/companyProfile/addCompanyAdvertising');
         });
+        /*Страница редактирования данных о компании*/
+        Route::get('/company-edit', [CompanyEditSectionController::class, 'index']);
+        /*Меню админа компании*/
+        Route::get('/company-admin-menu', function(){
+            return view('pages/companyProfile/companyAdminMenuPage');
+        });
+
     });
-    /* Страницы Laravel Auth */
+
     Auth::routes();
-    /* Страницы админки */
-    /* Авторизованный пользователь с ролью Админ */
+
     Route::group(['prefix' => 'admin'], function () {
         Voyager::routes();
     });

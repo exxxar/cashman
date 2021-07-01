@@ -68,12 +68,12 @@
                     </a>
                 </li>
             </ul>
-            <div class="listview-title mt-1">Profile Settings</div>
+            <div class="listview-title mt-1">Настройки профиля</div>
             <ul class="listview image-listview text inset">
                 <li>
-                    <a href="#" class="item">
+                    <a href="/user-edit" class="item">
                         <div class="in">
-                            <div>Change Username</div>
+                            <div>Изменить настройки профиля</div>
                         </div>
                     </a>
                 </li>
@@ -84,14 +84,7 @@
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="item">
-                        <div class="in">
-                            <div>Address</div>
-                            <span class="text-primary">Edit</span>
-                        </div>
-                    </a>
-                </li>
+
             </ul>
             <div class="listview-title mt-1">Security</div>
             <ul class="listview image-listview text mb-2 inset">

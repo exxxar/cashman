@@ -49,10 +49,12 @@ Vue.component('landing-page', require('./components/Pages/LandingPage').default)
 Vue.component('company-profile', require('./components/Companies/CompanyProfile').default);
 Vue.component('ad-list', require('./components/Companies/ADComponents/Stepper').default);
 Vue.component('search-company', require('./components/Companies/SearchCompanySection').default);
-
+Vue.component('edit-company', require('./components/Companies/CompanyAdmin/CompanyEditSection').default);
+Vue.component('edit-profile', require('./components/Pages/UserProfileEditSection').default);
+Vue.component('company-admin-menu', require('./components/Companies/CompanyAdmin/CompanyAdminMenu').default);
 //Company Authentication
-Vue.component('company-register-component', require('./components/Companies/CompanyRegisterSection').default);
-Vue.component('company-login-component', require('./components/Companies/CompanyLoginSection').default);
+Vue.component('company-register-component', require('./components/Companies/CompanyAuth/CompanyRegisterSection').default);
+Vue.component('company-login-component', require('./components/Companies/CompanyAuth/CompanyLoginSection').default);
 
 //Products
 Vue.component('products', require('./components/Products/ProductList').default);

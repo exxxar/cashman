@@ -102,11 +102,11 @@
 </template>
 
 <script>
-import InformModal from "../Modals/InformModal";
-import Header from "../LayoutComponents/Header";
+import InformModal from "../../Modals/InformModal";
+import Header from "../../LayoutComponents/Header";
 import Form from "vform"
 import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
-import TransactionsModal from "../Modals/TransactionsModal";
+import TransactionsModal from "../../Modals/TransactionsModal";
 
 export default {
     name: "CompanyRegisterSection",
@@ -120,7 +120,7 @@ export default {
                 title: '',
                 domain: '',
                 description: '',
-                logo: null,
+                image: null,
                 confirmed: ''
             })
         }

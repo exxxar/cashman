@@ -16,7 +16,7 @@ class CompanyAuthController extends Controller
         $this->validate($request, [
             'title' => ['required', 'string'],
             'domain' => ['required', 'string', 'unique:companies'],
-            'logo' => ['image'],
+            'image' => ['image'],
             'description' => ['required', 'string', 'max:255'],
             'confirmed' => ['accepted']
         ]);

@@ -17,6 +17,8 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('domain')->unique();
+            $table->integer('cashback_percent_level_1');
+            $table->integer('cashback_percent_level_2');
             $table->integer('cashback_percent');
             $table->text('description');
             $table->string('image');
