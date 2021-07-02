@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Achievements\AchievementController;
+use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
 use App\Http\Controllers\Companies\CompanyProfileController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
@@ -104,8 +107,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/company-edit', [CompanyEditSectionController::class, 'index']);
         /*Меню админа компании*/
         Route::get('/company-admin-menu', function(){
-            return view('pages/companyProfile/companyAdminMenuPage');
+            return view('pages/companyProfile/Admin/companyAdminMenuPage');
         });
+        Route::get('/company-admin-products', [ProductController::class, 'index']);
+        Route::get('/company-admin-advertisement', [AdvertisementController::class, 'index']);
+        Route::get('/company-admin-users', [UserController::class, 'index']);
 
     });
 

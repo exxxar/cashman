@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.3",
+        "sweetalert2": "^11.0.18",
         "vee-validate": "^3.4.10",
         "vform": "^2.1.0",
         "vue-fragment": "^1.5.2",

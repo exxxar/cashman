@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Callback\CallbackController;
 use App\Http\Controllers\Companies\CompanyAuthController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
@@ -31,3 +34,7 @@ Route::post('/add-story', [StoryController::class, 'addStory']);
 
 Route::post('company/settings', [CompanyEditSectionController::class, 'updateCompanyData']);
 Route::post('user/settings', [UserProfileController::class, 'updateUserProfileData']);
+
+Route::APIresource('admin/products', ProductController::class);
+Route::resource('admin/advertisement', AdvertisementController::class);
+Route::resource('admin/users', UserController::class);

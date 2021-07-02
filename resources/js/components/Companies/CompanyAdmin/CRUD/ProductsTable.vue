@@ -1,0 +1,278 @@
+<template>
+    <fragment>
+        <Header>
+            <template v-slot:left>
+                <a href="#" class="headerButton goBack">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </a>
+            </template>
+            <template v-slot:title>
+                Ваши товары
+            </template>
+        </Header>
+        <br/>
+        <br/>
+        <div class="section mt-2 mb-2">
+            <div class="section-title">
+                Добавить новый товар
+                <button @click="newModal" type="button" class="btn btn-icon btn-info me-1">
+                    <ion-icon name="add-outline"></ion-icon>
+                </button>
+                <button type="button" class="btn btn-icon btn-warning me-1">
+                    <ion-icon name="download-outline"></ion-icon>
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Код</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Цена</th>
+                            <th>Цена по скидке</th>
+                            <th>Тип акции</th>
+                            <th>Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="product in products" :key="product.id">
+                            <td>{{ product.id }}</td>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.discount_price }}</td>
+                            <td>{{ product.type }}</td>
+                            <td>
+                                <a href="#" @click="editModal(product)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                </a>
+                                /
+                                <a href="#"  @click="deleteRecord(product.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="AddNew" tabindex="-1" aria-labelledby="AddNewLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" v-show="!editmode" id="AddNewLabel">Добавить новый товар</h5>
+                        <h5 class="modal-title" v-show="editmode" id="UpdateLabel">Редактировать запись о товаре</h5>
+
+                    </div>
+                    <form @submit.prevent="editmode ? updateProduct() : createProduct()">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Название товара</label>
+                                <input v-model="form.title" type="text" name="title"
+                                       placeholder="Название товара"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
+                                <HasError :form="form" field="title"></HasError>
+                            </div>
+                            <div class="form-group">
+                                <label>Описание товара</label>
+                                <input v-model="form.description" type="text" name="description"
+                                       placeholder="Описание товара"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
+                                <HasError :form="form" field="description"></HasError>
+                            </div>
+                            <div class="form-group">
+                                <label>Цена</label>
+                                <input v-model="form.price" type="number" name="price"
+                                       placeholder="Цена"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('price') }">
+                                <HasError :form="form" field="price"></HasError>
+                            </div>
+                            <div class="form-group">
+                                <label>Цена по акции</label>
+                                <input v-model="form.discount_price" type="number" name="discount_price"
+                                       placeholder="Цена по акции"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('discount_price') }">
+                                <HasError :form="form" field="discount_price"></HasError>
+                            </div>
+                            <div class="form-group">
+                                <label>Тип акции</label>
+                                <input v-model="form.type" type="text" name="type"
+                                       placeholder="Тип акции"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
+                                <HasError :form="form" field="type"></HasError>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+                            <button v-show="editmode" type="submit" class="btn btn-success">Обновить</button>
+                            <button v-show="!editmode" type="submit" class="btn btn-primary">Создать</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </fragment>
+
+</template>
+
+<script>
+import Header from "../../../LayoutComponents/Header";
+import Form from 'vform';
+import { HasError} from "vform/src/components/bootstrap5"
+import BottomMenu from "../../../LayoutComponents/BottomMenu";
+export default {
+    name: "ProductsTable",
+    components: {BottomMenu, Header, HasError},
+    props: {
+        products: {
+            type: Object,
+            required: true
+        }
+    },
+    data: function () {
+        return {
+            editmode: false,
+            form: new Form({
+                id: '',
+                title: '',
+                description: '',
+                price: '',
+                discount_price: '',
+                type: ''
+            })
+        }
+    },
+    methods: {
+        updateProduct() {
+            this.form.put('api/admin/products/' + this.form.id)
+                .then(() => {
+                    $('#AddNew').modal('hide');
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire(
+                        'Обновлено',
+                        'Выбранная запись была обновлена',
+                        'success'
+                    )
+                    Fire.$emit('AfterCreate');
+                })
+                .catch(() => {
+
+                });
+        },
+        editModal(record) {
+            this.editmode = true;
+            this.form.reset();
+            $('#AddNew').modal('show');
+            this.form.fill(record);
+        },
+        newModal() {
+            this.editmode = false;
+            this.form.reset();
+            $('#AddNew').modal('show');
+        },
+        deleteRecord(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Вы уверены?',
+                text: "Отменить действие будет невозможно",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Да, удалить',
+                cancelButtonText: 'Отмена',
+                reverseButtons: true
+            }).then((result) => {
+                //send request to the server
+                if (result.isConfirmed) {
+                    this.form.delete('api/admin/products/' + id).then(() => {
+
+                        swalWithBootstrapButtons.fire(
+                            'Удалено',
+                            'Выбранная запись была удалена',
+                            'success'
+                        )
+                        Fire.$emit('AfterCreate');
+                    })
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Отменено',
+                        'Удаление было отменено',
+                        'error'
+                    )
+                }
+
+            }).catch(() => {
+                swal("Ошибка", "Что-то пошло не так ):", "warning")
+            });
+        },
+       // loadRecords() {
+        //    axios.get('api/admin/products').then(({data}) => (this.products = data.data));
+       // },
+        createProduct() {
+            this.form.post('api/admin/products')
+                .then(() => {
+                    Fire.$emit('AfterCreate');
+
+                    $('#AddNew').modal('hide');
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Запись успешно добавлена'
+                    });
+                })
+                .catch(() => {
+
+                })
+        },
+
+    },
+
+   // created() {
+     //   this.loadRecords();
+     //   Fire.$on('AfterCreate', () => {
+      //      this.loadRecords();
+      //  });
+
+   // }
+
+}
+
+</script>
+
+<style scoped>
+
+</style>

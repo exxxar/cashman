@@ -15,6 +15,8 @@ Vue.use(Fragment.Plugin)
 export const eventBus = new Vue()
 
 Vue.config.ignoredElements = [/^ion-/]
+import Swal from 'sweetalert2'
+window.Swal = Swal;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -51,7 +53,11 @@ Vue.component('ad-list', require('./components/Companies/ADComponents/Stepper').
 Vue.component('search-company', require('./components/Companies/SearchCompanySection').default);
 Vue.component('edit-company', require('./components/Companies/CompanyAdmin/CompanyEditSection').default);
 Vue.component('edit-profile', require('./components/Pages/UserProfileEditSection').default);
-Vue.component('company-admin-menu', require('./components/Companies/CompanyAdmin/CompanyAdminMenu').default);
+//Company Admin
+Vue.component('company-admin-menu', require('./components/Companies/CompanyAdmin/CRUD/CompanyAdminMenu').default);
+Vue.component('company-admin-products', require('./components/Companies/CompanyAdmin/CRUD/ProductsTable').default);
+Vue.component('company-admin-advertisement', require('./components/Companies/CompanyAdmin/CRUD/AdvertisementTable').default);
+Vue.component('company-admin-users', require('./components/Companies/CompanyAdmin/CRUD/UsersTable').default);
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyAuth/CompanyRegisterSection').default);
 Vue.component('company-login-component', require('./components/Companies/CompanyAuth/CompanyLoginSection').default);
@@ -59,6 +65,19 @@ Vue.component('company-login-component', require('./components/Companies/Company
 //Products
 Vue.component('products', require('./components/Products/ProductList').default);
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+window.Toast = Toast;
+window.Fire = new Vue();
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
