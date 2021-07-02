@@ -84,7 +84,6 @@
 
 <script>
 import {FormWizard, TabContent, ValidationHelper} from 'vue-step-wizard'
-import 'vue-step-wizard/dist/vue-step-wizard.css'
 import {required} from 'vuelidate/lib/validators';
 import InformModal from "../../Modals/InformModal";
 import BottomMenu from "../../LayoutComponents/BottomMenu";
