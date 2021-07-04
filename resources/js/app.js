@@ -53,11 +53,16 @@ Vue.component('ad-list', require('./components/Companies/ADComponents/Stepper').
 Vue.component('search-company', require('./components/Companies/SearchCompanySection').default);
 Vue.component('edit-company', require('./components/Companies/CompanyAdmin/CompanyEditSection').default);
 Vue.component('edit-profile', require('./components/Pages/UserProfileEditSection').default);
+Vue.component('region-map-block', require('./components/Companies/RegionMapBlock').default);
 //Company Admin
 Vue.component('company-admin-menu', require('./components/Companies/CompanyAdmin/CRUD/CompanyAdminMenu').default);
 Vue.component('company-admin-products', require('./components/Companies/CompanyAdmin/CRUD/ProductsTable').default);
 Vue.component('company-admin-advertisement', require('./components/Companies/CompanyAdmin/CRUD/AdvertisementTable').default);
 Vue.component('company-admin-users', require('./components/Companies/CompanyAdmin/CRUD/UsersTable').default);
+Vue.component('story-admin-menu', require('./components/Companies/CompanyAdmin/StoryAdminMenu').default);
+Vue.component('company-action-menu', require('./components/Companies/CompanyAdmin/CompanyActionMenu').default);
+Vue.component('company-group-admin', require('./components/Companies/CompanyAdmin/CompanyGroupAdmin').default);
+Vue.component('add-promocode', require('./components/Companies/CompanyAdmin/CRUD/AddPromocodeBlock').default);
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyAuth/CompanyRegisterSection').default);
 Vue.component('company-login-component', require('./components/Companies/CompanyAuth/CompanyLoginSection').default);

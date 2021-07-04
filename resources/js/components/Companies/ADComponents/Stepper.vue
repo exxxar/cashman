@@ -11,7 +11,6 @@
             </template>
         </Header>
         <br/>
-        <br/>
         <form-wizard @onComplete="onComplete" enctype="multipart/form-data">
             <tab-content title="Название и описание рекламы" :selected="true">
                 <div class="form-group">

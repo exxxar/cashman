@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\Achievements\AchievementController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\CompanyActionMenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
 use App\Http\Controllers\Companies\CompanyProfileController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
 use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\Promocode\PromocodeController;
+use App\Http\Controllers\Region\RegionMapController;
 use App\Http\Controllers\Social\SocialController;
 use App\Http\Controllers\Users\UserProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -109,10 +112,24 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/company-admin-menu', function(){
             return view('pages/companyProfile/Admin/companyAdminMenuPage');
         });
+        /*CRUD продукты*/
         Route::get('/company-admin-products', [ProductController::class, 'index']);
+        /*CRUD реклама*/
         Route::get('/company-admin-advertisement', [AdvertisementController::class, 'index']);
+        /*Просмотр пользователей админом*/
         Route::get('/company-admin-users', [UserController::class, 'index']);
-
+        /*Страница с картой*/
+        Route::get('/region-map/{id}', [RegionMapController::class, 'getMap']);
+        /*Страница историй админа*/
+        Route::get('/story-admin-menu', [AdvertisementController::class, 'getAdvertisement']);
+        /*Страница действий компании*/
+        Route::get('/company-action-menu', [CompanyActionMenuController::class, 'index']);
+        /*Страница списка администраторов компании*/
+        Route::get('/company-group-admin', function(){
+            return view('pages/companyProfile/Admin/CompanyGroupAdmin');
+        });
+        /*Страница добавления промокода*/
+        Route::get('/add-promocode', [PromocodeController::class, 'index']);
     });
 
     Auth::routes();

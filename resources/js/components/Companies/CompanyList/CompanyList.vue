@@ -27,10 +27,10 @@ export default {
     data: function () {
         return {
             companies: [
-                {title: "title1", description: "Music Monthly Subscription", image: "assets/sample/brand/2.jpg"},
-                {title: "title2", description: "Music Monthly Subscription", image: "assets/sample/brand/1.jpg"},
-                {title: "title3", description: "Music Monthly Subscription", image: "assets/sample/brand/3.jpg"},
-                {title: "title4", description: "Music Monthly Subscription", image: "assets/sample/brand/4.jpg"},
+                {id: 1,title: "title1", description: "Music Monthly Subscription", image: "assets/sample/brand/2.jpg"},
+                {id: 2,title: "title2", description: "Music Monthly Subscription", image: "assets/sample/brand/1.jpg"},
+                {id: 3,title: "title3", description: "Music Monthly Subscription", image: "assets/sample/brand/3.jpg"},
+                {id: 4,title: "title4", description: "Music Monthly Subscription", image: "assets/sample/brand/4.jpg"},
             ]
         }
     }

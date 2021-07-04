@@ -4,7 +4,8 @@
             <img :src="user.avatar" alt="image" class="imaged w86 rounded">
             <div class="in">
                 <div>
-                    <header>User</header>
+                    <header v-if="type==='friend'">User</header>
+                    <header v-if="type==='admin'">Admin</header>
                     <header>{{ user.name }}</header>
                     <footer>{{ user.region }}</footer>
                 </div>
@@ -14,7 +15,8 @@
                 </a>
             </div>
         </div>
-        <ConfirmActionModal :action="'Удалить ' + user.name + ' из друзей?' "></ConfirmActionModal>
+        <ConfirmActionModal v-if="type==='friend'" :action="'Удалить ' + user.name + ' из друзей?' "></ConfirmActionModal>
+        <ConfirmActionModal v-if="type==='admin'" :action="'Удалить ' + user.name + ' из списка администраторов компании?' "></ConfirmActionModal>
     </fragment>
 </template>
 
@@ -30,6 +32,9 @@ export default {
                 required: true,
                 type: Object
             },
+        type:{
+            default: 'friend'
+        }
     }
 }
 </script>

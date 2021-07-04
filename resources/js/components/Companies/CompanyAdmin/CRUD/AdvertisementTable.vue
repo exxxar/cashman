@@ -18,9 +18,10 @@
                 <button @click="newModal" type="button" class="btn btn-icon btn-info me-1">
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
+                <button @click="getStoryAdminMenu" type="button" class="btn btn-outline-info rounded shadowed">Меню историй</button>
             </div>
 
-            <div class="card">
+            <div class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -260,6 +261,9 @@ export default {
 
                 })
         },
+        getStoryAdminMenu(){
+            window.location.href = 'story-admin-menu';
+        }
         // loadRecords() {
         //    axios.get('api/admin/products').then(({data}) => (this.products = data.data));
         // },

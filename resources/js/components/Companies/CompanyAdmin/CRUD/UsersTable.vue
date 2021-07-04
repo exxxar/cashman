@@ -17,7 +17,7 @@
                 Клиенты вашей компании
             </div>
 
-            <div class="card">
+            <div class="card text-center" >
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

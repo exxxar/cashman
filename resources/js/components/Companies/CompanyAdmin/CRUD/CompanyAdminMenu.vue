@@ -27,7 +27,7 @@
             <li>
                 <a href="/company-admin-advertisement" class="item">
                     <div class="icon-box bg-primary">
-                        <ion-icon name="card-outline"></ion-icon>
+                        <ion-icon name="newspaper-outline"></ion-icon>
                     </div>
                     <div class="in">
                         <div>Реклама</div>
@@ -37,10 +37,33 @@
             <li>
                 <a href="/company-admin-users" class="item">
                     <div class="icon-box bg-primary">
-                        <ion-icon name="cash-outline"></ion-icon>
+                        <ion-icon name="people-outline"></ion-icon>
                     </div>
                     <div class="in">
                         <div>Пользователи</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="listview-title mt-2">Данные вашей компании</div>
+        <ul class="listview image-listview inset">
+            <li>
+                <a href="/company-action-menu" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        <div>Меню действий</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/company-group-admin" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        <div>Администраторы компании</div>
                     </div>
                 </a>
             </li>
