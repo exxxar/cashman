@@ -60,6 +60,6 @@ export default {
 
 .ymap-container {
     width: 100%;
-    height: 600px;
+    height: 100vh;
 }
 </style>

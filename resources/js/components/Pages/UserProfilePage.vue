@@ -10,20 +10,19 @@
                 <img src="assets/logo.png" alt="logo" class="logo">
             </template>
             <template v-slot:right>
-                <a href="#" class="headerButton">
+                <a href="/history" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                    <span class="badge badge-danger">4</span>
+                    <span class="badge badge-danger">1</span>
                 </a>
-                <a href="user-settings" class="headerButton">
-                    <img src="assets/sample/avatar/avatar1.jpg" alt="image" class="imaged w32">
-                    <span class="badge badge-danger">6</span>
+                <a href="/user-profile" class="headerButton">
+                    <img :src="auth_user.avatar" alt="image" class="imaged w32">
+                    <span class="badge badge-danger">2</span>
                 </a>
             </template>
         </Header>
-        <SideMenu></SideMenu>
+        <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule">
             <StatisticsSummary :cashback="1500"></StatisticsSummary>
-            <MainStatisctic></MainStatisctic>
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
             <CashBackList></CashBackList>
@@ -41,7 +40,6 @@
 <script>
 import Header from "../LayoutComponents/Header";
 import AchievementList from "../Achievements/AchievementList";
-import SideMenu from "../LayoutComponents/SideMenu";
 import UserList from "../Users/UserList";
 import ProductTile from "../Products/ProductTile";
 import CashBackList from "../CashBack/CashBackList";
@@ -49,10 +47,10 @@ import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import HistoryActionList from "../HistoryAction/HistoryActionList";
 import StoryList from "../Stories/StoryList";
-import MainStatisctic from "../UserStatistic/MainStatistic";
 import StatisticsSummary from "../UserStatistic/StatisticsSummary";
 import NewsList from "../News/NewsList";
 import CompanyList from "../Companies/CompanyList/CompanyList";
+import SideMenu from "../LayoutComponents/SideMenu";
 
 export default {
     name: "UserPageComponent",
@@ -60,10 +58,14 @@ export default {
         CompanyList,
         NewsList,
         StatisticsSummary,
-        MainStatisctic,
         StoryList,
         HistoryActionList,
         BottomMenu, Footer, CashBackList, ProductTile, UserList, AchievementList, Header, SideMenu
-    }
+    },
+    props:{
+        auth_user:{
+            default: null
+        }
+    },
 }
 </script>

@@ -30,6 +30,7 @@
         "sweetalert2": "^11.0.18",
         "vee-validate": "^3.4.10",
         "vform": "^2.1.0",
+        "vue-audio-recorder": "^3.0.1",
         "vue-fragment": "^1.5.2",
         "vue-step-wizard": "^0.1.17",
         "vue-tree-chart": "^1.2.9",

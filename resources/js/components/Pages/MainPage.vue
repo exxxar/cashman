@@ -10,17 +10,22 @@
                 <img src="assets/logo.png" alt="logo" class="logo">
             </template>
             <template v-slot:right>
-                <a href="app-notifications.html" class="headerButton">
+                <a v-if="auth_user===null" href="/login" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="log-in-outline"></ion-icon>
+                    </div>
+                </a>
+                <a v-if="auth_user!==null" href="/history" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
                     <span class="badge badge-danger">1</span>
                 </a>
-                <a href="app-settings.html" class="headerButton">
-                    <img src="assets/sample/avatar/avatar1.jpg" alt="image" class="imaged w32">
+                <a v-if="auth_user!==null" href="/user-profile" class="headerButton">
+                    <img :src="auth_user.avatar" alt="image" class="imaged w32">
                     <span class="badge badge-danger">2</span>
                 </a>
             </template>
         </Header>
-        <SideMenu></SideMenu>
+        <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule">
             <ActivityHistoryList></ActivityHistoryList>
             <StoryList></StoryList>
@@ -37,7 +42,6 @@
 
 <script>
 import Header from "../LayoutComponents/Header";
-import SideMenu from "../LayoutComponents/SideMenu";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import Footer from "../LayoutComponents/Footer";
 import CallbackForm from "../Callback/CallbackForm";
@@ -47,6 +51,7 @@ import ActivityHistoryList from "../ActivityHistory/ActivityHistoryList";
 import UserList from "../Users/UserList";
 import NewsList from "../News/NewsList";
 import CompanyList from "../Companies/CompanyList/CompanyList";
+import SideMenu from "../LayoutComponents/SideMenu";
 
 export default {
     name: "MainPageComponent",
@@ -60,8 +65,13 @@ export default {
         CallbackForm,
         Footer,
         BottomMenu,
-        SideMenu,
-        Header
-    }
+        Header,
+        SideMenu
+    },
+    props:{
+        auth_user:{
+            default: null
+        }
+    },
 }
 </script>

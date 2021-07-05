@@ -106,7 +106,7 @@
                                             <div class="in">
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control" id="socials1"
-                                                           :placeholder="'Ссылка на профиль в '+key"
+                                                           :placeholder="'Ссылка на '+key"
                                                            :value="social">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>

@@ -19,6 +19,7 @@
     @if (Illuminate\Support\Facades\Auth::check())
     <meta name="user" content="{{ App\Models\User::self() }}"/>
     @endif
+    @laravelPWA
 </head>
 <body>
 <div id="app">

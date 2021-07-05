@@ -12,7 +12,6 @@
         </Header>
         <div id="appCapsule">
             <AchievementList :show-detail="true"></AchievementList>
-            <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
     </fragment>

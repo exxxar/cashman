@@ -8,7 +8,7 @@
                     </a>
                 </template>
                 <template v-slot:title>
-                    Products
+                    Акции
                 </template>
             </Header>
             <div class="section mt-4">

@@ -2,7 +2,6 @@
     <div class="section mt-4">
         <div class="section-heading padding">
             <h2 class="title">История начисления/списания</h2>
-            <a href="app-cards.html" class="link">Посмотреть все</a>
         </div>
         <!-- carousel single -->
         <div class="carousel-single splide">

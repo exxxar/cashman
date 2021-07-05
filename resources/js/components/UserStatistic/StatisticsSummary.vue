@@ -27,6 +27,17 @@
                 <!-- * Wallet Footer -->
             </div>
         </div>
+        <div class="section">
+            <div class="row mt-2">
+                <div class="col-6" v-for="statistic in statistics">
+                    <div class="stat-box">
+                        <div class="title">{{ statistic.title }}</div>
+                        <div class="value">{{ statistic.value }} $</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <TransactionsModal :title="currentTitle" :exchange=currentExchange></TransactionsModal>
         <TransactionsModal title="Увеличение суммарного кэшбека" modalID="depositActionSheet"
                            :recipient=false></TransactionsModal>
@@ -56,7 +67,13 @@ export default {
                 {icon: 'exchange', title: 'Обмен кэшбека', exchange: true},
             ],
             currentTitle: '',
-            currentExchange: false
+            currentExchange: false,
+            statistics: [
+                {title: "Income", value: "200"},
+                {title: "Income", value: "200"},
+                {title: "Income", value: "200"},
+                {title: "Income", value: "200"}
+            ]
         }
     },
     mounted() {
@@ -70,3 +87,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.stat-box {
+    margin: 1% !important;
+}
+</style>

@@ -37,4 +37,14 @@ class UserProfileController extends Controller
             'address'=>['required', 'string']
         ]);
     }
+    public function getAuthUser(){
+            $profile = (object)[
+                'id' => 12454,
+                'name' => 'UserName',
+                'avatar' => 'assets/sample/brand/3.jpg',
+                'cashback' => 2354
+            ];
+
+        return view('pages/userProfile/userProfilePage', compact('profile'));
+    }
 }

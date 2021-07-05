@@ -21,7 +21,6 @@
                     <a href="javascript:;" class="btn btn-block btn-primary btn-lg">Load More</a>
                 </div>
             </div>
-            <Footer></Footer>
         </div>
         <BottomMenu></BottomMenu>
     </fragment>

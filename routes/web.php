@@ -13,6 +13,7 @@ use App\Http\Controllers\Promocode\PromocodeController;
 use App\Http\Controllers\Region\RegionMapController;
 use App\Http\Controllers\Social\SocialController;
 use App\Http\Controllers\Users\UserProfileController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
@@ -34,9 +35,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages/landingPage');
     });
     /* Главная страница */
-    Route::get('/', function () {
-        return view('pages/welcome');
-    });
+    Route::get('/', [\App\Http\Controllers\Users\UserController::class, 'getAuthUser']);
     /* О нас */
     Route::get('/about-project', function () {
         return view('pages/aboutProjectPage');
@@ -57,12 +56,12 @@ Route::group(['middleware' => ['web']], function () {
     /* Авторизация через социальные сети */
     Route::get('/auth/{driver}', [SocialController::class, 'index']);
     Route::get('/auth/{driver}/callback', [SocialController::class, 'callback']);
+    /*Страница с картой*/
+    Route::get('/region-map/{id}', [RegionMapController::class, 'getMap']);
     /* Группа авторизованных пользователей */
     Route::group(['middleware' => ['auth']], function () {
         /* Профиль пользователя */
-        Route::get('/user-profile', function () {
-            return view('pages/userProfile/userProfilePage');
-        });
+        Route::get('/user-profile',[UserProfileController::class, 'getAuthUser']);
         /* Настройки профиля пользователя */
         Route::get('/user-settings', function () {
             return view('pages/userProfile/userSettingsPage');
@@ -118,8 +117,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/company-admin-advertisement', [AdvertisementController::class, 'index']);
         /*Просмотр пользователей админом*/
         Route::get('/company-admin-users', [UserController::class, 'index']);
-        /*Страница с картой*/
-        Route::get('/region-map/{id}', [RegionMapController::class, 'getMap']);
         /*Страница историй админа*/
         Route::get('/story-admin-menu', [AdvertisementController::class, 'getAdvertisement']);
         /*Страница действий компании*/

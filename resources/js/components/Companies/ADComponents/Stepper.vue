@@ -55,7 +55,7 @@
             <tab-content title="Условия соглашения">
                 <div class="form-group">
                     <label>Ознакомьтесь с условиями соглашения</label>
-                    <div class="form-group form-check">
+                    <div class="form-group form-check" >
                         <div class="custom-control custom-checkbox mt-2 mb-1">
                             <div class="form-check">
                                 <input v-model="formData.terms" type="checkbox" class="form-check-input"
@@ -115,34 +115,41 @@ export default {
                 {terms: {checked}}
             ],
             dropzoneOptions: {
-                url: '/api/add-story',
+                url: 'api/add-story',
                 thumbnailWidth: 150,
                 maxFilesize: 0.5,
-                addRemoveLinks: true,
                 maxFiles: 1,
                 dictDefaultMessage: "<i class='fas fa-cloud-upload-alt'></i>UPLOAD ME"
-            },
-            show: false,
+            }
         }
     },
 
     methods: {
         onComplete() {
-            alert('AlertSuccess')
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire(
+                'Поздравляем!',
+                'Вы добавили новую рекламу своей компании',
+                'success'
+            )
             this.$refs.formwizard.changeStatus();
+            window.location.href = 'company-profile';
         },
-        reset() {
-            for (let field in this.formData) {
-                this.formData[field] = null;
-            }
-        },
+
         handleFile(file) {
-            this.formData.image = file.name
-            console.log(this.formData.image)
+            this.formData.image = file;
+
         },
         canceledFile() {
             this.formData.image = null
         }
-    }
+    },
+
 }
 </script>

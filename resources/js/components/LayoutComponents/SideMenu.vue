@@ -3,14 +3,20 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body p-0">
-                    <!-- profile box -->
-                    <div class="profileBox pt-2 pb-2">
+                    <!-- logo -->
+                    <div v-if="auth_user===null" class="profileBox pt-2 pb-2 bg-primary">
                         <div class="image-wrapper">
-                            <img :src="'assets/sample/avatar/avatar1.jpg'" alt="image" class="imaged  w36">
+                            <img src="assets/logo.png" alt="image" class="w-100">
+                        </div>
+                    </div>
+                    <!-- profile box -->
+                    <div v-if="auth_user!==null" class="profileBox pt-2 pb-2">
+                        <div class="image-wrapper">
+                            <img :src="auth_user.avatar" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
-                            <strong>Sebastian Doe</strong>
-                            <div class="text-muted">4029209</div>
+                            <strong>{{auth_user.name}}</strong>
+                            <div class="text-muted">{{auth_user.id}}</div>
                         </div>
                         <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
                             <ion-icon name="close-outline"></ion-icon>
@@ -18,16 +24,16 @@
                     </div>
                     <!-- * profile box -->
                     <!-- balance -->
-                    <div class="sidebar-balance">
+                    <div v-if="auth_user!==null" class="sidebar-balance">
                         <div class="listview-title">Balance</div>
                         <div class="in">
-                            <h1 class="amount">$ 2,562.50</h1>
+                            <h1 class="amount">$ {{auth_user.cashback}}</h1>
                         </div>
                     </div>
                     <!-- * balance -->
 
                     <!-- action group -->
-                    <div class="action-group">
+                    <div v-if="auth_user!==null" class="action-group">
                         <a href="index.html" class="action-button">
                             <div class="in">
                                 <div class="iconbox">
@@ -65,7 +71,7 @@
                     <!-- menu -->
                     <div class="listview-title mt-1">Меню</div>
                     <ul class="listview flush transparent no-line image-listview">
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="user-profile" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>
@@ -75,7 +81,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="user-settings" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>
@@ -85,7 +91,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="history" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>
@@ -95,7 +101,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="achievements" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>
@@ -125,7 +131,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="friends" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="document-text-outline"></ion-icon>
@@ -151,7 +157,7 @@
                     <!-- others -->
                     <div class="listview-title mt-1">Разное</div>
                     <ul class="listview flush transparent no-line image-listview">
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="user-settings" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="settings-outline"></ion-icon>
@@ -171,13 +177,23 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <li v-if="auth_user!==null">
                             <a href="#" @click.prevent="logout" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="log-out-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Выйти
+                                </div>
+                            </a>
+                        </li>
+                        <li v-if="auth_user===null">
+                            <a href="/login" class="item">
+                                <div class="icon-box bg-primary">
+                                    <ion-icon name="log-in-outline"></ion-icon>
+                                </div>
+                                <div class="in">
+                                    Войти в аккаунт
                                 </div>
                             </a>
                         </li>
@@ -192,6 +208,11 @@
 <script>
 export default {
     name: "SideMenu",
+    props:{
+        auth_user:{
+            default: null
+        }
+    },
     data: () => ({
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
     }),
@@ -199,7 +220,7 @@ export default {
         logout: function () {
             axios.post('logout').then(response => {
                 if (response.status === 302 || 401) {
-                    window.location.href = 'login';
+                    window.location.href = '/';
                     console.log('logout')
                 } else {
                     // throw error and go to catch block

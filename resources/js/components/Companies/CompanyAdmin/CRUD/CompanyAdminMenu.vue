@@ -78,7 +78,7 @@ import BottomMenu from "../../../LayoutComponents/BottomMenu";
 
 export default {
     name: "CompanyAdminMenu",
-    components: {BottomMenu, Header},
+    components: { BottomMenu, Header},
 
 }
 </script>

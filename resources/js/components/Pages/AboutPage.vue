@@ -63,6 +63,10 @@
                 <!-- * carousel single -->
             </div>
             <CallbackForm></CallbackForm>
+            <div class="section mt-3 mb-3 text-center border-bottom">
+                <h2>or</h2>
+            </div>
+            <VoiceCallbackForm></VoiceCallbackForm>
             <div class="section mt-2">
                 <div class="card">
                     <div class="card-body">
@@ -78,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section mt-2 mb-2">
+            <div class="section mt-3 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="p-1">
@@ -118,9 +122,10 @@ import Header from "../LayoutComponents/Header";
 import CallbackForm from "../Callback/CallbackForm";
 import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import VoiceCallbackForm from "../Callback/VoiceCallbackForm";
 
 export default {
     name: "AboutPage",
-    components: {BottomMenu, Footer, CallbackForm, Header}
+    components: {VoiceCallbackForm, BottomMenu, Footer, CallbackForm, Header}
 }
 </script>

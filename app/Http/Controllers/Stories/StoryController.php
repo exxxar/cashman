@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
-    public function addStory(){
-
+    public function addStory(Request $request)
+    {
+        $file = $request->file('file');
+        $file->store('public/uploads');
     }
 }

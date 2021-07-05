@@ -15,10 +15,9 @@
         <div class="section mt-2 mb-2">
             <div class="section-title">
                 Добавить новую рекламу
-                <button @click="newModal" type="button" class="btn btn-icon btn-info me-1">
+                <button @click="getStoryAdminMenu" type="button" class="btn btn-icon btn-info me-1">
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
-                <button @click="getStoryAdminMenu" type="button" class="btn btn-outline-info rounded shadowed">Меню историй</button>
             </div>
 
             <div class="card text-center">
@@ -73,78 +72,18 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="AddNew" tabindex="-1" aria-labelledby="AddNewLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" v-show="!editmode" id="AddNewLabel">Добавить новую рекламу</h5>
-                        <h5 class="modal-title" v-show="editmode" id="UpdateLabel">Редактировать рекламу</h5>
-                    </div>
-                    <form @submit.prevent="editmode ? updateAdvertisement() : createAdvertisement()">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Название рекламы</label>
-                                <input v-model="form.title" type="text" name="title"
-                                       placeholder="Название рекламы"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
-                                <HasError :form="form" field="title"></HasError>
-                            </div>
-                            <div class="form-group">
-                                <label>Описание рекламы</label>
-                                <input v-model="form.description" type="text" name="description"
-                                       placeholder="Описание рекламы"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
-                                <HasError :form="form" field="description"></HasError>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Изображение рекламы</label>
-                                <div class="custom-file-upload" id="fileUpload1">
-                                    <img v-if="editmode" :src="form.images" alt="image" class="imaged" style="width:inherit">
-                                    <input name="file" type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg"
-                                           @change="handleFile" >
-                                    <label for="fileuploadInput">
-
-                                <span>
-                                    <strong>
-                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
-                                        <i>Upload a Photo</i>
-                                    </strong>
-                                </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Тип рекламы</label>
-                                <input v-model="form.type" type="text" name="type"
-                                       placeholder="Тип рекламы"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                                <HasError :form="form" field="type"></HasError>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                            <button v-show="editmode" type="submit" class="btn btn-success">Обновить</button>
-                            <button v-show="!editmode" type="submit" class="btn btn-primary">Создать</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
+        <AdvertisementModal :form="this.form"></AdvertisementModal>
     </fragment>
 </template>
 
 <script>
 import Header from "../../../LayoutComponents/Header";
-import Form from 'vform';
-import { HasError} from "vform/src/components/bootstrap5"
+import AdvertisementModal from "../../../Modals/CRUDModals/AdvertisementModal";
+import Form from "vform";
 
 export default {
     name: "AdvertisementTable",
-    components: { Header, HasError},
+    components: {AdvertisementModal, Header},
     props: {
         advertisements: {
             type: Object,
@@ -153,7 +92,6 @@ export default {
     },
     data: function () {
         return {
-            editmode: false,
             form: new Form({
                 id: '',
                 title: '',
@@ -164,39 +102,13 @@ export default {
             })
         }
     },
-    methods: {
-        updateAdvertisement() {
-            this.form.put('api/admin/advertisement/' + this.form.id)
-                .then(() => {
-                    $('#AddNew').modal('hide');
-                    const swalWithBootstrapButtons = Swal.mixin({
-                        customClass: {
-                            confirmButton: 'btn btn-success',
-                            cancelButton: 'btn btn-danger'
-                        },
-                        buttonsStyling: false
-                    })
-                    swalWithBootstrapButtons.fire(
-                        'Обновлено',
-                        'Выбранная запись была обновлена',
-                        'success'
-                    )
-                    Fire.$emit('AfterCreate');
-                })
-                .catch(() => {
-
-                });
-        },
+    methods:{
         editModal(record) {
             this.editmode = true;
+
             this.form.reset();
             $('#AddNew').modal('show');
             this.form.fill(record);
-        },
-        newModal() {
-            this.editmode = false;
-            this.form.reset();
-            $('#AddNew').modal('show');
         },
 
         deleteAdvertisement(id) {
@@ -243,33 +155,14 @@ export default {
                 swal("Ошибка", "Что-то пошло не так ):", "warning")
             });
         },
-        handleFile(event) {
-            this.form.images = event.target.files[0]
-        },
-        createAdvertisement() {
-            this.form.post('api/admin/advertisement')
-                .then(() => {
-                    Fire.$emit('AfterCreate');
-
-                    $('#AddNew').modal('hide');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Запись успешно добавлена'
-                    });
-                })
-                .catch(() => {
-
-                })
-        },
         getStoryAdminMenu(){
             window.location.href = 'story-admin-menu';
         }
+
         // loadRecords() {
-        //    axios.get('api/admin/products').then(({data}) => (this.products = data.data));
+        //    axios.get('api/admin/advertisement').then(({data}) => (this.advertisements = data.data));
         // },
-
-
-    },
+    }
 
     // created() {
     //   this.loadRecords();

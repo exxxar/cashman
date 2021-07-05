@@ -56,7 +56,7 @@
                     <div class="section mt-2 text-center border-bottom">
                         <h2>or</h2>
                     </div>
-                    <div class="section p-2 text-center">
+                    <div class="section py-2 px-1 text-center">
                         <a class="btn btn-icon btn-facebook  me-05" href="auth/facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>

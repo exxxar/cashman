@@ -43,5 +43,27 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .verification-input {
+        width: 65% !important;
+    }
+}
 
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .verification-input {
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .verification-input {
+        width: 95% !important;
+    }
+}
+@media screen and (max-width: 440px) {
+    .verification-input {
+        width: 95% !important;
+        font-size: 16px !important;
+    }
+}
 </style>

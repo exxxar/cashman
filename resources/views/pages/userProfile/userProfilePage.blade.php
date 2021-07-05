@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <user-page></user-page>
+    <user-page :auth_user='{!! json_encode($profile) !!}'></user-page>
 @endsection

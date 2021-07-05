@@ -1,6 +1,6 @@
 <template>
-    <div class="section mt-4">
-        <div class="card mx-3">
+    <div class="section mt-3 mb-3">
+        <div class="card">
             <div class="card-body">
                 <div class="p-1">
                     <div class="text-center">

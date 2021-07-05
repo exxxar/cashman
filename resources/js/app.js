@@ -17,6 +17,9 @@ export const eventBus = new Vue()
 Vue.config.ignoredElements = [/^ion-/]
 import Swal from 'sweetalert2'
 window.Swal = Swal;
+
+import AudioRecorder from 'vue-audio-recorder'
+Vue.use(AudioRecorder)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -69,6 +72,8 @@ Vue.component('company-login-component', require('./components/Companies/Company
 
 //Products
 Vue.component('products', require('./components/Products/ProductList').default);
+
+Vue.component('side-menu', require('./components/LayoutComponents/SideMenu').default);
 
 const Toast = Swal.mixin({
     toast: true,
