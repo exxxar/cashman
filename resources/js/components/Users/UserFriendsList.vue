@@ -14,7 +14,7 @@
             </template>
         </Header>
         <br/>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section inset mt-2 mb-2">
                 <div class="accordion" id="accordionExample5">
                     <div class="accordion-item">
@@ -37,8 +37,8 @@
                     <FriendItem :user=friend></FriendItem>
                 </li>
             </ul>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>

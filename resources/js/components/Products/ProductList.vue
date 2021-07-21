@@ -1,6 +1,5 @@
 <template>
     <fragment>
-        <div id="appCapsule">
             <Header>
                 <template v-slot:left>
                     <a href="#" class="headerButton goBack">
@@ -11,6 +10,7 @@
                     Акции
                 </template>
             </Header>
+        <div id="appCapsule" class="full-height">
             <div class="section mt-4">
                 <div class="section-heading padding">
                     <h2 class="title">Категории</h2>
@@ -40,8 +40,8 @@
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>

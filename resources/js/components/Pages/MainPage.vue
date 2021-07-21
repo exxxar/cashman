@@ -26,7 +26,7 @@
             </template>
         </Header>
         <SideMenu :auth_user="auth_user"></SideMenu>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <ActivityHistoryList></ActivityHistoryList>
             <StoryList></StoryList>
             <ProductTile></ProductTile>
@@ -34,8 +34,8 @@
             <CompanyList></CompanyList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>

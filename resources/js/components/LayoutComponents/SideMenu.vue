@@ -1,4 +1,5 @@
 <template>
+    <fragment>
     <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -34,36 +35,39 @@
 
                     <!-- action group -->
                     <div v-if="auth_user!==null" class="action-group">
-                        <a href="index.html" class="action-button">
+                        <a href="#" class="action-button"  data-bs-toggle="modal"
+                           data-bs-target="#depositActionSheet">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="add-outline"></ion-icon>
                                 </div>
-                                Deposit
+                                Добавить
                             </div>
                         </a>
-                        <a href="index.html" class="action-button">
+                        <a href="#" class="action-button"  data-bs-toggle="modal"
+                           data-bs-target="#withdrawActionSheet1">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="arrow-down-outline"></ion-icon>
                                 </div>
-                                Withdraw
+                                Вывод
                             </div>
                         </a>
-                        <a href="index.html" class="action-button">
+                        <a href="#" class="action-button" data-bs-toggle="modal"
+                           data-bs-target="#withdrawActionSheet2">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="arrow-forward-outline"></ion-icon>
                                 </div>
-                                Send
+                                Отправить
                             </div>
                         </a>
-                        <a href="app-cards.html" class="action-button">
+                        <a href="history" class="action-button">
                             <div class="in">
                                 <div class="iconbox">
                                     <ion-icon name="card-outline"></ion-icon>
                                 </div>
-                                My Cards
+                                Мои действия
                             </div>
                         </a>
                     </div>
@@ -74,7 +78,7 @@
                         <li v-if="auth_user!==null">
                             <a href="user-profile" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="person-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Профиль пользователя
@@ -84,7 +88,7 @@
                         <li v-if="auth_user!==null">
                             <a href="user-settings" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="settings-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Настройки профиля
@@ -94,7 +98,7 @@
                         <li v-if="auth_user!==null">
                             <a href="history" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="receipt-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     История действий
@@ -104,7 +108,7 @@
                         <li v-if="auth_user!==null">
                             <a href="achievements" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="medal-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Достижения
@@ -114,7 +118,7 @@
                         <li>
                             <a href="products" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="cash-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Акции
@@ -124,7 +128,7 @@
                         <li>
                             <a href="search-company" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="grid-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Компании
@@ -134,7 +138,7 @@
                         <li v-if="auth_user!==null">
                             <a href="friends" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="people-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Друзья
@@ -144,7 +148,7 @@
                         <li>
                             <a href="news" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="newspaper-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     Новости
@@ -170,7 +174,7 @@
                         <li>
                             <a href="about-project" class="item">
                                 <div class="icon-box bg-primary">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    <ion-icon name="help-circle-outline"></ion-icon>
                                 </div>
                                 <div class="in">
                                     О нас
@@ -203,11 +207,19 @@
             </div>
         </div>
     </div>
+        <TransactionsModal title="Вывод кэшбека" modalID="withdrawActionSheet1"></TransactionsModal>
+        <TransactionsModal title="Отправка кэшбека" modalID="withdrawActionSheet2"></TransactionsModal>
+        <TransactionsModal title="Увеличение суммарного кэшбека" modalID="depositActionSheet"
+                           :recipient=false></TransactionsModal>
+    </fragment>
 </template>
 
 <script>
+import TransactionsModal from "../Modals/TransactionsModal";
+
 export default {
     name: "SideMenu",
+    components: {TransactionsModal},
     props:{
         auth_user:{
             default: null
@@ -215,6 +227,7 @@ export default {
     },
     data: () => ({
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        currentTitle: ''
     }),
     methods: {
         logout: function () {
@@ -228,7 +241,8 @@ export default {
             }).catch(error => {
 
             });
-        },
+        }
+
     },
 }
 </script>

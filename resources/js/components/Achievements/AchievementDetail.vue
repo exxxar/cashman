@@ -55,8 +55,8 @@
                     </li>
                 </ul>
             </div>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>

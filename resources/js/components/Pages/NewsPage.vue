@@ -10,7 +10,7 @@
                 News
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section tab-content mt-2 mb-2">
                 <div class="row">
                     <div class="col-6 mb-2" v-for="item in items">

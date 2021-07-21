@@ -13,7 +13,7 @@
                 <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogNotification">Help</a>
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section">
                 <div class="splash-page mt-5 mb-5">
                     <div class="mb-3">

@@ -1,101 +1,143 @@
 <template>
-    <div class="section mt-3 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="p-1">
-                    <div class="row">
-                        <div class="text-center">
-                            <h2 class="text-primary">Отправьте нам голосовое сообщение</h2>
-                            <p>Нажмите на кнопку "Микрофон" для начала общения</p>
+    <div class="mt-2 mb-2">
+        <h6 class="text-center">Запиши голосовое сообщение</h6>
+        <div class="d-flex justify-content-center mt-2">
+            <vue-record-audio :mode="'hold'" @stream="onStream" @result="onResult"/>
+        </div>
+        <div class="row d-flex justify-content-center mt-2" v-if="recordings.length>0">
+            <div class="col-12">
+                <div class="recorded-audio">
+                    <div v-for="(record, index) in recordings" :key="index" class="recorded-item">
+                        <div class="audio-container">
+                            <audio :src="record.src" controls/>
                         </div>
-                        <form @submit.prevent="sendMessage"
-                              @keydown="form.onKeydown($event)">
-                            <div class="d-flex justify-content-center">
-                                <audio-recorder v-if="showRecorder"
-                                                upload-url="some url"
-                                                filename="ninja"
-                                                format="wav"
-                                                :attempts="3"
-                                                :time="2"
-                                                :headers="headers"
-                                                :before-recording="callback"
-                                                :pause-recording="callback"
-                                                :after-recording="callback"
-                                                :select-record="callback"
-                                                :before-upload="callback"
-                                                :successful-upload="callback"
-                                                :failed-upload="callback"
-                                                :bit-rate="192"/>
-                            </div>
-                            <div class="form-group basic animated">
-                                <div class="input-wrapper">
-                                    <label class="label" for="name2">Ваше имя</label>
-                                    <input v-model="form.name" type="text" class="form-control" id="name2"
-                                           placeholder="Ваше имя">
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
-                                </div>
-                                <HasError :form="form" field="name"/>
-                            </div>
-                            <div class="form-group basic animated">
-                                <div class="input-wrapper">
-                                    <label class="label" for="email2">Номер телефона</label>
-                                    <input v-model="form.phone" type="text" class="form-control" id="email2"
-                                           placeholder="Номер телефона">
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
-                                </div>
-                                <HasError :form="form" field="phone"/>
-                            </div>
-                            <div class="mt-2">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Отправить</button>
-                            </div>
-                        </form>
+                        <div>
+                            <a @click="removeRecord(index)" class="button is-dark"><i class="fas fa-trash"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
-import Form from "vform"
-import {HasError} from "vform/src/components/bootstrap5"
+
 export default {
     name: "VoiceCallbackForm",
-    components: { HasError},
+    props: ["phone", "cansend"],
     data() {
         return {
-            showRecorder: true,
-            headers: {
-                'X-Custom-Header': 'some data'
-            },
-            form: new Form({
-                name: '',
-                phone:'',
-            })
+            recordings: []
+        }
+    },
+    watch: {
+        cansend: function (newVal) {
+            if (newVal)
+                this.send();
         }
     },
     methods: {
-        callback(msg) {
-            console.debug('Event: ', msg)
+        send() {
+
+            let formData = new FormData();
+
+            formData.append("phone", this.phone)
+
+            for (var i = 0; i < this.recordings.length; i++) {
+                let file = this.recordings[i].data;
+                console.log(file);
+                formData.append('files[' + i + ']', file);
+            }
+
+            axios.post('api/send/voice-message', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                }
+            ).then(function () {
+                this.recordings = []
+            })
+                .catch(function () {
+                });
+            this.recordings = []
         },
-        async sendMessage() {
-            await this.form.post('api/send/voice-message')
+        removeRecord(index) {
+            this.recordings.splice(index, 1)
         },
+        onStream(stream) {
+            console.log('Got a stream object:', stream);
+        },
+        onVideoStream(stream) {
+            console.log('Got a video stream object:', stream);
+        },
+        onVideoResult(data) {
+            this.$refs.Video.srcObject = null
+            this.$refs.Video.src = window.URL.createObjectURL(data)
+        },
+        onResult(data) {
+            this.recordings.push({
+                src: window.URL.createObjectURL(data),
+                data: data
+            })
+        }
     }
 
 }
 </script>
 
-<style>
-.ar-icon svg {
-    vertical-align: top !important;
+<style lang="scss">
+
+
+.vue-audio-recorder, .vue-video-recorder {
+    margin-right: 0px;
+    background-color: #38c172;
 }
 
-.ar-recorder__duration {
-    margin-top: 40px !important;
+.record-settings {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
 }
+
+.recorded-audio {
+    margin: 0 auto;
+    height: 200px;
+    overflow: auto;
+    border: thin solid #eee;
+    background-color: #fffcfc;
+    padding: 10px 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 0px inset;
+
+    .recorded-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        padding: 0px 22px;
+    }
+
+    .audio-container {
+        display: flex;
+        height: 54px;
+        margin-right: 16px;
+
+        width: 100%;
+        padding: 0px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+}
+
+.recorded-video {
+    video {
+        width: 100%;
+        max-height: 400px;
+    }
+}
+
+
 </style>
+

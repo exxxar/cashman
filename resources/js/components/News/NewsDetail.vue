@@ -10,7 +10,7 @@
                 {{ item.title }}
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section mt-2">
                 <h1>
                     {{ item.title }}

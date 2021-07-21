@@ -40,3 +40,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"></script>
 </body>
 </html>
+
+<style>
+    .padding-bottom-70 {
+        padding-bottom: 70px;
+    }
+</style>

@@ -26,6 +26,7 @@
         "vuelidate": "^0.7.6"
     },
     "dependencies": {
+        "@codekraft-studio/vue-record": "^0.0.3",
         "@fortawesome/fontawesome-free": "^5.15.3",
         "sweetalert2": "^11.0.18",
         "vee-validate": "^3.4.10",

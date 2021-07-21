@@ -13,7 +13,9 @@ import Fragment from 'vue-fragment'
 
 Vue.use(Fragment.Plugin)
 export const eventBus = new Vue()
+import VueRecord from '@codekraft-studio/vue-record'
 
+Vue.use(VueRecord)
 Vue.config.ignoredElements = [/^ion-/]
 import Swal from 'sweetalert2'
 window.Swal = Swal;
@@ -34,6 +36,7 @@ Vue.use(AudioRecorder)
 //User Authentication
 Vue.component('user-login-component', require('./components/Autentification/UserLoginSection').default);
 Vue.component('user-register-component', require('./components/Autentification/UserRegisterSection').default);
+Vue.component('user-register-stepper', require('./components/Autentification/UserRegisterStepper').default);
 
 //Pages
 Vue.component('main-page', require('./components/Pages/MainPage').default);

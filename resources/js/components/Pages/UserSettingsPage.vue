@@ -16,7 +16,7 @@
                 </a>
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section mt-3 text-center">
                 <div class="avatar-section">
                     <a href="#">
@@ -116,8 +116,8 @@
                     </a>
                 </li>
             </ul>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>

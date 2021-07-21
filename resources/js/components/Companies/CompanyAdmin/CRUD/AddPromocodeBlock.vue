@@ -7,29 +7,30 @@
                 </a>
             </template>
             <template v-slot:title>
-              Добавить промокод
+                Добавить промокод
             </template>
         </Header>
-    <div id="appCapsule">
-        <div class="section mt-2 text-center">
-            <h1>Введите символы для промокода</h1>
-            <h4>Количество символов не должно превышать 12</h4>
+        <div id="appCapsule" class="full-height">
+            <div class="section mt-2 text-center">
+                <h1>Введите символы для промокода</h1>
+                <h4>Количество символов не должно превышать 12</h4>
+            </div>
+            <div class="section mb-5 p-2">
+                <form action="/company-admin-menu">
+                    <div class="form-group basic">
+                        <input type="text" class="form-control verification-input w-100" id="smscode"
+                               placeholder="••••••••••••"
+                               maxlength="12">
+                    </div>
+
+                    <div class="form-button-group transparent">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Создать промокод</button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
-        <div class="section mb-5 p-2">
-            <form action="/company-admin-menu">
-                <div class="form-group basic">
-                    <input type="text" class="form-control verification-input w-100" id="smscode" placeholder="••••••••••••"
-                           maxlength="12">
-                </div>
-
-                <div class="form-button-group transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Создать промокод</button>
-                </div>
-
-            </form>
-        </div>
-
-    </div>
     </fragment>
 </template>
 
@@ -60,6 +61,7 @@ export default {
         width: 95% !important;
     }
 }
+
 @media screen and (max-width: 440px) {
     .verification-input {
         width: 95% !important;

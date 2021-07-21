@@ -10,12 +10,12 @@
                 Friends Tree
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div id="UsersFriendsTree">
                 <TreeChart :json="treeData"/>
             </div>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>

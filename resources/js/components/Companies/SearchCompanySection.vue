@@ -16,7 +16,7 @@
             </template>
         </Header>
        <SearchComponent></SearchComponent>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
 
             <div class="section tab-content mt-2 mb-2">
 

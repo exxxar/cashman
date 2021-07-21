@@ -10,7 +10,7 @@
                 404 - Not found
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section">
                 <div class="splash-page mt-5 mb-5">
                     <img src="assets/logo-icon.png" alt="image" class="imaged w140">

@@ -10,7 +10,7 @@
                 Achievements
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <AchievementList :show-detail="true"></AchievementList>
         </div>
         <BottomMenu></BottomMenu>

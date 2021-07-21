@@ -10,7 +10,7 @@
         Администраторы компании
     </template>
 </Header>
-<div id="appCapsule">
+    <div id="appCapsule" class="full-height">
     <div class="section inset mt-2 mb-2">
     <ul class="listview image-listview inset">
         <li v-for="admin in admins">

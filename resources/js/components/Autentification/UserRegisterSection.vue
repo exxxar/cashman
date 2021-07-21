@@ -1,6 +1,6 @@
 <template>
     <!-- App Capsule -->
-    <div id="appCapsule">
+    <div id="appCapsule" class="full-height">
         <Header class="bg-transparent border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
@@ -73,8 +73,33 @@
                         </div>
                     </div>
                 </div>
+                <div id="social_icon">
+                    <div class="section mt-2 text-center border-bottom">
+                        <h2>or</h2>
+                    </div>
+                    <div class="section py-2 px-1 text-center">
+                        <a class="btn btn-icon btn-facebook  me-05" href="auth/facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-icon btn-twitter me-05" href="auth/twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-icon btn-google me-05" href="auth/google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a class="btn btn-icon btn-vk me-05" href="auth/vkontakte">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a class="btn btn-icon btn-telegram me-05" href="auth/telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a class="btn btn-icon btn-yandex me-05" href="auth/yandex">
+                            <i class="fab fa-yandex"></i>
+                        </a>
+                    </div>
+                </div>
                 <div class="form-button-group transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Register</button>
                 </div>
             </form>
         </div>
@@ -105,7 +130,12 @@ export default {
         async registerUser() {
             await this.form.post('/register')
             window.location.href = 'user-profile';
-        },
+        }
+    },
+    computed: {
+        isComplete () {
+            return this.form.email && this.form.password && this.form.password_confirmation && this.form.submitted;
+        }
     }
 }
 </script>

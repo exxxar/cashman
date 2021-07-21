@@ -18,7 +18,7 @@
                 </a>
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
 
             <div class="section mt-2">
                 <div class="profile-head">

@@ -1,5 +1,5 @@
 <template>
-    <div id="appCapsule">
+    <div id="appCapsule" class="full-height">
         <Header class="bg-transparent border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">

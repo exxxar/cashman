@@ -16,7 +16,7 @@
                 </a>
             </template>
         </Header>
-        <div id="appCapsule">
+        <div id="appCapsule" class="full-height">
             <div class="section full">
                 <img src="assets/sample/photo/wide3.jpg" alt="image" class="imaged w-100 square">
             </div>
@@ -63,10 +63,6 @@
                 <!-- * carousel single -->
             </div>
             <CallbackForm></CallbackForm>
-            <div class="section mt-3 mb-3 text-center border-bottom">
-                <h2>or</h2>
-            </div>
-            <VoiceCallbackForm></VoiceCallbackForm>
             <div class="section mt-2">
                 <div class="card">
                     <div class="card-body">
@@ -111,8 +107,8 @@
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
         </div>
+        <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
     </fragment>
 </template>
@@ -122,10 +118,9 @@ import Header from "../LayoutComponents/Header";
 import CallbackForm from "../Callback/CallbackForm";
 import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
-import VoiceCallbackForm from "../Callback/VoiceCallbackForm";
 
 export default {
     name: "AboutPage",
-    components: {VoiceCallbackForm, BottomMenu, Footer, CallbackForm, Header}
+    components: { BottomMenu, Footer, CallbackForm, Header}
 }
 </script>
