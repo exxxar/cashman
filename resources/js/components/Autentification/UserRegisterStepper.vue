@@ -23,7 +23,8 @@
                         class="form-control"
                         :class="hasError('email') ? 'is-invalid' : ''"
                         placeholder="Введите E-mail"
-                        v-model="formData.email">
+                        v-model="formData.email"
+                        :disabled='isEmail'>
                     <div v-if="hasError('email')" class="invalid-feedback">
                         <div class="error" v-if="!$v.formData.email.required">Введите электронную почту</div>
                         <div class="error" v-if="!$v.formData.email.email">Введенный электронный адрес имеет неверный
@@ -31,6 +32,7 @@
                         </div>
                     </div>
                 </div>
+
             </tab-content>
             <tab-content title="Пароль">
                 <div class="form-group">
@@ -113,11 +115,8 @@ export default {
     },
     props: {
         email: {
-            type: String,
+            required: true
         }
-    },
-    mounted() {
-        console.log(this.email)
     },
     mixins: [ValidationHelper],
     data() {
@@ -132,7 +131,15 @@ export default {
                 {email: {required, email}},
                 {password: {required, minLength: minLength(8)}, password_confirmation: {required}},
                 {submitted: {checked}}
-            ],
+            ]
+        }
+    },
+    mounted() {
+        this.formData.email = this.email
+    },
+    computed: {
+        isEmail () {
+            return this.formData.email;
         }
     },
     methods: {
@@ -149,8 +156,8 @@ export default {
                 'Поздравляем!',
                 'Вы создали аккаунт в CashMan! Ваши данные сохранены',
                 'success'
-            ).then(()=> {
-                    window.location.href = 'user-profile';
+            ).then(() => {
+                window.location.href = 'user-profile';
             })
 
         },

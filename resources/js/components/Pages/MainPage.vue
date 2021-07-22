@@ -20,7 +20,7 @@
                     <span class="badge badge-danger">1</span>
                 </a>
                 <a v-if="auth_user!==null" href="/user-profile" class="headerButton">
-                    <img :src="auth_user.avatar" alt="image" class="imaged w32">
+                    <img :src="'storage/'+auth_user.avatar" alt="image" class="imaged w32">
                     <span class="badge badge-danger">2</span>
                 </a>
             </template>

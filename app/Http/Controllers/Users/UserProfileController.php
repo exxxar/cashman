@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -38,13 +40,7 @@ class UserProfileController extends Controller
         ]);
     }
     public function getAuthUser(){
-            $profile = (object)[
-                'id' => 12454,
-                'name' => 'UserName',
-                'avatar' => 'assets/sample/brand/3.jpg',
-                'cashback' => 2354
-            ];
-
+        $profile = Auth::user();
         return view('pages/userProfile/userProfilePage', compact('profile'));
     }
 }

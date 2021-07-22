@@ -56,13 +56,13 @@ Route::group(['middleware' => ['web']], function () {
     /* Авторизация через социальные сети */
     Route::get('/auth/{driver}', [SocialController::class, 'index']);
     Route::get('/auth/{driver}/callback', [SocialController::class, 'callback']);
-    Route::get('/complete-register', [SocialController::class, 'complete']);
+    Route::get('/complete-register-{email}', [SocialController::class, 'complete']);
     /*Страница с картой*/
     Route::get('/region-map/{id}', [RegionMapController::class, 'getMap']);
     /* Группа авторизованных пользователей */
     Route::group(['middleware' => ['auth']], function () {
         /* Профиль пользователя */
-        Route::get('/user-profile',[UserProfileController::class, 'getAuthUser'])->name('user-profile');
+        Route::get('/user-profile',[UserProfileController::class, 'getAuthUser']);
         /* Настройки профиля пользователя */
         Route::get('/user-settings', function () {
             return view('pages/userProfile/userSettingsPage');

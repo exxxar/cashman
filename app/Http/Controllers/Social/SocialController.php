@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Social;
 
 use App\Http\Controllers\Controller;
-use App\Service\SocialService;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -17,16 +17,13 @@ class SocialController extends Controller
 
     public function callback($driver)
     {
-        $user = Socialite::driver($driver)->user();
-        $objSocial = new SocialService();
-        if ($user = $objSocial->saveSocialData($user)) {
+        $userSocial = Socialite::driver($driver)->stateless()->user();
+        $user = User::where(['email' => $userSocial->getEmail()])->first();
+        if($user){
             Auth::login($user);
-            return redirect()->route('user-profile');
+            return redirect("/user-profile");
         }
-        if($driver == 'vkontakte') {
-            return $this->complete($user->accessTokenResponseBody['email'] ?? null);
-        }
-        return $this->complete($user->email);
+        return redirect("/complete-register-".$userSocial->getEmail());
     }
 
     public function complete($email)

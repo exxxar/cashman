@@ -8629,6 +8629,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -8651,11 +8653,8 @@ var checked = function checked(value) {
   },
   props: {
     email: {
-      type: String
+      required: true
     }
-  },
-  mounted: function mounted() {
-    console.log(this.email);
   },
   mixins: [vue_step_wizard__WEBPACK_IMPORTED_MODULE_0__.ValidationHelper],
   data: function data() {
@@ -8685,6 +8684,14 @@ var checked = function checked(value) {
         }
       }]
     };
+  },
+  mounted: function mounted() {
+    this.formData.email = this.email;
+  },
+  computed: {
+    isEmail: function isEmail() {
+      return this.formData.email;
+    }
   },
   methods: {
     onComplete: function onComplete() {
@@ -63893,14 +63900,7 @@ var render = function() {
               return [
                 _c(
                   "a",
-                  {
-                    staticClass: "headerButton",
-                    on: {
-                      click: function($event) {
-                        this.window.location = "/login"
-                      }
-                    }
-                  },
+                  { staticClass: "headerButton", attrs: { href: "login" } },
                   [_vm._v("Login")]
                 )
               ]
@@ -63931,7 +63931,11 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: _vm.hasError("email") ? "is-invalid" : "",
-                attrs: { type: "email", placeholder: "Введите E-mail" },
+                attrs: {
+                  type: "email",
+                  placeholder: "Введите E-mail",
+                  disabled: _vm.isEmail
+                },
                 domProps: { value: _vm.formData.email },
                 on: {
                   input: function($event) {
@@ -68762,15 +68766,18 @@ var render = function() {
                         _c("div", { staticClass: "image-wrapper" }, [
                           _c("img", {
                             staticClass: "imaged  w36",
-                            attrs: { src: _vm.auth_user.avatar, alt: "image" }
+                            attrs: {
+                              src: "storage/" + _vm.auth_user.avatar,
+                              alt: "image"
+                            }
                           })
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "in" }, [
-                          _c("strong", [_vm._v(_vm._s(_vm.auth_user.name))]),
+                          _c("strong", [_vm._v(_vm._s(_vm.auth_user.id))]),
                           _vm._v(" "),
                           _c("div", { staticClass: "text-muted" }, [
-                            _vm._v(_vm._s(_vm.auth_user.id))
+                            _vm._v(_vm._s(_vm.auth_user.email))
                           ])
                         ]),
                         _vm._v(" "),
@@ -68796,7 +68803,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "in" }, [
                           _c("h1", { staticClass: "amount" }, [
-                            _vm._v("$ " + _vm._s(_vm.auth_user.cashback))
+                            _vm._v("$ " + _vm._s(_vm.auth_user.id))
                           ])
                         ])
                       ])
@@ -75378,7 +75385,10 @@ var render = function() {
                       [
                         _c("img", {
                           staticClass: "imaged w32",
-                          attrs: { src: _vm.auth_user.avatar, alt: "image" }
+                          attrs: {
+                            src: "storage/" + _vm.auth_user.avatar,
+                            alt: "image"
+                          }
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "badge badge-danger" }, [
@@ -76137,7 +76147,10 @@ var render = function() {
                   [
                     _c("img", {
                       staticClass: "imaged w32",
-                      attrs: { src: _vm.auth_user.avatar, alt: "image" }
+                      attrs: {
+                        src: "storage/" + _vm.auth_user.avatar,
+                        alt: "image"
+                      }
                     }),
                     _vm._v(" "),
                     _c("span", { staticClass: "badge badge-danger" }, [

@@ -79,7 +79,9 @@ export default {
     methods: {
         async loginUser() {
             await this.form.post('login')
-            window.location.href = 'user-profile';
+                window.location.href = 'user-profile';
+
+
         },
     },
     computed: {

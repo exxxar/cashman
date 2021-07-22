@@ -13,11 +13,11 @@
                     <!-- profile box -->
                     <div v-if="auth_user!==null" class="profileBox pt-2 pb-2">
                         <div class="image-wrapper">
-                            <img :src="auth_user.avatar" alt="image" class="imaged  w36">
+                            <img :src="'storage/'+auth_user.avatar" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
-                            <strong>{{auth_user.name}}</strong>
-                            <div class="text-muted">{{auth_user.id}}</div>
+                            <strong>{{auth_user.id}}</strong>
+                            <div class="text-muted">{{auth_user.email}}</div>
                         </div>
                         <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
                             <ion-icon name="close-outline"></ion-icon>
@@ -28,7 +28,7 @@
                     <div v-if="auth_user!==null" class="sidebar-balance">
                         <div class="listview-title">Balance</div>
                         <div class="in">
-                            <h1 class="amount">$ {{auth_user.cashback}}</h1>
+                            <h1 class="amount">$ {{auth_user.id}}</h1>
                         </div>
                     </div>
                     <!-- * balance -->
@@ -76,7 +76,7 @@
                     <div class="listview-title mt-1">Меню</div>
                     <ul class="listview flush transparent no-line image-listview">
                         <li v-if="auth_user!==null">
-                            <a href="user-profile" class="item">
+                            <a href='user-profile' class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="person-outline"></ion-icon>
                                 </div>
