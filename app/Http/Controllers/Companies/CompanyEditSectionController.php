@@ -11,7 +11,6 @@ class CompanyEditSectionController extends Controller
     {
         $company = (object)[
             'title' => 'CompanyTitle',
-            'domain' => 'company.domain',
             'cashback_percent' => 10,
             'cashback_percent_level_1' => 5,
             'cashback_percent_level_2' => 3,
@@ -35,7 +34,6 @@ class CompanyEditSectionController extends Controller
     {
         $this->validate($request, [
             'title' => ['required', 'string'],
-            'domain' => ['required', 'string', 'unique:companies'],
             'cashback_percent' =>['required', 'numeric'],
             'cashback_percent_level_1'=>['required', 'numeric'],
             'cashback_percent_level_2' =>['required', 'numeric'],

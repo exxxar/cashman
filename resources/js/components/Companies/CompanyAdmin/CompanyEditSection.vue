@@ -54,16 +54,7 @@
                                 </div>
 
                             </div>
-                            <div class="form-group basic">
-                                <div class="input-wrapper">
-                                    <label class="label" for="password1">Домен</label>
-                                    <input type="text" class="form-control" id="password1" autocomplete="off"
-                                           placeholder="Домен компании" v-model="form.domain" name="domain">
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
-                                </div>
-                            </div>
+
 
                             <div class="form-group basic">
                                 <div class="input-wrapper">
@@ -197,7 +188,6 @@ export default {
         return{
             form: new Form({
                 title: '',
-                domain: '',
                 description: '',
                 image: '',
                 position: '',
@@ -219,12 +209,7 @@ export default {
     methods: {
        async updateSettings() {
            axios.post('api/company/settings', this.form)
-               .then(function (response) {
-                   window.location.href = 'company-profile';
-               })
-               .catch(function (error) {
-                   console.log(error);
-               });
+
         },
         handleFile(event) {
             this.form.image = event.target.files[0]

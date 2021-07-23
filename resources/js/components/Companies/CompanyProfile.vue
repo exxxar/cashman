@@ -35,17 +35,21 @@
             <div class="section full mt-2">
                 <div class="profile-stats pl-2 pr-2">
                     <a href="#" class="item">
-                        <strong>{{ company.products }}</strong>products
+                        <strong>{{ products }}</strong>products
+
                     </a>
                     <a href="#" class="item">
-                        <strong>{{ company.users }}</strong>users
+                        <strong>{{ users }}</strong>users
+
                     </a>
                     <a href="#" class="item">
-                        <strong>{{ company.stories }}</strong>stories
+                        <strong>{{ stories }}</strong>stories
+
                     </a>
 
                     <a href="#" class="item">
-                        <strong>{{ company.news }}</strong>news
+                        <strong >{{ news }}</strong>news
+
                     </a>
                 </div>
             </div>
@@ -56,7 +60,7 @@
                         {{ company.description }}
                     </div>
                     <div class="link">
-                        <a href="#">{{ company.region }}</a>
+                        <a v-if="company.region!==null" href="#">{{ company.region }}</a>
                     </div>
                 </div>
             </div>
@@ -147,19 +151,13 @@
                     <div class="tab-pane fade" id="settings" role="tabpanel">
                         <ul class="listview image-listview text flush transparent pt-1">
                             <li>
-                                <a href="/company-edit" class="item">
+                                <a href='/company-edit' class="item">
                                     <div class="in">
                                         <div class="text-danger">Настройки профиля компании</div>
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/company-admin-menu" class="item">
-                                    <div class="in">
-                                        <div class="text-danger">Меню админа компании</div>
-                                    </div>
-                                </a>
-                            </li>
+
                             <li>
                                 <a href="#" class="item">
                                     <div class="in">
@@ -167,13 +165,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="item">
-                                    <div class="in">
-                                        <div>Добавление промокода компании</div>
-                                    </div>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                     <!-- * settings -->
@@ -202,7 +194,20 @@ export default {
         company: {
             type: Object,
             required: true
+        },
+        news:{
+            required: true
+        },
+        stories:{
+            required: true
+        },
+        products:{
+            required: true
+        },
+        users:{
+            required: true
         }
+
     },
     data: function () {
         return {

@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <promo-code></promo-code>
+    <promo-code :code='{!! json_encode($data) !!}'></promo-code>
 @endsection

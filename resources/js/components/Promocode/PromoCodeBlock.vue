@@ -2,7 +2,7 @@
     <fragment>
         <Header class="no-border">
             <template v-slot:left>
-                <a href="#" class="headerButton goBack">
+                <a href="/user-profile" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -17,7 +17,7 @@
             <div class="section">
                 <div class="splash-page mt-5 mb-5">
                     <div class="mb-3">
-                        <img :src="code" alt="QR Code" class="imaged square w140">
+                        <vue-qrcode :value=code :options="{ width: 200 }"></vue-qrcode>
                     </div>
                     <h2 class="mb-2">Scan the QR Code</h2>
                     <p>
@@ -28,7 +28,7 @@
             <div class="fixed-bar">
                 <div class="row">
                     <div class="col-12">
-                        <a href="#" class="btn btn-lg btn-outline-secondary btn-block goBack">Go Back</a>
+                        <a href="/user-profile" class="btn btn-lg btn-outline-secondary btn-block goBack">Go Back</a>
                     </div>
                 </div>
             </div>
@@ -44,14 +44,13 @@ import Header from "../LayoutComponents/Header";
 import NotificationModal from "../Modals/NotificationModal";
 import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
-
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 export default {
     name: "PromoCodeBlock",
-    components: {BottomMenu, Footer, NotificationModal, Header},
+    components: {BottomMenu, Footer, NotificationModal, Header,  VueQrcode},
     props: {
         code: {
-            type: String,
-            default: "assets/sample/qr.png"
+            required: true
         },
         description: {
             type: String,

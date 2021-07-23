@@ -57,7 +57,7 @@
                                 </span>
                                 </label>
                             </div>
-                            <HasError :form="form" field="logo"/>
+                            <HasError :form="form" field="image"/>
                         </div>
 
                         <div class="form-group basic">
@@ -67,6 +67,18 @@
                                           placeholder="Description"
                                           name="description"></textarea>
                                 <HasError :form="form" field="description"/>
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                </i>
+                            </div>
+                        </div>
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="position">Position</label>
+                                <textarea v-model="form.position" id="position" rows="2" class="form-control"
+                                          placeholder="Position"
+                                          name="position"></textarea>
+                                <HasError :form="form" field="position"/>
                                 <i class="clear-input">
                                     <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
@@ -121,17 +133,27 @@ export default {
                 domain: '',
                 description: '',
                 image: null,
+                position: '',
                 confirmed: ''
             })
         }
     },
     methods: {
-        async registerCompany() {
-            await this.form.post('api/company/register')
-            window.location.href = 'company-profile';
+        registerCompany() {
+            this.form.post('/register-company').then (function (response) {
+                if (response.data.href !== undefined) {
+                    location.href = response.data.href
+                } else {
+                    location.reload(true);
+                }
+
+            })
+                .catch(function (error) {
+                    console.log(error);});
+
         },
         handleFile(event) {
-            this.form.logo = event.target.files[0]
+            this.form.image = event.target.files[0]
         }
     }
 }

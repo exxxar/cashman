@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <user-settings></user-settings>
+    <user-settings :user='{!! json_encode($user) !!}'></user-settings>
 @endsection

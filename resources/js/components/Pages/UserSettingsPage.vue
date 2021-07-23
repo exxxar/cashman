@@ -20,7 +20,7 @@
             <div class="section mt-3 text-center">
                 <div class="avatar-section">
                     <a href="#">
-                        <img src="assets/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w100 rounded">
+                        <img :src="'storage/'+user.avatar" alt="avatar" class="imaged w100 rounded">
                         <span class="button">
                         <ion-icon name="camera-outline"></ion-icon>
                     </span>
@@ -146,5 +146,10 @@ export default {
             });
         },
     },
+    props:{
+        user:{
+            required: true
+        }
+    }
 }
 </script>

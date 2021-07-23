@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\CompanyActionMenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Companies\CompanyAuthController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
 use App\Http\Controllers\Companies\CompanyProfileController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
@@ -64,9 +65,7 @@ Route::group(['middleware' => ['web']], function () {
         /* Профиль пользователя */
         Route::get('/user-profile',[UserProfileController::class, 'getAuthUser']);
         /* Настройки профиля пользователя */
-        Route::get('/user-settings', function () {
-            return view('pages/userProfile/userSettingsPage');
-        });
+        Route::get('/user-settings', [UserProfileController::class, 'getUserSettings']);
         /*Страница редактирования данных о профиле пользователя*/
         Route::get('/user-edit', [UserProfileController::class, 'index']);
         /* Достижения пользователя */
@@ -88,20 +87,20 @@ Route::group(['middleware' => ['web']], function () {
             return view('pages/userProfile/friends/usersFriendsTreePage');
         });
         /* Страница ввода промокода */
-        Route::get('/promo-code', function () {
-            return view('pages/promoCodePage');
-        });
+        Route::get('/promo-code/{user}/{company}', [PromocodeController::class, 'getUserPromocode'])->name('user-qr');
         /* Регистрация компании */
         Route::get('/register-company', function () {
             return view('auth/companyAuth/RegistrationCompanyPage');
         });
+        Route::post('/register-company', [CompanyAuthController::class, 'register']);
+        Route::post('/login-company', [CompanyAuthController::class, 'login']);
         /* Авторизация компании */
         Route::get('/login-company', function () {
             return view('auth/companyAuth/LoginCompanyPage');
         });
         /* Надо добавить ещё один middleware для авторизованых пользователей которые авторизовались в компании */
         /* Профиль компании */
-        Route::get('/company-profile', [CompanyProfileController::class, 'getCompanyData'])->name('company-profile');
+        Route::get('/company-profile-{id}', [CompanyProfileController::class, 'getCompanyData'])->name('company-profile');
         /* Страница добавления рекламы (Степер) */
         Route::get('/add-advertising', function () {
             return view('pages/companyProfile/addCompanyAdvertising');

@@ -3,25 +3,19 @@
 namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyProfileController extends Controller
 {
-    public function getCompanyData()
+    public function getCompanyData($id)
     {
-        $company = (object)[
-            'id'=>1,
-            'image'=>'assets/sample/avatar/avatar1.jpg',
-            'title' => 'Julian Gruber',
-            'position'=>'Designer',
-            'description'=>' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at magna porttitor lorem mollis
-                    ornare. Fusce varius varius massa.',
-            'region'=>'Paris, France',
-            'news'=>1022,
-            'users'=>222,
-            'stories'=>8,
-            'products'=>329
-        ];
-        return view('pages/companyProfile/companyProfilePage', compact('company'));
+        $company = Company::where('id', $id)->first();
+        $users = 100;
+        $news =88;
+        $stories = 27;
+        $products = 39;
+        return view('pages/companyProfile/companyProfilePage', compact('company',
+            'news', 'users', 'stories', 'products'));
     }
 }

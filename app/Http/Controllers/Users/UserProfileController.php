@@ -43,4 +43,8 @@ class UserProfileController extends Controller
         $profile = Auth::user();
         return view('pages/userProfile/userProfilePage', compact('profile'));
     }
+    public function getUserSettings(){
+        $user = Auth::user();
+        return view('pages/userProfile/userSettingsPage', compact('user'));
+    }
 }

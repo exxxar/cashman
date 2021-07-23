@@ -58,9 +58,18 @@ export default {
         }
     },
     methods: {
-        async loginCompany() {
-            await this.form.post('api/company/login')
-            window.location.href = 'company-profile';
+        loginCompany() {
+            this.form.post('/login-company')  .then (function (response) {
+                if (response.data.href !== undefined) {
+                    location.href = response.data.href
+                } else {
+                    location.reload(true);
+                }
+
+            })
+                .catch(function (error) {
+                    console.log(error);});
+
         },
     }
 }
