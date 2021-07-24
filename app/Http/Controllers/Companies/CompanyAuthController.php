@@ -34,7 +34,8 @@ class CompanyAuthController extends Controller
                 'description' => $request->description,
                 'company_group_id' => 1, 'position' => $request->position,
                 'creator_id' => Auth::user()->getAuthIdentifier()]);
-            $result['href'] = route('user-qr', ['user' => Auth::user()->getAuthIdentifier(), 'company' => $company->id]);
+
+            $result['href'] = route('user-qr', ['user' => $company->creator_id, 'company' => $company->id]);
             return response()->json($result);
         }
 

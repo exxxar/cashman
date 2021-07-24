@@ -14014,9 +14014,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.form.post('/register');
 
               case 2:
-                window.location.href = 'user-profile';
-
-              case 3:
               case "end":
                 return _context.stop();
             }
@@ -82278,7 +82275,7 @@ var render = function() {
                 {
                   staticClass:
                     "btn btn-lg btn-outline-secondary btn-block goBack",
-                  attrs: { href: "#" }
+                  attrs: { href: "/user-profile" }
                 },
                 [_vm._v("Go Back")]
               )

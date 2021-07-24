@@ -54,6 +54,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/search-company', function () {
         return view('pages/companies/searchCompanyPage');
     });
+    Route::get('/qr-handler/data={data}', [PromocodeController::class, 'qrHandler'])->name('qr-handler');
     /* Авторизация через социальные сети */
     Route::get('/auth/{driver}', [SocialController::class, 'index']);
     Route::get('/auth/{driver}/callback', [SocialController::class, 'callback']);
@@ -108,9 +109,9 @@ Route::group(['middleware' => ['web']], function () {
         /* Страница редактирования данных о компании */
         Route::get('/company-edit', [CompanyEditSectionController::class, 'index']);
         /* Меню админа компании */
-        Route::get('/company-admin-menu', function(){
+        Route::get('/company-admin-menu-{id}', function(){
             return view('pages/companyProfile/Admin/companyAdminMenuPage');
-        });
+        })->name('company-admin');
         /*CRUD продукты*/
         Route::get('/company-admin-products', [ProductController::class, 'index']);
         /*CRUD реклама*/

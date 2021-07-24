@@ -10,7 +10,8 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'companies';
-    protected $fillable = ['title', 'domain', 'cashback_percent', 'description',
+    protected $fillable = ['title', 'domain', 'cashback_percent', 'cashback_percent_level_1',
+           'cashback_percent_level_2', 'description',
            'image', 'position', 'company_group_id', 'properties', 'callback_url',
            'socials', 'is_active', 'upload_vk_url', 'creator_id'];
 
