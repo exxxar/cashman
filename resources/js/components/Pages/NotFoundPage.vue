@@ -16,8 +16,10 @@
                     <img src="assets/logo-icon.png" alt="image" class="imaged w140">
                     <h1>404</h1>
                     <h2 class="mb-2">Страница не найдена</h2>
-                    <p>Подождите несколько минут и совершите повторную попытку загрузки страницы или свяжитесь со
+                    <p v-if="company===null">Подождите несколько минут и совершите повторную попытку загрузки страницы или свяжитесь со
                         администрацией сайта</p>
+                    <p v-if="company!==null">Ошибка при подключении! Для подключения к компании перейдите по ссылке ниже</p>
+                    <strong v-if="company!==null">{{company}}</strong>
                 </div>
             </div>
             <div class="fixed-bar">
@@ -51,6 +53,11 @@ export default {
     },
     mounted() {
         document.querySelector('body').classList.add('bg-white');
+    },
+    props:{
+        company:{
+            default: null
+        }
     }
 }
 </script>

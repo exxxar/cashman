@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\UsersFriedsByCompany;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 
@@ -60,10 +62,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $parent_id = session('user');
+        $company_id = session('company');
+        $company = Company::where('id', $company_id)->first();
+        $user = User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        UsersFriedsByCompany::create(['user_id' => $user->id,
+            'company_id' => $company_id, 'parent_id' => $parent_id]);
+        $company->users()->attach(['user_id' => $user->id]);
+        return $user;
     }
 
 }

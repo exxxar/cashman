@@ -14014,6 +14014,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.form.post('/register');
 
               case 2:
+                window.location.href = 'user-profile';
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -20124,6 +20127,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NotFoundPage",
@@ -20137,6 +20142,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     document.querySelector('body').classList.add('bg-white');
+  },
+  props: {
+    company: {
+      "default": null
+    }
   }
 });
 
@@ -81066,11 +81076,25 @@ var render = function() {
             _vm._v(" "),
             _c("h2", { staticClass: "mb-2" }, [_vm._v("Страница не найдена")]),
             _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "Подождите несколько минут и совершите повторную попытку загрузки страницы или свяжитесь со\n                    администрацией сайта"
-              )
-            ])
+            _vm.company === null
+              ? _c("p", [
+                  _vm._v(
+                    "Подождите несколько минут и совершите повторную попытку загрузки страницы или свяжитесь со\n                    администрацией сайта"
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.company !== null
+              ? _c("p", [
+                  _vm._v(
+                    "Ошибка при подключении! Для подключения к компании перейдите по ссылке ниже"
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.company !== null
+              ? _c("strong", [_vm._v(_vm._s(_vm.company))])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),

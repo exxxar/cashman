@@ -11,16 +11,7 @@ class UserController extends Controller
 {
     public function getAuthUser()
     {
-        $profile = null;
-        if (Auth::user()) {
-            $profile = (object)[
-                'id' => 12454,
-                'name' => 'UserName',
-                'avatar' => 'assets/sample/brand/3.jpg',
-                'cashback' => 2354
-            ];
-        }
-
+        $profile = Auth::user();
         return view('pages/welcome', compact('profile'));
 
     }

@@ -32,8 +32,10 @@ class PromocodeController extends Controller
         $operation_code = mb_substr($data, 0, 2);
         $user_id = (integer)str_replace('0', '', mb_substr($data, 3, 12));
         $company_id = (integer)str_replace('0', '', mb_substr($data, 13, 22));
+        $company_url = '127.0.0.1:8000/company-profile-'.$company_id;
         $company = Company::where('id', $company_id)->first();
         if(!Auth::user()){
+            session(['user' => $user_id, 'company'=>$company_id]);
             return redirect('/register');
         }
         if ($company->creator_id == $user_id && auth()->user()->id == $user_id) {
@@ -48,6 +50,7 @@ class PromocodeController extends Controller
             $company->users()->attach(['user_id' => Auth::user()->getAuthIdentifier()]);
             return redirect()->route('company-profile', $company_id);
         }
+
 
 
     }
