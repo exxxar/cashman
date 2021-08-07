@@ -9,7 +9,7 @@ class RegionMapController extends Controller
 {
     public function getMap($id)
     {
-        $coords = [39, 45];
+        $coords = [48.008579, 37.810202];
         return view('pages/companies/regionMapPage', compact('coords'));
     }
 }
