@@ -26,13 +26,23 @@ export default {
     components: {CompanyItem},
     data: function () {
         return {
-            companies: [
-                {id: 1,title: "title1", description: "Music Monthly Subscription", image: "assets/sample/brand/2.jpg"},
-                {id: 2,title: "title2", description: "Music Monthly Subscription", image: "assets/sample/brand/1.jpg"},
-                {id: 3,title: "title3", description: "Music Monthly Subscription", image: "assets/sample/brand/3.jpg"},
-                {id: 4,title: "title4", description: "Music Monthly Subscription", image: "assets/sample/brand/4.jpg"},
-            ]
+            companies: []
         }
+    },
+    methods:{
+        getList(){
+            axios.get('api/company/list')
+                .then( response => {
+                    this.companies = response.data
+                })
+                .catch( error => {
+                    console.log(error);
+                })
+        }
+    },
+    mounted(){
+        this.getList();
     }
+
 }
 </script>

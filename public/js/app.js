@@ -16218,28 +16218,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      companies: [{
-        id: 1,
-        title: "title1",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/2.jpg"
-      }, {
-        id: 2,
-        title: "title2",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/1.jpg"
-      }, {
-        id: 3,
-        title: "title3",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/3.jpg"
-      }, {
-        id: 4,
-        title: "title4",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/4.jpg"
-      }]
+      companies: []
     };
+  },
+  methods: {
+    getList: function getList() {
+      var _this = this;
+
+      axios.get('api/company/list').then(function (response) {
+        _this.companies = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getList();
   }
 });
 
@@ -16264,6 +16258,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Users_FriendItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Users/FriendItem */ "./resources/js/components/Users/FriendItem.vue");
 /* harmony import */ var _Products_ProductItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Products/ProductItem */ "./resources/js/components/Products/ProductItem.vue");
 /* harmony import */ var _Products_ProductTile__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Products/ProductTile */ "./resources/js/components/Products/ProductTile.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16483,7 +16500,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      items: [{
+      companyItems: [{
         id: 1,
         image: "assets/sample/photo/1.jpg",
         title: "What will be the value of bitcoin in the next..."
@@ -16508,7 +16525,7 @@ __webpack_require__.r(__webpack_exports__);
         image: "assets/sample/photo/3.jpg",
         title: "Rules you need to know in business"
       }],
-      users: [{
+      companyUsers: [{
         avatar: "assets/sample/avatar/avatar9.jpg",
         name: "Alex",
         region: "Florida"
@@ -16529,7 +16546,7 @@ __webpack_require__.r(__webpack_exports__);
         name: "Alex",
         region: "Florida"
       }],
-      products: [{
+      companyProducts: [{
         image: "assets/sample/brand/2.jpg",
         price: 14,
         description: "Music Monthly Subscription"
@@ -16558,6 +16575,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     document.querySelector('body').classList.add('bg-white');
+    console.log(_typeof(this.company.socials));
+    console.log(this.company.properties);
+    console.log(_typeof(this.company.properties));
   }
 });
 
@@ -16685,6 +16705,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16699,24 +16733,32 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      companies: [{
-        title: "title1",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/2.jpg"
-      }, {
-        title: "title2",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/1.jpg"
-      }, {
-        title: "title3",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/3.jpg"
-      }, {
-        title: "title4",
-        description: "Music Monthly Subscription",
-        image: "assets/sample/brand/4.jpg"
-      }]
+      companies: [],
+      pagination: {}
     };
+  },
+  methods: {
+    getResults: function getResults(page_url) {
+      var _this = this;
+
+      page_url = page_url || '/api/company/search';
+      axios.get(page_url).then(function (response) {
+        _this.companies = response.data.data;
+
+        _this.makePagination(response.data);
+      });
+    },
+    makePagination: function makePagination(response) {
+      this.pagination = {
+        current_page: response.current_page,
+        last_page: response.last_page,
+        prev_page_url: response.prev_page_url,
+        next_page_url: response.next_page_url
+      };
+    }
+  },
+  mounted: function mounted() {
+    this.getResults();
   }
 });
 
@@ -21742,6 +21784,10 @@ Vue.config.ignoredElements = [/^ion-/];
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
 
 Vue.use((vue_audio_recorder__WEBPACK_IMPORTED_MODULE_3___default()));
+
+var VueScrollTo = __webpack_require__(/*! vue-scrollto */ "./node_modules/vue-scrollto/vue-scrollto.js");
+
+Vue.use(VueScrollTo);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -26374,7 +26420,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.right-button{\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: relative;\n}\n.pos-ab-right-5{\n    position: absolute;\n    right: 5%;\n}\n@media screen and (max-width: 576px) {\n.right-button{\n        display: block;\n}\n.pos-ab-right-5 {\n        position: relative;\n        right: 0;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.right-button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: relative;\n}\n.pos-ab-right-5 {\n    position: absolute;\n    right: 5%;\n}\n@media screen and (max-width: 576px) {\n.right-button {\n        display: block;\n}\n.pos-ab-right-5 {\n        position: relative;\n        right: 0;\n}\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.pagination[data-v-db088322] {\n    justify-content: center;\n}\n.page-link[data-v-db088322]{\n    background: #6236FF !important;\n    color: #fff !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58380,6 +58450,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchCompanySection_vue_vue_type_style_index_0_id_db088322_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchCompanySection_vue_vue_type_style_index_0_id_db088322_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchCompanySection_vue_vue_type_style_index_0_id_db088322_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserStatistic/StatisticsSummary.vue?vue&type=style&index=0&id=373aa604&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserStatistic/StatisticsSummary.vue?vue&type=style&index=0&id=373aa604&scoped=true&lang=css& ***!
@@ -63630,15 +63730,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _SearchCompanySection_vue_vue_type_template_id_db088322_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchCompanySection.vue?vue&type=template&id=db088322&scoped=true& */ "./resources/js/components/Companies/SearchCompanySection.vue?vue&type=template&id=db088322&scoped=true&");
 /* harmony import */ var _SearchCompanySection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchCompanySection.vue?vue&type=script&lang=js& */ "./resources/js/components/Companies/SearchCompanySection.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _SearchCompanySection_vue_vue_type_style_index_0_id_db088322_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css& */ "./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _SearchCompanySection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _SearchCompanySection_vue_vue_type_template_id_db088322_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _SearchCompanySection_vue_vue_type_template_id_db088322_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -66566,6 +66668,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CompanyItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CompanyItem.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/CompanyList/CompanyItem.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchCompanySection_vue_vue_type_style_index_0_id_db088322_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Companies/SearchCompanySection.vue?vue&type=style&index=0&id=db088322&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -73061,27 +73176,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: "#" } }, [
-    _c("div", { staticClass: "blog-card" }, [
-      _c("img", {
-        staticClass: "imaged w-100",
-        attrs: { src: _vm.company.image, alt: "image" }
-      }),
+  return _c("div", { staticClass: "bill-box" }, [
+    _c("img", {
+      staticClass: "imaged w-75",
+      attrs: { src: "assets/sample/" + _vm.company.image, alt: "image" }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "text text-center right-button" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.company.title))]),
       _vm._v(" "),
-      _c("div", { staticClass: "text text-center right-button" }, [
-        _c("h3", [_vm._v(_vm._s(_vm.company.title))]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "item btn btn-icon btn-primary pos-ab-right-5",
-            attrs: { type: "button" },
-            on: { click: _vm.getMap }
-          },
-          [_c("ion-icon", { attrs: { name: "map-outline" } })],
-          1
-        )
-      ])
+      _c(
+        "a",
+        {
+          staticClass: "item btn btn-icon btn-primary pos-ab-right-5",
+          attrs: { type: "button" },
+          on: { click: _vm.getMap }
+        },
+        [_c("ion-icon", { attrs: { name: "map-outline" } })],
+        1
+      )
     ])
   ])
 }
@@ -73236,18 +73353,15 @@ var render = function() {
               _c("div", { staticClass: "avatar" }, [
                 _c("img", {
                   staticClass: "imaged w64 rounded",
-                  attrs: { src: _vm.company.image, alt: "avatar" }
+                  attrs: {
+                    src: "assets/sample/" + _vm.company.image,
+                    alt: "avatar"
+                  }
                 })
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "in" }, [
-                _c("h3", { staticClass: "name" }, [
-                  _vm._v(_vm._s(_vm.company.title))
-                ]),
-                _vm._v(" "),
-                _c("h5", { staticClass: "subtext" }, [
-                  _vm._v(_vm._s(_vm.company.position))
-                ])
+                _c("h2", [_vm._v(_vm._s(_vm.company.title))])
               ])
             ])
           ]),
@@ -73256,7 +73370,7 @@ var render = function() {
             _c("div", { staticClass: "profile-stats pl-2 pr-2" }, [
               _c("a", { staticClass: "item", attrs: { href: "#" } }, [
                 _c("strong", [_vm._v(_vm._s(_vm.products))]),
-                _vm._v("products\n\n                ")
+                _vm._v("products\n                ")
               ]),
               _vm._v(" "),
               _c("a", { staticClass: "item", attrs: { href: "#" } }, [
@@ -73278,21 +73392,105 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "section mt-1 mb-2" }, [
             _c("div", { staticClass: "profile-info" }, [
-              _c("div", { staticClass: " bio" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.company.description) +
-                    "\n                "
-                )
-              ]),
+              _c(
+                "div",
+                { staticClass: "bio subtext" },
+                [
+                  _vm.company.description
+                    ? _c("h3", [_vm._v("О нас:")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.company.description
+                    ? _c("h5", [_vm._v(_vm._s(_vm.company.description))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.company.properties.time
+                    ? _c("h3", [_vm._v("Время работы:")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.company.properties.time
+                    ? _c("h4", [_vm._v(_vm._s(_vm.company.properties.time))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  typeof _vm.company.properties.address !== "string" &&
+                  _vm.company.properties.address
+                    ? _c("h3", [_vm._v("Наши адреса:")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.company.properties.address, function(address) {
+                    return typeof _vm.company.properties.address !== "string" &&
+                      _vm.company.properties.address
+                      ? _c("div", [_c("h4", [_vm._v(" " + _vm._s(address))])])
+                      : _vm._e()
+                  }),
+                  _vm._v(" "),
+                  typeof _vm.company.properties.address === "string" &&
+                  _vm.company.properties.address
+                    ? _c("h3", [_vm._v("Наш адрес:")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  typeof _vm.company.properties.address === "string" &&
+                  _vm.company.properties.address
+                    ? _c("h4", [_vm._v(_vm._s(_vm.company.properties.address))])
+                    : _vm._e()
+                ],
+                2
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "link" }, [
-                _vm.company.region !== null
-                  ? _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(_vm._s(_vm.company.region))
-                    ])
-                  : _vm._e()
-              ])
+              _vm.company.socials
+                ? _c("div", { staticClass: "link" }, [
+                    _c("h3", [_vm._v("Социальные сети")]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      {
+                        staticClass:
+                          "listview image-listview no-line no-space flush"
+                      },
+                      _vm._l(_vm.company.socials, function(social, key) {
+                        return _c("li", [
+                          social !== null
+                            ? _c("div", { staticClass: "item" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "icon-box bg-primary" },
+                                  [_c("i", { class: "fab fa-" + key })]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "in" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-wrapper w-100" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: {
+                                            href: social,
+                                            target: "_blank"
+                                          }
+                                        },
+                                        [
+                                          _c("label", [
+                                            _vm._v(
+                                              _vm._s(
+                                                "Ссылка на профиль в " + key
+                                              )
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -73390,7 +73588,7 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "row" },
-                      _vm._l(_vm.items, function(item) {
+                      _vm._l(_vm.companyItems, function(item) {
                         return _c(
                           "div",
                           { staticClass: "col-4 mb-2" },
@@ -73452,7 +73650,7 @@ var render = function() {
                       staticClass:
                         "listview image-listview flush transparent pt-1"
                     },
-                    _vm._l(_vm.users, function(user) {
+                    _vm._l(_vm.companyUsers, function(user) {
                       return _c(
                         "li",
                         [_c("FriendItem", { attrs: { user: user } })],
@@ -73474,7 +73672,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "row" },
-                    _vm._l(_vm.products, function(product) {
+                    _vm._l(_vm.companyProducts, function(product) {
                       return _c(
                         "div",
                         { staticClass: "col-4 mb-2" },
@@ -73637,7 +73835,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "yandex-map",
-        { attrs: { coords: _vm.coords, zoom: 10 } },
+        { attrs: { coords: _vm.coords, zoom: 16 } },
         [
           _c("ymap-marker", {
             attrs: {
@@ -73680,6 +73878,7 @@ var render = function() {
     "fragment",
     [
       _c("Header", {
+        attrs: { id: "companies" },
         scopedSlots: _vm._u([
           {
             key: "left",
@@ -73732,13 +73931,102 @@ var render = function() {
             _vm._l(_vm.companies, function(company) {
               return _c(
                 "div",
-                { staticClass: "col-4 mb-2" },
+                { staticClass: "col-3 mb-2" },
                 [_c("CompanyItem", { attrs: { company: company } })],
                 1
               )
             }),
             0
           )
+        ]),
+        _vm._v(" "),
+        _c("nav", [
+          _c("ul", { staticClass: "pagination pagination-rounded" }, [
+            _c(
+              "li",
+              {
+                class: { disabled: !_vm.pagination.prev_page_url },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.getResults(_vm.pagination.prev_page_url)
+                  }
+                }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "scroll-to",
+                        rawName: "v-scroll-to",
+                        value: "#companies",
+                        expression: "'#companies'"
+                      }
+                    ],
+                    staticClass: "page-link",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Предыдущая")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "disabled " }, [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  staticStyle: {
+                    background: "#fff !important",
+                    color: "#6236FF !important"
+                  },
+                  attrs: { href: "#" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Страница " +
+                      _vm._s(_vm.pagination.current_page) +
+                      " из " +
+                      _vm._s(_vm.pagination.last_page) +
+                      "\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                class: { disabled: !_vm.pagination.next_page_url },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.getResults(_vm.pagination.next_page_url)
+                  }
+                }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "scroll-to",
+                        rawName: "v-scroll-to",
+                        value: "#companies",
+                        expression: "'#companies'"
+                      }
+                    ],
+                    staticClass: "page-link",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Следующая")]
+                )
+              ]
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -83218,6 +83506,568 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-scrollto/vue-scrollto.js":
+/*!***************************************************!*\
+  !*** ./node_modules/vue-scrollto/vue-scrollto.js ***!
+  \***************************************************/
+/***/ (function(module) {
+
+/*!
+  * vue-scrollto v2.20.0
+  * (c) 2019 Randjelovic Igor
+  * @license MIT
+  */
+(function (global, factory) {
+   true ? module.exports = factory() :
+  0;
+}(this, (function () { 'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  /**
+   * https://github.com/gre/bezier-easing
+   * BezierEasing - use bezier curve for transition easing function
+   * by Gaëtan Renaudeau 2014 - 2015 – MIT License
+   */
+
+  // These values are established by empiricism with tests (tradeoff: performance VS precision)
+  var NEWTON_ITERATIONS = 4;
+  var NEWTON_MIN_SLOPE = 0.001;
+  var SUBDIVISION_PRECISION = 0.0000001;
+  var SUBDIVISION_MAX_ITERATIONS = 10;
+
+  var kSplineTableSize = 11;
+  var kSampleStepSize = 1.0 / (kSplineTableSize - 1.0);
+
+  var float32ArraySupported = typeof Float32Array === 'function';
+
+  function A (aA1, aA2) { return 1.0 - 3.0 * aA2 + 3.0 * aA1; }
+  function B (aA1, aA2) { return 3.0 * aA2 - 6.0 * aA1; }
+  function C (aA1)      { return 3.0 * aA1; }
+
+  // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
+  function calcBezier (aT, aA1, aA2) { return ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT; }
+
+  // Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
+  function getSlope (aT, aA1, aA2) { return 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1); }
+
+  function binarySubdivide (aX, aA, aB, mX1, mX2) {
+    var currentX, currentT, i = 0;
+    do {
+      currentT = aA + (aB - aA) / 2.0;
+      currentX = calcBezier(currentT, mX1, mX2) - aX;
+      if (currentX > 0.0) {
+        aB = currentT;
+      } else {
+        aA = currentT;
+      }
+    } while (Math.abs(currentX) > SUBDIVISION_PRECISION && ++i < SUBDIVISION_MAX_ITERATIONS);
+    return currentT;
+  }
+
+  function newtonRaphsonIterate (aX, aGuessT, mX1, mX2) {
+   for (var i = 0; i < NEWTON_ITERATIONS; ++i) {
+     var currentSlope = getSlope(aGuessT, mX1, mX2);
+     if (currentSlope === 0.0) {
+       return aGuessT;
+     }
+     var currentX = calcBezier(aGuessT, mX1, mX2) - aX;
+     aGuessT -= currentX / currentSlope;
+   }
+   return aGuessT;
+  }
+
+  function LinearEasing (x) {
+    return x;
+  }
+
+  var src = function bezier (mX1, mY1, mX2, mY2) {
+    if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) {
+      throw new Error('bezier x values must be in [0, 1] range');
+    }
+
+    if (mX1 === mY1 && mX2 === mY2) {
+      return LinearEasing;
+    }
+
+    // Precompute samples table
+    var sampleValues = float32ArraySupported ? new Float32Array(kSplineTableSize) : new Array(kSplineTableSize);
+    for (var i = 0; i < kSplineTableSize; ++i) {
+      sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
+    }
+
+    function getTForX (aX) {
+      var intervalStart = 0.0;
+      var currentSample = 1;
+      var lastSample = kSplineTableSize - 1;
+
+      for (; currentSample !== lastSample && sampleValues[currentSample] <= aX; ++currentSample) {
+        intervalStart += kSampleStepSize;
+      }
+      --currentSample;
+
+      // Interpolate to provide an initial guess for t
+      var dist = (aX - sampleValues[currentSample]) / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+      var guessForT = intervalStart + dist * kSampleStepSize;
+
+      var initialSlope = getSlope(guessForT, mX1, mX2);
+      if (initialSlope >= NEWTON_MIN_SLOPE) {
+        return newtonRaphsonIterate(aX, guessForT, mX1, mX2);
+      } else if (initialSlope === 0.0) {
+        return guessForT;
+      } else {
+        return binarySubdivide(aX, intervalStart, intervalStart + kSampleStepSize, mX1, mX2);
+      }
+    }
+
+    return function BezierEasing (x) {
+      // Because JavaScript number are imprecise, we should guarantee the extremes are right.
+      if (x === 0) {
+        return 0;
+      }
+      if (x === 1) {
+        return 1;
+      }
+      return calcBezier(getTForX(x), mY1, mY2);
+    };
+  };
+
+  var easings = {
+    ease: [0.25, 0.1, 0.25, 1.0],
+    linear: [0.0, 0.0, 1.0, 1.0],
+    'ease-in': [0.42, 0.0, 1.0, 1.0],
+    'ease-out': [0.0, 0.0, 0.58, 1.0],
+    'ease-in-out': [0.42, 0.0, 0.58, 1.0]
+  };
+
+  // https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md#feature-detection
+  var supportsPassive = false;
+
+  try {
+    var opts = Object.defineProperty({}, 'passive', {
+      get: function get() {
+        supportsPassive = true;
+      }
+    });
+    window.addEventListener('test', null, opts);
+  } catch (e) {}
+
+  var _ = {
+    $: function $(selector) {
+      if (typeof selector !== 'string') {
+        return selector;
+      }
+
+      return document.querySelector(selector);
+    },
+    on: function on(element, events, handler) {
+      var opts = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {
+        passive: false
+      };
+
+      if (!(events instanceof Array)) {
+        events = [events];
+      }
+
+      for (var i = 0; i < events.length; i++) {
+        element.addEventListener(events[i], handler, supportsPassive ? opts : false);
+      }
+    },
+    off: function off(element, events, handler) {
+      if (!(events instanceof Array)) {
+        events = [events];
+      }
+
+      for (var i = 0; i < events.length; i++) {
+        element.removeEventListener(events[i], handler);
+      }
+    },
+    cumulativeOffset: function cumulativeOffset(element) {
+      var top = 0;
+      var left = 0;
+
+      do {
+        top += element.offsetTop || 0;
+        left += element.offsetLeft || 0;
+        element = element.offsetParent;
+      } while (element);
+
+      return {
+        top: top,
+        left: left
+      };
+    }
+  };
+
+  var abortEvents = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
+  var defaults = {
+    container: 'body',
+    duration: 500,
+    lazy: true,
+    easing: 'ease',
+    offset: 0,
+    force: true,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+  };
+  function setDefaults(options) {
+    defaults = _extends({}, defaults, options);
+  }
+  var scroller = function scroller() {
+    var element; // element to scroll to
+
+    var container; // container to scroll
+
+    var duration; // duration of the scrolling
+
+    var easing; // easing to be used when scrolling
+
+    var lazy; // checks the target position at each step
+
+    var offset; // offset to be added (subtracted)
+
+    var force; // force scroll, even if element is visible
+
+    var cancelable; // indicates if user can cancel the scroll or not.
+
+    var onStart; // callback when scrolling is started
+
+    var onDone; // callback when scrolling is done
+
+    var onCancel; // callback when scrolling is canceled / aborted
+
+    var x; // scroll on x axis
+
+    var y; // scroll on y axis
+
+    var initialX; // initial X of container
+
+    var targetX; // target X of container
+
+    var initialY; // initial Y of container
+
+    var targetY; // target Y of container
+
+    var diffX; // difference
+
+    var diffY; // difference
+
+    var abort; // is scrolling aborted
+
+    var cumulativeOffsetContainer;
+    var cumulativeOffsetElement;
+    var abortEv; // event that aborted scrolling
+
+    var abortFn = function abortFn(e) {
+      if (!cancelable) return;
+      abortEv = e;
+      abort = true;
+    };
+
+    var easingFn;
+    var timeStart; // time when scrolling started
+
+    var timeElapsed; // time elapsed since scrolling started
+
+    var progress; // progress
+
+    function scrollTop(container) {
+      var scrollTop = container.scrollTop;
+
+      if (container.tagName.toLowerCase() === 'body') {
+        // in firefox body.scrollTop always returns 0
+        // thus if we are trying to get scrollTop on a body tag
+        // we need to get it from the documentElement
+        scrollTop = scrollTop || document.documentElement.scrollTop;
+      }
+
+      return scrollTop;
+    }
+
+    function scrollLeft(container) {
+      var scrollLeft = container.scrollLeft;
+
+      if (container.tagName.toLowerCase() === 'body') {
+        // in firefox body.scrollLeft always returns 0
+        // thus if we are trying to get scrollLeft on a body tag
+        // we need to get it from the documentElement
+        scrollLeft = scrollLeft || document.documentElement.scrollLeft;
+      }
+
+      return scrollLeft;
+    }
+
+    function recalculateTargets() {
+      cumulativeOffsetContainer = _.cumulativeOffset(container);
+      cumulativeOffsetElement = _.cumulativeOffset(element);
+
+      if (x) {
+        targetX = cumulativeOffsetElement.left - cumulativeOffsetContainer.left + offset;
+        diffX = targetX - initialX;
+      }
+
+      if (y) {
+        targetY = cumulativeOffsetElement.top - cumulativeOffsetContainer.top + offset;
+        diffY = targetY - initialY;
+      }
+    }
+
+    function step(timestamp) {
+      if (abort) return done();
+      if (!timeStart) timeStart = timestamp; // When a site has a lot of media that can be loaded asynchronously,
+      // the targetY/targetX may end up in the wrong place during scrolling.
+      // So we will check this at each step
+
+      if (!lazy) {
+        recalculateTargets();
+      }
+
+      timeElapsed = timestamp - timeStart;
+      progress = Math.min(timeElapsed / duration, 1);
+      progress = easingFn(progress);
+      topLeft(container, initialY + diffY * progress, initialX + diffX * progress);
+      timeElapsed < duration ? window.requestAnimationFrame(step) : done();
+    }
+
+    function done() {
+      if (!abort) topLeft(container, targetY, targetX);
+      timeStart = false;
+
+      _.off(container, abortEvents, abortFn);
+
+      if (abort && onCancel) onCancel(abortEv, element);
+      if (!abort && onDone) onDone(element);
+    }
+
+    function topLeft(element, top, left) {
+      if (y) element.scrollTop = top;
+      if (x) element.scrollLeft = left;
+
+      if (element.tagName.toLowerCase() === 'body') {
+        // in firefox body.scrollTop doesn't scroll the page
+        // thus if we are trying to scrollTop on a body tag
+        // we need to scroll on the documentElement
+        if (y) document.documentElement.scrollTop = top;
+        if (x) document.documentElement.scrollLeft = left;
+      }
+    }
+
+    function scrollTo(target, _duration) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      if (_typeof(_duration) === 'object') {
+        options = _duration;
+      } else if (typeof _duration === 'number') {
+        options.duration = _duration;
+      }
+
+      element = _.$(target);
+
+      if (!element) {
+        return console.warn('[vue-scrollto warn]: Trying to scroll to an element that is not on the page: ' + target);
+      }
+
+      container = _.$(options.container || defaults.container);
+      duration = options.hasOwnProperty('duration') ? options.duration : defaults.duration;
+      lazy = options.hasOwnProperty('lazy') ? options.lazy : defaults.lazy;
+      easing = options.easing || defaults.easing;
+      offset = options.hasOwnProperty('offset') ? options.offset : defaults.offset;
+      force = options.hasOwnProperty('force') ? options.force !== false : defaults.force;
+      cancelable = options.hasOwnProperty('cancelable') ? options.cancelable !== false : defaults.cancelable;
+      onStart = options.onStart || defaults.onStart;
+      onDone = options.onDone || defaults.onDone;
+      onCancel = options.onCancel || defaults.onCancel;
+      x = options.x === undefined ? defaults.x : options.x;
+      y = options.y === undefined ? defaults.y : options.y;
+
+      if (typeof offset === 'function') {
+        offset = offset(element, container);
+      }
+
+      initialX = scrollLeft(container);
+      initialY = scrollTop(container); // calculates cumulative offsets and targetX/Y + diffX/Y
+
+      recalculateTargets();
+      abort = false;
+
+      if (!force) {
+        // When the container is the default (body) we need to use the viewport
+        // height, not the entire body height
+        var containerHeight = container.tagName.toLowerCase() === 'body' ? document.documentElement.clientHeight || window.innerHeight : container.offsetHeight;
+        var containerTop = initialY;
+        var containerBottom = containerTop + containerHeight;
+        var elementTop = targetY - offset;
+        var elementBottom = elementTop + element.offsetHeight;
+
+        if (elementTop >= containerTop && elementBottom <= containerBottom) {
+          // make sure to call the onDone callback even if there is no need to
+          // scroll the container. Fixes #111 (ref #118)
+          if (onDone) onDone(element);
+          return;
+        }
+      }
+
+      if (onStart) onStart(element);
+
+      if (!diffY && !diffX) {
+        if (onDone) onDone(element);
+        return;
+      }
+
+      if (typeof easing === 'string') {
+        easing = easings[easing] || easings['ease'];
+      }
+
+      easingFn = src.apply(src, easing);
+
+      _.on(container, abortEvents, abortFn, {
+        passive: true
+      });
+
+      window.requestAnimationFrame(step);
+      return function () {
+        abortEv = null;
+        abort = true;
+      };
+    }
+
+    return scrollTo;
+  };
+
+  var _scroller = scroller();
+
+  var bindings = []; // store binding data
+
+  function deleteBinding(el) {
+    for (var i = 0; i < bindings.length; ++i) {
+      if (bindings[i].el === el) {
+        bindings.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  function findBinding(el) {
+    for (var i = 0; i < bindings.length; ++i) {
+      if (bindings[i].el === el) {
+        return bindings[i];
+      }
+    }
+  }
+
+  function getBinding(el) {
+    var binding = findBinding(el);
+
+    if (binding) {
+      return binding;
+    }
+
+    bindings.push(binding = {
+      el: el,
+      binding: {}
+    });
+    return binding;
+  }
+
+  function handleClick(e) {
+    var ctx = getBinding(this).binding;
+    if (!ctx.value) return;
+    e.preventDefault();
+
+    if (typeof ctx.value === 'string') {
+      return _scroller(ctx.value);
+    }
+
+    _scroller(ctx.value.el || ctx.value.element, ctx.value);
+  }
+
+  var directiveHooks = {
+    bind: function bind(el, binding) {
+      getBinding(el).binding = binding;
+
+      _.on(el, 'click', handleClick);
+    },
+    unbind: function unbind(el) {
+      deleteBinding(el);
+
+      _.off(el, 'click', handleClick);
+    },
+    update: function update(el, binding) {
+      getBinding(el).binding = binding;
+    }
+  };
+  var VueScrollTo = {
+    bind: directiveHooks.bind,
+    unbind: directiveHooks.unbind,
+    update: directiveHooks.update,
+    beforeMount: directiveHooks.bind,
+    unmounted: directiveHooks.unbind,
+    updated: directiveHooks.update,
+    scrollTo: _scroller,
+    bindings: bindings
+  };
+
+  var install = function install(Vue, options) {
+    if (options) setDefaults(options);
+    Vue.directive('scroll-to', VueScrollTo);
+    var properties = Vue.config.globalProperties || Vue.prototype;
+    properties.$scrollTo = VueScrollTo.scrollTo;
+  };
+
+  if (typeof window !== 'undefined' && window.Vue) {
+    window.VueScrollTo = VueScrollTo;
+    window.VueScrollTo.setDefaults = setDefaults;
+    window.VueScrollTo.scroller = scroller;
+    if (window.Vue.use) window.Vue.use(install);
+  }
+
+  VueScrollTo.install = install;
+
+  return VueScrollTo;
+
+})));
 
 
 /***/ }),

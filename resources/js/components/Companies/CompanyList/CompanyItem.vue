@@ -1,15 +1,15 @@
 <template>
-    <a href="#">
-        <div class="blog-card">
-            <img :src="company.image" alt="image" class="imaged w-100">
-            <div class="text text-center right-button">
-                <h3>{{ company.title }}</h3>
-                <a @click="getMap" type="button" class="item btn btn-icon btn-primary pos-ab-right-5">
-                    <ion-icon name="map-outline"></ion-icon>
-                </a>
-            </div>
+    <div class="bill-box">
+        <img :src="'assets/sample/'+company.image" alt="image" class="imaged w-75">
+        <br>
+        <br>
+        <div class="text text-center right-button">
+            <h3>{{ company.title }}</h3>
+            <a @click="getMap" type="button" class="item btn btn-icon btn-primary pos-ab-right-5">
+                <ion-icon name="map-outline"></ion-icon>
+            </a>
         </div>
-    </a>
+    </div>
 </template>
 
 <script>
@@ -31,20 +31,23 @@ export default {
 }
 </script>
 <style>
-.right-button{
+.right-button {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
-.pos-ab-right-5{
+
+.pos-ab-right-5 {
     position: absolute;
     right: 5%;
 }
+
 @media screen and (max-width: 576px) {
-    .right-button{
+    .right-button {
         display: block;
     }
+
     .pos-ab-right-5 {
         position: relative;
         right: 0;

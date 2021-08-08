@@ -23,11 +23,10 @@
             <div class="section mt-2">
                 <div class="profile-head">
                     <div class="avatar">
-                        <img :src="company.image" alt="avatar" class="imaged w64 rounded">
+                        <img :src="'assets/sample/'+company.image" alt="avatar" class="imaged w64 rounded">
                     </div>
                     <div class="in">
-                        <h3 class="name">{{ company.title }}</h3>
-                        <h5 class="subtext">{{ company.position }}</h5>
+                        <h2 >{{ company.title }}</h2>
                     </div>
                 </div>
             </div>
@@ -36,7 +35,6 @@
                 <div class="profile-stats pl-2 pr-2">
                     <a href="#" class="item">
                         <strong>{{ products }}</strong>products
-
                     </a>
                     <a href="#" class="item">
                         <strong>{{ users }}</strong>users
@@ -56,11 +54,34 @@
 
             <div class="section mt-1 mb-2">
                 <div class="profile-info">
-                    <div class=" bio">
-                        {{ company.description }}
+                    <div class="bio subtext" >
+                        <h3 v-if="company.description">О нас:</h3>
+                        <h5 v-if="company.description">{{company.description}}</h5>
+                        <h3 v-if="company.properties.time">Время работы:</h3>
+                        <h4 v-if="company.properties.time">{{ company.properties.time }}</h4>
+                        <h3 v-if="typeof(company.properties.address)!=='string' && company.properties.address">Наши адреса:</h3>
+                        <div v-if="typeof(company.properties.address)!=='string'&& company.properties.address" v-for="address in company.properties.address">
+                            <h4> {{ address }}</h4>
+                        </div>
+                        <h3 v-if="typeof(company.properties.address)==='string' && company.properties.address">Наш адрес:</h3>
+                        <h4 v-if="typeof(company.properties.address)==='string' && company.properties.address">{{company.properties.address}}</h4>
                     </div>
-                    <div class="link">
-                        <a v-if="company.region!==null" href="#">{{ company.region }}</a>
+                    <div class="link" v-if="company.socials">
+                        <h3>Социальные сети</h3>
+                        <ul class="listview image-listview no-line no-space flush">
+                            <li v-for="(social, key) in company.socials">
+                                <div class="item" v-if="social!==null">
+                                    <div class="icon-box bg-primary">
+                                        <i :class="'fab fa-'+key"></i>
+                                    </div>
+                                    <div class="in">
+                                        <div class="input-wrapper w-100">
+                                            <a :href="social" target="_blank"><label>{{'Ссылка на профиль в '+key}}</label></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -101,7 +122,7 @@
                     <div class="tab-pane fade show active" id="feed" role="tabpanel">
                         <div class="mt-2 pr-2 pl-2">
                             <div class="row">
-                                <div class="col-4 mb-2" v-for="item in items">
+                                <div class="col-4 mb-2" v-for="item in companyItems">
                                     <NewsItem :item="item"></NewsItem>
                                 </div>
 
@@ -122,7 +143,7 @@
                     <!-- * friends -->
                     <div class="tab-pane fade" id="friends" role="tabpanel">
                         <ul class="listview image-listview flush transparent pt-1">
-                            <li v-for="user in users">
+                            <li v-for="user in companyUsers">
                                 <FriendItem :user="user"></FriendItem>
                             </li>
 
@@ -133,7 +154,7 @@
                     <!--  bookmarks -->
                     <div class="tab-pane fade" id="bookmarks" role="tabpanel">
                         <div class="row">
-                            <div class="col-4 mb-2" v-for="product in products">
+                            <div class="col-4 mb-2" v-for="product in companyProducts">
                                 <ProductItem :items="product" :action=false></ProductItem>
                             </div>
                         </div>
@@ -195,6 +216,7 @@ export default {
             type: Object,
             required: true
         },
+
         news:{
             required: true
         },
@@ -209,9 +231,10 @@ export default {
         }
 
     },
+
     data: function () {
         return {
-            items: [
+            companyItems: [
                 {id: 1, image: "assets/sample/photo/1.jpg", title: "What will be the value of bitcoin in the next..."},
                 {id: 2, image: "assets/sample/photo/2.jpg", title: "Rules you need to know in business"},
                 {id: 3, image: "assets/sample/photo/3.jpg", title: "10 easy ways to save your money"},
@@ -219,14 +242,14 @@ export default {
                 {id: 5, image: "assets/sample/photo/2.jpg", title: "Rules you need to know in business"},
                 {id: 6, image: "assets/sample/photo/3.jpg", title: "Rules you need to know in business"},
             ],
-            users: [
+            companyUsers: [
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
             ],
-            products: [
+            companyProducts: [
                 {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
                 {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
                 {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
@@ -238,6 +261,10 @@ export default {
     },
     mounted() {
         document.querySelector('body').classList.add('bg-white');
+        console.log(typeof(this.company.socials))
+        console.log(this.company.properties)
+        console.log(typeof(this.company.properties))
+
     }
 }
 </script>

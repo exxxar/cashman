@@ -14,7 +14,10 @@ class Company extends Model
            'cashback_percent_level_2', 'description',
            'image', 'position', 'company_group_id', 'properties', 'callback_url',
            'socials', 'is_active', 'upload_vk_url', 'creator_id'];
-
+    protected $casts = [
+        'socials' => 'array',
+        'properties' => 'array',
+    ];
     public function users()
     {
         return $this->belongsToMany(User::class)->using(UserCompany::class);

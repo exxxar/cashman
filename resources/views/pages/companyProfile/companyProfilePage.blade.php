@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
- <company-profile :company = '{!! json_encode($company) !!}' :news = '{!! json_encode($news) !!}'
+ <company-profile :company = '{!! json_encode($company) !!}'  :news = '{!! json_encode($news) !!}'
                   :users = '{!! json_encode($users) !!}' :stories = '{!! json_encode($stories) !!}'
                   :products = '{!! json_encode($products) !!}'></company-profile>
 @endsection

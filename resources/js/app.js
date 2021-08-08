@@ -22,6 +22,10 @@ window.Swal = Swal;
 
 import AudioRecorder from 'vue-audio-recorder'
 Vue.use(AudioRecorder)
+var VueScrollTo = require('vue-scrollto');
+
+Vue.use(VueScrollTo)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -14,7 +14,7 @@
         <br/>
         <yandex-map
             :coords="coords"
-            :zoom="10">
+            :zoom="16">
             <ymap-marker
                 marker-id="123"
                 :coords="coords"

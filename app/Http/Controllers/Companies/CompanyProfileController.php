@@ -10,7 +10,7 @@ class CompanyProfileController extends Controller
 {
     public function getCompanyData($id)
     {
-        $company = Company::where('id', $id)->first();
+        $company = (object)Company::where('id', $id)->first();
         $users = 100;
         $news =88;
         $stories = 27;
