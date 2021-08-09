@@ -38,6 +38,7 @@
         crossorigin="anonymous"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://js.pusher.com/7.0.3/pusher.min.js"></script>
 </body>
 </html>
 

@@ -19,27 +19,26 @@
         <div id="appCapsule" class="full-height">
             <div class="section tab-content mt-2 mb-2">
                 <div class="row">
-                    <div class="col-3 mb-2" v-for="company in companies">
+                    <div class="col-3 mb-2" v-for="company in paginatedData">
                         <CompanyItem :company="company" :user="auth_user" :allow-add="true"></CompanyItem>
                     </div>
                 </div>
             </div>
             <nav>
                 <ul class="pagination pagination-rounded" >
-                    <li :class="{ disabled: !pagination.prev_page_url }"
-                        @click.prevent="getResults(pagination.prev_page_url)">
-                        <a class="page-link" v-scroll-to="'#companies'" href="#">Предыдущая</a></li>
+                    <li >
+                        <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">Предыдущая</button></li>
                     <li class="disabled ">
-                        <a class="page-link" href="#" style="background: #fff !important;color: #6236FF !important;">
-                            Страница {{ pagination.current_page }} из {{ pagination.last_page }}
+                        <a class="page-link"  style="background: #fff !important;color: #6236FF !important;">
+                            Страница {{ pageNumber+1 }} из {{ pageCount }}
                         </a>
                     </li>
-                    <li :class="{ disabled: !pagination.next_page_url }"
-                        @click.prevent="getResults(pagination.next_page_url)">
-                        <a class="page-link" v-scroll-to="'#companies'" href="#">Следующая</a>
+                    <li>
+                        <button class="page-link"  @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">Следующая</button>
                     </li>
                 </ul>
             </nav>
+
         </div>
         <BottomMenu></BottomMenu>
     </fragment>
@@ -50,14 +49,24 @@ import Header from "../LayoutComponents/Header";
 import CompanyItem from "./CompanyList/CompanyItem";
 import SearchComponent from "../LayoutComponents/SearchComponent";
 import BottomMenu from "../LayoutComponents/BottomMenu";
+import {mapGetters} from 'vuex'
 
 export default {
     name: "SearchCompanySection",
     components: {BottomMenu, SearchComponent, CompanyItem, Header},
     data: function () {
         return {
-            companies: [],
-            pagination: {}
+            pageNumber: 0,
+            size: 8
+
+        }
+    },
+    methods:{
+        nextPage(){
+            this.pageNumber++;
+        },
+        prevPage(){
+            this.pageNumber--;
         }
     },
     props:{
@@ -65,27 +74,32 @@ export default {
             default: null
         }
     },
-    methods: {
-        getResults(page_url) {
-            page_url = page_url || '/api/company/search'
-            axios.get(page_url)
-                .then(response => {
-                    this.companies = response.data.data
-                    this.makePagination(response.data)
-                });
-        },
-        makePagination(response) {
-            this.pagination = {
-                current_page: response.current_page,
-                last_page: response.last_page,
-                prev_page_url: response.prev_page_url,
-                next_page_url: response.next_page_url,
-            }
-        },
 
-    },
     mounted() {
-        this.getResults();
+        this.$store.dispatch('GET_COMPANIES')
+
+        window.Echo.channel('search')
+            .listen('.searchResults', (e) => {
+                this.$store.commit('SET_COMPANIES', e.companies)
+            })
+    },
+    computed: {
+        groupedCompanies() {
+            return this.companies;
+        },
+        ...mapGetters([
+            'companies'
+        ]),
+        pageCount(){
+            let l = this.groupedCompanies.length,
+                s = this.size;
+            return Math.ceil(l/s);
+        },
+        paginatedData(){
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            return this.groupedCompanies.slice(start, end);
+        }
     }
 }
 </script>

@@ -4,7 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import {req} from "vuelidate/lib/validators/common";
 
 require('./bootstrap');
 
@@ -14,6 +13,9 @@ import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
 export const eventBus = new Vue()
 import VueRecord from '@codekraft-studio/vue-record'
+
+import store from './store/index'
+
 
 Vue.use(VueRecord)
 Vue.config.ignoredElements = [/^ion-/]
@@ -103,4 +105,5 @@ window.Fire = new Vue();
 
 const app = new Vue({
     el: '#app',
+    store
 });

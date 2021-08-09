@@ -35,8 +35,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('company/list', [CompanyListController::class, 'index']);
 Route::get('company/list-{id}', [CompanyListController::class, 'userCompanies']);
-Route::get('company/search', [CompanyListController::class, 'search']);
-Route::get('/search', [SearchCompanyController::class, 'search']);
+Route::get('companies', [SearchCompanyController::class, 'index']);
+Route::get('search', [SearchCompanyController::class, 'search']);
 
 Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'sendTextMessage']);
