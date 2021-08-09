@@ -8,7 +8,10 @@
         <div class="carousel-multiple splide">
             <div class="splide__track">
                 <ul class="splide__list">
-                    <li class="splide__slide" v-for="company in companies">
+                    <li v-if="user!==null" class="splide__slide" v-for="company in companies">
+                        <CompanyItem :company="company" :user="user"></CompanyItem>
+                    </li>
+                    <li v-if="user===null" class="splide__slide" v-for="company in companies">
                         <CompanyItem :company="company"></CompanyItem>
                     </li>
                 </ul>
@@ -29,19 +32,38 @@ export default {
             companies: []
         }
     },
+    props:{
+        user:{
+            default: null
+        }
+    },
     methods:{
         getList(){
-            axios.get('api/company/list')
-                .then( response => {
-                    this.companies = response.data
-                })
-                .catch( error => {
-                    console.log(error);
-                })
+            if(this.user===null) {
+                axios.get('api/company/list')
+                    .then(response => {
+                        this.companies = response.data
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+            else{
+                axios.get('api/company/list-'+this.user.id)
+                    .then(response => {
+                        this.companies = response.data
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
         }
     },
     mounted(){
         this.getList();
+        console.log(this.companies)
+        this.$forceUpdate();
+
     }
 
 }

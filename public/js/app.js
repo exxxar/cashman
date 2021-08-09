@@ -16160,18 +16160,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CompanyItem",
   props: {
     company: {
       type: Object,
       required: true
+    },
+    user: {
+      "default": null
+    },
+    allowAdd: {
+      type: Boolean,
+      "default": false
     }
   },
   methods: {
     getMap: function getMap() {
-      axios.get('region-map/' + this.company.id);
-      window.location.href = 'region-map/' + this.company.id;
+      var _this = this;
+
+      axios.get('region-map/' + this.company.id).then(function () {
+        window.location.href = 'region-map/' + _this.company.id;
+      });
+    },
+    addCompany: function addCompany() {
+      axios.get('company/add-' + this.company.id).then(function () {
+        window.location.href = 'user-profile';
+      });
+    },
+    showCompany: function showCompany() {
+      var _this2 = this;
+
+      axios.get('company-profile-' + this.company.id).then(function () {
+        window.location.href = 'company-profile-' + _this2.company.id;
+      });
     }
   }
 });
@@ -16210,6 +16238,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CompanyList",
@@ -16221,19 +16252,34 @@ __webpack_require__.r(__webpack_exports__);
       companies: []
     };
   },
+  props: {
+    user: {
+      "default": null
+    }
+  },
   methods: {
     getList: function getList() {
       var _this = this;
 
-      axios.get('api/company/list').then(function (response) {
-        _this.companies = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (this.user === null) {
+        axios.get('api/company/list').then(function (response) {
+          _this.companies = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        axios.get('api/company/list-' + this.user.id).then(function (response) {
+          _this.companies = response.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     }
   },
   mounted: function mounted() {
     this.getList();
+    console.log(this.companies);
+    this.$forceUpdate();
   }
 });
 
@@ -16260,6 +16306,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Products_ProductTile__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Products/ProductTile */ "./resources/js/components/Products/ProductTile.vue");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16496,6 +16548,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     },
     users: {
       required: true
+    },
+    isAdmin: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -16736,6 +16792,11 @@ __webpack_require__.r(__webpack_exports__);
       companies: [],
       pagination: {}
     };
+  },
+  props: {
+    auth_user: {
+      "default": null
+    }
   },
   methods: {
     getResults: function getResults(page_url) {
@@ -26420,7 +26481,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.right-button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: relative;\n}\n.pos-ab-right-5 {\n    position: absolute;\n    right: 5%;\n}\n@media screen and (max-width: 576px) {\n.right-button {\n        display: block;\n}\n.pos-ab-right-5 {\n        position: relative;\n        right: 0;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.right-button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: relative;\n}\n.pos-ab-right-5 {\n    position: absolute;\n    right: 5%;\n}\n.pos-ab-left-5 {\n    position: absolute;\n    left: 5%;\n}\n@media screen and (max-width: 576px) {\n.right-button {\n        display: block;\n}\n.pos-ab-right-5 {\n        position: relative;\n        right: 0;\n}\n.pos-ab-left-5 {\n        position: relative;\n        left: 0;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -73198,7 +73259,33 @@ var render = function() {
         },
         [_c("ion-icon", { attrs: { name: "map-outline" } })],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.user !== null && _vm.allowAdd
+        ? _c(
+            "a",
+            {
+              staticClass: "item btn btn-icon btn-success pos-ab-left-5",
+              attrs: { type: "button" },
+              on: { click: _vm.addCompany }
+            },
+            [_c("ion-icon", { attrs: { name: "add-outline" } })],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.user !== null && !_vm.allowAdd
+        ? _c(
+            "a",
+            {
+              staticClass: "item btn btn-icon btn-info pos-ab-left-5",
+              attrs: { type: "button" },
+              on: { click: _vm.showCompany }
+            },
+            [_c("ion-icon", { attrs: { name: "open-outline" } })],
+            1
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -73233,15 +73320,34 @@ var render = function() {
         _c(
           "ul",
           { staticClass: "splide__list" },
-          _vm._l(_vm.companies, function(company) {
-            return _c(
-              "li",
-              { staticClass: "splide__slide" },
-              [_c("CompanyItem", { attrs: { company: company } })],
-              1
-            )
-          }),
-          0
+          [
+            _vm._l(_vm.companies, function(company) {
+              return _vm.user !== null
+                ? _c(
+                    "li",
+                    { staticClass: "splide__slide" },
+                    [
+                      _c("CompanyItem", {
+                        attrs: { company: company, user: _vm.user }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.companies, function(company) {
+              return _vm.user === null
+                ? _c(
+                    "li",
+                    { staticClass: "splide__slide" },
+                    [_c("CompanyItem", { attrs: { company: company } })],
+                    1
+                  )
+                : _vm._e()
+            })
+          ],
+          2
         )
       ])
     ])
@@ -73494,7 +73600,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("StoryList", { attrs: { "add-new": "true" } }),
+          _c("StoryList", { attrs: { "add-new": _vm.isAdmin } }),
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
@@ -73555,21 +73661,27 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("li", { staticClass: "nav-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: {
-                          "data-toggle": "tab",
-                          href: "#settings",
-                          role: "tab"
-                        }
-                      },
-                      [_c("ion-icon", { attrs: { name: "settings-outline" } })],
-                      1
-                    )
-                  ])
+                  _vm.isAdmin
+                    ? _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: {
+                              "data-toggle": "tab",
+                              href: "#settings",
+                              role: "tab"
+                            }
+                          },
+                          [
+                            _c("ion-icon", {
+                              attrs: { name: "settings-outline" }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
                 ]
               )
             ])
@@ -73600,40 +73712,55 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "row",
-                      staticStyle: {
-                        "margin-left": "4px",
-                        "margin-right": "5px"
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "col-6" }, [
+                  _vm.isAdmin
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "row",
+                          staticStyle: {
+                            "margin-left": "4px",
+                            "margin-right": "5px"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "col-6" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-outline-primary btn-lg btn-block",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Больше новостей")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-6" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-lg btn-primary btn-block",
+                                attrs: { href: "/add-advertising" }
+                              },
+                              [_vm._v("Добавить новость")]
+                            )
+                          ])
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.isAdmin
+                    ? _c("div", { staticClass: "pr-2 pl-2" }, [
                         _c(
                           "a",
                           {
-                            staticClass:
-                              "btn btn-outline-primary btn-lg btn-block",
+                            staticClass: "btn btn-primary btn-lg btn-block",
                             attrs: { href: "#" }
                           },
                           [_vm._v("Больше новостей")]
                         )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-lg btn-primary btn-block",
-                            attrs: { href: "/add-advertising" }
-                          },
-                          [_vm._v("Добавить новость")]
-                        )
                       ])
-                    ]
-                  )
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
@@ -73678,7 +73805,7 @@ var render = function() {
                         { staticClass: "col-4 mb-2" },
                         [
                           _c("ProductItem", {
-                            attrs: { items: product, action: false }
+                            attrs: { items: product, action: !_vm.isAdmin }
                           })
                         ],
                         1
@@ -73687,85 +73814,108 @@ var render = function() {
                     0
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "row",
-                      staticStyle: {
-                        "margin-left": "4px",
-                        "margin-right": "5px"
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "col-6" }, [
+                  _vm.isAdmin
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "row",
+                          staticStyle: {
+                            "margin-left": "4px",
+                            "margin-right": "5px"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "col-6" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn btn-outline-primary btn-lg btn-block",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Больше продуктов")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-6" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-lg btn-primary btn-block",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Добавить продукт")]
+                            )
+                          ])
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.isAdmin
+                    ? _c("div", { staticClass: "pr-2 pl-2" }, [
                         _c(
                           "a",
                           {
-                            staticClass:
-                              "btn btn-outline-primary btn-lg btn-block",
+                            staticClass: "btn btn-primary btn-lg btn-block",
                             attrs: { href: "#" }
                           },
                           [_vm._v("Больше продуктов")]
                         )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-lg btn-primary btn-block",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v("Добавить продукт")]
-                        )
                       ])
-                    ]
-                  )
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "tab-pane fade",
-                  attrs: { id: "settings", role: "tabpanel" }
-                },
-                [
-                  _c(
-                    "ul",
+              _vm.isAdmin
+                ? _c(
+                    "div",
                     {
-                      staticClass:
-                        "listview image-listview text flush transparent pt-1"
+                      staticClass: "tab-pane fade",
+                      attrs: { id: "settings", role: "tabpanel" }
                     },
                     [
-                      _c("li", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "item",
-                            attrs: { href: "/company-edit" }
-                          },
-                          [
-                            _c("div", { staticClass: "in" }, [
-                              _c("div", { staticClass: "text-danger" }, [
-                                _vm._v("Настройки профиля компании")
-                              ])
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _c("a", { staticClass: "item", attrs: { href: "#" } }, [
-                          _c("div", { staticClass: "in" }, [
-                            _c("div", [_vm._v("История начисления/списания")])
+                      _c(
+                        "ul",
+                        {
+                          staticClass:
+                            "listview image-listview text flush transparent pt-1"
+                        },
+                        [
+                          _c("li", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "item",
+                                attrs: { href: "/company-edit" }
+                              },
+                              [
+                                _c("div", { staticClass: "in" }, [
+                                  _c("div", { staticClass: "text-danger" }, [
+                                    _vm._v("Настройки профиля компании")
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c(
+                              "a",
+                              { staticClass: "item", attrs: { href: "#" } },
+                              [
+                                _c("div", { staticClass: "in" }, [
+                                  _c("div", [
+                                    _vm._v("История начисления/списания")
+                                  ])
+                                ])
+                              ]
+                            )
                           ])
-                        ])
-                      ])
+                        ]
+                      )
                     ]
                   )
-                ]
-              )
+                : _vm._e()
             ])
           ])
         ],
@@ -73932,7 +74082,15 @@ var render = function() {
               return _c(
                 "div",
                 { staticClass: "col-3 mb-2" },
-                [_c("CompanyItem", { attrs: { company: company } })],
+                [
+                  _c("CompanyItem", {
+                    attrs: {
+                      company: company,
+                      user: _vm.auth_user,
+                      "allow-add": true
+                    }
+                  })
+                ],
                 1
               )
             }),
@@ -81197,7 +81355,7 @@ var render = function() {
           _vm._v(" "),
           _c("NewsList"),
           _vm._v(" "),
-          _c("CompanyList"),
+          _c("CompanyList", { attrs: { user: _vm.auth_user } }),
           _vm._v(" "),
           _c("UserList", { attrs: { "show-friends": false } }),
           _vm._v(" "),
@@ -81976,7 +82134,7 @@ var render = function() {
           _vm._v(" "),
           _c("ProductTile"),
           _vm._v(" "),
-          _c("CompanyList"),
+          _c("CompanyList", { attrs: { user: _vm.auth_user } }),
           _vm._v(" "),
           _c("UserList", { attrs: { "show-friends": true } }),
           _vm._v(" "),

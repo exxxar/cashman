@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <StoryList add-new=true></StoryList>
+            <StoryList :add-new="isAdmin"></StoryList>
             <br/>
             <div class="section full">
                 <div class="wide-block transparent p-0">
@@ -105,7 +105,7 @@
                                 <ion-icon name="bookmark-outline"></ion-icon>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="isAdmin" class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
                                 <ion-icon name="settings-outline"></ion-icon>
                             </a>
@@ -129,13 +129,16 @@
                             </div>
                         </div>
 
-                        <div class="row" style="margin-left: 4px; margin-right: 5px">
+                        <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
                             <div class="col-6">
                                 <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block">Больше новостей</a>
                             </div>
                             <div class="col-6">
                                 <a :href="'/add-advertising'" class="btn btn-lg btn-primary btn-block">Добавить новость</a>
                             </div>
+                        </div>
+                        <div v-if="!isAdmin" class="pr-2 pl-2">
+                            <a href="#" class="btn btn-primary btn-lg btn-block">Больше новостей</a>
                         </div>
                     </div>
                     <!-- * feed -->
@@ -155,10 +158,10 @@
                     <div class="tab-pane fade" id="bookmarks" role="tabpanel">
                         <div class="row">
                             <div class="col-4 mb-2" v-for="product in companyProducts">
-                                <ProductItem :items="product" :action=false></ProductItem>
+                                <ProductItem :items="product" :action="!isAdmin"></ProductItem>
                             </div>
                         </div>
-                        <div class="row" style="margin-left: 4px; margin-right: 5px">
+                        <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
                             <div class="col-6">
                                 <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block">Больше продуктов</a>
                             </div>
@@ -166,10 +169,13 @@
                                 <a :href="'#'" class="btn btn-lg btn-primary btn-block">Добавить продукт</a>
                             </div>
                         </div>
+                        <div v-if="!isAdmin" class="pr-2 pl-2">
+                            <a href="#" class="btn btn-primary btn-lg btn-block">Больше продуктов</a>
+                        </div>
                     </div>
                     <!-- * bookmarks -->
                     <!-- settings -->
-                    <div class="tab-pane fade" id="settings" role="tabpanel">
+                    <div v-if="isAdmin" class="tab-pane fade" id="settings" role="tabpanel">
                         <ul class="listview image-listview text flush transparent pt-1">
                             <li>
                                 <a href='/company-edit' class="item">
@@ -228,6 +234,10 @@ export default {
         },
         users:{
             required: true
+        },
+        isAdmin:{
+            type:Boolean,
+            default: false
         }
 
     },

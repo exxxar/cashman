@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Companies\CompanyAuthController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
+use App\Http\Controllers\Companies\CompanyListController;
 use App\Http\Controllers\Companies\CompanyProfileController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
 use App\Http\Controllers\News\NewsController;
@@ -51,9 +52,7 @@ Route::group(['middleware' => ['web']], function () {
     });
     Route::get('/news/{id}', [NewsController::class, 'getNewsItem']);
     /* Страница компаний */
-    Route::get('/search-company', function () {
-        return view('pages/companies/searchCompanyPage');
-    });
+    Route::get('/search-company', [CompanyListController::class, 'getSearchPage']);
     Route::get('/qr-handler/data={data}', [PromocodeController::class, 'qrHandler'])->name('qr-handler');
     /* Авторизация через социальные сети */
     Route::get('/auth/{driver}', [SocialController::class, 'index']);
@@ -65,6 +64,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         /* Профиль пользователя */
         Route::get('/user-profile',[UserProfileController::class, 'getAuthUser']);
+        Route::get('/company/add-{id}', [CompanyListController::class, 'addUserCompany']);
         /* Настройки профиля пользователя */
         Route::get('/user-settings', [UserProfileController::class, 'getUserSettings']);
         /*Страница редактирования данных о профиле пользователя*/

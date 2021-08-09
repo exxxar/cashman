@@ -8,6 +8,7 @@ use App\Http\Controllers\Callback\VoiceCallbackController;
 use App\Http\Controllers\Companies\CompanyAuthController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
 use App\Http\Controllers\Companies\CompanyListController;
+use App\Http\Controllers\Companies\SearchCompanyController;
 use App\Http\Controllers\Social\SocialController;
 use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\Subscription\BuySubscriptionController;
@@ -33,7 +34,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('company/list', [CompanyListController::class, 'index']);
+Route::get('company/list-{id}', [CompanyListController::class, 'userCompanies']);
 Route::get('company/search', [CompanyListController::class, 'search']);
+Route::get('/search', [SearchCompanyController::class, 'search']);
 
 Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'sendTextMessage']);

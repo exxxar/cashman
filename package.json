@@ -29,6 +29,7 @@
         "@chenfengyuan/vue-qrcode": "^1.0.2",
         "@codekraft-studio/vue-record": "^0.0.3",
         "@fortawesome/fontawesome-free": "^5.15.3",
+        "@splidejs/splide": "^2.4.21",
         "qrcode": "^1.4.4",
         "sweetalert2": "^11.0.18",
         "vee-validate": "^3.4.10",

@@ -28,7 +28,7 @@
             <CashBackList></CashBackList>
             <StoryList></StoryList>
             <ProductTile></ProductTile>
-            <CompanyList></CompanyList>
+            <CompanyList :user="auth_user"></CompanyList>
             <UserList :show-friends="true"></UserList>
             <NewsList></NewsList>
         </div>

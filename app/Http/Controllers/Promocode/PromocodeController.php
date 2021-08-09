@@ -48,7 +48,7 @@ class PromocodeController extends Controller
             UsersFriedsByCompany::create(['user_id' => Auth::user()->getAuthIdentifier(),
                 'company_id' => $company_id, 'parent_id' => $user_id]);
             $company->users()->attach(['user_id' => Auth::user()->getAuthIdentifier()]);
-            return redirect()->route('company-profile', $company_id);
+             return redirect('/user-profile');
         }
 
 

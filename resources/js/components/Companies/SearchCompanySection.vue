@@ -20,7 +20,7 @@
             <div class="section tab-content mt-2 mb-2">
                 <div class="row">
                     <div class="col-3 mb-2" v-for="company in companies">
-                        <CompanyItem :company="company"></CompanyItem>
+                        <CompanyItem :company="company" :user="auth_user" :allow-add="true"></CompanyItem>
                     </div>
                 </div>
             </div>
@@ -58,6 +58,11 @@ export default {
         return {
             companies: [],
             pagination: {}
+        }
+    },
+    props:{
+        auth_user:{
+            default: null
         }
     },
     methods: {
