@@ -13,7 +13,7 @@ class CreateUsersFriedsByCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_friends_by_companies', function (Blueprint $table) {
+        Schema::create('users_frieds_by_companies', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')

@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class UserCompany extends Pivot
 {
     use HasFactory;
-    protected $table = 'company_user';
+    protected $table = 'company_users';
 }

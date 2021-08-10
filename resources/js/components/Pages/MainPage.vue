@@ -31,7 +31,7 @@
             <StoryList></StoryList>
             <ProductTile></ProductTile>
             <NewsList></NewsList>
-            <CompanyList :user="auth_user"></CompanyList>
+            <CompanyList></CompanyList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
         </div>

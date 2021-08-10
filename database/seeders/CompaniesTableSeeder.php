@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use Illuminate\Database\Seeder;
-use PhpParserode\Expr\Cast\Object_;
+
 
 
 class CompaniesTableSeeder extends Seeder
@@ -37,7 +37,7 @@ class CompaniesTableSeeder extends Seeder
                 'title' => 'BAR BOSKO', 'domain' => 'barbosko_bot', 'cashback_percent' => 10, 'cashback_percent_level_1' => 3,
                 'cashback_percent_level_2' => 1, 'description' => 'Ресторан БарБоско - это душевная обстановка, сытная домашняя кухня и необычные согревающие напитки.Когда мы говорим о настоящей кухне, то всегда подразумеваем с детства знакомые домашние мотивы, которые из поколения в поколение передаются и бережно сохраняются. И как же здорово, что в Республике все больше таких мест. Ресторан домашней кухни «БарБоско» поражает своей фирменной начинкой. Пожалуй, это самый уникальный рестораны в столице, где как на международном музыкальном фестивале, бок о бок, в дружеской и гостеприимной атмосфере, стоят стили разных кухонь. Невероятная задача стоявшая перед рестораторами, объединить блюда разных стран выполнена на отлично!',
                 'image' => 'companyLogos/barbosko.jpg', 'position' => [47.986519, 37.786077],
-                'company_group_id' => 3, 'properties' => ['address' => 'Ленинский проспект, 11б'], 'socials' => ['instagram' => 'https://www.instagram.com/bar.bosco.cafe/', 'telegram' => 'https://t.me/barbosko_bot', 'vk' => 'https://vk.com/barbosko_donetsk', 'facebook'=>null],
+                'company_group_id' => 3, 'properties' => ['time' => '10.00-22.00','address' => 'Ленинский проспект, 11б'], 'socials' => ['instagram' => 'https://www.instagram.com/bar.bosco.cafe/', 'telegram' => 'https://t.me/barbosko_bot', 'vk' => 'https://vk.com/barbosko_donetsk', 'facebook'=>null],
                 'callback_url' => 'https://vk.com/barbosko_donetsk',
                 'is_active' => true, 'upload_vk_url' => 'https://vk.com/barbosko_donetsk', 'creator_id' => 1
             ],
@@ -68,7 +68,7 @@ class CompaniesTableSeeder extends Seeder
                 'title' => 'Chelentano', 'domain' => 'celentano.dn.ua', 'cashback_percent' => 10, 'cashback_percent_level_1' => 3,
                 'cashback_percent_level_2' => 1, 'description' => 'Кафе «Пицца Челентано»! Вас ждут оригинальный интерьер, внимательный персонал и неизменно позитивная атмосфера 😉👌 Вам предложат блюда только из свежих продуктов, богатые на микроэлементы, витамины и минералы. Паста 🍝, блинчики 🥞, салаты 🥗, суши 🍣 и роллы 🍣, супы 🍲, напитки 🍹🍸🍷, десерты 🍰🍫🍒, настоящий кофе ☕ и конечно же самая вкусная пицца 🍕 в городе! Все блюда созданы, чтобы поразить Ваш вкус!',
                 'image' => 'companyLogos/celentano.jpg', 'position' => [48.008579, 37.810202],
-                'company_group_id' => 3, 'properties' => ['address' => ['пр. Богдана-Хмельницкого 92', 'бул. Шевченко 48', 'ул. Артема 277']],
+                'company_group_id' => 3, 'properties' => ['time' => '10.00-22.00', 'address' => ['пр. Богдана-Хмельницкого 92', 'бул. Шевченко 48', 'ул. Артема 277']],
                 'socials' => ['instagram' => 'https://www.instagram.com/chelentanodonetsk/', 'telegram' => 'https://t.me/celentanodon_bot/', 'vk' => 'https://vk.com/celentanodonetsk', 'facebook'=>null], 'callback_url' => 'https://t.me/celentanodon_bot/',
                 'is_active' => true, 'upload_vk_url' => 'https://vk.com/celentanodonetsk', 'creator_id' => 1
             ],

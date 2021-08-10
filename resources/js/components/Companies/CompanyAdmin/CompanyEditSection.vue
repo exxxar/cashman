@@ -14,7 +14,7 @@
             <div class="section mt-2 text-center">
                 <div class="avatar-section">
                     <a href="#">
-                        <img :src="form.image" alt="avatar" class="imaged w100 rounded">
+                        <img :src="'assets/sample/'+company.image" alt="avatar" class="imaged w100 rounded">
                     </a>
                 </div>
                 <h1>Данные о компании</h1>
@@ -28,11 +28,7 @@
                                 <div class="input-wrapper">
                                     <label class="label" for="title">Название</label>
                                     <input type="text" class="form-control" placeholder="Название компании"
-                                           v-model="form.title" name="title" id="title"
-                                           :class="hasError('title') ? 'is-invalid' : ''">
-                                    <div v-if="hasError('title')" class="invalid-feedback">
-                                        <div class="error" v-if="!$v.form.title.required">Введите название компании</div>
-                                    </div>
+                                           v-model="company.title" name="title" id="title">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -60,7 +56,7 @@
                                 <div class="input-wrapper">
                                     <label class="label" for="percent">Процент кэшбека</label>
                                     <input type="text" class="form-control" id="percent"
-                                           placeholder="Процент кэшбека" v-model="form.cashback_percent"
+                                           placeholder="Процент кэшбека" v-model="company.cashback_percent"
                                            name="cashback_percent">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -72,7 +68,7 @@
                                     <label class="label" for="percent1">Процент кэшбека 1 уровня</label>
                                     <input type="text" class="form-control" id="percent1"
                                            placeholder="Процент кэшбека 1 уровня"
-                                           v-model="form.cashback_percent_level_1" name="cashback_percent_level_1">
+                                           v-model="company.cashback_percent_level_1" name="cashback_percent_level_1">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -83,7 +79,7 @@
                                     <label class="label" for="percent2">Процент кэшбека 2 уровня</label>
                                     <input type="text" class="form-control" id="percent2"
                                            placeholder="Процент кэшбека 2 уровня"
-                                           v-model="form.cashback_percent_level_2" name="cashback_percent_level_2">
+                                           v-model="company.cashback_percent_level_2" name="cashback_percent_level_2">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -92,9 +88,10 @@
                             <div class="form-group basic">
                                 <div class="input-wrapper">
                                     <label class="label" for="description">Описание компании</label>
-                                    <input type="text" class="form-control" id="description"
-                                           placeholder="Описание компании" v-model="form.description"
-                                    name="description">
+                                    <textarea type="text" class="form-control" id="description"
+                                              placeholder="Описание компании" v-model="company.description"
+                                              name="description" @onKeyUp="SetNewSize(this)" cols="5"
+                                              rows="6"></textarea>
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -104,8 +101,8 @@
                                 <div class="input-wrapper">
                                     <label class="label" for="position">Позиция</label>
                                     <input type="text" class="form-control" id="position"
-                                           placeholder="Позиция компании" v-model="form.position"
-                                    name="position">
+                                           placeholder="Позиция компании" v-model="company.position"
+                                           name="position">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -115,8 +112,8 @@
                                 <div class="input-wrapper">
                                     <label class="label" for="callback">Ссылка для обратной связи</label>
                                     <input type="text" class="form-control" id="callback"
-                                           placeholder="Ссылка для обратной связи" v-model="form.callback_url"
-                                    name="callback_url">
+                                           placeholder="Ссылка для обратной связи" v-model="company.callback_url"
+                                           name="callback_url">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -127,16 +124,36 @@
                                     <label class="label" for="vk-url">Ссылка для загрузки товаров из VK</label>
                                     <input type="text" class="form-control" id="vk-url"
                                            placeholder="Ссылка для загрузки товаров из VK"
-                                           v-model="form.upload_vk_url" name="upload_vk_url">
+                                           v-model="company.upload_vk_url" name="upload_vk_url">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
                                 </div>
                             </div>
                             <div class="form-group basic">
+                                <label class="label">Дополнительная информация</label>
+                                <ul class="listview image-listview no-line no-space flush">
+                                    <li v-for="(property, key) in company.properties">
+                                        <div class="item flex-wrap flex-column d-flex">
+                                            <p class="mb-0 w-100">{{ key }} : </p>
+                                            <div class="in mb-1 w-100">
+                                                <div class="input-wrapper w-100">
+                                                    <input type="text" class="form-control"
+                                                           :placeholder="key"
+                                                           :value="property">
+                                                    <i class="clear-input">
+                                                        <ion-icon name="close-circle"></ion-icon>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group basic">
                                 <label class="label">Социальные сети</label>
                                 <ul class="listview image-listview no-line no-space flush">
-                                    <li v-for="(social, key) in form.socials">
+                                    <li v-for="(social, key) in company.socials">
                                         <div class="item">
                                             <div class="icon-box bg-primary">
                                                 <i :class="'fab fa-'+key"></i>
@@ -172,47 +189,32 @@
 
 <script>
 import Header from "../../LayoutComponents/Header";
-import Form from 'vform';
-import { ValidationHelper} from 'vue-step-wizard'
-import {required} from 'vuelidate/lib/validators';
+
 export default {
     name: "CompanyEditSection",
     components: {Header},
-    mixins: [ValidationHelper],
     props: {
-        company:{
+        company: {
             required: true
         }
     },
-    data: function(){
-        return{
-            form: new Form({
-                title: '',
-                description: '',
-                image: '',
-                position: '',
-                cashback_percent: 0,
-                cashback_percent_level_1: 0,
-                cashback_percent_level_2: 0,
-                callback_url: '',
-                upload_vk_url: '',
-                socials: []
-            }),
-            validationRules: [
-                {title: {required}}
-            ],
-        }
-    },
-    mounted(){
-        this.form=this.company
-    },
+
     methods: {
-       async updateSettings() {
-           axios.post('api/company/settings', this.form)
+        async updateSettings() {
+            axios.post('api/company/settings', this.company)
 
         },
         handleFile(event) {
-            this.form.image = event.target.files[0]
+            this.company.image = event.target.files[0]
+        },
+        SetNewSize(textarea) {
+            if (textarea.value.length > 5) {
+                textarea.cols = 50;
+                textarea.rows = 50;
+            } else {
+                textarea.cols = 10;
+                textarea.rows = 15;
+            }
         }
     }
 }

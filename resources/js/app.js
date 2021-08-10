@@ -8,7 +8,19 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import LoadScript from 'vue-plugin-load-script';
+
+Vue.use(LoadScript);
 import Fragment from 'vue-fragment'
+
+import VueLazyload from 'vue-lazyload'
+
+Vue.use(VueLazyload, {
+    preLoad: 1,
+    error: 'assets/logo-icon.png',
+    loading: 'assets/loading.gif',
+    attempt: 1
+})
 
 Vue.use(Fragment.Plugin)
 export const eventBus = new Vue()

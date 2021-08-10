@@ -17,6 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/base.js', 'public/js/base.js')
     .js('resources/js/landing/landing.js', 'public/js/landing.js')
     .js('resources/js/splide.min.js', 'public/js/splide.min.js')
+    .js('resources/js/carousel.js', 'public/js/carousel.js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/landingStyles/landing-app.scss', 'public/css');

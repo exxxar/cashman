@@ -41,12 +41,12 @@
 
                     </a>
                     <a href="#" class="item">
-                        <strong>{{ stories }}</strong>stories
+                        <strong>{{ stories.length }}</strong>stories
 
                     </a>
 
                     <a href="#" class="item">
-                        <strong >{{ news }}</strong>news
+                        <strong >{{ news.length }}</strong>news
 
                     </a>
                 </div>
@@ -178,7 +178,7 @@
                     <div v-if="isAdmin" class="tab-pane fade" id="settings" role="tabpanel">
                         <ul class="listview image-listview text flush transparent pt-1">
                             <li>
-                                <a href='/company-edit' class="item">
+                                <a :href="'/company-edit-'+company.id" class="item">
                                     <div class="in">
                                         <div class="text-danger">Настройки профиля компании</div>
                                     </div>
@@ -271,11 +271,11 @@ export default {
     },
     mounted() {
         document.querySelector('body').classList.add('bg-white');
-        console.log(typeof(this.company.socials))
-        console.log(this.company.properties)
-        console.log(typeof(this.company.properties))
+        console.log(this.news)
+        console.log(this.stories)
 
-    }
+    },
+
 }
 </script>
 

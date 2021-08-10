@@ -33,7 +33,8 @@
 <!-- Scripts -->
 <script type="text/javascript" src="{{ asset('js/app.js') }}" defer ></script>
 <script type="text/javascript" src="{{ asset('js/base.js') }}" defer></script>
-<script type="text/javascript" src="{{asset('js/splide.min.js')}}" defer></script>
+<script type="text/javascript" src="{{ asset('js/carousel.js') }}" defer></script>
+<script type="text/javascript" src="{{asset('js/splide.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined"
         crossorigin="anonymous"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

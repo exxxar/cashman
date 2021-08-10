@@ -14,6 +14,7 @@ class SearchCompanyController extends Controller
         $query = $request->query('query');
 
         $companies = Company::where('title', 'like', '%' . $query . '%')
+            ->select('id', 'title', 'image')
             ->get();
 
         //broadcast search results with Pusher channels

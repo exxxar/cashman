@@ -1,10 +1,10 @@
 <template>
     <div class="bill-box">
-        <img :src="'assets/sample/'+company.image" alt="image" class="imaged w-75">
+        <img v-lazy="'assets/sample/'+company.image" alt="image" class="image-block imaged w-75">
         <br>
         <br>
         <div class="text text-center right-button">
-            <h3>{{ company.title }}</h3>
+            <h3 class="title">{{ company.title }}</h3>
             <a @click="getMap" type="button" class="item btn btn-icon btn-primary pos-ab-right-5">
                 <ion-icon name="map-outline"></ion-icon>
             </a>

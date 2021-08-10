@@ -27,7 +27,7 @@ class CreateCompanyAdvertisingTable extends Migration
                 ->references('id')->on('users');
             $table->boolean('is_active');
             $table->json('images');
-            $table->enum('type', array('Сторис', 'Баннер'))->change();
+            $table->string('type');
             $table->timestamps();
         });
     }

@@ -12,6 +12,10 @@ class CompanyAdvertising extends Model
     protected $table = 'company_advertising';
     protected $fillable = ['title', 'description', 'company_id',
         'regularity', 'properties', 'creator_id', 'is_active', 'images', 'type'];
+    protected $casts = [
+        'properties' => 'array',
+        'images' => 'array'
+    ];
 
     public function company()
     {

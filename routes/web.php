@@ -107,7 +107,7 @@ Route::group(['middleware' => ['web']], function () {
             return view('pages/companyProfile/addCompanyAdvertising');
         });
         /* Страница редактирования данных о компании */
-        Route::get('/company-edit', [CompanyEditSectionController::class, 'index']);
+        Route::get('/company-edit-{id}', [CompanyEditSectionController::class, 'index']);
         /* Меню админа компании */
         Route::get('/company-admin-menu-{id}', function(){
             return view('pages/companyProfile/Admin/companyAdminMenuPage');

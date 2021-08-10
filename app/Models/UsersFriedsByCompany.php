@@ -9,7 +9,7 @@ class UsersFriedsByCompany extends Model
 {
     use HasFactory;
 
-    protected $table = 'users_friends_by_companies';
+    protected $table = 'users_frieds_by_companies';
     protected $fillable = ['user_id', 'company_id', 'parent_id'];
 
     public function user()
