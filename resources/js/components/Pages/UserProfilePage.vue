@@ -26,11 +26,11 @@
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
             <CashBackList></CashBackList>
-            <StoryList></StoryList>
+            <StoryList :stories="stories"></StoryList>
             <ProductTile></ProductTile>
-            <CompanyList :user="auth_user"></CompanyList>
+            <CompanyList :user="auth_user" :companies="companies"></CompanyList>
             <UserList :show-friends="true"></UserList>
-            <NewsList></NewsList>
+            <NewsList :items="news"></NewsList>
         </div>
         <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
@@ -65,6 +65,15 @@ export default {
     props:{
         auth_user:{
             default: null
+        },
+        companies:{
+            default: null
+        },
+        news:{
+            required: true
+        },
+        stories:{
+            required: true
         }
     },
 }

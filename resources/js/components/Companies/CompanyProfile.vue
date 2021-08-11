@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <StoryList :add-new="isAdmin"></StoryList>
+            <StoryList :add-new="isAdmin" :stories="stories"></StoryList>
             <br/>
             <div class="section full">
                 <div class="wide-block transparent p-0">
@@ -122,7 +122,7 @@
                     <div class="tab-pane fade show active" id="feed" role="tabpanel">
                         <div class="mt-2 pr-2 pl-2">
                             <div class="row">
-                                <div class="col-4 mb-2" v-for="item in companyItems">
+                                <div class="col-4 mb-2" v-for="item in news">
                                     <NewsItem :item="item"></NewsItem>
                                 </div>
 

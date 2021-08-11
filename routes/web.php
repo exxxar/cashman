@@ -47,9 +47,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages/products/ProductsPage');
     });
     /* Новости (рекламные банеры) */
-    Route::get('/news', function () {
-        return view('pages/userProfile/news/newsPage');
-    });
+    Route::get('/news', [NewsController::class, 'getNews']);
     Route::get('/news/{id}', [NewsController::class, 'getNewsItem']);
     /* Страница компаний */
     Route::get('/search-company', [CompanyListController::class, 'getSearchPage']);
@@ -109,9 +107,7 @@ Route::group(['middleware' => ['web']], function () {
         /* Страница редактирования данных о компании */
         Route::get('/company-edit-{id}', [CompanyEditSectionController::class, 'index']);
         /* Меню админа компании */
-        Route::get('/company-admin-menu-{id}', function(){
-            return view('pages/companyProfile/Admin/companyAdminMenuPage');
-        })->name('company-admin');
+        Route::get('/company-admin-menu-{id}', [CompanyActionMenuController::class, 'adminMenu'])->name('company-admin');
         /*CRUD продукты*/
         Route::get('/company-admin-products', [ProductController::class, 'index']);
         /*CRUD реклама*/

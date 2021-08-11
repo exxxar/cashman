@@ -20,7 +20,7 @@ class Company extends Model
     ];
     public function users()
     {
-        return $this->belongsToMany(User::class)->using(UserCompany::class);
+        return $this->belongsToMany(User::class)->using(CompanyUser::class);
     }
 
     public function group()

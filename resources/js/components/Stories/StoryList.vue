@@ -14,13 +14,13 @@
                         </a>
                     </li>
                     <li class="splide__slide" v-for="story in stories">
-                        <StoryItem :story=story></StoryItem>
+                        <StoryItem :story='story'></StoryItem>
                     </li>
                 </ul>
             </div>
         </div>
         <!-- * story-block -->
-        <StoryModal :story="currentStory"/>
+        <StoryModal :story="currentStory" />
     </div>
 </template>
 
@@ -36,48 +36,15 @@ export default {
         addNew: {
             default: false,
             type: Boolean
+        },
+        stories:{
+            required:true,
+
         }
     },
     data: function () {
         return {
-            stories: [
-                {
-                    avatar: "assets/sample/avatar/avatar1.jpg", image: "assets/sample/photo/1.jpg",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-                {
-                    avatar: "assets/sample/avatar/avatar2.jpg", image: "assets/sample/photo/2.jpg",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-                {
-                    avatar: "assets/sample/avatar/avatar3.jpg", image: "assets/sample/photo/vector3.png",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-                {
-                    avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-                {
-                    avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-                {
-                    avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-                {
-                    avatar: "assets/sample/avatar/avatar4.jpg", image: "assets/sample/photo/vector1.png",
-                    name: "Ashley Graham", created_at: "24.06.2021", title: "Another Title Here",
-                    description: "This is simple text for the story"
-                },
-            ],
-            currentStory: []
+            currentStory: [],
         }
     },
     mounted() {

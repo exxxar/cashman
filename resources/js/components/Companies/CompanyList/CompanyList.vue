@@ -29,41 +29,15 @@ import CompanyItem from "./CompanyItem";
 export default {
     name: "CompanyList",
     components: {CompanyItem},
-    data: function () {
-        return {
-            companies: []
-        }
-    },
     props:{
         user:{
             default: null
+        },
+        companies:{
+            type:Object,
         }
     },
-    methods:{
-        getList(){
-            if(this.user===null) {
-                axios.get('api/company/list')
-                    .then(response => {
-                        this.companies = response.data
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            }
-            else{
-                axios.get('api/company/list-'+this.user.id)
-                    .then(response => {
-                        this.companies = response.data
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            }
-        }
-    },
-    mounted() {
-        this.getList()
-    }
+
 
 
 }

@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <company-admin-menu></company-admin-menu>
+    <company-admin-menu :id ='{!! json_encode($id) !!}'></company-admin-menu>
 @endsection

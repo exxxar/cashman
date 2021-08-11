@@ -17,8 +17,8 @@
                 </h1>
                 <div class="blog-header-info mt-2 mb-2">
                     <div>
-                        <img :src="item.avatar" alt="img" class="imaged w24 rounded me-05">
-                        by {{ item.name }}
+                        <img :src="'./../assets/sample/'+company.image" alt="img" class="imaged w24 rounded me-05">
+                        by {{ company.title }}
                     </div>
                     <div>
                         {{ item.created_at }}
@@ -27,17 +27,10 @@
             </div>
             <div class="section mt-2">
                 <figure>
-                    <img :src="item.image" alt="image" class="imaged img-fluid">
+                    <img :src="'./../assets/sample/'+item.images.main" alt="image" class="imaged img-fluid">
                 </figure>
                 <p>
                     {{ item.description }}
-                </p>
-                <figure>
-                    <img v-if="item.image2" :src="item.image2" alt="image" class="imaged img-fluid">
-                </figure>
-                <h3 v-if="item.title2">{{ item.title2 }}</h3>
-                <p v-if="item.description2">
-                    {{ item.description2 }}
                 </p>
             </div>
             <div class="section">
@@ -73,33 +66,20 @@ export default {
         item: {
             type: Object,
             required: true
+        },
+        items:{
+            type: Object,
+            required: true
+        },
+        company:{
+            type: Object,
+            required: true
         }
     },
-    data: function () {
-        return {
-            items: [
-                {
-                    id: 1,
-                    image: "../assets/sample/photo/1.jpg",
-                    title: "What will be the value of bitcoin in the next..."
-                },
-                {
-                    id: 2,
-                    image: "../assets/sample/photo/2.jpg",
-                    title: "Rules you need to know in business"
-                },
-                {
-                    id: 3,
-                    image: "../assets/sample/photo/3.jpg",
-                    title: "10 easy ways to save your money"
-                },
-                {
-                    id: 4,
-                    image: "../assets/sample/photo/4.jpg",
-                    title: "10 easy ways to save your money"
-                }
-            ]
-        }
+    mounted(){
+        console.log(typeof (this.items))
+        console.log(this.items)
     }
+
 }
 </script>

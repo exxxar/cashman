@@ -23,14 +23,10 @@ import NewsItem from "./NewsItem";
 export default {
     name: "NewsList",
     components: {NewsItem},
-    data: function () {
-        return {
-            items: [
-                {id: 1, image: "assets/sample/photo/1.jpg", title: "What will be the value of bitcoin in the next..."},
-                {id: 2, image: "assets/sample/photo/2.jpg", title: "Rules you need to know in business"},
-                {id: 3, image: "assets/sample/photo/3.jpg", title: "10 easy ways to save your money"},
-                {id: 4, image: "assets/sample/photo/4.jpg", title: "10 easy ways to save your money"}
-            ]
+    props:{
+        items:{
+            type: Object,
+            required: true
         }
     }
 }

@@ -50,7 +50,7 @@ class User extends \TCG\Voyager\Models\User
 
     public function companies()
     {
-        return $this->belongsToMany(Company::class)->using(UserCompany::class);
+        return $this->belongsToMany(Company::class)->using(CompanyUser::class);
     }
 
     public function friends()

@@ -1,7 +1,7 @@
 <template>
     <a :href="'news/' + this.item.id">
         <div class="blog-card">
-            <img :src="item.image" alt="image" class="imaged w-100">
+            <img class="img imaged w-100 fill fixed-img-200-fill" v-lazy="'./../assets/sample/'+item.images.main" alt="image" >
             <div class="text">
                 <h4 class="title">{{ item.title }}</h4>
             </div>
@@ -20,3 +20,9 @@ export default {
     }
 }
 </script>
+<style>
+.fixed-img-200-fill{
+    object-fit: fill;
+    height: 250px;
+}
+</style>

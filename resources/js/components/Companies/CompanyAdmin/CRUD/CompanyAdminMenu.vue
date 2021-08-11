@@ -2,7 +2,7 @@
     <fragment>
         <Header>
             <template v-slot:left>
-                <a href="#" class="headerButton goBack">
+                <a :href="'/company-profile-'+ id" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
@@ -79,6 +79,12 @@ import BottomMenu from "../../../LayoutComponents/BottomMenu";
 export default {
     name: "CompanyAdminMenu",
     components: { BottomMenu, Header},
+    props:{
+        id:{
+            type:Number,
+            required: true
+        }
+    }
 
 }
 </script>

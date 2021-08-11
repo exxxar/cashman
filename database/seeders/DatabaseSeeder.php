@@ -21,7 +21,11 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionsTableSeeder::class);
         $this->call(GroupCompaniesTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
-        $this->call(CompanyAdvertisingTableSeeder::class);
+        $number = 0;
+        while($number<6) {
+            $this->call(CompanyAdvertisingTableSeeder::class);
+            $number++;
+        }
 
         Model::reguard();
     }

@@ -33,8 +33,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('company/list', [CompanyListController::class, 'index']);
-Route::get('company/list-{id}', [CompanyListController::class, 'userCompanies']);
 Route::get('companies', [SearchCompanyController::class, 'index']);
 Route::get('search', [SearchCompanyController::class, 'search']);
 

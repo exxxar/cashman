@@ -28,10 +28,10 @@
         <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule" class="full-height">
             <ActivityHistoryList></ActivityHistoryList>
-            <StoryList></StoryList>
+            <StoryList :stories="stories"></StoryList>
             <ProductTile></ProductTile>
-            <NewsList></NewsList>
-            <CompanyList></CompanyList>
+            <NewsList :items="news"></NewsList>
+            <CompanyList :companies="companies"></CompanyList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
         </div>
@@ -71,7 +71,16 @@ export default {
     props:{
         auth_user:{
             default: null
-        }
+        },
+        news:{
+            required: true
+        },
+        companies:{
+            required: true
+        },
+        stories:{
+            required: true
+        },
     },
 }
 </script>

@@ -3,11 +3,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="story-image">
-                    <img :src="story.image" alt="image">
+                    <img :src="'./../assets/sample/'+story.images.main" alt="image">
                 </div>
                 <div class="modal-header">
                     <a href="#" class="profile-detail">
-                        <img :src="story.avatar" alt="avatar"
+                        <img :src="'./../assets/sample/'+story.avatar" alt="avatar"
                              class="imaged w36 rounded me-1">
                         <div>
                             <h4>{{ story.name }}</h4>
@@ -18,9 +18,9 @@
                         <ion-icon name="close"></ion-icon>
                     </a>
                 </div>
-                <div class="modal-body">
-                    <h1>{{ story.title }}</h1>
-                    <p>{{ story.description }}</p>
+                <div class="modal-body flex-column justify-content-between padding-1-2-5-2">
+                    <h1 class="bg-dark">{{ story.title }}</h1>
+                    <p class="bg-dark">{{ story.description }}</p>
                     <a href="#" class="fixed-btn btn btn-primary">Button</a>
                 </div>
             </div>
@@ -39,3 +39,8 @@ export default {
     }
 }
 </script>
+<style>
+    .padding-1-2-5-2 {
+        padding: 1% 2% 5% 2% !important;
+    }
+</style>
