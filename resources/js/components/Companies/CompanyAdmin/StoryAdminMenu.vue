@@ -1,12 +1,12 @@
 <template>
 <fragment>
-    <Stepper></Stepper>
+    <Stepper :id="id"></Stepper>
     <div class="listview-title mt-2">Ваши истории</div>
     <ul class="listview image-listview inset">
         <li v-for="story in stories">
             <a href="#" class="item"  v-on:click="showStory(story)" data-bs-toggle="modal" data-component="stories"
                data-bs-target="#StoryDefault">
-                <img :src="story.image" alt="image" class="image">
+                <img :src="'./../assets/sample/'+story.images.main" alt="image" class="image">
                 <div class="in">
                     <div>{{story.title}}</div>
                 </div>
@@ -17,7 +17,7 @@
     <ul class="listview image-listview inset">
         <li v-for="item in news" >
             <a :href="'news/' + item.id" class="item">
-                <img :src="item.image" alt="image" class="image">
+                <img :src="'./../assets/sample/'+item.images.main" alt="image" class="image">
                 <div class="in">
                     <div>{{ item.title }}</div>
                 </div>
@@ -59,6 +59,10 @@ export default {
         },
         news:{
             type: Object,
+            required: true
+        },
+        id:{
+            type: Number,
             required: true
         }
     }

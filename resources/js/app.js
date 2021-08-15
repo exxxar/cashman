@@ -27,6 +27,12 @@ export const eventBus = new Vue()
 import VueRecord from '@codekraft-studio/vue-record'
 
 import store from './store/index'
+import moment from 'moment';
+
+Vue.filter('myDate', function(date){
+    moment.locale('ru');
+    return moment(date).format("LL");
+});
 
 
 Vue.use(VueRecord)

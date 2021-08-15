@@ -4,5 +4,6 @@
 @endsection
 
 @section('content')
-  <story-admin-menu :stories='{!! json_encode($stories) !!}' :news='{!! json_encode($news) !!}'></story-admin-menu>
+  <story-admin-menu :stories='{!! json_encode($stories) !!}' :news='{!! json_encode($news) !!}'
+                    :id = '{!! json_encode($id) !!}'></story-admin-menu>
 @endsection

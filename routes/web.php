@@ -14,6 +14,7 @@ use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Promocode\PromocodeController;
 use App\Http\Controllers\Region\RegionMapController;
 use App\Http\Controllers\Social\SocialController;
+use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\Users\UserProfileController;
 
 use Illuminate\Support\Facades\Auth;
@@ -101,25 +102,23 @@ Route::group(['middleware' => ['web']], function () {
         /* Профиль компании */
         Route::get('/company-profile-{id}', [CompanyProfileController::class, 'getCompanyData'])->name('company-profile');
         /* Страница добавления рекламы (Степер) */
-        Route::get('/add-advertising', function () {
-            return view('pages/companyProfile/addCompanyAdvertising');
-        });
+        Route::get('/add-advertising-{id}', [StoryController::class, 'getStepperPage']);
         /* Страница редактирования данных о компании */
         Route::get('/company-edit-{id}', [CompanyEditSectionController::class, 'index']);
         /* Меню админа компании */
         Route::get('/company-admin-menu-{id}', [CompanyActionMenuController::class, 'adminMenu'])->name('company-admin');
         /*CRUD продукты*/
-        Route::get('/company-admin-products', [ProductController::class, 'index']);
+        Route::get('/company-admin-products-{id}', [ProductController::class, 'index']);
         /*CRUD реклама*/
-        Route::get('/company-admin-advertisement', [AdvertisementController::class, 'index']);
+        Route::get('/company-admin-advertisement-{id}', [AdvertisementController::class, 'index']);
         /*Просмотр пользователей админом*/
-        Route::get('/company-admin-users', [UserController::class, 'index']);
+        Route::get('/company-admin-users-{id}', [UserController::class, 'index']);
         /*Страница историй админа*/
-        Route::get('/story-admin-menu', [AdvertisementController::class, 'getAdvertisement']);
+        Route::get('/story-admin-menu-{id}', [AdvertisementController::class, 'getAdvertisement']);
         /*Страница действий компании*/
-        Route::get('/company-action-menu', [CompanyActionMenuController::class, 'index']);
+        Route::get('/company-action-menu-{id}', [CompanyActionMenuController::class, 'index']);
         /*Страница списка администраторов компании*/
-        Route::get('/company-group-admin', function(){
+        Route::get('/company-group-admin-{id}', function(){
             return view('pages/companyProfile/Admin/CompanyGroupAdmin');
         });
         /*Страница добавления промокода*/

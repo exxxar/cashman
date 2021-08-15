@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Add Advertising
+                 Добавить рекламу
             </template>
         </Header>
         <br/>
@@ -38,17 +38,35 @@
                     </div>
                 </div>
             </tab-content>
-            <tab-content title="Изображение">
+            <tab-content title="Изображение и тип рекламы">
                 <div class="form-group">
                     <label class="control-label col-lg-1 text-semibold">Images</label>
-                    <vue-dropzone  ref="myVueDropzone" id="dropzone" name="image"
-                                   :class="hasError('image') ? 'is-invalid' : ''"
-                                   :options="dropzoneOptions"
-                     v-on:vdropzone-sending="handleFile"
-                     v-on:vdropzone-canceled="canceledFile"></vue-dropzone>
+                    <vue-dropzone
+                        ref="myVueDropzone"
+                        id="dropzone"
+                        :class="hasError('image') ? 'is-invalid' : ''"
+                        :options="dropzoneOptions"
+                        :useCustomSlot="true"
+                        v-on:vdropzone-success="uploadSuccess"
+                        v-on:vdropzone-removed-file="fileRemoved"
+                    >
+                        <div class="dropzone-custom-content">
+                            <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+                            <div class="subtitle">...or click to select a file from your computer</div>
+                        </div>
+                    </vue-dropzone>
                     <div v-if="hasError('image')" class="invalid-feedback">
                         <div class="error" v-if="!$v.formData.image.required">Добавьте изображение рекламы
                         </div>
+                    </div>
+                </div>
+                <div class="form-group basic">
+                    <div class="input-wrapper">
+                        <label class="label" for="select4">Выберите тип рекламы</label>
+                        <select class="form-control custom-select" id="select4" v-model="formData.type">
+                            <option value="Сторис">История</option>
+                            <option value="Баннер">Новость</option>
+                        </select>
                     </div>
                 </div>
             </tab-content>
@@ -106,49 +124,52 @@ export default {
             formData: {
                 title: '',
                 description: '',
-                image: '',
+                images: '',
+                type: 'Сторис',
                 terms: false
             },
             validationRules: [
                 {title: {required}, description: {required}},
-                { image:{required}},
+                { images:{required}},
                 {terms: {checked}}
             ],
             dropzoneOptions: {
                 url: 'api/add-story',
-                thumbnailWidth: 150,
-                maxFilesize: 0.5,
-                maxFiles: 1,
-                dictDefaultMessage: "<i class='fas fa-cloud-upload-alt'></i>UPLOAD ME"
+                acceptedFiles: ".png, .jpg, .jpeg",
+                addRemoveLinks: true,
+                maxFiles: 1
             }
+        }
+    },
+    props:{
+        id:{
+            required: true
         }
     },
 
     methods: {
         onComplete() {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
+            axios.post('api/admin/add-advertisement-'+this.id, this.formData)
+            .then(()=> {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+                swalWithBootstrapButtons.fire(
+                    'Поздравляем!',
+                    'Вы добавили новую рекламу своей компании',
+                    'success',
+                )
+                window.location.href = 'company-admin-menu-'+this.id
             })
-            swalWithBootstrapButtons.fire(
-                'Поздравляем!',
-                'Вы добавили новую рекламу своей компании',
-                'success'
-            )
-            this.$refs.formwizard.changeStatus();
-            window.location.href = 'company-profile';
         },
-
-        handleFile(file) {
-            this.formData.image = file;
-
+        uploadSuccess(file, response) {
+            this.formData.images = response.file;
         },
-        canceledFile() {
-            this.formData.image = null
-        }
+        fileRemoved() {}
     },
 
 }

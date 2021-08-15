@@ -35,16 +35,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('companies', [SearchCompanyController::class, 'index']);
 Route::get('search', [SearchCompanyController::class, 'search']);
-
+Route::post('files',  [CompanyEditSectionController::class, 'storeFile']);
 Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'sendTextMessage']);
 Route::post('send/voice-message', [CallbackController::class, 'sendVoiceMessage']);
-Route::post('add-story', [StoryController::class, 'addStory']);
+Route::post('add-story', [StoryController::class, 'addStoryFile']);
 
 Route::post('company/settings', [CompanyEditSectionController::class, 'updateCompanyData']);
 Route::post('user/settings', [UserProfileController::class, 'updateUserProfileData']);
 
 Route::APIresource('admin/products', ProductController::class);
 Route::resource('admin/advertisement', AdvertisementController::class);
+Route::get('admin/get/advertisement/{id}', [AdvertisementController::class, 'getData']);
+Route::post('admin/add-advertisement-{id}', [StoryController::class, 'store']);
 Route::resource('admin/users', UserController::class);
 

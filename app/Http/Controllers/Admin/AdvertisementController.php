@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\CompanyAdvertising;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
@@ -12,64 +14,26 @@ class AdvertisementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $advertisement = (object)[
-            ['id' => 1,
-                'title' => 'cheese',
-                'description' => 'best cheese',
-                'creator_id' => 'John Wild',
-                'images' => 'assets/sample/photo/3.jpg',
-                'type' => 'sale type'],
-            ['id' => 2,
-                'title' => 'cheese',
-                'description' => 'best cheese',
-                'creator_id' => 'John Wild',
-                'images' => 'assets/sample/photo/2.jpg',
-                'type' => 'sale type'],
-            ['id' => 3,
-                'title' => 'cheese',
-                'description' => 'best cheese',
-                'creator_id' => 'John Wild',
-                'images' => 'assets/sample/photo/1.jpg',
-                'type' => 'sale type'],
-            ['id' => 4,
-                'title' => 'cheese',
-                'description' => 'best cheese',
-                'creator_id' => 'John Wild',
-                'images' => 'assets/sample/photo/4.jpg',
-                'type' => 'sale type'],
-
-        ];
-        return view('pages/companyProfile/Admin/AdminAdvertisementPage', compact('advertisement'));
+        $advertisement = CompanyAdvertising::where('company_id', $id)->get();
+        return view('pages/companyProfile/Admin/AdminAdvertisementPage', compact('advertisement', 'id'));
+    }
+    public function getData($id)
+    {
+        return CompanyAdvertising::where('company_id', $id)->get();
     }
 
-    public function getAdvertisement()
-    {
-        $stories = (object)[
-            ['avatar' => "assets/sample/avatar/avatar1.jpg", 'image' => "assets/sample/photo/1.jpg",
-                'name' => "Ashley Graham", 'created_at' => "24.06.2021", 'title' => "Another Title Here",
-                'description' => "This is simple text for the story"],
-            ['avatar' => "assets/sample/avatar/avatar2.jpg", 'image' => "assets/sample/photo/1.jpg",
-                'name' => "Ashley Graham", 'created_at' => "24.06.2021", 'title' => "Another Title Here",
-                'description' => "This is simple text for the story"],
-            ['avatar' => "assets/sample/avatar/avatar3.jpg", 'image' => "assets/sample/photo/1.jpg",
-                'name' => "Ashley Graham", 'created_at' => "24.06.2021", 'title' => "Another Title Here",
-                'description' => "This is simple text for the story"],
-            ['avatar' => "assets/sample/avatar/avatar4.jpg", 'image' => "assets/sample/photo/1.jpg",
-                'name' => "Ashley Graham", 'created_at' => "24.06.2021", 'title' => "Another Title Here",
-                'description' => "This is simple text for the story"],
-        ];
-        $news = (object)[
-            ['id' => 1, 'image' => "assets/sample/photo/1.jpg", 'title' => "What will be the value of bitcoin in the next..."],
-            ['id' => 2, 'image' => "assets/sample/photo/1.jpg", 'title' => "What will be the value of bitcoin in the next..."],
-            ['id' => 3, 'image' => "assets/sample/photo/1.jpg", 'title' => "What will be the value of bitcoin in the next..."],
-            ['id' => 4, 'image' => "assets/sample/photo/1.jpg", 'title' => "What will be the value of bitcoin in the next..."],
 
-        ];
+    public function getAdvertisement($id)
+    {
+        $company = (object)Company::where('id', $id)->first();
+        $news = $company->advertising()->where('type', 'Баннер')->get();
+        $stories = $company->advertising()->where('type', 'Сторис')->get();
         return view('pages/companyProfile/Admin/StoryAdminMenu', [
-            'stories'=>$stories,
-            'news'=>$news
+            'stories' => $stories,
+            'news' => $news,
+            'id' => $id
         ]);
     }
 
@@ -80,7 +44,7 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -91,12 +55,7 @@ class AdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required|string',
-            'description' => 'required|string|max:255',
-            'type' => 'required|string',
-            'images' => 'required'
-        ]);
+        ;
     }
 
     /**
@@ -130,10 +89,21 @@ class AdvertisementController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $advertisement = CompanyAdvertising::find($id);
         $this->validate($request, [
             'title' => 'required|string',
-            'description' => 'required|string|max:255'
+            'description' => 'required|string',
+            'images' => 'required'
         ]);
+        $advertisement->title = $request->title;
+        $advertisement->description = $request->description;
+        if ($advertisement->images['main'] != $request->image) {
+            $advertisement->images = [
+                'main' => 'news/' . $request->images
+            ];
+        }
+        $advertisement->save();
+        return ['message'=>'record updated'];
     }
 
     /**
@@ -144,6 +114,8 @@ class AdvertisementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $advertisement= CompanyAdvertising::find($id);
+        $advertisement->delete();
+        return ['message'=>'record deleted'];
     }
 }

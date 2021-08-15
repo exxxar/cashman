@@ -21,7 +21,7 @@
                 <h4>Заполните данные о вашей компании</h4>
             </div>
             <div class="section mb-5 p-2">
-                <form @submit.prevent="updateSettings">
+                <form @submit.prevent="updateSettings" @keydown="company.onKeydown($event)">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group basic">
@@ -35,20 +35,19 @@
                                 </div>
                             </div>
                             <div class="form-group basic">
-                                <label class="label">Изменить логотип компании</label>
-                                <div class="custom-file-upload" id="fileUpload1">
-                                    <input name="file" type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg"
-                                           @change="handleFile">
-                                    <label for="fileuploadInput">
-                                <span>
-                                    <strong>
-                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
-                                        <i>Upload a Photo</i>
-                                    </strong>
-                                </span>
-                                    </label>
-                                </div>
-
+                                <vue-dropzone
+                                    ref="myVueDropzone"
+                                    id="dropzone"
+                                    :options="dropzoneOptions"
+                                    :useCustomSlot="true"
+                                    v-on:vdropzone-success="uploadSuccess"
+                                    v-on:vdropzone-removed-file="fileRemoved"
+                                >
+                                    <div class="dropzone-custom-content">
+                                        <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+                                        <div class="subtitle">...or click to select a file from your computer</div>
+                                    </div>
+                                </vue-dropzone>
                             </div>
 
 
@@ -99,17 +98,6 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="position">Позиция</label>
-                                    <input type="text" class="form-control" id="position"
-                                           placeholder="Позиция компании" v-model="company.position"
-                                           name="position">
-                                    <i class="clear-input">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </i>
-                                </div>
-                            </div>
-                            <div class="form-group basic">
-                                <div class="input-wrapper">
                                     <label class="label" for="callback">Ссылка для обратной связи</label>
                                     <input type="text" class="form-control" id="callback"
                                            placeholder="Ссылка для обратной связи" v-model="company.callback_url"
@@ -131,7 +119,11 @@
                                 </div>
                             </div>
                             <div class="form-group basic">
-                                <label class="label">Дополнительная информация</label>
+                                <label class="label">Дополнительная информация
+                                <button @click="addProperty" type="button" class="btn btn-icon btn-info me-1">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                </button>
+                                </label>
                                 <ul class="listview image-listview no-line no-space flush">
                                     <li v-for="(property, key) in company.properties">
                                         <div class="item flex-wrap flex-column d-flex">
@@ -140,13 +132,31 @@
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control"
                                                            :placeholder="key"
-                                                           :value="property">
+                                                            v-model="company.properties[key]">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>
                                                     </i>
                                                 </div>
                                             </div>
                                         </div>
+                                    </li>
+                                    <li v-for="input in inputs">
+                                        <div class="input-wrapper w-100" style="display: flex!important; margin: 10px 0!important;">
+                                            <input type="text" class="form-control"
+                                            placeholder="Вид информации"
+                                            v-model="type">
+                                            <i class="clear-input">
+                                                <ion-icon name="close-circle"></ion-icon>
+                                            </i>
+                                            <input type="text" class="form-control"
+                                                   :placeholder="input.placeholder"
+                                            :disabled="!newKey"
+                                            v-model="company.properties[type]">
+                                            <i class="clear-input">
+                                                <ion-icon name="close-circle"></ion-icon>
+                                            </i>
+                                        </div>
+
                                     </li>
                                 </ul>
                             </div>
@@ -162,7 +172,7 @@
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control" id="socials1"
                                                            :placeholder="'Ссылка на профиль в '+key"
-                                                           :value="social">
+                                                            v-model="company.socials[key]">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>
                                                     </i>
@@ -174,7 +184,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-button-group transparent">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">
                             Обновить
@@ -189,23 +198,49 @@
 
 <script>
 import Header from "../../LayoutComponents/Header";
-
+import vue2Dropzone from "vue2-dropzone";
+import "vue2-dropzone/dist/vue2Dropzone.min.css";
 export default {
     name: "CompanyEditSection",
-    components: {Header},
+    components: {Header, vueDropzone: vue2Dropzone},
     props: {
         company: {
             required: true
         }
     },
-
+    data(){
+        return{
+            inputs: [],
+            type: '',
+            dropzoneOptions: {
+                url: "api/files",
+                acceptedFiles: ".png, .jpg, .jpeg",
+                addRemoveLinks: true,
+                maxFiles: 1
+            }
+        }
+    },
+  computed:{
+        newKey(){
+            return this.type
+        }
+  },
     methods: {
-        async updateSettings() {
+
+        updateSettings() {
             axios.post('api/company/settings', this.company)
+            location.reload()
 
         },
-        handleFile(event) {
-            this.company.image = event.target.files[0]
+        addProperty() {
+            if(this.inputs.length>0) {
+                this.inputs.splice(this.inputs.length-1)
+                this.type = ''
+            }
+            this.inputs.push({
+                placeholder: 'Дополнительная информация '
+            })
+
         },
         SetNewSize(textarea) {
             if (textarea.value.length > 5) {
@@ -215,7 +250,12 @@ export default {
                 textarea.cols = 10;
                 textarea.rows = 15;
             }
-        }
+        },
+        uploadSuccess(file, response) {
+            this.company.image = response.file;
+        },
+
+        fileRemoved() {}
     }
 }
 </script>

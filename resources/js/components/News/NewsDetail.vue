@@ -21,7 +21,7 @@
                         by {{ company.title }}
                     </div>
                     <div>
-                        {{ item.created_at }}
+                        {{ item.created_at | myDate }}
                     </div>
                 </div>
             </div>

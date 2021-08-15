@@ -35,13 +35,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="advertisement in advertisements" :key="advertisement.id">
+                        <tr v-for="advertisement in paginatedData" :key="advertisement.id">
                             <td>{{ advertisement.id }}</td>
                             <td>{{ advertisement.title }}</td>
                             <td>{{ advertisement.description }}</td>
                             <td>{{ advertisement.creator_id }}</td>
                             <td>
-                                <img :src="advertisement.images" alt="image"
+                                <img :src="'./../assets/sample/'+advertisement.images.main" alt="image"
                                      class="imaged w100">
                             </td>
                             <td>{{ advertisement.type }}</td>
@@ -56,7 +56,7 @@
                                     </svg>
                                 </a>
                                 /
-                                <a href="#"  @click="deleteAdvertisement(advertisement.id)">
+                                <a href="#" @click="deleteAdvertisement(advertisement.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-trash" viewBox="0 0 16 16">
                                         <path
@@ -71,6 +71,25 @@
                     </table>
                 </div>
             </div>
+            <nav>
+                <ul class="pagination pagination-rounded">
+                    <li>
+                        <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
+                            Предыдущая
+                        </button>
+                    </li>
+                    <li class="disabled ">
+                        <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
+                            Страница {{ pageNumber + 1 }} из {{ pageCount }}
+                        </a>
+                    </li>
+                    <li>
+                        <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
+                            Следующая
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <AdvertisementModal :form="this.form"></AdvertisementModal>
     </fragment>
@@ -81,12 +100,15 @@ import Header from "../../../LayoutComponents/Header";
 import AdvertisementModal from "../../../Modals/CRUDModals/AdvertisementModal";
 import Form from "vform";
 
+
 export default {
     name: "AdvertisementTable",
     components: {AdvertisementModal, Header},
     props: {
         advertisements: {
-            type: Object,
+            required: true
+        },
+        id: {
             required: true
         }
     },
@@ -99,10 +121,13 @@ export default {
                 creator_id: '',
                 images: '',
                 type: ''
-            })
+            }),
+            pageNumber: 0,
+            size: 10,
+            currentId: 0
         }
     },
-    methods:{
+    methods: {
         editModal(record) {
             this.editmode = true;
 
@@ -138,7 +163,8 @@ export default {
                             'Выбранная запись была удалена',
                             'success'
                         )
-                        Fire.$emit('AfterCreate');
+                       // Fire.$emit('AfterCreate');
+                        location.reload();
                     })
                 } else if (
                     /* Read more about handling dismissals below */
@@ -155,27 +181,54 @@ export default {
                 swal("Ошибка", "Что-то пошло не так ):", "warning")
             });
         },
-        getStoryAdminMenu(){
-            window.location.href = 'story-admin-menu';
+        getStoryAdminMenu() {
+            window.location.href = 'story-admin-menu-' + this.id;
+        },
+
+        nextPage() {
+            this.pageNumber++;
+        },
+        prevPage() {
+            this.pageNumber--;
+        },
+
+
+        //loadRecords() {
+      //      axios.get('/company-admin-advertisement-' + this.id).then(({data}) => (this.advertisements = data.data));
+      //  },
+    },
+    computed: {
+        pageCount() {
+            let l = this.advertisements.length,
+                s = this.size;
+            return Math.ceil(l / s);
+        },
+        paginatedData() {
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            return this.advertisements.slice(start, end);
         }
+    },
 
-        // loadRecords() {
-        //    axios.get('api/admin/advertisement').then(({data}) => (this.advertisements = data.data));
-        // },
-    }
+   // created() {
+   //     Fire.$on('AfterCreate', () => {
+    //        this.loadRecords();
+   //     });
 
-    // created() {
-    //   this.loadRecords();
-    //   Fire.$on('AfterCreate', () => {
-    //      this.loadRecords();
-    //  });
-
-    // }
+  //  }
 
 }
 
 </script>
 
 <style scoped>
+.pagination {
+    justify-content: center;
+}
+
+.page-link {
+    background: #6236FF !important;
+    color: #fff !important;
+}
 
 </style>

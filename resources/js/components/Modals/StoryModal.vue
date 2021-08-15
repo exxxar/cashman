@@ -11,7 +11,7 @@
                              class="imaged w36 rounded me-1">
                         <div>
                             <h4>{{ story.name }}</h4>
-                            <span class="text-muted">{{ story.created_at }}</span>
+                            <span class="text-muted">{{ story.created_at | myDate}}</span>
                         </div>
                     </a>
                     <a href="#" data-bs-dismiss="modal">

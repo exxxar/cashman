@@ -65,6 +65,10 @@
                         </div>
                         <h3 v-if="typeof(company.properties.address)==='string' && company.properties.address">Наш адрес:</h3>
                         <h4 v-if="typeof(company.properties.address)==='string' && company.properties.address">{{company.properties.address}}</h4>
+                        <div v-for="(property, key) in company.properties">
+                            <h4 v-if="key !== 'address' && key !== 'time'"> {{property}}</h4>
+
+                        </div>
                     </div>
                     <div class="link" v-if="company.socials">
                         <h3>Социальные сети</h3>

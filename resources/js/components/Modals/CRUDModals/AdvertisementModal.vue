@@ -24,28 +24,21 @@
 
                         <div class="form-group">
                             <label>Изображение рекламы</label>
-                            <div class="custom-file-upload" id="fileUpload1">
-                                <img :src="form.images" alt="image" class="imaged"
-                                     style="width:inherit">
-                                <input name="file" type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg"
-                                       @change="handleFile">
-                                <label for="fileuploadInput">
-
-                                <span>
-                                    <strong>
-                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
-                                        <i>Upload a Photo</i>
-                                    </strong>
-                                </span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Тип рекламы</label>
-                            <input v-model="form.type" type="text" name="type"
-                                   placeholder="Тип рекламы"
-                                   class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
-                            <HasError :form="form" field="type"></HasError>
+                            <vue-dropzone
+                                ref="myVueDropzone"
+                                id="dropzone"
+                                :class="{ 'is-invalid': form.errors.has('images') }"
+                                :options="dropzoneOptions"
+                                :useCustomSlot="true"
+                                v-on:vdropzone-success="uploadSuccess"
+                                v-on:vdropzone-removed-file="fileRemoved"
+                            >
+                                <div class="dropzone-custom-content">
+                                    <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+                                    <div class="subtitle">...or click to select a file from your computer</div>
+                                </div>
+                            </vue-dropzone>
+                            <HasError :form="form" field="images"></HasError>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -60,36 +53,57 @@
 
 <script>
 import {HasError} from "vform/src/components/bootstrap5"
-
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
     name: "AdvertisementModal",
-    components: {HasError},
+    components: {HasError, vueDropzone: vue2Dropzone},
     props: {
         form: {
             required: true
         }
     },
+    data(){
+        return{
+            dropzoneOptions: {
+                url: 'api/add-story',
+                acceptedFiles: ".png, .jpg, .jpeg",
+                addRemoveLinks: true,
+                maxFiles: 1
+            }
+        }
+    },
     methods: {
 
-        handleFile(event) {
-            this.form.images = event.target.files[0]
+        uploadSuccess(file, response) {
+            this.form.images = response.file;
         },
-        createAdvertisement() {
-            this.form.post('api/admin/advertisement')
-                .then(() => {
-                    Fire.$emit('AfterCreate');
-
+        fileRemoved() {},
+        updateAdvertisement(){
+            console.log(this.form);
+            axios.put('api/admin/advertisement/'+this.form.id, this.form)
+                .then(()=>{
                     $('#AddNew').modal('hide');
-
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Запись успешно добавлена'
-                    });
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire(
+                        'Обновлено',
+                        'Выбранная запись была обновлена',
+                        'success'
+                    )
+                   // Fire.$emit('AfterCreate');
+                    location.reload();
                 })
-                .catch(() => {
+                .catch(()=>{
 
-                })
+                });
         },
+
     }
 }
 </script>

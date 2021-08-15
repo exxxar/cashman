@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-   <ad-list></ad-list>
+   <ad-list :id='{!! json_encode($id) !!}'></ad-list>
 @endsection

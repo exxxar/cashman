@@ -21,19 +21,31 @@ class CompanyAuthController extends Controller
             'title' => ['required', 'string'],
             'domain' => ['required', 'string', 'unique:companies'],
             'image' => ['required'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
             'position' => ['required', 'string'],
             'confirmed' => ['accepted']
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = md5(time() . $image->getClientOriginalName() . Auth::user()->getAuthIdentifier());
-            $image->move(public_path('companiesLogo'), $imagename);
+            $image->move(public_path('assets/sample/companyLogos'), $imagename);
             $company = Company::create(['title' => $request->title,
-                'domain' => $request->domain, 'image' => '/companiesLogo/' . $imagename,
+                'domain' => $request->domain, 'image' => 'companyLogos/' . $imagename,
                 'description' => $request->description,
                 'company_group_id' => 1, 'position' => $request->position,
-                'creator_id' => Auth::user()->getAuthIdentifier()]);
+                'creator_id' => Auth::user()->getAuthIdentifier(),
+                'socials'=>[
+                    'vk'=>'',
+                    'telegram'=>'',
+                    'instagram'=>'',
+                    'facebook'=>'',
+                    'youtube'=>'',
+                ],
+                'properties'=>[
+                    'time'=>'',
+                    'address'=>''
+                ]
+            ]);
 
             $result['href'] = route('user-qr', ['user' => $company->creator_id, 'company' => $company->id]);
             return response()->json($result);
