@@ -126,7 +126,7 @@
                     <div class="tab-pane fade show active" id="feed" role="tabpanel">
                         <div class="mt-2 pr-2 pl-2">
                             <div class="row">
-                                <div class="col-4 mb-2" v-for="item in news">
+                                <div class="col-4 mb-2" v-for="item in paginatedData">
                                     <NewsItem :item="item"></NewsItem>
                                 </div>
 
@@ -135,14 +135,16 @@
 
                         <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
                             <div class="col-6">
-                                <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block">Больше новостей</a>
+                                <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block"
+                                   @click="increaseSize">Больше новостей</a>
                             </div>
                             <div class="col-6">
                                 <a :href="'/add-advertising'" class="btn btn-lg btn-primary btn-block">Добавить новость</a>
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
-                            <a href="#" class="btn btn-primary btn-lg btn-block">Больше новостей</a>
+                            <a href="#" class="btn btn-primary btn-lg btn-block" @click="increaseSize"
+                            :disabled="!isMore">Больше новостей</a>
                         </div>
                     </div>
                     <!-- * feed -->
@@ -248,14 +250,6 @@ export default {
 
     data: function () {
         return {
-            companyItems: [
-                {id: 1, image: "assets/sample/photo/1.jpg", title: "What will be the value of bitcoin in the next..."},
-                {id: 2, image: "assets/sample/photo/2.jpg", title: "Rules you need to know in business"},
-                {id: 3, image: "assets/sample/photo/3.jpg", title: "10 easy ways to save your money"},
-                {id: 4, image: "assets/sample/photo/4.jpg", title: "10 easy ways to save your money"},
-                {id: 5, image: "assets/sample/photo/2.jpg", title: "Rules you need to know in business"},
-                {id: 6, image: "assets/sample/photo/3.jpg", title: "Rules you need to know in business"},
-            ],
             companyUsers: [
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
@@ -271,14 +265,30 @@ export default {
                 {image: "assets/sample/brand/1.jpg", price: 140, description: "Music Monthly Subscription"},
                 {image: "assets/sample/brand/3.jpg", price: 1400, description: "Music Monthly Subscription"},
             ],
+            pageNumber: 0,
+            size: 3
         }
     },
     mounted() {
         document.querySelector('body').classList.add('bg-white');
-        console.log(this.news)
-        console.log(this.stories)
 
     },
+    computed: {
+
+        paginatedData() {
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            if(this.news.length>this.size) {
+                return this.news.slice(start, end);
+            }
+            return this.news
+        }
+    },
+    methods:{
+        increaseSize(){
+            this.size+=this.size
+        }
+    }
 
 }
 </script>

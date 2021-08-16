@@ -100,20 +100,17 @@ import Header from "../../../LayoutComponents/Header";
 import AdvertisementModal from "../../../Modals/CRUDModals/AdvertisementModal";
 import Form from "vform";
 
-
 export default {
     name: "AdvertisementTable",
     components: {AdvertisementModal, Header},
     props: {
-        advertisements: {
-            required: true
-        },
         id: {
             required: true
         }
     },
     data: function () {
         return {
+            advertisements: [],
             form: new Form({
                 id: '',
                 title: '',
@@ -123,14 +120,13 @@ export default {
                 type: ''
             }),
             pageNumber: 0,
-            size: 10,
-            currentId: 0
+            size: 3,
+
         }
     },
     methods: {
         editModal(record) {
             this.editmode = true;
-
             this.form.reset();
             $('#AddNew').modal('show');
             this.form.fill(record);
@@ -163,8 +159,8 @@ export default {
                             'Выбранная запись была удалена',
                             'success'
                         )
-                       // Fire.$emit('AfterCreate');
-                        location.reload();
+                        Fire.$emit('AfterCreate');
+                        //location.reload();
                     })
                 } else if (
                     /* Read more about handling dismissals below */
@@ -184,18 +180,22 @@ export default {
         getStoryAdminMenu() {
             window.location.href = 'story-admin-menu-' + this.id;
         },
-
+        loadRecords() {
+          axios.get('api/get/advertisement/' + this.id).then((response) => (this.advertisements = response.data.advertisements));
+        },
         nextPage() {
             this.pageNumber++;
         },
         prevPage() {
             this.pageNumber--;
         },
+    },
 
-
-        //loadRecords() {
-      //      axios.get('/company-admin-advertisement-' + this.id).then(({data}) => (this.advertisements = data.data));
-      //  },
+    mounted() {
+        this.loadRecords();
+       Fire.$on('AfterCreate', () => {
+           this.loadRecords();
+        });
     },
     computed: {
         pageCount() {
@@ -209,16 +209,7 @@ export default {
             return this.advertisements.slice(start, end);
         }
     },
-
-   // created() {
-   //     Fire.$on('AfterCreate', () => {
-    //        this.loadRecords();
-   //     });
-
-  //  }
-
 }
-
 </script>
 
 <style scoped>

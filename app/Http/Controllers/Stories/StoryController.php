@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyAdvertising;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class StoryController extends Controller
 {
@@ -16,6 +17,14 @@ class StoryController extends Controller
 
         return response()->json(['file' => $fileName]);
     }
+    public function getData($id)
+    {
+        return response()->json([
+            'advertisements' => CompanyAdvertising::where('company_id', $id)->get(),
+        ], Response::HTTP_OK);
+
+    }
+
     public function getStepperPage($id){
         return view('pages/companyProfile/addCompanyAdvertising', compact('id'));
     }

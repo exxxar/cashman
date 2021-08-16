@@ -24,10 +24,11 @@
 
                         <div class="form-group">
                             <label>Изображение рекламы</label>
+                            <img :src="'./../assets/sample/'+form.images.main" alt="image"
+                                 class="imaged w100">
                             <vue-dropzone
                                 ref="myVueDropzone"
                                 id="dropzone"
-                                :class="{ 'is-invalid': form.errors.has('images') }"
                                 :options="dropzoneOptions"
                                 :useCustomSlot="true"
                                 v-on:vdropzone-success="uploadSuccess"
@@ -38,11 +39,10 @@
                                     <div class="subtitle">...or click to select a file from your computer</div>
                                 </div>
                             </vue-dropzone>
-                            <HasError :form="form" field="images"></HasError>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="filesRemove">Закрыть</button>
                         <button type="submit" class="btn btn-success">Обновить</button>
                     </div>
                 </form>
@@ -70,20 +70,31 @@ export default {
                 acceptedFiles: ".png, .jpg, .jpeg",
                 addRemoveLinks: true,
                 maxFiles: 1
-            }
+            },
+            newImage: ''
         }
     },
     methods: {
 
         uploadSuccess(file, response) {
-            this.form.images = response.file;
+            this.newImage = 'news/' + response.file;
         },
-        fileRemoved() {},
-        updateAdvertisement(){
-            console.log(this.form);
-            axios.put('api/admin/advertisement/'+this.form.id, this.form)
-                .then(()=>{
-                    $('#AddNew').modal('hide');
+        fileRemoved() {
+            this.newImage = ''
+        },
+        filesRemove(){
+            this.$refs.myVueDropzone.removeAllFiles()
+        },
+        updateAdvertisement() {
+            if (this.newImage !== '') {
+                this.form.images.main = this.newImage
+                this.filesRemove()
+
+            }
+            axios.put('api/admin/advertisement/' + this.form.id, this.form)
+                .then(() => {
+                    $('#AddNew').modal('hide')
+
                     const swalWithBootstrapButtons = Swal.mixin({
                         customClass: {
                             confirmButton: 'btn btn-success',
@@ -96,14 +107,12 @@ export default {
                         'Выбранная запись была обновлена',
                         'success'
                     )
-                   // Fire.$emit('AfterCreate');
-                    location.reload();
+                    Fire.$emit('AfterCreate');
                 })
-                .catch(()=>{
+                .catch(() => {
 
                 });
         },
-
     }
 }
 </script>

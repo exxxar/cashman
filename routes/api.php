@@ -46,7 +46,7 @@ Route::post('user/settings', [UserProfileController::class, 'updateUserProfileDa
 
 Route::APIresource('admin/products', ProductController::class);
 Route::resource('admin/advertisement', AdvertisementController::class);
-Route::get('admin/get/advertisement/{id}', [AdvertisementController::class, 'getData']);
+Route::get('get/advertisement/{id}', [StoryController::class, 'getData']);
 Route::post('admin/add-advertisement-{id}', [StoryController::class, 'store']);
 Route::resource('admin/users', UserController::class);
 

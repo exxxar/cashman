@@ -16,14 +16,8 @@ class AdvertisementController extends Controller
      */
     public function index($id)
     {
-        $advertisement = CompanyAdvertising::where('company_id', $id)->get();
-        return view('pages/companyProfile/Admin/AdminAdvertisementPage', compact('advertisement', 'id'));
+        return view('pages/companyProfile/Admin/AdminAdvertisementPage', compact( 'id'));
     }
-    public function getData($id)
-    {
-        return CompanyAdvertising::where('company_id', $id)->get();
-    }
-
 
     public function getAdvertisement($id)
     {
@@ -97,9 +91,9 @@ class AdvertisementController extends Controller
         ]);
         $advertisement->title = $request->title;
         $advertisement->description = $request->description;
-        if ($advertisement->images['main'] != $request->image) {
+        if ($advertisement->images['main'] != $request->images['main']) {
             $advertisement->images = [
-                'main' => 'news/' . $request->images
+                'main' => $request->images['main']
             ];
         }
         $advertisement->save();

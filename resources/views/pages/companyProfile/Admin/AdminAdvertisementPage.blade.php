@@ -4,6 +4,5 @@
 @endsection
 
 @section('content')
-    <company-admin-advertisement :advertisements = '{!! json_encode($advertisement) !!}'
-                                 :id = '{!! json_encode($id) !!}'></company-admin-advertisement>
+    <company-admin-advertisement :id = '{!! json_encode($id) !!}'></company-admin-advertisement>
 @endsection
