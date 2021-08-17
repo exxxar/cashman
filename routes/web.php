@@ -92,6 +92,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/register-company', function () {
             return view('auth/companyAuth/RegistrationCompanyPage');
         });
+        Route::get('/register-complete-company-{id}', [CompanyAuthController::class, 'completeRegistration'])->name('completeCompanyRegistration');
         Route::post('/register-company', [CompanyAuthController::class, 'register']);
         Route::post('/login-company', [CompanyAuthController::class, 'login']);
         /* Авторизация компании */

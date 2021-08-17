@@ -17,12 +17,14 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('domain')->unique();
+            $table->string('password');
             $table->integer('cashback_percent_level_1')->nullable();
             $table->integer('cashback_percent_level_2')->nullable();
             $table->integer('cashback_percent')->nullable();
             $table->text('description');
             $table->string('image');
             $table->string('position')->nullable();
+            $table->string('personal_rating')->nullable();
             $table->bigInteger('company_group_id')->unsigned()->nullable();
             $table->foreign('company_group_id')
                 ->references('id')->on('group_companies');

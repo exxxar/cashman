@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
                 ->references('id')->on('companies');
             $table->string('title');
             $table->text('description');
+            $table->json('images');
             $table->float('price');
             $table->float('discount_price');
             $table->string('type');

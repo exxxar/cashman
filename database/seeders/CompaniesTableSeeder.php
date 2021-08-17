@@ -105,6 +105,7 @@ class CompaniesTableSeeder extends Seeder
             Company::create([
                 'title' => $company['title'],
                 'domain' => $company['domain'],
+                'password'=>md5('12345678'),
                 'cashback_percent' => $company['cashback_percent'],
                 'cashback_percent_level_1' => $company['cashback_percent_level_1'],
                 'cashback_percent_level_2' => $company['cashback_percent_level_2'],

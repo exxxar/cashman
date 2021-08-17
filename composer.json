@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jackmartin/laravel-yandex-geocode": "^1.2",
         "laravel/framework": "^8.40",
         "laravel/scout": "^9.2",
         "laravel/socialite": "^5.2",
@@ -27,7 +28,8 @@
         "socialiteproviders/vkontakte": "^4.2",
         "socialiteproviders/yandex": "^4.1",
         "socialiteproviders/zoho": "^4.1",
-        "tcg/voyager": "^1.4"
+        "tcg/voyager": "^1.4",
+      "ext-curl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

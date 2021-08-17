@@ -96,7 +96,7 @@ Vue.component('add-promocode', require('./components/Companies/CompanyAdmin/CRUD
 //Company Authentication
 Vue.component('company-register-component', require('./components/Companies/CompanyAuth/CompanyRegisterSection').default);
 Vue.component('company-login-component', require('./components/Companies/CompanyAuth/CompanyLoginSection').default);
-
+Vue.component('company-complete-registration', require('./components/Companies/CompanyAuth/CompanyRegisterStepper').default);
 //Products
 Vue.component('products', require('./components/Products/ProductList').default);
 

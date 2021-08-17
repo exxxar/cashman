@@ -20,37 +20,45 @@ class CompanyAuthController extends Controller
         $this->validate($request, [
             'title' => ['required', 'string'],
             'domain' => ['required', 'string', 'unique:companies'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'image' => ['required'],
             'description' => ['required', 'string'],
             'position' => ['required', 'string'],
             'confirmed' => ['accepted']
         ]);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagename = md5(time() . $image->getClientOriginalName() . Auth::user()->getAuthIdentifier());
-            $image->move(public_path('assets/sample/companyLogos'), $imagename);
-            $company = Company::create(['title' => $request->title,
-                'domain' => $request->domain, 'image' => 'companyLogos/' . $imagename,
-                'description' => $request->description,
-                'company_group_id' => 1, 'position' => $request->position,
-                'creator_id' => Auth::user()->getAuthIdentifier(),
-                'socials'=>[
-                    'vk'=>'',
-                    'telegram'=>'',
-                    'instagram'=>'',
-                    'facebook'=>'',
-                    'youtube'=>'',
-                ],
-                'properties'=>[
-                    'time'=>'',
-                    'address'=>''
-                ]
-            ]);
+        $address = $request->position;
+        $ch = curl_init('https://geocode-maps.yandex.ru/1.x/?apikey=865b6aaf-1477-4185-ac17-c503079aa759&format=json&geocode=' . urlencode($address));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        $res = json_decode($res, true);
+        $coordinates = $res['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos'];
+        $coordinates = explode(' ', $coordinates);
 
-            $result['href'] = route('user-qr', ['user' => $company->creator_id, 'company' => $company->id]);
-            return response()->json($result);
-        }
+        $company = Company::create(['title' => $request->title,
+            'domain' => $request->domain,
+            'password' => md5($request->password),
+            'image' => 'companyLogos/' . $request->image,
+            'description' => $request->description,
+            'company_group_id' => 1, 'position' => json_encode([(float)$coordinates[1], (float)$coordinates[0]]),
+            'creator_id' => Auth::user()->getAuthIdentifier(),
+            'socials' => [
+                'vk' => '',
+                'telegram' => '',
+                'instagram' => '',
+                'facebook' => '',
+                'youtube' => '',
+            ],
+            'properties' => [
+                'time' => '',
+                'address' => ''
+            ]
+        ]);
 
+        $result['href'] = route('company-profile', ['id' => $company->id]);
+        return response()->json($result);
 
     }
 
@@ -63,11 +71,20 @@ class CompanyAuthController extends Controller
         $result = [];
         $this->validate($request, [
             'domain' => ['required', 'string', 'exists:companies'],
+            'password' => ['required', 'string']
         ]);
         $company = Company::where('domain', $request->domain)->first();
-        $result['href'] = route('user-qr', ['user' => Auth::user()->getAuthIdentifier(), 'company' => $company->id]);
+        if ($company->password == md5($request->password)) {
+            $result['href'] = route('completeCompanyRegistration', ['id' => $company->id]);
+            return response()->json($result);
+        }
+        $result['error'] = 'Ошибка при вводе домена компании или пароля!';
         return response()->json($result);
 
+    }
 
+    public function completeRegistration($id){
+        $company = Company::find($id);
+        return view('auth/companyAuth/RegisterCompanyStepper', compact('company'));
     }
 }
