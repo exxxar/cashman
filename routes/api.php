@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Callback\CallbackController;
-use App\Http\Controllers\Callback\VoiceCallbackController;
 use App\Http\Controllers\Companies\CompanyAuthController;
 use App\Http\Controllers\Companies\CompanyEditSectionController;
 use App\Http\Controllers\Companies\CompanyListController;
@@ -40,13 +39,17 @@ Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'sendTextMessage']);
 Route::post('send/voice-message', [CallbackController::class, 'sendVoiceMessage']);
 Route::post('add-story', [StoryController::class, 'addStoryFile']);
+Route::post('add-product-image', [ProductController::class, 'addProductFile']);
 
 Route::post('company/settings', [CompanyEditSectionController::class, 'updateCompanyData']);
 Route::post('user/settings', [UserProfileController::class, 'updateUserProfileData']);
 
-Route::APIresource('admin/products', ProductController::class);
+Route::resource('admin/products', ProductController::class);
+Route::get('admin/get/products/{id}', [\App\Http\Controllers\Products\ProductController::class, 'getProducts']);
 Route::resource('admin/advertisement', AdvertisementController::class);
 Route::get('get/advertisement/{id}', [StoryController::class, 'getData']);
 Route::post('admin/add-advertisement-{id}', [StoryController::class, 'store']);
 Route::resource('admin/users', UserController::class);
+
+Route::get('upload/products/{id}', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts']);
 

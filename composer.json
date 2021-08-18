@@ -9,9 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-curl": "*",
         "ext-json": "*",
+        "atehnix/vk-client": "^1.4",
+        "bensampo/laravel-enum": "^3.4",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "geoip2/geoip2": "^2.11",
         "guzzlehttp/guzzle": "^7.0.1",
         "jackmartin/laravel-yandex-geocode": "^1.2",
         "laravel/framework": "^8.40",
@@ -29,7 +33,7 @@
         "socialiteproviders/yandex": "^4.1",
         "socialiteproviders/zoho": "^4.1",
         "tcg/voyager": "^1.4",
-      "ext-curl": "*"
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

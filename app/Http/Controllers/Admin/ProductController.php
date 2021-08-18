@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,36 +13,17 @@ class ProductController extends Controller
      *
      * @return false|object|string
      */
-    public function index()
+    public function index($id)
     {
-        $products =(object)[
-            ['id'=>1,
-            'title'=>'cheese',
-            'description'=>'best cheese',
-            'price'=>300,
-            'discount_price'=>200,
-            'type'=>'sale type'],
-            ['id'=>2,
-                'title'=>'cheese',
-                'description'=>'best cheese',
-                'price'=>300,
-                'discount_price'=>200,
-                'type'=>'sale type'],
-            ['id'=>3,
-                'title'=>'cheese',
-                'description'=>'best cheese',
-                'price'=>300,
-                'discount_price'=>200,
-                'type'=>'sale type'],
-            ['id'=>4,
-                'title'=>'cheese',
-                'description'=>'best cheese',
-                'price'=>300,
-                'discount_price'=>200,
-                'type'=>'sale type'],
+        return view('pages/companyProfile/Admin/AdminProductsPage', compact('id'));
+    }
 
-        ];
-        return view('pages/companyProfile/Admin/AdminProductsPage', compact('products'));
+    public function addProductFile(Request $request)
+    {
+        $fileName = time() . '.' . $request->file->getClientOriginalExtension();
+        $request->file->move(public_path('assets/sample/products'), $fileName);
+
+        return response()->json(['file' => $fileName]);
     }
 
     /**
@@ -65,9 +47,19 @@ class ProductController extends Controller
         $this->validate($request,[
             'title'=> 'required|string',
             'description'=>'required|string|max:255',
+            'image'=>'required',
             'type'=>'required|string',
             'price'=>'required',
             'discount_price'=>'required',
+        ]);
+        return Product::create([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'company_id'=>$request->id,
+            'image'=>$request->image,
+            'price'=>$request->price,
+            'discount_price'=>$request->discount_price,
+            'type'=>$request->type
         ]);
     }
 
@@ -102,13 +94,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $product = Product::find($id);
         $this->validate($request,[
             'title'=> 'required|string',
             'description'=>'required|string|max:255',
+            'image'=>'required',
             'type'=>'required|string',
             'price'=>'required',
             'discount_price'=>'required',
         ]);
+        $product->title = $request->title;
+        $product->description = $request->description;
+        if ($product->image != $request->image) {
+            $product->image = $request->image;
+        }
+        $product->type = $request->type;
+        $product->price = $request->price;
+        $product->discount_price = $request->discount_price;
+        $product->save();
+        return ['message'=>'record updated'];
     }
 
     /**
@@ -119,6 +123,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product= Product::find($id);
+        $product->delete();
+        return ['message'=>'record deleted'];
     }
 }

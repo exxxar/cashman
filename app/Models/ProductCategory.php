@@ -13,6 +13,6 @@ class ProductCategory extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->using(ProductsInCategories::class);
+        return $this->belongsToMany(Product::class, 'products_in_categories');
     }
 }

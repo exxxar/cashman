@@ -11,7 +11,8 @@ class RegionMapController extends Controller
     public function getMap($id)
     {
         $company = Company::where('id', $id)->first();
-        $coords = $company['position'];
+        $position = json_decode($company['position']);
+        $coords = [(float)$position->lat, (float)$position->lon];
         return view('pages/companies/regionMapPage', compact('coords'));
     }
 }

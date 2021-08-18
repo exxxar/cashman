@@ -228,8 +228,16 @@ export default {
     methods: {
 
         updateSettings() {
-            axios.post('api/company/settings', this.company)
-            location.reload()
+            axios.post('api/company/settings', this.company).then (function (response) {
+                if (response.data.href !== undefined) {
+                    location.href = response.data.href
+                } else {
+                    //location.reload(true);
+                }
+
+            })
+                .catch(function (error) {
+                    console.log(error);});
 
         },
         addProperty() {

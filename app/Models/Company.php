@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Company extends Model
 {
@@ -12,13 +13,14 @@ class Company extends Model
 
     protected $table = 'companies';
     protected $fillable = ['title', 'domain', 'password', 'cashback_percent', 'cashback_percent_level_1',
-           'cashback_percent_level_2', 'description', 'personal_rating',
-           'image', 'position', 'company_group_id', 'properties', 'callback_url',
-           'socials', 'is_active', 'upload_vk_url', 'creator_id'];
+        'cashback_percent_level_2', 'description', 'personal_rating',
+        'image', 'position', 'company_group_id', 'properties', 'callback_url',
+        'socials', 'is_active', 'upload_vk_url', 'creator_id'];
     protected $casts = [
         'socials' => 'array',
         'properties' => 'array',
     ];
+
     public function users()
     {
         return $this->belongsToMany(User::class)->using(CompanyUser::class);
@@ -43,6 +45,7 @@ class Company extends Model
     {
         return $this->HasMany(CompanyAlert::class);
     }
+
     public function friendsByCompany()
     {
         return $this->HasMany(UsersFriedsByCompany::class);
@@ -77,4 +80,5 @@ class Company extends Model
     {
         return $this->HasMany(FinanceHistory::class);
     }
+
 }

@@ -42,7 +42,7 @@ class CompanyAuthController extends Controller
             'password' => md5($request->password),
             'image' => 'companyLogos/' . $request->image,
             'description' => $request->description,
-            'company_group_id' => 1, 'position' => json_encode([(float)$coordinates[1], (float)$coordinates[0]]),
+            'company_group_id' => 1, 'position' => json_encode(['lon'=>(float)$coordinates[1], 'lat'=> (float)$coordinates[0]]),
             'creator_id' => Auth::user()->getAuthIdentifier(),
             'socials' => [
                 'vk' => '',
@@ -57,7 +57,7 @@ class CompanyAuthController extends Controller
             ]
         ]);
 
-        $result['href'] = route('company-profile', ['id' => $company->id]);
+        $result['href'] = route('completeCompanyRegistration', ['id' => $company->id]);
         return response()->json($result);
 
     }
@@ -75,7 +75,7 @@ class CompanyAuthController extends Controller
         ]);
         $company = Company::where('domain', $request->domain)->first();
         if ($company->password == md5($request->password)) {
-            $result['href'] = route('completeCompanyRegistration', ['id' => $company->id]);
+            $result['href'] = route('company-profile', ['id' => $company->id]);
             return response()->json($result);
         }
         $result['error'] = 'Ошибка при вводе домена компании или пароля!';

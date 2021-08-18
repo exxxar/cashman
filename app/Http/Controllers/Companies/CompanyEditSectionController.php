@@ -25,6 +25,7 @@ class CompanyEditSectionController extends Controller
 
     public function updateCompanyData(Request $request)
     {
+        $result = [];
         $this->validate($request, [
             'title' => ['required', 'string'],
             'image' => ['required'],
@@ -50,6 +51,8 @@ class CompanyEditSectionController extends Controller
         $company->properties = $request->properties;
         $company->socials = $request->socials;
         $company->save();
+        $result['href'] = route('company-profile', ['id' => $company->id]);
+        return response()->json($result);
 
 
     }

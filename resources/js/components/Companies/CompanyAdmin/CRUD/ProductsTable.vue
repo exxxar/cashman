@@ -18,18 +18,20 @@
                 <button @click="newModal" type="button" class="btn btn-icon btn-info me-1">
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
-                <button type="button" class="btn btn-icon btn-warning me-1">
+                <button @click="uploadProducts" type="button" class="btn btn-icon btn-warning me-1">
                     <ion-icon name="download-outline"></ion-icon>
                 </button>
             </div>
-
-            <div class="card text-center">
+            <h4 class="text-center" v-if="products.length===0">Вы пока не добавили ни одного продукта своей компании.
+                Нажмите кнопку "Загрузить товары из ВК" или добавьте товар вручную.</h4>
+            <div v-if="products.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>Код</th>
                             <th>Название</th>
+                            <th>Изображение</th>
                             <th>Описание</th>
                             <th>Цена</th>
                             <th>Цена по скидке</th>
@@ -39,9 +41,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="product in products" :key="product.id">
+                        <tr v-for="product in paginatedData" :key="product.id">
                             <td>{{ product.id }}</td>
                             <td>{{ product.title }}</td>
+                            <td>
+                                <img :src="productImage(product.image)" alt="image"
+                                     class="imaged w100">
+                            </td>
                             <td>{{ product.description }}</td>
                             <td>{{ product.price }}</td>
                             <td>{{ product.discount_price }}</td>
@@ -57,7 +63,7 @@
                                     </svg>
                                 </a>
                                 /
-                                <a href="#"  @click="deleteRecord(product.id)">
+                                <a href="#" @click="deleteRecord(product.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-trash" viewBox="0 0 16 16">
                                         <path
@@ -79,10 +85,29 @@
                     </table>
                 </div>
             </div>
+            <nav>
+                <ul class="pagination pagination-rounded">
+                    <li>
+                        <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
+                            Предыдущая
+                        </button>
+                    </li>
+                    <li class="disabled ">
+                        <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
+                            Страница {{ pageNumber + 1 }} из {{ pageCount }}
+                        </a>
+                    </li>
+                    <li>
+                        <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
+                            Следующая
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
         <!-- Modal -->
-        <ProductsModal :form="this.form" :editmode="this.editmode"></ProductsModal>
+        <ProductsModal :form="this.form" :editmode="this.editmode" :id="this.id"></ProductsModal>
 
     </fragment>
 
@@ -93,29 +118,33 @@ import Header from "../../../LayoutComponents/Header";
 import Form from 'vform';
 import BottomMenu from "../../../LayoutComponents/BottomMenu";
 import ProductsModal from "../../../Modals/CRUDModals/ProductsModal";
+
 export default {
     name: "ProductsTable",
     components: {ProductsModal, BottomMenu, Header},
     props: {
-        products: {
-            type: Object,
+        id: {
             required: true
         }
     },
     data: function () {
         return {
+            products: [],
             editmode: false,
             form: new Form({
                 id: '',
                 title: '',
+                image: '',
                 description: '',
                 price: '',
                 discount_price: '',
                 type: ''
-            })
+            }),
+            pageNumber: 0,
+            size: 10
         }
     },
-   methods:{
+    methods: {
         editModal(record) {
             this.editmode = true;
             this.form.reset();
@@ -126,6 +155,23 @@ export default {
             this.editmode = false;
             this.form.reset();
             $('#AddNew').modal('show');
+        },
+        uploadProducts() {
+            axios.get('api/upload/products/' + this.id)
+            Toast.fire({
+                icon: 'warning',
+                title: 'Эта операция может занять несколько минут'
+            })
+                .then(() => {
+                    Fire.$emit('AfterCreate');
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Товары успешно загружены!'
+                    });
+                })
+                .catch(() => {
+
+                })
         },
         deleteRecord(id) {
             const swalWithBootstrapButtons = Swal.mixin({
@@ -171,24 +217,56 @@ export default {
                 swal("Ошибка", "Что-то пошло не так ):", "warning")
             });
         },
-       // loadRecords() {
-        //    axios.get('api/admin/products').then(({data}) => (this.products = data.data));
-       // },
+        loadRecords() {
+            axios.get('api/admin/get/products/' + this.id).then((response) => (this.products = response.data.products));
+        },
+        nextPage() {
+            this.pageNumber++;
+        },
+        prevPage() {
+            this.pageNumber--;
+        },
+        productImage(image){
+            if(image.toString().startsWith('products/')){
+                return './../assets/sample/'+image
+            }
+            return image
+        }
 
     },
 
-   // created() {
-     //   this.loadRecords();
-     //   Fire.$on('AfterCreate', () => {
-      //      this.loadRecords();
-      //  });
+    mounted() {
+        this.loadRecords();
+        console.log(this.products)
+        Fire.$on('AfterCreate', () => {
+            this.loadRecords();
+        });
 
-   // }
+    },
+    computed: {
+        pageCount() {
+            let l = this.products.length,
+                s = this.size;
+            return Math.ceil(l / s);
+        },
+        paginatedData() {
+            const start = this.pageNumber * this.size,
+                end = start + this.size;
+            return this.products.slice(start, end);
+        }
+    },
 
 }
 
 </script>
 
 <style scoped>
+.pagination {
+    justify-content: center;
+}
 
+.page-link {
+    background: #6236FF !important;
+    color: #fff !important;
+}
 </style>

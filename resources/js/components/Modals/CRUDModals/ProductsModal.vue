@@ -17,6 +17,24 @@
                             <HasError :form="form" field="title"></HasError>
                         </div>
                         <div class="form-group">
+                            <label>Изображение рекламы</label>
+                            <img v-if="editmode" :src="productImage(form.image)" alt="image" class="imaged w100">
+                            <vue-dropzone
+                                ref="myVueDropzone"
+                                id="dropzone"
+                                :options="dropzoneOptions"
+                                :useCustomSlot="true"
+                                v-on:vdropzone-success="uploadSuccess"
+                                v-on:vdropzone-removed-file="fileRemoved"
+                            >
+                                <div class="dropzone-custom-content">
+                                    <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+                                    <div class="subtitle">...or click to select a file from your computer</div>
+                                </div>
+                            </vue-dropzone>
+                            <HasError :form="form" field="image"></HasError>
+                        </div>
+                        <div class="form-group">
                             <label>Описание товара</label>
                             <input v-model="form.description" type="text" name="description"
                                    placeholder="Описание товара"
@@ -57,20 +75,40 @@
 </template>
 
 <script>
-import { HasError} from "vform/src/components/bootstrap5"
+import {HasError} from "vform/src/components/bootstrap5"
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
     name: "ProductsModal",
-    components:{HasError},
+    components: {HasError, vueDropzone: vue2Dropzone},
     props: {
         form: {
             required: true
         },
-        editmode:{
+        editmode: {
             required: true
+        },
+        id: {}
+    },
+    data() {
+        return {
+            dropzoneOptions: {
+                url: 'api/add-product-image',
+                acceptedFiles: ".png, .jpg, .jpeg",
+                addRemoveLinks: true,
+                maxFiles: 1
+            },
+            newImage: ''
         }
     },
     methods: {
         updateProduct() {
+            if (this.newImage !== '') {
+                this.form.image = this.newImage
+                this.filesRemove()
+
+            }
             this.form.put('api/admin/products/' + this.form.id)
                 .then(() => {
                     $('#AddNew').modal('hide');
@@ -93,6 +131,9 @@ export default {
                 });
         },
         createProduct() {
+            this.form.image = this.newImage
+            this.form.id = this.id
+            this.filesRemove()
             this.form.post('api/admin/products')
                 .then(() => {
                     Fire.$emit('AfterCreate');
@@ -108,6 +149,21 @@ export default {
 
                 })
         },
+        uploadSuccess(file, response) {
+            this.newImage = 'products/' + response.file;
+        },
+        fileRemoved() {
+            this.newImage = ''
+        },
+        filesRemove() {
+            this.$refs.myVueDropzone.removeAllFiles()
+        },
+        productImage(image){
+            if(image.toString().startsWith('products/')){
+                return './../assets/sample/'+image
+            }
+            return image
+        }
     }
 }
 </script>
