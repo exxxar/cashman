@@ -109,7 +109,9 @@ Route::group(['middleware' => ['web']], function () {
         /* Меню админа компании */
         Route::get('/company-admin-menu-{id}', [CompanyActionMenuController::class, 'adminMenu'])->name('company-admin');
         /*CRUD продукты*/
-        Route::get('/company-admin-products-{id}', [ProductController::class, 'index']);
+        Route::get('/company-admin-products-{id}', [ProductController::class, 'index'])->name('companyProducts');
+        Route::get('/upload-products', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts'])->name('companyUploadProducts');
+        Route::get('/token-company-{id}', [\App\Http\Controllers\Products\ProductController::class, 'getUserToken']);
         /*CRUD реклама*/
         Route::get('/company-admin-advertisement-{id}', [AdvertisementController::class, 'index']);
         /*Просмотр пользователей админом*/

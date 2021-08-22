@@ -34,7 +34,7 @@
             <div class="section full mt-2">
                 <div class="profile-stats pl-2 pr-2">
                     <a href="#" class="item">
-                        <strong>{{ products }}</strong>products
+                        <strong>{{ products.length }}</strong>products
                     </a>
                     <a href="#" class="item">
                         <strong>{{ users }}</strong>users
@@ -143,8 +143,7 @@
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
-                            <a href="#" class="btn btn-primary btn-lg btn-block" @click="increaseSize"
-                            :disabled="!isMore">Больше новостей</a>
+                            <a href="#" class="btn btn-primary btn-lg btn-block" @click="increaseSize">Больше новостей</a>
                         </div>
                     </div>
                     <!-- * feed -->
@@ -169,14 +168,14 @@
                         </div>
                         <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
                             <div class="col-6">
-                                <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block">Больше продуктов</a>
+                                <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block"  @click="increaseProductSize">Больше продуктов</a>
                             </div>
                             <div class="col-6">
                                 <a :href="'#'" class="btn btn-lg btn-primary btn-block">Добавить продукт</a>
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
-                            <a href="#" class="btn btn-primary btn-lg btn-block">Больше продуктов</a>
+                            <a href="#" class="btn btn-primary btn-lg btn-block"  @click="increaseProductSize">Больше продуктов</a>
                         </div>
                     </div>
                     <!-- * bookmarks -->
@@ -257,16 +256,10 @@ export default {
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
                 {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
             ],
-            companyProducts: [
-                {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
-                {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
-                {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
-                {image: "assets/sample/brand/2.jpg", price: 14, description: "Music Monthly Subscription"},
-                {image: "assets/sample/brand/1.jpg", price: 140, description: "Music Monthly Subscription"},
-                {image: "assets/sample/brand/3.jpg", price: 1400, description: "Music Monthly Subscription"},
-            ],
-            pageNumber: 0,
-            size: 3
+            pageNews: 0,
+            pageProducts: 0,
+            sizeProduct: 9,
+            sizeNews: 6
         }
     },
     mounted() {
@@ -276,17 +269,29 @@ export default {
     computed: {
 
         paginatedData() {
-            const start = this.pageNumber * this.size,
-                end = start + this.size;
-            if(this.news.length>this.size) {
+            const start = this.pageNews * this.sizeNews,
+                end = start + this.sizeNews;
+            if(this.news.length>end) {
                 return this.news.slice(start, end);
             }
             return this.news
+        },
+        companyProducts(){
+            const start = this.pageProducts * this.sizeProduct,
+                end = start + this.sizeProduct;
+            if(this.products.length>end) {
+                return this.products.slice(start, end);
+            }
+            return this.products
+
         }
     },
     methods:{
         increaseSize(){
             this.size+=this.size
+        },
+        increaseProductSize(){
+            this.sizeProduct+=this.sizeProduct
         }
     }
 

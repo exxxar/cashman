@@ -42,7 +42,9 @@ class CompanyAuthController extends Controller
             'password' => md5($request->password),
             'image' => 'companyLogos/' . $request->image,
             'description' => $request->description,
-            'company_group_id' => 1, 'position' => json_encode(['lon'=>(float)$coordinates[1], 'lat'=> (float)$coordinates[0]]),
+            'company_group_id' => 1,
+            'latitude' => (float)$coordinates[0],
+            'longitude'=>(float)$coordinates[1],
             'creator_id' => Auth::user()->getAuthIdentifier(),
             'socials' => [
                 'vk' => '',

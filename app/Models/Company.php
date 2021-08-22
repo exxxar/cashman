@@ -14,7 +14,7 @@ class Company extends Model
     protected $table = 'companies';
     protected $fillable = ['title', 'domain', 'password', 'cashback_percent', 'cashback_percent_level_1',
         'cashback_percent_level_2', 'description', 'personal_rating',
-        'image', 'position', 'company_group_id', 'properties', 'callback_url',
+        'image', 'latitude', 'longitude','position', 'company_group_id', 'properties', 'callback_url',
         'socials', 'is_active', 'upload_vk_url', 'creator_id'];
     protected $casts = [
         'socials' => 'array',

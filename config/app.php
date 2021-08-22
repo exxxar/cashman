@@ -178,6 +178,7 @@ return [
         \SocialiteProviders\Manager\ServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*

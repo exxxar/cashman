@@ -23,7 +23,9 @@ class CreateCompaniesTable extends Migration
             $table->integer('cashback_percent')->nullable();
             $table->text('description');
             $table->string('image');
-            $table->json('position')->nullable();
+            $table->float('latitude');
+            $table->float('longitude');
+            $table->string('position')->nullable();
             $table->string('personal_rating')->nullable();
             $table->bigInteger('company_group_id')->unsigned()->nullable();
             $table->foreign('company_group_id')

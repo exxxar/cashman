@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Companies;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyAdvertising;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class CompanyProfileController extends Controller
         $users = 100;
         $news =$company->advertising()->where('type','Баннер')->get();
         $stories = $company->advertising()->where('type', 'Сторис')->get();
-        $products = 39;
+        $products = Product::where('company_id', $id)->get();
         return view('pages/companyProfile/companyProfilePage', compact('company',
             'news', 'users', 'stories', 'products', 'isAdmin'));
     }

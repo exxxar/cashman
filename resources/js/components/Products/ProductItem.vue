@@ -1,7 +1,7 @@
 <template>
     <div class="bill-box">
         <div class="img-wrapper">
-            <img :src="items.image" alt="img" class="image-block imaged w48">
+            <img :src="productImage(items.image)" alt="img" class="image-block imaged w48">
         </div>
         <div class="price">{{ items.price }}</div>
         <p>{{ items.description }}</p>
@@ -19,6 +19,14 @@ export default {
         },
         action:{
             default: true
+        }
+    },
+    methods:{
+        productImage(image){
+            if(image.toString().startsWith('products/')){
+                return './../assets/sample/'+image
+            }
+            return image
         }
     }
 }

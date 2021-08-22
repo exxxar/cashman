@@ -51,5 +51,6 @@ Route::get('get/advertisement/{id}', [StoryController::class, 'getData']);
 Route::post('admin/add-advertisement-{id}', [StoryController::class, 'store']);
 Route::resource('admin/users', UserController::class);
 
-Route::get('upload/products/{id}', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts']);
+//Route::get('upload/products/{id}', [\App\Http\Controllers\Products\ProductController::class, 'getCompany']);
+Route::get('upload/products', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts'])->name('uploadProducts');
 

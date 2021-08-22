@@ -157,20 +157,14 @@ export default {
             $('#AddNew').modal('show');
         },
         uploadProducts() {
-            axios.get('api/upload/products/' + this.id)
-            Toast.fire({
-                icon: 'warning',
-                title: 'Эта операция может занять несколько минут'
-            })
-                .then(() => {
-                    Fire.$emit('AfterCreate');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Товары успешно загружены!'
-                    });
-                })
-                .catch(() => {
+            axios.get('/token-company-'+this.id).then(function (response) {
+                if (response.data.href !== undefined) {
+                    location.href = response.data.href
+                }
 
+            })
+                .catch(function (error) {
+                    console.log(error)
                 })
         },
         deleteRecord(id) {
