@@ -179,6 +179,8 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class
+
     ],
 
     /*

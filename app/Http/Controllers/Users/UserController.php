@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyAdvertising;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -17,29 +15,47 @@ class UserController extends Controller
         $profile = Auth::user();
         $news = CompanyAdvertising::where('type', 'Баннер')->get();
         $stories = CompanyAdvertising::where('type', 'Сторис')->get();
-
-        //$yourIp = request()->ip();
-       /* $yourIp = geoip()->getLocation($_SERVER['REMOTE_ADDR']);
+        //$yourIp = Location::get($_SERVER['REMOTE_ADDR']);
+        $yourIp = $this->getIp();
+        /* $yourIp = request()->ip();
+         $yourIp = geoip()->getLocation($yourIp);*/
+        $yourIp = geoip()->getLocation($yourIp);
+        $latitude = $yourIp['lat'];
+        $longitude = $yourIp['lon'];
         logger($yourIp['lat']);
-        logger($yourIp['lon']);*/
+        logger($yourIp['lon']);
+        $radius = 100; //km
 
-        /*$upper_latitude = 48.007746 + (.50); //Change .50 to small values
-        $lower_latitude = 48.007746 - (.50); //Change .50 to small values
-        $upper_longitude = 37.804889 + (.50); //Change .50 to small values
-        $lower_longitude = 37.804889 - (.50); //Change .50 to small values
-
-        $result = DB::table('companies')
-            ->whereBetween('position', [$lower_latitude, $upper_latitude])
-            ->whereBetween('position.lon', [$lower_longitude, $upper_longitude])
+        $companies = Company::selectRaw("id, title, image, latitude, longitude,
+                         ( 6371 * acos( cos( radians(?) ) *
+                           cos( radians( latitude ) )
+                           * cos( radians( longitude ) - radians(?)
+                           ) + sin( radians(?) ) *
+                           sin( radians( latitude ) ) )
+                         ) AS distance", [$latitude, $longitude, $latitude])
+            ->having("distance", "<", $radius)
+            ->orderBy("distance", 'asc')
+            ->offset(0)
+            ->limit(20)
             ->get();
-        logger($result);*/
-       /* $query = "SELECT (3956 * 2 * ASIN(SQRT( POWER(SIN(( $latitude - latitude) *  pi()/180 / 2), 2) +
-        COS( $latitude * pi()/180) * COS(latitude * pi()/180) * POWER(SIN(( $longitude - longitude) *
-        pi()/180 / 2), 2) ))) as distance, latitude, longitude" FROM COMPANIES HAVING distance <= 30;*/
-        $companies = Company::latest()->get();
+        // $companies = Company::latest()->get();
         return view('pages/welcome', compact('profile', 'news', 'companies', 'stories'));
 
     }
 
+    function getIp()
+    {
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
+            if (array_key_exists($key, $_SERVER) === true) {
+                foreach (explode(',', $_SERVER[$key]) as $ip) {
+                    $ip = trim($ip); // just to be safe
+                    logger($ip);
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                        return $ip;
+                    }
 
+                }
+            }
+        }
+    }
 }
