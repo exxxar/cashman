@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Companies;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,8 +44,8 @@ class CompanyAuthController extends Controller
             'image' => 'companyLogos/' . $request->image,
             'description' => $request->description,
             'company_group_id' => 1,
-            'latitude' => (float)$coordinates[0],
-            'longitude'=>(float)$coordinates[1],
+            'latitude' => (float)$coordinates[1],
+            'longitude'=>(float)$coordinates[0],
             'creator_id' => Auth::user()->getAuthIdentifier(),
             'socials' => [
                 'vk' => '',
@@ -58,7 +59,11 @@ class CompanyAuthController extends Controller
                 'address' => ''
             ]
         ]);
-
+        $companyUser = CompanyUser::create([
+            'user_id'=>Auth::user()->getAuthIdentifier(),
+            'company_id'=>$company->id,
+            'role'=>'admin'
+        ]);
         $result['href'] = route('completeCompanyRegistration', ['id' => $company->id]);
         return response()->json($result);
 
@@ -76,7 +81,9 @@ class CompanyAuthController extends Controller
             'password' => ['required', 'string']
         ]);
         $company = Company::where('domain', $request->domain)->first();
-        if ($company->password == md5($request->password)) {
+        $isAdmin = CompanyUser::where(['company_id'=>$company->id, 'user_id'=>Auth::user()->getAuthIdentifier(),
+            'role'=>'admin'])->exists();
+        if ($company->password == md5($request->password) && $isAdmin) {
             $result['href'] = route('company-profile', ['id' => $company->id]);
             return response()->json($result);
         }

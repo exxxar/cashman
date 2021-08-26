@@ -18,9 +18,10 @@
         <SearchComponent></SearchComponent>
         <div id="appCapsule" class="full-height">
             <div class="section tab-content mt-2 mb-2">
-                <div class="row">
-                    <div class="col-3 mb-2" v-for="company in paginatedData">
-                        <CompanyItem :company="company" :user="auth_user" :allow-add="true"></CompanyItem>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mb-2"
+                         v-for="company in paginatedData">
+                        <CompanyItem :company="company" :user="auth_user"></CompanyItem>
                     </div>
                 </div>
             </div>
@@ -57,7 +58,7 @@ export default {
     data: function () {
         return {
             pageNumber: 0,
-            size: 8
+            size: 12
 
         }
     },

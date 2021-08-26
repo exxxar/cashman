@@ -1,10 +1,10 @@
 <template>
     <div class="bill-box">
         <div class="img-wrapper">
-            <img :src="productImage(items.image)" alt="img" class="image-block imaged w48">
+            <img :src="productImage(items.image)" alt="img" class="image-block imaged w-100">
         </div>
         <div class="price">{{ items.price }}</div>
-        <p>{{ items.description }}</p>
+        <p>{{ items.title }}</p>
         <a v-if="action" href="#" class="btn btn-primary btn-block btn-sm">Купить</a>
     </div>
 </template>

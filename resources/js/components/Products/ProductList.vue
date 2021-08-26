@@ -17,14 +17,14 @@
                 </div>
                 <ul class="listview link-listview inset">
                     <li v-for="category in categories">
-                        <a href="#">
+                        <a href="#" @click="sortProducts(category.id)">
                             {{ category.title }}
                             <span class="badge badge-primary">{{ category.number }}</span>
                         </a>
                     </li>
                 </ul>
             </div>
-            <StoryList></StoryList>
+            <StoryList :stories="stories"></StoryList>
             <div class="section mt-4">
                 <div class="section-heading padding">
                     <h2 class="title">Акции</h2>
@@ -32,12 +32,16 @@
                 <div class="section tab-content mt-2 mb-1">
                     <!-- waiting tab -->
                     <div class="tab-pane fade show active" id="waiting" role="tabpanel">
-                        <div class="row">
-                            <div class="col-6 mb-2" v-for="item in items">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mb-2"
+                                 v-for="item in paginatedProducts">
                                 <ProductItem :items=item></ProductItem>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <button :disabled='this.size >= items.length' href="javascript:;" class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More</button>
                 </div>
             </div>
         </div>
@@ -58,34 +62,46 @@ export default {
     components: {Footer, StoryList, ProductItem, Header, BottomMenu},
     data: function () {
         return {
-            items: [
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-            ],
-            categories: [
-                {title: "Категория 1", number: 1},
-                {title: "Категория 2", number: 2},
-                {title: "Категория 2", number: 2},
-            ]
+            items: [],
+            categories: [],
+            stories: [],
+            page: 0,
+            size: 12
         }
-    }
+    },
+    methods:{
+        getProductsAndCategories(){
+            let vm = this
+            axios.get('api/products')
+                .then(response=> {
+                    vm.items = response.data.products
+                    vm.categories = response.data.categories
+                    vm.stories = response.data.stories
+
+                })
+        },
+        sortProducts(category){
+            axios.get('products/category/'+category).then(response=>{
+                this.items = response.data.products
+            })
+        },
+        increaseSize(){
+            this.size+=this.size
+        },
+    },
+    mounted() {
+        this.getProductsAndCategories();
+    },
+    computed: {
+        paginatedProducts() {
+            const start = this.page * this.size,
+                end = start + this.size;
+            if (this.items.length > end) {
+                return this.items.slice(start, end);
+            }
+            return this.items
+
+        }
+    },
 }
 </script>

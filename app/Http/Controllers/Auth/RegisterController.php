@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\UserProfile;
 use App\Models\UsersFriedsByCompany;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -67,6 +68,17 @@ class RegisterController extends Controller
         $user = User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+        $profile = UserProfile::create([
+            'user_id'=>$user->id,
+            'avatar'=>'users/default.png',
+            'messengers'=>[
+                'vk' => '',
+                'telegram' => '',
+                'instagram' => '',
+                'facebook' => '',
+                'youtube' => ''
+            ]
         ]);
         if($parent_id!=null && $company_id!=null) {
             $company = Company::where('id', $company_id)->first();

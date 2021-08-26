@@ -5,49 +5,74 @@
             <a href="products" class="link">Посмотреть все</a>
         </div>
         <!-- carousel multiple -->
-        <div class="carousel-multiple splide">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide" v-for="item in items">
-                        <ProductItem :items=item></ProductItem>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <splide :slides="items" :options="options">
+            <splide-slide v-for="item in items" :key="item.id">
+                <ProductItem :items=item></ProductItem>
+            </splide-slide>
+        </splide>
+
         <!-- * carousel multiple -->
     </div>
 </template>
 
 <script>
 import ProductItem from "./ProductItem";
-
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
 export default {
     name: "ProductTile",
-    components: {ProductItem},
+    components: {ProductItem, Splide, SplideSlide},
+    props:{
+        items:{
+            required: true
+        }
+    },
     data: function () {
         return {
-            items: [
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg",
-                    price: 14,
-                    description: "Music Monthly Subscription"
-                },
-            ],
+            options: {
+                perPage: 10,
+                rewind: true,
+                gap: 16,
+                padding: 16,
+                arrows: false,
+                pagination: false,
+                cover: true,
+                lazyLoad: 'sequential',
+                breakpoints: {
+                    320: {
+                        perPage: 2,
+                    },
+                    375: {
+                        perPage: 2,
+                    },
+                    425: {
+                        perPage: 2,
+                    },
+                    600: {
+                        perPage: 2,
+                    },
+                    768: {
+                        perPage: 3,
+                    },
+                    1024: {
+                        perPage: 4,
+                    },
+                    1440: {
+                        perPage: 5,
+                    },
+                    1600: {
+                        perPage: 6,
+                    },
+                    1680: {
+                        perPage: 6,
+                    },
+                    1920: {
+                        perPage: 8,
+                    },
+                    2500: {
+                        perPage: 10,
+                    },
+                }
+            },
         }
     }
 }

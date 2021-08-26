@@ -16,7 +16,7 @@
                             <img :src="'storage/'+auth_user.avatar" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
-                            <strong>{{auth_user.id}}</strong>
+                            <h3>{{profile.name}}</h3>
                             <div class="text-muted">{{auth_user.email}}</div>
                         </div>
                         <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
@@ -82,16 +82,6 @@
                                 </div>
                                 <div class="in">
                                     Профиль пользователя
-                                </div>
-                            </a>
-                        </li>
-                        <li v-if="auth_user!==null">
-                            <a href="user-settings" class="item">
-                                <div class="icon-box bg-primary">
-                                    <ion-icon name="settings-outline"></ion-icon>
-                                </div>
-                                <div class="in">
-                                    Настройки профиля
                                 </div>
                             </a>
                         </li>
@@ -227,8 +217,12 @@ export default {
     },
     data: () => ({
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        currentTitle: ''
+        currentTitle: '',
+        profile: []
     }),
+    mounted(){
+        this.getProfileData()
+    },
     methods: {
         logout: function () {
             axios.post('logout').then(response => {
@@ -241,6 +235,11 @@ export default {
             }).catch(error => {
 
             });
+        },
+        getProfileData(){
+            axios.get('api/profile/'+this.auth_user.id).then(response=>{
+                this.profile = response.data.profile
+            })
         }
 
     },

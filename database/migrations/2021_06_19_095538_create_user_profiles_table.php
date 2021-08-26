@@ -18,13 +18,13 @@ class CreateUserProfilesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')->on('users');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('country');
-            $table->string('region');
-            $table->string('address');
-            $table->json('messengers');
-            $table->string('avatar');
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('country')->nullable();
+            $table->string('region')->nullable();
+            $table->string('address')->nullable();
+            $table->json('messengers')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

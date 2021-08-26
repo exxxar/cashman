@@ -5,19 +5,17 @@
         </div>
         <!-- story-block -->
         <div class="mb-0 story-block splide">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li v-if="addNew" class="splide__slide">
-                        <a href="/add-advertising">
-                            <img src="assets/icon/plus.png" alt="alt"
-                                 class="imaged w-100 rounded shadow-none">
-                        </a>
-                    </li>
-                    <li class="splide__slide" v-for="story in stories">
-                        <StoryItem :story='story'></StoryItem>
-                    </li>
-                </ul>
-            </div>
+        <splide :slides="stories" :options="options">
+            <splide-slide v-if="addNew">
+                <a href="/add-advertising">
+                    <img src="assets/icon/plus.png" alt="alt"
+                         class="imaged w-100 rounded shadow-none">
+                </a>
+            </splide-slide>
+            <splide-slide v-for="story in stories" :key="story.id" >
+                <StoryItem :story='story'></StoryItem>
+            </splide-slide>
+        </splide>
         </div>
         <!-- * story-block -->
         <StoryModal :story="currentStory" />
@@ -28,10 +26,10 @@
 import StoryItem from "./StoryItem";
 import {eventBus} from '../../app'
 import StoryModal from "../Modals/StoryModal";
-
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
 export default {
     name: "StoryList",
-    components: {StoryModal, StoryItem},
+    components: {StoryModal, StoryItem, Splide, SplideSlide},
     props: {
         addNew: {
             default: false,
@@ -45,6 +43,22 @@ export default {
     data: function () {
         return {
             currentStory: [],
+            options: {
+                perPage: 4,
+                rewind: true,
+                gap: 16,
+                padding: 16,
+                arrows: false,
+                pagination: false,
+                breakpoints: {
+                    768: {
+                        perPage: 2
+                    },
+                    991: {
+                        perPage: 3
+                    }
+                }
+            },
         }
     },
     mounted() {

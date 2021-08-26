@@ -108,7 +108,8 @@ export default {
         }
     },
     methods: {
-        sendMessage(){
+        sendMessage(e){
+            e.preventDefault();
             this.cansend = true;
             axios
                 .post('api/send/message', {
@@ -118,12 +119,12 @@ export default {
 
                 })
                 .then(() => {
-                    this.sendMessage("Сообщение успешно отправлено")
-                    this.form.name = ""
-                    this.form.phone = ""
-                    this.form.message = ""
-                    this.socials = [],
-                        this.cansend = false;
+                    this.sendMessage("Сообщение успешно отправлено");
+                    this.form.name = "";
+                    this.form.phone = "";
+                    this.form.message = "";
+                    this.socials = [];
+                    this.cansend = false;
                 })
         },
     }

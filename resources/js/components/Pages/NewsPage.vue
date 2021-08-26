@@ -12,13 +12,14 @@
         </Header>
         <div id="appCapsule" class="full-height">
             <div class="section tab-content mt-2 mb-2">
-                <div class="row">
-                    <div class="col-6 mb-2" v-for="item in items">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mb-2"
+                         v-for="item in news">
                         <NewsItem :item="item"></NewsItem>
                     </div>
                 </div>
                 <div>
-                    <a href="javascript:;" class="btn btn-block btn-primary btn-lg">Load More</a>
+                    <button :disabled='this.size >= items.length' href="javascript:;" class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More</button>
                 </div>
             </div>
         </div>
@@ -35,11 +36,33 @@ import Footer from "../LayoutComponents/Footer";
 export default {
     name: "NewsPage",
     components: {Footer, BottomMenu, NewsItem, Header},
-    props:{
-        items:{
-            type:Object,
+    props: {
+        items: {
+            type: Object,
             required: true
         }
+    },
+    data() {
+        return {
+            page: 0,
+            size: 12
+        }
+    },
+    computed: {
+        news() {
+            const start = this.page * this.size,
+                end = start + this.size;
+            if (this.items.length > end) {
+                return this.items.slice(start, end);
+            }
+            return this.items
+
+        }
+    },
+    methods:{
+        increaseSize(){
+            this.size+=this.size
+        },
     }
 }
 </script>

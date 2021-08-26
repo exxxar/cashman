@@ -10,18 +10,19 @@
                 Адрес компании
             </template>
         </Header>
-        <br/>
-        <br/>
-        <yandex-map
-            :coords="coords"
-            :zoom="16">
-            <ymap-marker
-                marker-id="123"
+        <div class="py-5">
+            <yandex-map
                 :coords="coords"
-                :icon="markerIcon"
-            />
-        </yandex-map>
-
+                :zoom="16"
+                :settings="settings">
+                <ymap-marker
+                    marker-id="123"
+                    :coords="coords"
+                    :hint-content="this.company.title"
+                    :balloon-template="balloonTemplate"
+                />
+            </yandex-map>
+        </div>
     </fragment>
 </template>
 
@@ -32,27 +33,22 @@ import Header from "../LayoutComponents/Header";
 export default {
     name: "RegionMapBlock",
     components: {Header, yandexMap, ymapMarker},
-    data: function () {
-        return {
-            markerIcon: {
-                layout: 'default#imageWithContent',
-                imageHref: 'http://cdn.onlinewebfonts.com/svg/img_296993.png',
-                imageSize: [43, 43],
-                imageOffset: [0, 0],
-                content: '123 v12',
-                contentOffset: [0, 15],
-                contentLayout: '<div style="background: blue; width: 50px; color: #FFFFFF; font-weight: bold;"></div>'
-            }
-        }
-    },
     props: {
         coords: {
             required: true
         },
-        content: {
-            default: 'company'
+        company:{
+            required: true
         }
-    }
+    },
+    computed: {
+        balloonTemplate() {
+            return `
+        <h3 class="red"> ${this.company.title}</h3>
+        <img src="../assets/sample/${this.company.image}" alt="avatar" class="imaged w100 rounded">
+      `
+        }
+    },
 }
 </script>
 

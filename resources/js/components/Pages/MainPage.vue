@@ -29,9 +29,9 @@
         <div id="appCapsule" class="full-height">
             <ActivityHistoryList></ActivityHistoryList>
             <StoryList :stories="stories"></StoryList>
-            <ProductTile></ProductTile>
+            <ProductTile :items="products"></ProductTile>
             <NewsList :items="news"></NewsList>
-            <CompanyList :companies="companies"></CompanyList>
+            <CompanyList :companies="companies" :user="auth_user"></CompanyList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
         </div>
@@ -71,16 +71,44 @@ export default {
     props:{
         auth_user:{
             default: null
-        },
-        news:{
-            required: true
-        },
-        companies:{
-            required: true
-        },
-        stories:{
-            required: true
-        },
+        }
     },
+    data(){
+        return{
+            companies: [],
+            products: [],
+            news: [],
+            stories: []
+        }
+    },
+    mounted(){
+       this.getCompaniesByCoords()
+    },
+    methods:{
+        getCompaniesByCoords(){
+            let vm = this
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    axios.post('api/sort/companies',{
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude
+                    })
+                        .then(function (response) {
+                            console.log(response)
+                            vm.companies = response.data.companies
+                            vm.products = response.data.products
+                            vm.news = response.data.news
+                            vm.stories = response.data.stories
+                        })
+                    console.log(position.coords.latitude);
+                    console.log(position.coords.longitude);
+                },
+                error => {
+                    console.log(error.message);
+                },
+            )
+        }
+    }
 }
+
 </script>

@@ -15,7 +15,7 @@
                     <span class="badge badge-danger">1</span>
                 </a>
                 <a href="/user-profile" class="headerButton">
-                    <img :src="'storage/'+auth_user.avatar" alt="image" class="imaged w32">
+                    <img :src="'storage/' + auth_user.avatar" alt="image" class="imaged w32">
                     <span class="badge badge-danger">2</span>
                 </a>
             </template>
@@ -26,11 +26,11 @@
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
             <CashBackList></CashBackList>
-            <StoryList :stories="stories"></StoryList>
-            <ProductTile></ProductTile>
+            <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
+            <ProductTile v-if="products.length>0" :items="products"></ProductTile>
             <CompanyList :user="auth_user" :companies="companies"></CompanyList>
             <UserList :show-friends="true"></UserList>
-            <NewsList :items="news"></NewsList>
+            <NewsList v-if="news.length>0" :items="news"></NewsList>
         </div>
         <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
@@ -55,12 +55,8 @@ import SideMenu from "../LayoutComponents/SideMenu";
 export default {
     name: "UserPageComponent",
     components: {
-        CompanyList,
-        NewsList,
-        StatisticsSummary,
-        StoryList,
-        HistoryActionList,
-        BottomMenu, Footer, CashBackList, ProductTile, UserList, AchievementList, Header, SideMenu
+        CompanyList, NewsList, StatisticsSummary, StoryList, HistoryActionList, BottomMenu, Footer, CashBackList,
+        ProductTile, UserList, AchievementList, Header, SideMenu
     },
     props:{
         auth_user:{
@@ -73,6 +69,9 @@ export default {
             required: true
         },
         stories:{
+            required: true
+        },
+        products:{
             required: true
         }
     },

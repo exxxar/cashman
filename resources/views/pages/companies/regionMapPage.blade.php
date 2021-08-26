@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-<region-map-block :coords='{!! json_encode($coords) !!}'></region-map-block>
+<region-map-block :coords='{!! json_encode($coords) !!}' :company='{!! json_encode($company) !!}'></region-map-block>
 @endsection

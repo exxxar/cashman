@@ -35,6 +35,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('companies', [SearchCompanyController::class, 'index']);
 Route::get('search', [SearchCompanyController::class, 'search']);
 Route::post('files',  [CompanyEditSectionController::class, 'storeFile']);
+Route::post('avatars', [UserProfileController::class, 'uploadAvatar']);
 Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'sendTextMessage']);
 Route::post('send/voice-message', [CallbackController::class, 'sendVoiceMessage']);
@@ -43,7 +44,7 @@ Route::post('add-product-image', [ProductController::class, 'addProductFile']);
 
 Route::post('company/settings', [CompanyEditSectionController::class, 'updateCompanyData']);
 Route::post('user/settings', [UserProfileController::class, 'updateUserProfileData']);
-
+Route::get('profile/{id}', [UserProfileController::class, 'getProfileData']);
 Route::resource('admin/products', ProductController::class);
 Route::get('admin/get/products/{id}', [\App\Http\Controllers\Products\ProductController::class, 'getProducts']);
 Route::resource('admin/advertisement', AdvertisementController::class);
@@ -53,4 +54,6 @@ Route::resource('admin/users', UserController::class);
 
 //Route::get('upload/products/{id}', [\App\Http\Controllers\Products\ProductController::class, 'getCompany']);
 Route::get('upload/products', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts'])->name('uploadProducts');
-
+Route::post('sort/companies', [\App\Http\Controllers\Users\UserController::class, 'getCompanies']);
+Route::get('products', [\App\Http\Controllers\Products\ProductController::class, 'getProductsAndCategories']);
+Route::get('products/category/{id}',  [\App\Http\Controllers\Products\ProductController::class, 'getProductsByCategory']);

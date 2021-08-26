@@ -3,18 +3,19 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-import LoadScript from 'vue-plugin-load-script';
 
+export const eventBus = new Vue()
+
+import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
+
 import Fragment from 'vue-fragment'
+Vue.use(Fragment.Plugin)
 
 import VueLazyload from 'vue-lazyload'
-
 Vue.use(VueLazyload, {
     preLoad: 1,
     error: 'assets/logo-icon.png',
@@ -22,30 +23,31 @@ Vue.use(VueLazyload, {
     attempt: 1
 })
 
-Vue.use(Fragment.Plugin)
-export const eventBus = new Vue()
-import VueRecord from '@codekraft-studio/vue-record'
-
 import store from './store/index'
-import moment from 'moment';
 
+import moment from 'moment';
 Vue.filter('myDate', function(date){
     moment.locale('ru');
     return moment(date).format("LL");
 });
 
-
-Vue.use(VueRecord)
 Vue.config.ignoredElements = [/^ion-/]
+
 import Swal from 'sweetalert2'
 window.Swal = Swal;
 
-import AudioRecorder from 'vue-audio-recorder'
-Vue.use(AudioRecorder)
 var VueScrollTo = require('vue-scrollto');
-
 Vue.use(VueScrollTo)
 
+
+import YmapPlugin from 'vue-yandex-maps'
+const settings = {
+    apiKey: '865b6aaf-1477-4185-ac17-c503079aa759',
+    lang: 'ru_RU',
+    coordorder: 'latlong',
+    version: '2.1'
+}
+Vue.use(YmapPlugin, settings)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

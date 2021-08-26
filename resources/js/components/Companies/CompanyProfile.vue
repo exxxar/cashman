@@ -13,7 +13,7 @@
                 <a href="javascript:;" class="headerButton">
                     <ion-icon name="mail-outline"></ion-icon>
                 </a>
-                <a href="javascript:;" class="headerButton">
+                <a v-if="id!==null" :href="'/promo-code/'+user + '/' + company.id" class="headerButton">
                     <ion-icon name="person-add-outline"></ion-icon>
                 </a>
             </template>
@@ -94,17 +94,22 @@
             <div class="section full">
                 <div class="wide-block transparent p-0">
                     <ul class="nav nav-tabs lined iconed" role="tablist">
-                        <li class="nav-item">
+                        <li v-if="this.news.length>0" class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#feed" role="tab">
                                 <ion-icon name="grid-outline"></ion-icon>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="this.news.length===0" class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#friends" role="tab">
+                                <ion-icon name="people-outline"></ion-icon>
+                            </a>
+                        </li>
+                        <li v-if="this.news.length>0" class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#friends" role="tab">
                                 <ion-icon name="people-outline"></ion-icon>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="this.products.length>0" class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#bookmarks" role="tab">
                                 <ion-icon name="bookmark-outline"></ion-icon>
                             </a>
@@ -123,7 +128,7 @@
                 <div class="tab-content">
 
                     <!-- feed -->
-                    <div class="tab-pane fade show active" id="feed" role="tabpanel">
+                    <div v-if="this.news.length>0" class="tab-pane fade show active" id="feed" role="tabpanel">
                         <div class="mt-2 pr-2 pl-2">
                             <div class="row">
                                 <div class="col-4 mb-2" v-for="item in paginatedData">
@@ -135,21 +140,29 @@
 
                         <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
                             <div class="col-6">
-                                <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block"
-                                   @click="increaseSize">Больше новостей</a>
+                                <button :disabled='this.sizeNews >= news.length' :href="'#'" class="btn btn-outline-primary btn-lg btn-block"
+                                   @click="increaseSize">Больше новостей</button>
                             </div>
                             <div class="col-6">
-                                <a :href="'/add-advertising'" class="btn btn-lg btn-primary btn-block">Добавить новость</a>
+                                <a :href="'/add-advertising-'+this.company.id" class="btn btn-lg btn-primary btn-block">Добавить новость</a>
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
-                            <a href="#" class="btn btn-primary btn-lg btn-block" @click="increaseSize">Больше новостей</a>
+                            <button :disabled='this.sizeNews >= news.length'  href="#" class="btn btn-primary btn-lg btn-block" @click="increaseSize">Больше новостей</button>
                         </div>
                     </div>
                     <!-- * feed -->
 
                     <!-- * friends -->
-                    <div class="tab-pane fade" id="friends" role="tabpanel">
+                    <div v-if="this.news.length===0" class="tab-pane fade show active" id="friends" role="tabpanel">
+                        <ul class="listview image-listview flush transparent pt-1">
+                            <li v-for="user in companyUsers">
+                                <FriendItem :user="user"></FriendItem>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div v-if="this.news.length>0" class="tab-pane fade" id="friends" role="tabpanel">
                         <ul class="listview image-listview flush transparent pt-1">
                             <li v-for="user in companyUsers">
                                 <FriendItem :user="user"></FriendItem>
@@ -160,22 +173,22 @@
                     <!-- * friends -->
 
                     <!--  bookmarks -->
-                    <div class="tab-pane fade" id="bookmarks" role="tabpanel">
+                    <div v-if="this.products.length>0" class="tab-pane fade" id="bookmarks" role="tabpanel">
                         <div class="row">
                             <div class="col-4 mb-2" v-for="product in companyProducts">
                                 <ProductItem :items="product" :action="!isAdmin"></ProductItem>
                             </div>
                         </div>
                         <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
-                            <div class="col-6">
-                                <a :href="'#'" class="btn btn-outline-primary btn-lg btn-block"  @click="increaseProductSize">Больше продуктов</a>
+                            <div  class="col-6">
+                                <button :disabled='this.sizeProduct >= products.length' :href="'#'" class="btn btn-outline-primary btn-lg btn-block"  @click="increaseProductSize">Больше продуктов</button>
                             </div>
                             <div class="col-6">
                                 <a :href="'#'" class="btn btn-lg btn-primary btn-block">Добавить продукт</a>
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
-                            <a href="#" class="btn btn-primary btn-lg btn-block"  @click="increaseProductSize">Больше продуктов</a>
+                            <button :disabled='this.sizeProduct >= products.length'  href="#" class="btn btn-primary btn-lg btn-block"  @click="increaseProductSize">Больше продуктов</button>
                         </div>
                     </div>
                     <!-- * bookmarks -->
@@ -186,6 +199,13 @@
                                 <a :href="'/company-edit-'+company.id" class="item">
                                     <div class="in">
                                         <div class="text-danger">Настройки профиля компании</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a :href="'/company-admin-menu-'+company.id" class="item">
+                                    <div class="in">
+                                        <div class="text-danger">Меню админа компании</div>
                                     </div>
                                 </a>
                             </li>
@@ -243,6 +263,10 @@ export default {
         isAdmin:{
             type:Boolean,
             default: false
+        },
+        user:{
+            type: Number,
+            default: null
         }
 
     },

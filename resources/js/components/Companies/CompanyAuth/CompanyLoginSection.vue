@@ -59,7 +59,7 @@
 import Header from "../../LayoutComponents/Header";
 import Form from "vform"
 import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
-
+const swal = Swal.mixin()
 export default {
     name: "CompanyLoginSection",
     components: {Header, HasError, AlertErrors},
@@ -69,20 +69,25 @@ export default {
                 domain: '',
                 password: ''
             }),
-            error: ''
         }
     },
     methods: {
         loginCompany() {
+
             this.form.post('/login-company').then(function (response) {
                 if (response.data.href !== undefined) {
                     location.href = response.data.href
                 }
+                else if(response.data.error !== undefined) {
+                    swal.fire({
+                        title: 'Вам отказано в доступе к данной компании!',
+                        text: "Неправильно введенный домен ли пароль компании",
+                        icon: 'warning'
+                    })
+                }
 
             })
-                .catch(function (error) {
-                    console.log(error)
-                })
+
         }
     }
 }

@@ -4,19 +4,12 @@
             <h2 class="title">Компании</h2>
             <a href="/search-company" class="link">Посмотреть все</a>
         </div>
-        <!-- carousel single -->
-        <div class="carousel-multiple splide" >
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li v-if="user!==null" class="splide__slide" v-for="company in companies" >
-                        <CompanyItem :company="company" :user="user"></CompanyItem>
-                    </li>
-                    <li v-if="user===null" class="splide__slide" v-for="company in companies">
-                        <CompanyItem :company="company"></CompanyItem>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <splide :slides="companies" :options="options">
+            <splide-slide v-for="company in companies" :key="company.id" >
+                <CompanyItem :company="company" :user="user"></CompanyItem>
+            </splide-slide>
+        </splide>
+
         <h4 class="text-center" v-if="companies.length===0">Вы пока не зарегистрировались ни в одной компании.
             Нажмите "Посмотреть все" для отображения списка компаний</h4>
         <!-- * carousel single -->
@@ -25,20 +18,68 @@
 
 <script>
 import CompanyItem from "./CompanyItem";
-
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 export default {
     name: "CompanyList",
-    components: {CompanyItem},
+    components: {CompanyItem, Splide, SplideSlide},
+    data() {
+        return {
+            options: {
+                perPage: 10,
+                rewind: true,
+                gap: 16,
+                padding: 16,
+                arrows: false,
+                pagination: false,
+                cover: true,
+                lazyLoad: 'sequential',
+                breakpoints: {
+                    320: {
+                        perPage: 2,
+                    },
+                    375: {
+                        perPage: 2,
+                    },
+                    425: {
+                        perPage: 3,
+                    },
+                    600: {
+                        perPage: 3,
+                    },
+                    768: {
+                        perPage: 4,
+                    },
+                    1024: {
+                        perPage: 5,
+                    },
+                    1440: {
+                        perPage: 6,
+                    },
+                    1600: {
+                        perPage: 6,
+                    },
+                    1680: {
+                        perPage: 6,
+                    },
+                    1920: {
+                        perPage: 8,
+                    },
+                    2500: {
+                        perPage: 10,
+                    },
+                }
+            },
+        };
+    },
     props:{
         user:{
             default: null
         },
         companies:{
-            type:Object,
+            type: Array
         }
     },
-
 
 
 }

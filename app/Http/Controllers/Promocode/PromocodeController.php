@@ -22,7 +22,7 @@ class PromocodeController extends Controller
         $operation_code = '000';
         $user_id = str_pad($user, 10, "0", STR_PAD_LEFT);
         $company_id = str_pad($company, 10, "0", STR_PAD_LEFT);
-        $data = '127.0.0.1:8000/qr-handler/data=' . base64_encode($operation_code . $user_id . $company_id);
+        $data = 'your-cashman.com/qr-handler/data=' . base64_encode($operation_code . $user_id . $company_id);
         return view('pages/promoCodePage', compact('data'));
     }
 
@@ -32,7 +32,7 @@ class PromocodeController extends Controller
         $operation_code = mb_substr($data, 0, 2);
         $user_id = (integer)str_replace('0', '', mb_substr($data, 3, 12));
         $company_id = (integer)str_replace('0', '', mb_substr($data, 13, 22));
-        $company_url = '127.0.0.1:8000/company-profile-'.$company_id;
+        $company_url = 'your-cashman.com/company-profile-'.$company_id;
         $company = Company::where('id', $company_id)->first();
         if(!Auth::user()){
             session(['user' => $user_id, 'company'=>$company_id]);

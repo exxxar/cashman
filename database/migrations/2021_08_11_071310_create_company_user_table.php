@@ -21,6 +21,7 @@ class CreateCompanyUserTable extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->foreign('company_id')
                 ->references('id')->on('companies');
+            $table->string('role')->default('user');
             $table->timestamps();
         });
     }

@@ -120,9 +120,9 @@
                             </div>
                             <div class="form-group basic">
                                 <label class="label">Дополнительная информация
-                                <button @click="addProperty" type="button" class="btn btn-icon btn-info me-1">
-                                    <ion-icon name="add-outline"></ion-icon>
-                                </button>
+                                    <button @click="addProperty" type="button" class="btn btn-icon btn-info me-1">
+                                        <ion-icon name="add-outline"></ion-icon>
+                                    </button>
                                 </label>
                                 <ul class="listview image-listview no-line no-space flush">
                                     <li v-for="(property, key) in company.properties">
@@ -132,7 +132,7 @@
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control"
                                                            :placeholder="key"
-                                                            v-model="company.properties[key]">
+                                                           v-model="company.properties[key]">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>
                                                     </i>
@@ -141,17 +141,18 @@
                                         </div>
                                     </li>
                                     <li v-for="input in inputs">
-                                        <div class="input-wrapper w-100" style="display: flex!important; margin: 10px 0!important;">
+                                        <div class="input-wrapper w-100"
+                                             style="display: flex!important; margin: 10px 0!important;">
                                             <input type="text" class="form-control"
-                                            placeholder="Вид информации"
-                                            v-model="type">
+                                                   placeholder="Вид информации"
+                                                   v-model="type">
                                             <i class="clear-input">
                                                 <ion-icon name="close-circle"></ion-icon>
                                             </i>
                                             <input type="text" class="form-control"
                                                    :placeholder="input.placeholder"
-                                            :disabled="!newKey"
-                                            v-model="company.properties[type]">
+                                                   :disabled="!newKey"
+                                                   v-model="company.properties[type]">
                                             <i class="clear-input">
                                                 <ion-icon name="close-circle"></ion-icon>
                                             </i>
@@ -172,7 +173,7 @@
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control" id="socials1"
                                                            :placeholder="'Ссылка на профиль в '+key"
-                                                            v-model="company.socials[key]">
+                                                           v-model="company.socials[key]">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>
                                                     </i>
@@ -200,6 +201,7 @@
 import Header from "../../LayoutComponents/Header";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
+
 export default {
     name: "CompanyEditSection",
     components: {Header, vueDropzone: vue2Dropzone},
@@ -208,8 +210,8 @@ export default {
             required: true
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             inputs: [],
             type: '',
             dropzoneOptions: {
@@ -220,15 +222,14 @@ export default {
             }
         }
     },
-  computed:{
-        newKey(){
+    computed: {
+        newKey() {
             return this.type
         }
-  },
+    },
     methods: {
-
         updateSettings() {
-            axios.post('api/company/settings', this.company).then (function (response) {
+            axios.post('api/company/settings', this.company).then(function (response) {
                 if (response.data.href !== undefined) {
                     location.href = response.data.href
                 } else {
@@ -237,12 +238,13 @@ export default {
 
             })
                 .catch(function (error) {
-                    console.log(error);});
+                    console.log(error);
+                });
 
         },
         addProperty() {
-            if(this.inputs.length>0) {
-                this.inputs.splice(this.inputs.length-1)
+            if (this.inputs.length > 0) {
+                this.inputs.splice(this.inputs.length - 1)
                 this.type = ''
             }
             this.inputs.push({
@@ -263,7 +265,8 @@ export default {
             this.company.image = response.file;
         },
 
-        fileRemoved() {}
+        fileRemoved() {
+        }
     }
 }
 </script>

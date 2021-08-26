@@ -81,9 +81,6 @@
                         <a class="btn btn-icon btn-facebook  me-05" href="auth/facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a class="btn btn-icon btn-twitter me-05" href="auth/twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
                         <a class="btn btn-icon btn-google me-05" href="auth/google">
                             <i class="fab fa-google"></i>
                         </a>

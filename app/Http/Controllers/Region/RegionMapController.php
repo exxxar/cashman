@@ -14,6 +14,6 @@ class RegionMapController extends Controller
         $lat = $company['latitude'];
         $lon = $company['longitude'];
         $coords = [(float)$lat, (float)$lon];
-        return view('pages/companies/regionMapPage', compact('coords'));
+        return view('pages/companies/regionMapPage', compact('coords', 'company'));
     }
 }

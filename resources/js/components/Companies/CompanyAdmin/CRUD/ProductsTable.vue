@@ -231,7 +231,6 @@ export default {
 
     mounted() {
         this.loadRecords();
-        console.log(this.products)
         Fire.$on('AfterCreate', () => {
             this.loadRecords();
         });

@@ -2,7 +2,7 @@
     <div class="mt-2 mb-2">
         <h6 class="text-center">Запиши голосовое сообщение</h6>
         <div class="d-flex justify-content-center mt-2">
-            <vue-record-audio :mode="'hold'" @stream="onStream" @result="onResult"/>
+            <VueRecordAudio mode="hold" @stream="onStream" @result="onResult"/>
         </div>
         <div class="row d-flex justify-content-center mt-2" v-if="recordings.length>0">
             <div class="col-12">
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import VueRecord from '@codekraft-studio/vue-record'
+Vue.use(VueRecord)
 
 export default {
     name: "VoiceCallbackForm",

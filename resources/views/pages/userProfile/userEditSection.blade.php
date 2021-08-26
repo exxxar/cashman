@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <edit-profile :form='{!! json_encode($profile) !!}'></edit-profile>
+    <edit-profile :profile='{!!json_encode($profile) !!}'></edit-profile>
 @endsection
