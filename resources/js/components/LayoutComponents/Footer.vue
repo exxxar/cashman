@@ -1,9 +1,9 @@
 <template>
     <div class="appFooter mt-4">
         <div class="footer-title">
-            Copyright © 2021. All Rights Reserved.
+            Cashman © 2021. Все права защищены.
         </div>
-        Mobile App
+        Cashman
     </div>
 </template>
 

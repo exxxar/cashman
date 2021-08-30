@@ -13,7 +13,7 @@
                     <!-- profile box -->
                     <div v-if="auth_user!==null" class="profileBox pt-2 pb-2">
                         <div class="image-wrapper">
-                            <img :src="'storage/'+auth_user.avatar" alt="image" class="imaged  w36">
+                            <img :src="'assets/sample/'+profile.avatar" alt="image" class="imaged  w36">
                         </div>
                         <div class="in">
                             <h3>{{profile.name}}</h3>

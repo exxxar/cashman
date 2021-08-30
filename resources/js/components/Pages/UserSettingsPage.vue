@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Settings
+                Настройки
             </template>
             <template v-slot:right>
                 <a href="#" class="headerButton">
@@ -20,19 +20,19 @@
             <div class="section mt-3 text-center">
                 <div class="avatar-section">
                     <a href="#">
-                        <img :src="'storage/'+user.avatar" alt="avatar" class="imaged w100 rounded">
+                        <img :src="'assets/sample/'+profile.avatar" alt="avatar" class="imaged w100 rounded">
                         <span class="button">
                         <ion-icon name="camera-outline"></ion-icon>
                     </span>
                     </a>
                 </div>
             </div>
-            <div class="listview-title mt-1">Theme</div>
+            <div class="listview-title mt-1">Тема</div>
             <ul class="listview image-listview text inset">
                 <li>
                     <div class="item">
                         <div class="in">
-                            <div>Dark Mode</div>
+                            <div>Темная тема</div>
                             <div class="form-check form-switch  ms-2">
                                 <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
                                 <label class="form-check-label" for="darkmodeSwitch"></label>
@@ -80,33 +80,20 @@
                 <li>
                     <a href="#" class="item">
                         <div class="in">
-                            <div>Update E-mail</div>
+                            <div>Обновить адрес электронной почты</div>
                         </div>
                     </a>
                 </li>
 
             </ul>
-            <div class="listview-title mt-1">Security</div>
+            <div class="listview-title mt-1">Безопасность</div>
             <ul class="listview image-listview text mb-2 inset">
                 <li>
                     <a href="password/reset" class="item">
                         <div class="in">
-                            <div>Update Password</div>
+                            <div>Обновить пароль</div>
                         </div>
                     </a>
-                </li>
-                <li>
-                    <div class="item">
-                        <div class="in">
-                            <div>
-                                2 Step Verification
-                            </div>
-                            <div class="form-check form-switch ms-2">
-                                <input class="form-check-input" type="checkbox" id="SwitchCheckDefault3" checked/>
-                                <label class="form-check-label" for="SwitchCheckDefault3"></label>
-                            </div>
-                        </div>
-                    </div>
                 </li>
                 <li>
                     <a href="#" @click.prevent="logout" class="item">
@@ -132,6 +119,7 @@ export default {
     components: {Header, Footer, BottomMenu},
     data: () => ({
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        profile: []
     }),
     methods: {
         logout: function () {
@@ -145,11 +133,19 @@ export default {
 
             });
         },
+        getProfileData(){
+            axios.get('api/profile/'+this.user.id).then(response=>{
+                this.profile = response.data.profile
+            })
+        }
     },
     props:{
         user:{
             required: true
         }
+    },
+    mounted() {
+        this.getProfileData()
     }
 }
 </script>

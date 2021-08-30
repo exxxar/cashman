@@ -47,6 +47,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/products', function () {
         return view('pages/products/ProductsPage');
     });
+    Route::get('products/category/{id}', [\App\Http\Controllers\Products\ProductController::class, 'getProductsByCategory']);
     /* Новости (рекламные банеры) */
     Route::get('/news', [NewsController::class, 'getNews']);
     Route::get('/news/{id}', [NewsController::class, 'getNewsItem']);

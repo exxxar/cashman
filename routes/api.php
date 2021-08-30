@@ -57,3 +57,5 @@ Route::get('upload/products', [\App\Http\Controllers\Products\ProductController:
 Route::post('sort/companies', [\App\Http\Controllers\Users\UserController::class, 'getCompanies']);
 Route::get('products', [\App\Http\Controllers\Products\ProductController::class, 'getProductsAndCategories']);
 Route::get('products/category/{id}',  [\App\Http\Controllers\Products\ProductController::class, 'getProductsByCategory']);
+Route::get('user/companies/{id}', [\App\Http\Controllers\Users\UserController::class, 'getUsersCompanies']);
+Route::delete('user/{user}/company/{id}', [\App\Http\Controllers\Users\UserController::class, 'deleteCompany']);

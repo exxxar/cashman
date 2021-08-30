@@ -8,12 +8,12 @@
                 </a>
             </template>
             <template v-slot:right>
-                <a href="login" class="headerButton">Login</a>
+                <a href="login" class="headerButton">Авторизация</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Register now</h1>
-            <h4>Create an account</h4>
+            <h1>Регистрация</h1>
+            <h4>Создайте аккаунт в Cashman!</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form" class="mb-2"></AlertErrors>
@@ -23,8 +23,8 @@
                     <div class="card-body">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="email">E-mail</label>
-                                <input type="email" class="form-control" id="email" placeholder="Your e-mail"
+                                <label class="label" for="email">Электронная почта</label>
+                                <input type="email" class="form-control" id="email" placeholder="Введите Ваш адрес электронной почты"
                                        v-model="form.email" name="email">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -34,9 +34,9 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">Password</label>
+                                <label class="label" for="password">Пароль</label>
                                 <input type="password" class="form-control" id="password" autocomplete="new-password"
-                                       placeholder="Your password" name="password"
+                                       placeholder="Введите Ваш пароль" name="password"
                                        v-model="form.password">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -46,10 +46,10 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password-confirmation">Password Again</label>
+                                <label class="label" for="password-confirmation">Повторите пароль</label>
                                 <input type="password" class="form-control" id="password-confirmation"
                                        autocomplete="new-password"
-                                       placeholder="Type password again"
+                                       placeholder="Повторите Ваш пароль"
                                        name="password_confirmation"
                                        v-model="form.password_confirmation">
                                 <i class="clear-input">
@@ -63,9 +63,9 @@
                                 <input type="checkbox" class="form-check-input" id="customCheckb1"
                                        v-model="form.submitted">
                                 <label class="form-check-label" for="customCheckb1">
-                                    <a>I agree</a>
+                                    <a>Я согласен с</a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
-                                        terms and conditions
+                                        условиями соглашения
                                     </a>
                                 </label>
                                 <HasError :form="form" field="submitted"/>
@@ -75,7 +75,7 @@
                 </div>
                 <div id="social_icon">
                     <div class="section mt-2 text-center border-bottom">
-                        <h2>or</h2>
+                        <h2>ИЛИ</h2>
                     </div>
                     <div class="section py-2 px-1 text-center">
                         <a class="btn btn-icon btn-facebook  me-05" href="auth/facebook">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="form-button-group transparent">
-                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Register</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Зарегистрироваться</button>
                 </div>
             </form>
         </div>

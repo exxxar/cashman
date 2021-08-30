@@ -71,7 +71,7 @@ class RegisterController extends Controller
         ]);
         $profile = UserProfile::create([
             'user_id'=>$user->id,
-            'avatar'=>'users/default.png',
+            'avatar'=>'avatar/avatar1.jpg',
             'messengers'=>[
                 'vk' => '',
                 'telegram' => '',

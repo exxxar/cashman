@@ -8,7 +8,7 @@
         </a>
         <a href="products" class="item">
             <div class="col">
-                <ion-icon name="document-text-outline"></ion-icon>
+                <ion-icon name="cash-outline"></ion-icon>
                 <strong>Акции</strong>
             </div>
         </a>
@@ -19,13 +19,13 @@
         </a>
         <a href="search-company" class="item">
             <div class="col">
-                <ion-icon name="card-outline"></ion-icon>
+                <ion-icon name="grid-outline"></ion-icon>
                 <strong>Компании</strong>
             </div>
         </a>
         <a href="news" class="item">
             <div class="col">
-                <ion-icon name="settings-outline"></ion-icon>
+                <ion-icon name="newspaper-outline"></ion-icon>
                 <strong>Новости</strong>
             </div>
         </a>

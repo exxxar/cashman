@@ -17,7 +17,7 @@
         </Header>
         <SearchComponent></SearchComponent>
         <div id="appCapsule" class="full-height">
-            <div class="section tab-content mt-2 mb-2">
+            <div class="section tab-content mt-2 mb-2" :key="trigger">
                 <div class="row d-flex justify-content-center">
                     <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mb-2"
                          v-for="company in paginatedData">
@@ -51,14 +51,15 @@ import CompanyItem from "./CompanyList/CompanyItem";
 import SearchComponent from "../LayoutComponents/SearchComponent";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import {mapGetters} from 'vuex'
-
+import {eventBus} from '../../app'
 export default {
     name: "SearchCompanySection",
     components: {BottomMenu, SearchComponent, CompanyItem, Header},
     data: function () {
         return {
             pageNumber: 0,
-            size: 12
+            size: 12,
+            trigger: 0
 
         }
     },
@@ -68,7 +69,11 @@ export default {
         },
         prevPage(){
             this.pageNumber--;
+        },
+        updateCompanies(number){
+            this.trigger+=number
         }
+
     },
     props:{
         auth_user:{
@@ -83,6 +88,7 @@ export default {
             .listen('.searchResults', (e) => {
                 this.$store.commit('SET_COMPANIES', e.companies)
             })
+        eventBus.$on('updateCompanies', this.updateCompanies)
     },
     computed: {
         groupedCompanies() {
@@ -100,7 +106,8 @@ export default {
             const start = this.pageNumber * this.size,
                 end = start + this.size;
             return this.groupedCompanies.slice(start, end);
-        }
+        },
+
     }
 }
 </script>
@@ -113,5 +120,9 @@ export default {
     background: #6236FF !important;
     color: #fff !important;
 }
-
+@media (max-width: 375px) {
+    .page-link {
+        font-size: 70%;
+    }
+}
 </style>

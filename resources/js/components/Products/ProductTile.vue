@@ -26,7 +26,7 @@ export default {
             required: true
         }
     },
-    data: function () {
+    data() {
         return {
             options: {
                 perPage: 10,
@@ -45,19 +45,19 @@ export default {
                         perPage: 2,
                     },
                     425: {
-                        perPage: 2,
-                    },
-                    600: {
-                        perPage: 2,
-                    },
-                    768: {
                         perPage: 3,
                     },
-                    1024: {
+                    600: {
+                        perPage: 3,
+                    },
+                    768: {
                         perPage: 4,
                     },
-                    1440: {
+                    1024: {
                         perPage: 5,
+                    },
+                    1440: {
+                        perPage: 6,
                     },
                     1600: {
                         perPage: 6,
@@ -73,7 +73,7 @@ export default {
                     },
                 }
             },
-        }
-    }
+        };
+    },
 }
 </script>

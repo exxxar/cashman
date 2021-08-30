@@ -24,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
             'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
             'SocialiteProviders\\Google\\GoogleExtendSocialite@handle',
             'SocialiteProviders\\Telegram\\TelegramExtendSocialite@handle',
-            'SocialiteProviders\\Twitter\\TwitterExtendSocialite@handle',
+            'SocialiteProviders\\Yandex\\YandexExtendSocialite@handle',
         ],
     ];
 

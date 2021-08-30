@@ -262,4 +262,9 @@ export default {
     background: #6236FF !important;
     color: #fff !important;
 }
+@media (max-width: 375px) {
+    .page-link {
+        font-size: 70%;
+    }
+}
 </style>

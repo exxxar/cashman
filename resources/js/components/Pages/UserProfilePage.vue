@@ -15,7 +15,7 @@
                     <span class="badge badge-danger">1</span>
                 </a>
                 <a href="/user-profile" class="headerButton">
-                    <img :src="'storage/' + auth_user.avatar" alt="image" class="imaged w32">
+                    <img :src="'assets/sample/' + profile.avatar" alt="image" class="imaged w32">
                     <span class="badge badge-danger">2</span>
                 </a>
             </template>
@@ -75,5 +75,20 @@ export default {
             required: true
         }
     },
+    data(){
+        return{
+            profile: []
+        }
+    },
+    methods:{
+        getProfileData(){
+            axios.get('api/profile/'+this.auth_user.id).then(response=>{
+                this.profile = response.data.profile
+            })
+        }
+    },
+    mounted() {
+        this.getProfileData()
+    }
 }
 </script>

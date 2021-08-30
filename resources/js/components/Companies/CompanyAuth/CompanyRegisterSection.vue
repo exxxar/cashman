@@ -7,12 +7,12 @@
                 </a>
             </template>
             <template v-slot:right>
-                <a href="login-company" class="headerButton">Login</a>
+                <a href="login-company" class="headerButton">Авторизоваться в компании</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Register Your company now</h1>
-            <h4>Create an company account</h4>
+            <h1>Зарегистрируйте аакаунт Вашей компании</h1>
+            <h4>Создайте аккаунт компании в Cashman!</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form" class="mb-2"></AlertErrors>
@@ -80,8 +80,8 @@
                                 v-on:vdropzone-removed-file="fileRemoved"
                             >
                                 <div class="dropzone-custom-content">
-                                    <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-                                    <div class="subtitle">...or click to select a file from your computer</div>
+                                    <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
+                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
                                 </div>
                             </vue-dropzone>
                             <HasError :form="form" field="image"/>
@@ -113,8 +113,7 @@
                         </div>
                         <div class="form-group basic">
                             <label class="form-check-label" for="customCheckb1">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">Buy
-                                    subscription now</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">Купить подписку</a>
                             </label>
                         </div>
                         <div class="custom-control custom-checkbox mt-2 mb-1">
@@ -122,8 +121,7 @@
                                 <input v-model="form.confirmed" type="checkbox" class="form-check-input"
                                        id="customCheckb1">
                                 <label class="form-check-label" for="customCheckb1">
-                                    I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
-                                    conditions</a>
+                                    Я согласен с <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">условиями соглашения</a>
                                 </label>
                                 <HasError :form="form" field="confirmed"/>
                             </div>
@@ -131,7 +129,7 @@
                     </div>
                 </div>
                 <div class="form-button-group transparent">
-                    <button type="submit" :disabled='form.errors.any() || !isComplete'  class="btn btn-primary btn-block btn-lg">Register</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete'  class="btn btn-primary btn-block btn-lg">Зарегистрировать</button>
                 </div>
             </form>
         </div>

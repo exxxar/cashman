@@ -8,8 +8,8 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Log in</h1>
-            <h4>Fill the form to log in</h4>
+            <h1>Авторизация</h1>
+            <h4>Заполните форму для авторизации</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form" class="mb-2"></AlertErrors>
@@ -19,9 +19,9 @@
                     <div class="card-body pb-1">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="email">E-mail</label>
+                                <label class="label" for="email">Электронная почта</label>
                                 <input v-model="form.email" type="email" name="email" id="email"
-                                       placeholder="Your e-mail"
+                                       placeholder="Введите Вашу электронную почту"
                                        class="form-control">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -31,10 +31,10 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">Password</label>
+                                <label class="label" for="password">Пароль</label>
                                 <input v-model="form.password" type="password" id="password" name="password"
                                        autocomplete="off"
-                                       placeholder="Your password"
+                                       placeholder="Введите Ваш пароль"
                                        class="form-control">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -46,14 +46,14 @@
                 </div>
                 <div class="form-links mt-2">
                     <div>
-                        <a href="register">Register Now</a>
+                        <a href="register">Регистрация</a>
                     </div>
                     <div>
-                        <a href="password/reset" class="text-muted">Forgot Password?</a>
+                        <a href="password/reset" class="text-muted">Забыли пароль?</a>
                     </div>
                 </div>
                 <div class="form-button-group transparent">
-                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Log in</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Войти</button>
                 </div>
             </form>
         </div>

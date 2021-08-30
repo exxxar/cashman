@@ -4,7 +4,7 @@
             <h2 class="title">Компании</h2>
             <a href="/search-company" class="link">Посмотреть все</a>
         </div>
-        <splide :slides="companies" :options="options">
+        <splide :slides="companies" :options="options" :key="trigger">
             <splide-slide v-for="company in companies" :key="company.id" >
                 <CompanyItem :company="company" :user="user"></CompanyItem>
             </splide-slide>
@@ -19,7 +19,7 @@
 <script>
 import CompanyItem from "./CompanyItem";
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
-
+import {eventBus} from '../../../app'
 export default {
     name: "CompanyList",
     components: {CompanyItem, Splide, SplideSlide},
@@ -70,7 +70,8 @@ export default {
                     },
                 }
             },
-        };
+            trigger: 0
+        }
     },
     props:{
         user:{
@@ -79,6 +80,14 @@ export default {
         companies:{
             type: Array
         }
+    },
+    methods:{
+        updateCompanies(number){
+            this.trigger+=number
+        }
+    },
+    mounted() {
+        eventBus.$on('updateCompanies', this.updateCompanies)
     },
 
 

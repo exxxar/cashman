@@ -14,7 +14,7 @@
             <div class="section mt-2 text-center">
                 <div class="avatar-section">
                     <a href="#">
-                        <img :src="'storage/'+profile.avatar" alt="avatar" class="imaged w100 rounded">
+                        <img :src="'assets/sample/'+profile.avatar" alt="avatar" class="imaged w100 rounded">
                     </a>
                 </div>
                 <h1>Данные профиля</h1>
@@ -44,8 +44,8 @@
                                     v-on:vdropzone-removed-file="fileRemoved"
                                 >
                                     <div class="dropzone-custom-content">
-                                        <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-                                        <div class="subtitle">...or click to select a file from your computer</div>
+                                        <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
+                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
                                     </div>
                                 </vue-dropzone>
 

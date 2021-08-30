@@ -16,7 +16,7 @@ class CompanyProfileController extends Controller
     {
         $company = (object)Company::where('id', $id)->first();
         $isAdmin = CompanyUser::where(['company_id'=>$company->id, 'user_id'=>Auth::user()->getAuthIdentifier(),
-            'role'=>'admin'])->exists();
+            'role'=>'admin'])->exists()  || $company->creator_id==Auth::user()->getAuthIdentifier();
         $users = 100;
         $news =$company->advertising()->where('type','Баннер')->get();
         $stories = $company->advertising()->where('type', 'Сторис')->get();

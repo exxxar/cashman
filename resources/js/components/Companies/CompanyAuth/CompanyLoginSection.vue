@@ -8,8 +8,8 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Log in your company account</h1>
-            <h4>Fill the form to log in</h4>
+            <h1>Войдите в аккаунт Вашей компании</h1>
+            <h4>Заполните форму для входа в компанию</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form"  class="mb-2"></AlertErrors>
@@ -18,9 +18,9 @@
                     <div class="card-body pb-1">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="domain">Domain</label>
+                                <label class="label" for="domain">Домен</label>
                                 <input v-model="form.domain" type="text" class="form-control"
-                                       id="domain" placeholder="Your domain" name="domain">
+                                       id="domain" placeholder="Введите домен Вашей компании" name="domain">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
@@ -29,11 +29,11 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">Password</label>
+                                <label class="label" for="password">Пароль</label>
                                 <input v-model="form.password" type="password" class="form-control"
                                        id="password"
                                        autocomplete="off"
-                                       placeholder="Your password" name="password">
+                                       placeholder="Введите пароль Вашей компании" name="password">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
@@ -44,11 +44,11 @@
                 </div>
                 <div class="form-links mt-2">
                     <div>
-                        <a href="register-company">Register Your Company Now</a>
+                        <a href="register-company">Зарегистрировать компанию</a>
                     </div>
                 </div>
                 <div class="form-button-group  transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Войти</button>
                 </div>
             </form>
         </div>

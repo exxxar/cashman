@@ -1,7 +1,7 @@
 <template>
     <div class="bill-box">
         <div class="img-wrapper">
-            <img :src="productImage(items.image)" alt="img" class="image-block imaged w-100">
+            <img :src="productImage(items.image)" alt="img" class="image-block imaged w-100 images-product">
         </div>
         <div class="price">{{ items.price }}</div>
         <p>{{ items.title }}</p>
@@ -31,3 +31,8 @@ export default {
     }
 }
 </script>
+<style>
+.images-product {
+    object-fit: contain;
+}
+</style>

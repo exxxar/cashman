@@ -20,7 +20,7 @@
                     <span class="badge badge-danger">1</span>
                 </a>
                 <a v-if="auth_user!==null" href="/user-profile" class="headerButton">
-                    <img :src="'storage/'+auth_user.avatar" alt="image" class="imaged w32">
+                    <img :src="'assets/sample/' + profile.avatar" alt="image" class="imaged w32">
                     <span class="badge badge-danger">2</span>
                 </a>
             </template>
@@ -28,10 +28,10 @@
         <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule" class="full-height">
             <ActivityHistoryList></ActivityHistoryList>
-            <StoryList :stories="stories"></StoryList>
-            <ProductTile :items="products"></ProductTile>
-            <NewsList :items="news"></NewsList>
-            <CompanyList :companies="companies" :user="auth_user"></CompanyList>
+            <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
+            <ProductTile v-if="products.length>0" :items="products"></ProductTile>
+            <NewsList v-if="news.length>0" :items="news"></NewsList>
+            <CompanyList v-if="companies.length>0" :companies="companies" :user="auth_user"></CompanyList>
             <UserList :show-friends="false"></UserList>
             <CallbackForm></CallbackForm>
         </div>
@@ -78,37 +78,69 @@ export default {
             companies: [],
             products: [],
             news: [],
-            stories: []
+            stories: [],
+            profile: []
         }
     },
     mounted(){
        this.getCompaniesByCoords()
+        this.getProfileData()
     },
     methods:{
         getCompaniesByCoords(){
             let vm = this
             navigator.geolocation.getCurrentPosition(
-                position => {
+                position =>
+                {
                     axios.post('api/sort/companies',{
                         lat: position.coords.latitude,
                         lon: position.coords.longitude
                     })
                         .then(function (response) {
-                            console.log(response)
                             vm.companies = response.data.companies
                             vm.products = response.data.products
                             vm.news = response.data.news
                             vm.stories = response.data.stories
                         })
-                    console.log(position.coords.latitude);
-                    console.log(position.coords.longitude);
                 },
                 error => {
-                    console.log(error.message);
+                    axios.post('api/sort/companies',{
+                        lat: 0,
+                        lon: 0
+                    })
+                        .then(function (response) {
+                            vm.companies = response.data.companies
+                            vm.products = response.data.products
+                            vm.news = response.data.news
+                            vm.stories = response.data.stories
+                        })
                 },
             )
+
+        },
+        getProfileData(){
+            axios.get('api/profile/'+this.auth_user.id).then(response=>{
+                this.profile = response.data.profile
+            })
         }
     }
 }
 
 </script>
+<style>
+.section-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+@media (max-width: 375px) {
+    .section-heading .title {
+        font-size: 90%;
+    }
+
+    .section-heading .link {
+        font-size: 90%;
+    }
+
+}
+</style>

@@ -83,7 +83,7 @@ class CompanyAuthController extends Controller
         $company = Company::where('domain', $request->domain)->first();
         $isAdmin = CompanyUser::where(['company_id'=>$company->id, 'user_id'=>Auth::user()->getAuthIdentifier(),
             'role'=>'admin'])->exists();
-        if ($company->password == md5($request->password) && $isAdmin) {
+        if ($company->password == md5($request->password) && ($isAdmin || $company->creator_id==Auth::user()->getAuthIdentifier())) {
             $result['href'] = route('company-profile', ['id' => $company->id]);
             return response()->json($result);
         }

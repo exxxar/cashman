@@ -21,10 +21,10 @@ export default {
     data: function () {
         return {
             activity: [
-                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " + 187 $"},
-                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " - 187 $"},
-                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " + 187 $"},
-                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " - 187 $"},
+                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " + 18 $"},
+                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " - 18 $"},
+                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " + 18 $"},
+                {image: "assets/sample/avatar/avatar4.jpg", name: "Beatriz Brito", type: "Transfer", price: " - 18 $"},
             ]
         }
     }

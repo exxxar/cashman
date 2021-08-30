@@ -17,7 +17,7 @@
                 </div>
                 <ul class="listview link-listview inset">
                     <li v-for="category in categories">
-                        <a href="#" @click="sortProducts(category.id)">
+                        <a href="#" @click="sortProducts(category)" v-scroll-to="'#products'">
                             {{ category.title }}
                             <span class="badge badge-primary">{{ category.number }}</span>
                         </a>
@@ -25,11 +25,12 @@
                 </ul>
             </div>
             <StoryList :stories="stories"></StoryList>
-            <div class="section mt-4">
+            <div class="section mt-4" :key="trigger">
                 <div class="section-heading padding">
-                    <h2 class="title">Акции</h2>
+                    <h2 v-if="currentCategory===''" class="title">Акции</h2>
+                    <h2 v-if="currentCategory!==''" class="title" id="products">Акции из категории {{currentCategory}}</h2>
                 </div>
-                <div class="section tab-content mt-2 mb-1">
+                <div class="section tab-content mt-2 mb-1" >
                     <!-- waiting tab -->
                     <div class="tab-pane fade show active" id="waiting" role="tabpanel">
                         <div class="row d-flex justify-content-center">
@@ -66,7 +67,9 @@ export default {
             categories: [],
             stories: [],
             page: 0,
-            size: 12
+            size: 12,
+            trigger: 0,
+            currentCategory: ''
         }
     },
     methods:{
@@ -81,8 +84,10 @@ export default {
                 })
         },
         sortProducts(category){
-            axios.get('products/category/'+category).then(response=>{
+            axios.get('products/category/'+category.id).then(response=>{
                 this.items = response.data.products
+                this.currentCategory = category.title
+                this.trigger++
             })
         },
         increaseSize(){
