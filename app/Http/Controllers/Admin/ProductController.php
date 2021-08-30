@@ -124,6 +124,10 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product= Product::find($id);
+        $categories = $product->categories()->get();
+        foreach ($categories as $cat){
+            $cat->products()->detach($product);
+        }
         $product->delete();
         return ['message'=>'record deleted'];
     }

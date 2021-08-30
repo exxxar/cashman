@@ -7,10 +7,10 @@
                 </a>
             </template>
             <template v-slot:title>
-                PromoCode Activation
+                Активация промокода
             </template>
             <template v-slot:right>
-                <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogNotification">Help</a>
+                <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogNotification">Помощь</a>
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <vue-qrcode :value=code :options="{ width: 200 }"></vue-qrcode>
                     </div>
-                    <h2 class="mb-2">Scan the QR Code</h2>
+                    <h2 class="mb-2">Отканируйте QR Код</h2>
                     <p>
                         {{ description }}
                     </p>
@@ -28,13 +28,13 @@
             <div class="fixed-bar">
                 <div class="row">
                     <div class="col-12">
-                        <a href="/user-profile" class="btn btn-lg btn-outline-secondary btn-block goBack">Go Back</a>
+                        <a href="/user-profile" class="btn btn-lg btn-outline-secondary btn-block goBack">Назад</a>
                     </div>
                 </div>
             </div>
         </div>
-        <NotificationModal title="PromoCode Activation"
-                           description="You can use QR code verification for two-factor authentication or protect actions.">
+        <NotificationModal title="Активация промокода"
+                           description="Отправьте ссылку на эту страницу другу, чтобы пригласить его в компанию и получать многоуровневый кэшбек!">
         </NotificationModal>
     </fragment>
 </template>
@@ -54,7 +54,7 @@ export default {
         },
         description: {
             type: String,
-            default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam."
+            default: "Отправьте ссылку на эту страницу другу, чтобы пригласить его в компанию и получать многоуровневый кэшбек!"
         }
     },
     mounted() {
