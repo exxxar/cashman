@@ -27,7 +27,7 @@ class CreateHistoryUsersCompaniesTable extends Migration
             $table->float('value');
             $table->float('money_in_check');
             $table->text('description');
-            $table->enum('type', array('Списание', 'Начисление'))->change();
+            $table->string('type');
             $table->timestamps();
         });
     }

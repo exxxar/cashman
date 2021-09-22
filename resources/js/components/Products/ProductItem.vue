@@ -3,8 +3,8 @@
         <div class="img-wrapper">
             <img :src="productImage(items.image)" alt="img" class="image-block imaged w-100 images-product">
         </div>
-        <div class="price">{{ items.price }}</div>
-        <p>{{ items.title }}</p>
+        <div class="price" v-html="items.price"></div>
+        <p v-html="items.title"></p>
         <a v-if="action" href="#" class="btn btn-primary btn-block btn-sm">Купить</a>
     </div>
 </template>

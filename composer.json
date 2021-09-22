@@ -35,7 +35,9 @@
         "spatie/laravel-permission": "^4.3",
         "stevebauman/location": "^6.2",
         "tcg/voyager": "^1.4",
-        "torann/geoip": "^3.0"
+        "torann/geoip": "^3.0",
+        "ext-mysqli": "*",
+        "ext-mysql": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

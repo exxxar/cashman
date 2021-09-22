@@ -10,7 +10,7 @@ class HistoryUsersCompany extends Model
     use HasFactory;
     protected $table = 'history_users_companies';
     protected $fillable = ['user_id', 'company_id', 'company_admin_id',
-        'value', 'money_in_check', 'description'];
+        'value', 'money_in_check', 'description', 'type'];
 
     public function user()
     {

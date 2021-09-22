@@ -59,3 +59,4 @@ Route::get('products', [\App\Http\Controllers\Products\ProductController::class,
 Route::get('products/category/{id}',  [\App\Http\Controllers\Products\ProductController::class, 'getProductsByCategory']);
 Route::get('user/companies/{id}', [\App\Http\Controllers\Users\UserController::class, 'getUsersCompanies']);
 Route::delete('user/{user}/company/{id}', [\App\Http\Controllers\Users\UserController::class, 'deleteCompany']);
+Route::post('debiting/cashback', [\App\Http\Controllers\Cashback\CashBackController::class, 'debitingCashback']);

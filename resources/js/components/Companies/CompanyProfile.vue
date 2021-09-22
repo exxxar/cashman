@@ -154,7 +154,7 @@
                     <!-- * feed -->
 
                     <!-- * friends -->
-                    <div v-if="this.news.length===0" class="tab-pane fade show active" id="friends" role="tabpanel">
+                    <div v-if="this.news.length===0" class="tab-pane fade show active" id="friend" role="tabpanel">
                         <ul class="listview image-listview flush transparent pt-1">
                             <li v-for="user in companyUsers">
                                 <FriendItem :user="user"></FriendItem>
