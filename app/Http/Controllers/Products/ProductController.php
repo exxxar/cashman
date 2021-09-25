@@ -22,14 +22,14 @@ class ProductController extends Controller
     public function getUserToken($id)
     {
         session(['company' => $id]);
-        $result['href'] = 'https://oauth.vk.com/authorize?client_id=7883909&scope=market&redirect_uri=http://127.0.0.1:8000/upload-products&response_type=code&display=page';
+        $result['href'] = 'https://oauth.vk.com/authorize?client_id=7883909&scope=market&redirect_uri=https://your-cashman.com/upload-products&response_type=code&display=page';
         return response()->json($result);
 
     }
 
     public function uploadProducts(Request $request)
     {
-        $auth = new Auth('7883909', 'B95nspocgcljhxTATjTN', 'http://127.0.0.1:8000/upload-products', 'market, groups');
+        $auth = new Auth('7883909', 'B95nspocgcljhxTATjTN', 'https://your-cashman.com/upload-products', 'market, groups');
         $id = session('company');
         $company = Company::find($id);
         $group = $company->upload_vk_url;
