@@ -25,7 +25,7 @@
             <StatisticsSummary :cashback="1500"></StatisticsSummary>
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
-            <CashBackList></CashBackList>
+            <CashBackList v-if="cashbacks.length>0" :cashbacks="cashbacks"></CashBackList>
             <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
             <ProductTile v-if="products.length>0" :items="products"></ProductTile>
             <CompanyList :user="auth_user" :companies="companies"></CompanyList>
@@ -71,13 +71,14 @@ export default {
         stories:{
             required: true
         },
-        products:{
+        cashbacks:{
             required: true
         }
     },
     data(){
         return{
-            profile: []
+            profile: [],
+            products: []
         }
     },
     methods:{
@@ -85,10 +86,16 @@ export default {
             axios.get('api/profile/'+this.auth_user.id).then(response=>{
                 this.profile = response.data.profile
             })
+        },
+        getProductsData(){
+            axios.get('api/profile/products/'+this.auth_user.id).then(response=>{
+                this.products = response.data.products
+            })
         }
     },
     mounted() {
         this.getProfileData()
+        this.getProductsData()
     }
 }
 </script>

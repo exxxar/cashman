@@ -39,6 +39,7 @@ Route::group(['middleware' => ['web']], function () {
     });
     /* Главная страница */
     Route::get('/', [\App\Http\Controllers\Users\UserController::class, 'getAuthUser']);
+    Route::get('/activity-history', [\App\Http\Controllers\ActivityHistory\ActivityHistoryController::class, 'getActivityHistory']);
     /* О нас */
     Route::get('/about-project', function () {
         return view('pages/aboutProjectPage');

@@ -86,6 +86,7 @@ Vue.component('search-company', require('./components/Companies/SearchCompanySec
 Vue.component('edit-company', require('./components/Companies/CompanyAdmin/CompanyEditSection').default);
 Vue.component('edit-profile', require('./components/Pages/UserProfileEditSection').default);
 Vue.component('region-map-block', require('./components/Companies/RegionMapBlock').default);
+Vue.component('activity-history-page', require('./components/ActivityHistory/ActivityHistoryPage').default);
 //Company Admin
 Vue.component('company-admin-menu', require('./components/Companies/CompanyAdmin/CRUD/CompanyAdminMenu').default);
 Vue.component('company-admin-products', require('./components/Companies/CompanyAdmin/CRUD/ProductsTable').default);

@@ -23,7 +23,7 @@ class PromocodeController extends Controller
         $operation_code = '000';
         $user_id = str_pad($user, 10, "0", STR_PAD_LEFT);
         $company_id = str_pad($company, 10, "0", STR_PAD_LEFT);
-        $data = 'http://127.0.0.1:8000/qr-handler/data=' . base64_encode($operation_code . $user_id . $company_id);
+        $data = 'https://your-cashman.com/qr-handler/data=' . base64_encode($operation_code . $user_id . $company_id);
         return view('pages/promoCodePage', compact('data'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyAdvertising;
+use App\Models\HistoryUsersCompany;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -57,16 +58,14 @@ class UserProfileController extends Controller
             $ids = $company->pluck('id');
             $news = CompanyAdvertising::where('type', 'Баннер')->whereIn('company_id', $ids)->get();
             $stories = CompanyAdvertising::where('type', 'Сторис')->whereIn('company_id', $ids)->get();
-            $products = Product::whereIn('company_id', $ids)->get();
         } else {
             $company = Company::latest()->get();
             $news = CompanyAdvertising::where('type', 'Баннер')->get();
             $stories = CompanyAdvertising::where('type', 'Сторис')->get();
-            $products = Product::latest()->get();
         }
-
+        $cashback = HistoryUsersCompany::where('user_id', $profile->id)->limit(30)->get();
         return view('pages/userProfile/userProfilePage', compact('profile', 'company',
-            'news', 'stories', 'products'));
+            'news', 'stories', 'cashback'));
     }
 
     public function getUserSettings()
@@ -87,6 +86,19 @@ class UserProfileController extends Controller
     {
         $profile = (object)UserProfile::where('user_id', $id)->first();
         return response()->json(['profile' => $profile]);
+    }
+    public function getProducts($id){
+        $profile = User::find($id);
+        $company = $profile->companies()->get();
+        if ($company) {
+            $ids = $company->pluck('id');
+            $products = Product::whereIn('company_id', $ids)->limit(30)->get();
+        } else {
+            $products = Product::latest()->limit(30)->get();
+        }
+        return response()->json([
+            'products'=>$products
+        ]);
     }
 
 

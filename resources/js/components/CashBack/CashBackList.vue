@@ -13,7 +13,6 @@
                 </ul>
             </div>
         </div>
-        <!-- * carousel single -->
     </div>
 </template>
 
@@ -23,22 +22,10 @@ import CashBackItem from "./CashBackItem";
 export default {
     name: "CashBackList",
     components: {CashBackItem},
-    data: function () {
-        return {
-            cashbacks: [
-                {
-                    image: "assets/sample/brand/1.jpg", value: "1000", money_in_check: "200",
-                    description: "Кешбек с покупки телефона", type: "Начисление"
-                },
-                {
-                    image: "assets/sample/brand/2.jpg", value: "1000", money_in_check: "200",
-                    description: "Кешбек с покупки телефона", type: "Начисление"
-                },
-                {
-                    image: "assets/sample/brand/3.jpg", value: "1000", money_in_check: "200",
-                    description: "Кешбек с покупки телефона", type: "Начисление"
-                },
-            ]
+
+    props:{
+        cashbacks:{
+            required: true
         }
     }
 }

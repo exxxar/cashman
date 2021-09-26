@@ -3,10 +3,10 @@
     <div class="card-block bg-primary">
         <div class="card-main">
             <div class="card-button dropdown">
-                <img :src="cashback.image" alt="img" class="image-block imaged w76">
+                <img :src="'assets/sample/'+cashback.company.image" alt="img" class="image-block imaged w76">
             </div>
             <div class="balance">
-                <span class="label">Сумма</span>
+                <span class="label">Кэшбек</span>
                 <h1 class="title">$ {{ cashback.value }}</h1>
             </div>
             <div class="in">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="bottom">
                     <div class="card-expiry">
-                        <span class="label">Кешбэк</span>
+                        <span class="label">Сумма</span>
                         $ {{ cashback.money_in_check }}
                     </div>
                     <div class="card-ccv">

@@ -6,5 +6,5 @@
 @section('content')
     <user-page :auth_user='{!! json_encode($profile) !!}' :companies = '{!! json_encode($company) !!}'
     :news='{!! json_encode($news) !!}'  :stories='{!! json_encode($stories) !!}'
-               :products='{!! json_encode($products) !!}'></user-page>
+    :cashbacks='{!! json_encode($cashback) !!}'></user-page>
 @endsection

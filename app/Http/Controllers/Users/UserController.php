@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyAdvertising;
+use App\Models\HistoryUsersCompany;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,9 +41,9 @@ class UserController extends Controller
                 ->get();
             $companiesIds = $companies->pluck('id');
             $products = Product::whereIn('company_id', $companiesIds)->latest()->limit(30)->get();
-            $news = CompanyAdvertising::whereIn('company_id', $companiesIds)->where('type', 'Баннер')->latest()->limit(20)->get();
-            $stories = CompanyAdvertising::whereIn('company_id', $companiesIds)->where('type', 'Сторис')->latest()->limit(20)->get();
-
+            $news = CompanyAdvertising::whereIn('company_id', $companiesIds)->where('type', 'Баннер')->latest()->limit(30)->get();
+            $stories = CompanyAdvertising::whereIn('company_id', $companiesIds)->where('type', 'Сторис')->latest()->limit(30)->get();
+            $history = HistoryUsersCompany::whereIn('company_id', $companiesIds)->latest()->limit(4)->get();
         }
         else
         {
@@ -50,9 +51,10 @@ class UserController extends Controller
             $products = Product::latest()->limit(30)->get();
             $news = CompanyAdvertising::where('type', 'Баннер')->limit(20)->get();
             $stories = CompanyAdvertising::where('type', 'Сторис')->limit(20)->get();
+            $history = HistoryUsersCompany::latest()->limit(4)->get();
         }
         return response()->json(['companies' => $companies, 'products'=>$products,
-            'news'=>$news, 'stories'=>$stories]);
+            'news'=>$news, 'stories'=>$stories, 'history'=>$history]);
     }
 
     public function getUsersCompanies($id){

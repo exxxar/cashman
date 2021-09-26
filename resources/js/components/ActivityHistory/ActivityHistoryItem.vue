@@ -1,14 +1,16 @@
 <template>
     <fragment>
         <div class="detail">
-            <img :src="activity.image" alt="img" class="image-block imaged w48">
+            <img :src="'assets/sample/'+activity.company.image" alt="img" class="image-block imaged w48">
             <div>
-                <strong>{{ activity.name }}</strong>
-                <p>{{ activity.type }}</p>
+                <strong>{{ activity.company.title }}</strong>
+                <p v-if="activity.type==='Начисление'">Начисление кэшбека пользователю {{activity.user.name}}</p>
+                <p v-if="activity.type==='Списание'">Списание кэшбека с пользователя {{activity.user.name}}</p>
             </div>
         </div>
         <div class="right">
-            <div class="price text-danger">{{ activity.price }}</div>
+            <div v-if="activity.type==='Начисление'" class="price text-danger">+ {{ activity.value }} $</div>
+            <div v-if="activity.type==='Списание'" class="price text-black-50">- {{ activity.value }} $</div>
         </div>
     </fragment>
 </template>

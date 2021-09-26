@@ -27,7 +27,7 @@
         </Header>
         <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule" class="full-height">
-            <ActivityHistoryList></ActivityHistoryList>
+            <ActivityHistoryList v-if="history.length>0" :actions="history"></ActivityHistoryList>
             <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
             <ProductTile v-if="products.length>0" :items="products"></ProductTile>
             <NewsList v-if="news.length>0" :items="news"></NewsList>
@@ -79,7 +79,8 @@ export default {
             products: [],
             news: [],
             stories: [],
-            profile: []
+            profile: [],
+            history: []
         }
     },
     mounted(){
@@ -101,6 +102,7 @@ export default {
                             vm.products = response.data.products
                             vm.news = response.data.news
                             vm.stories = response.data.stories
+                            vm.history = response.data.history
                         })
                 },
                 error => {
