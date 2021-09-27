@@ -3,9 +3,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="CashbackLabel">Списание кэшбека {{company.cashback_percent}}%</h5>
+                    <h5 v-if="type==='Начисление'" class="modal-title">Начисление кэшбека {{company.cashback_percent}}%</h5>
+                    <h5 v-if="type==='Списание'" class="modal-title">Списание кэшбека</h5>
                 </div>
-                <form @submit.prevent="debitingCashback()">
+                <form @submit.prevent="type==='Начисление' ? debitingCashback() : offsCashback()">
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Код пользователя</label>
@@ -28,7 +29,7 @@
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('sum') }">
                             <HasError :form="form" field="sum"></HasError>
                         </div>
-                        <div class="form-group">
+                        <div v-if="type==='Начисление'" class="form-group">
                             <label>Сумма списания</label>
                             <input v-model="calculatedCashBack" type="text" name="cashback"
                                    placeholder="Сумма списания" readonly
@@ -38,7 +39,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="btn btn-success">Списать кэшбек {{company.cashback_percent}}%</button>
+                        <button v-if="type==='Начисление'" type="submit" class="btn btn-success" >Начислить кэшбек {{company.cashback_percent}}%</button>
+                        <button v-if="type==='Списание'" type="submit" class="btn btn-success">Списать кэшбек</button>
                     </div>
                 </form>
             </div>
@@ -64,6 +66,10 @@ export default {
         },
         user:{
             default:null
+        },
+        type:{
+            required: true,
+            type: String
         }
     },
     data(){
@@ -97,23 +103,43 @@ export default {
                 this.form.description = ""
                 this.form.sum = null
                 this.form.cashback = null
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false
+                Swal.fire({
+                    icon: 'success',
+                    title:   'Кэшбек начислен',
+                    text: 'Начисление кэшбека в '+this.company.cashback_percent+'% прошло успешно!',
                 })
-                swalWithBootstrapButtons.fire(
-                    'Кэшбек списан',
-                    'Списание кэшбека в '+this.company.cashback_percent+'% прошло успешно!',
-                    'success'
-                )
             })
                 .catch(() => {
 
                 });
 
+        },
+        offsCashback(){
+            this.form.company = this.company
+            this.form.admin = this.admin
+            this.form.post('api/offs/cashback') .then((response) => {
+                $('#CashbackModal').modal('hide')
+                this.form.user = null
+                this.form.description = ""
+                this.form.sum = null
+                if (response.data.error !== undefined) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Выполнение списания невозможно!',
+                        text: 'Недостаточно средств для выполнения операции',
+                    })
+                }
+                else {
+                    Swal.fire({
+                        icon: 'success',
+                        title:  'Кэшбек списан',
+                        text: 'Списание кэшбека прошло успешно!',
+                    })
+                }
+            })
+                .catch(() => {
+
+                });
         },
         getUserId(userId){
             this.form.user = userId

@@ -6,7 +6,7 @@
                 <div class="balance">
                     <div class="left">
                         <span class="title">Суммарный кэшбек</span>
-                        <h1 class="total">$ {{ cashback }}</h1>
+                        <h1 class="total">$ {{ profile.score }}</h1>
                     </div>
                     <div class="right">
                         <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
@@ -29,12 +29,31 @@
         </div>
         <div class="section">
             <div class="row mt-2">
-                <div class="col-6" v-for="statistic in statistics">
+                <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">{{ statistic.title }}</div>
-                        <div class="value">{{ statistic.value }} $</div>
+                        <div class="title">Начисления кэшбека</div>
+                        <div class="value text-success">{{profile.debitings}} $</div>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Списания кэшбека</div>
+                        <div class="value text-danger">{{profile.offs}} $</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Вывод кэшбека</div>
+                        <div class="value text-dark">0 $</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Перевод кэшбека</div>
+                        <div class="value text-info">0 $</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -53,9 +72,8 @@ export default {
     name: "StatisticsSummary",
     components: {StatisticAction, TransactionsModal},
     props: {
-        cashback: {
+        profile: {
             required: true,
-            type: Number
         }
     },
     data: function () {
@@ -68,12 +86,6 @@ export default {
             ],
             currentTitle: '',
             currentExchange: false,
-            statistics: [
-                {title: "Income", value: "200"},
-                {title: "Income", value: "200"},
-                {title: "Income", value: "200"},
-                {title: "Income", value: "200"}
-            ]
         }
     },
     mounted() {

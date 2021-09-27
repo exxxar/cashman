@@ -10,4 +10,6 @@ class CompanyUser extends Pivot
 {
     use HasFactory;
     protected $table = 'company_user';
+
+
 }

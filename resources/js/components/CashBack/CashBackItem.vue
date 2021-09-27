@@ -10,7 +10,7 @@
                 <h1 class="title">$ {{ cashback.value }}</h1>
             </div>
             <div class="in">
-                <div class="card-number">
+                <div class="card-number" style="font-size: 14px!important;">
                     <span class="label">Описание</span>
                     {{ cashback.description }}
                 </div>

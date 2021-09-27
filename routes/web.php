@@ -123,9 +123,7 @@ Route::group(['middleware' => ['web']], function () {
         /*Страница действий компании*/
         Route::get('/company-action-menu-{id}', [CompanyActionMenuController::class, 'index']);
         /*Страница списка администраторов компании*/
-        Route::get('/company-group-admin-{id}', function(){
-            return view('pages/companyProfile/Admin/CompanyGroupAdmin');
-        });
+        Route::get('/company-group-admin-{id}', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'getCompanyGroupAdmin']);
         /*Страница добавления промокода*/
         Route::get('/add-promocode', [PromocodeController::class, 'index']);
     });

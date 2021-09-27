@@ -22,7 +22,7 @@
         </Header>
         <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule" class="full-height">
-            <StatisticsSummary :cashback="1500"></StatisticsSummary>
+            <StatisticsSummary :profile="profile"></StatisticsSummary>
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
             <CashBackList v-if="cashbacks.length>0" :cashbacks="cashbacks"></CashBackList>

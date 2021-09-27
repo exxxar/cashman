@@ -22,6 +22,7 @@ class CreateCompanyUserTable extends Migration
             $table->foreign('company_id')
                 ->references('id')->on('companies');
             $table->string('role')->default('user');
+            $table->string('isActive')->nullable()->default(true);
             $table->timestamps();
         });
     }

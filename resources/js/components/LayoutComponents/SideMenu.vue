@@ -17,7 +17,7 @@
                         </div>
                         <div class="in">
                             <h3>{{profile.name}}</h3>
-                            <div class="text-muted">{{auth_user.email}}</div>
+                            <div class="text-muted">{{auth_user.id}}</div>
                         </div>
                         <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
                             <ion-icon name="close-outline"></ion-icon>
@@ -28,7 +28,7 @@
                     <div v-if="auth_user!==null" class="sidebar-balance">
                         <div class="listview-title">Balance</div>
                         <div class="in">
-                            <h1 class="amount">$ {{auth_user.id}}</h1>
+                            <h1 class="amount">$ {{profile.score}}</h1>
                         </div>
                     </div>
                     <!-- * balance -->

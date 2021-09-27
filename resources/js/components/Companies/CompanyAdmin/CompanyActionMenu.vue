@@ -17,28 +17,29 @@
 
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Списать CashBack</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showOffsCashBackModal">Списать CashBack</button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showModal">Начислить
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDebitingCashBackModal">Начислить
                         CashBack {{company.cashback_percent}}%
                     </button>
                     <div class="mt-1"></div>
 
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Добавить администратора</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showAddAdminModal">Добавить администратора</button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Убрать администратора</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDeleteAdminModal">Убрать администратора</button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Завершить работу</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="terminate">Завершить работу</button>
 
                 </div>
             </div>
         </div>
-        <CashbackModal :company="company" :admin="admin" :user="user"></CashbackModal>
+        <CashbackModal :company="company" :admin="admin" :user="user" :type="type"></CashbackModal>
+        <AdminsModal :company="company" :operation="operation"></AdminsModal>
     </fragment>
 </template>
 
@@ -46,10 +47,11 @@
 import Header from "../../LayoutComponents/Header";
 import CashbackModal from "../../Modals/CashbackModal";
 import {eventBus} from "../../../app";
+import AdminsModal from "../../Modals/CRUDModals/AdminsModal";
 
 export default {
     name: "CompanyActionMenu",
-    components: {CashbackModal, Header},
+    components: {AdminsModal, CashbackModal, Header},
     props: {
         company: {
             required: true
@@ -61,18 +63,36 @@ export default {
     },
     data() {
         return {
-            user: 0
+            user: 0,
+            type: '',
+            operation: ''
         }
     },
     methods: {
-        showModal() {
+        showDebitingCashBackModal() {
+            this.type = 'Начисление'
             $('#CashbackModal').modal('show');
+        },
+        showOffsCashBackModal(){
+            this.type = 'Списание'
+            $('#CashbackModal').modal('show');
+        },
+        showAddAdminModal(){
+            this.operation='Add'
+            $('#AdminsModal').modal('show');
+        },
+        showDeleteAdminModal(){
+            this.operation='Delete'
+            $('#AdminsModal').modal('show');
+        },
+        terminate(){
+           window.location.href='/user-profile'
         }
     },
     mounted() {
             let param = location.search
             if(param.length>0) {
-                console.log(param.slice(param.indexOf('=')+1))
+                this.type = 'Начисление'
                 eventBus.$emit('userId', param.slice(param.indexOf('=')+1))
                 $('#CashbackModal').modal('show');
             }

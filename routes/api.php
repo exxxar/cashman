@@ -60,4 +60,7 @@ Route::get('products/category/{id}',  [\App\Http\Controllers\Products\ProductCon
 Route::get('user/companies/{id}', [\App\Http\Controllers\Users\UserController::class, 'getUsersCompanies']);
 Route::delete('user/{user}/company/{id}', [\App\Http\Controllers\Users\UserController::class, 'deleteCompany']);
 Route::post('debiting/cashback', [\App\Http\Controllers\Cashback\CashBackController::class, 'debitingCashback']);
+Route::post('offs/cashback', [\App\Http\Controllers\Cashback\CashBackController::class, 'offsCashback']);
 Route::get('profile/products/{id}', [UserProfileController::class, 'getProducts']);
+Route::post('add/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'addCompanyAdmin']);
+Route::post('delete/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'deleteCompanyAdmin']);

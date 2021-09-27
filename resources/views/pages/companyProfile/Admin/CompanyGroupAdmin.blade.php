@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <company-group-admin></company-group-admin>
+    <company-group-admin :admins='{!! $admins !!}'></company-group-admin>
 @endsection

@@ -14,7 +14,23 @@
     <div class="section inset mt-2 mb-2">
     <ul class="listview image-listview inset">
         <li v-for="admin in admins">
-           <FriendItem :user="admin" type="admin"></FriendItem>
+            <div class="item">
+                <img :src="'assets/sample/' + admin.avatar" alt="image" class="imaged w86 rounded">
+                <div class="in">
+                    <div style="margin: 0 0 0 2%;">
+                        <header>Код администратора - {{admin.id}}</header>
+                        <header>{{ admin.name }}</header>
+                        <footer>{{ admin.phone }}</footer>
+                    </div>
+                    <a v-if="admin.isActive" href="#" class="headerButton">
+                        <ion-icon name="notifications"></ion-icon>
+                    </a>
+                    <a v-if="!admin.isActive" href="#" class="headerButton">
+                        <ion-icon name="notifications-off"></ion-icon>
+                    </a>
+
+                </div>
+            </div>
         </li>
 
     </ul>
@@ -29,20 +45,20 @@ import FriendItem from "../../Users/FriendItem";
 export default {
     name: "CompanyGroupAdmin",
     components:{FriendItem, Header},
-    data: function () {
-        return {
-            admins: [
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-            ]
+    props:{
+        admins:{
+            required: true
         }
     },
+    mounted(){
+        console.log(this.admins)
+    }
 }
 </script>
 
 <style scoped>
-
+.listview > li header, li footer {
+    font-size: 16px !important;
+    margin: 8% 0 0 0 !important;
+}
 </style>
