@@ -21,7 +21,7 @@ class UserProfile extends Model
         $debitings = HistoryUsersCompany::where(['user_id'=> $this->user_id, 'type'=>'Начисление'])->sum('value');
         $offs = HistoryUsersCompany::where(['user_id'=> $this->user_id, 'type'=>'Списание'])->sum('value');
         if($debitings>$offs){
-            return $debitings-$offs;
+            return round($debitings-$offs, 2);
         }
         return 0;
 
@@ -29,7 +29,7 @@ class UserProfile extends Model
     public function getDebitingsAttribute(){
         $debitings = HistoryUsersCompany::where(['user_id'=> $this->user_id, 'type'=>'Начисление'])->sum('value');
         if(!is_null($debitings)){
-            return $debitings;
+            return round($debitings, 2);
         }
         return 0;
 
@@ -37,7 +37,7 @@ class UserProfile extends Model
     public function getOffsAttribute(){
         $offs = HistoryUsersCompany::where(['user_id'=> $this->user_id, 'type'=>'Списание'])->sum('value');
         if(!is_null($offs)){
-            return $offs;
+            return round($offs, 2);
         }
         return 0;
 
