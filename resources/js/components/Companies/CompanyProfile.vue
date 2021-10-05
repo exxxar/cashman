@@ -349,6 +349,9 @@ export default {
         changeActiveAdmin(){
             axios.get('api/change/active-admin/'+this.user.id + '/' + this.company.id)
             this.isActive = !this.isActive
+            axios.get('api/active/admins/company/'+this.company.id).then((response)=>{
+                this.admins = response.data.admins
+            })
         },
         showAdminsModal(){
             axios.get('api/active/admins/company/'+this.company.id).then((response)=>{
