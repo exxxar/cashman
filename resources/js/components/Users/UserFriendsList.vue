@@ -9,9 +9,6 @@
             <template v-slot:title>
                 Ваши друзья
             </template>
-            <template v-slot:right>
-                <a href="/friends-tree" type="button" class="btn btn-text-primary">Дерево друзей</a>
-            </template>
         </Header>
         <br/>
         <div id="appCapsule" class="full-height">

@@ -351,6 +351,9 @@ export default {
             this.isActive = !this.isActive
         },
         showAdminsModal(){
+            axios.get('api/active/admins/company/'+this.company.id).then((response)=>{
+                this.admins = response.data.admins
+            })
             $('#ShowAdmins').modal('show');
         }
     }
