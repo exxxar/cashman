@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <user-friends></user-friends>
+    <user-friends :friends='{!! json_encode($friends) !!}'></user-friends>
 @endsection

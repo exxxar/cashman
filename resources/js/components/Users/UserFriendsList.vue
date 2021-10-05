@@ -7,10 +7,10 @@
                 </a>
             </template>
             <template v-slot:title>
-                You Friends
+                Ваши друзья
             </template>
             <template v-slot:right>
-                <a href="/friends-tree" type="button" class="btn btn-text-primary">Friends Tree</a>
+                <a href="/friends-tree" type="button" class="btn btn-text-primary">Дерево друзей</a>
             </template>
         </Header>
         <br/>
@@ -26,7 +26,7 @@
                         </h2>
                         <div id="accordiond1" class="accordion-collapse collapse" data-bs-parent="#accordionExample5">
                             <div class="accordion-body">
-                                <UserFriendsAddHistory></UserFriendsAddHistory>
+                                <UserFriendsAddHistory :friends="friends"></UserFriendsAddHistory>
                             </div>
                         </div>
                     </div>
@@ -53,16 +53,10 @@ import Footer from "../LayoutComponents/Footer";
 export default {
     name: "UserFriendsList",
     components: {Footer, BottomMenu, UserFriendsAddHistory, FriendItem, Header},
-    data: function () {
-        return {
-            friends: [
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex", region: "Florida"},
-            ]
+    props: {
+        friends: {
+            required: true
         }
-    },
+    }
 }
 </script>

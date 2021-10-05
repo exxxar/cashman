@@ -1,7 +1,7 @@
 <template>
     <a href="#">
         <div class="user-card">
-            <img :src="user.avatar" alt="img" class="imaged w-100">
+            <img :src="'assets/sample/' +user.avatar" alt="img" class="imaged w-100">
             <strong>{{ user.name }}</strong>
         </div>
     </a>

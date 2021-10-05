@@ -64,3 +64,6 @@ Route::post('offs/cashback', [\App\Http\Controllers\Cashback\CashBackController:
 Route::get('profile/products/{id}', [UserProfileController::class, 'getProducts']);
 Route::post('add/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'addCompanyAdmin']);
 Route::post('delete/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'deleteCompanyAdmin']);
+Route::get('change/active-admin/{admin}/{company}', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'changeActiveAdmin']);
+Route::get('active/admins/company/{id}', [\App\Http\Controllers\Companies\CompanyProfileController::class, 'getActiveAdmins']);
+

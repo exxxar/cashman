@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyAdvertising;
+use App\Models\CompanyUser;
 use App\Models\HistoryUsersCompany;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Models\UsersFriedsByCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,7 +87,12 @@ class UserProfileController extends Controller
     public function getProfileData($id)
     {
         $profile = (object)UserProfile::where('user_id', $id)->first();
-        return response()->json(['profile' => $profile]);
+        $friendsIds = UsersFriedsByCompany::where('parent_id', $id)->pluck('user_id');
+        $friends = UserProfile::whereIn('id', $friendsIds)->get();
+        return response()->json([
+            'profile' => $profile,
+            'friends'=>$friends
+        ]);
     }
     public function getProducts($id){
         $profile = User::find($id);

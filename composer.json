@@ -11,6 +11,7 @@
         "php": "^7.3|^8.0",
         "ext-curl": "*",
         "ext-json": "*",
+        "ext-mysqli": "*",
         "atehnix/vk-client": "^1.4",
         "bensampo/laravel-enum": "^3.4",
         "fideloper/proxy": "^4.4",
@@ -18,6 +19,7 @@
         "geoip2/geoip2": "^2.11",
         "guzzlehttp/guzzle": "^7.0.1",
         "jackmartin/laravel-yandex-geocode": "^1.2",
+        "laravel-lang/lang": "~8.0",
         "laravel/framework": "^8.40",
         "laravel/scout": "^9.2",
         "laravel/socialite": "^5.2",
@@ -35,9 +37,7 @@
         "spatie/laravel-permission": "^4.3",
         "stevebauman/location": "^6.2",
         "tcg/voyager": "^1.4",
-        "torann/geoip": "^3.0",
-        "ext-mysqli": "*",
-        "ext-mysql": "*"
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

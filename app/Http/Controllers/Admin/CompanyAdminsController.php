@@ -49,4 +49,11 @@ class CompanyAdminsController extends Controller
         $user->isActive=null;
         $user->save();
     }
+    public function changeActiveAdmin($admin, $company){
+        $user = CompanyUser::where(['user_id'=>$admin, 'company_id'=>$company])->first();
+        if($user->role=='admin') {
+            $user->isActive = !$user->isActive;
+            $user->save();
+        }
+    }
 }

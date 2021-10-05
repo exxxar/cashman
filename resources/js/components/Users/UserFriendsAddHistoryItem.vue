@@ -1,11 +1,11 @@
 <template>
     <div class="item">
-        <span class="time">{{ friend.created_at }}</span>
+        <span class="time">{{ friend.date|myDate }}</span>
         <div class="dot bg-danger"></div>
         <div class="content">
-            <h4 class="title">Your referrals</h4>
+            <h4 class="title">Ваш реферал - {{friend.name}}</h4>
             <div class="text">
-                <img :src="friend.avatar" alt="avatar" class="imaged w48 rounded">
+                <img :src="'assets/sample/' +friend.avatar" alt="avatar" class="imaged w48 rounded">
             </div>
         </div>
     </div>

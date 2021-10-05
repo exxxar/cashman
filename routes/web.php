@@ -54,6 +54,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/news/{id}', [NewsController::class, 'getNewsItem']);
     /* Страница компаний */
     Route::get('/search-company', [CompanyListController::class, 'getSearchPage']);
+    /* Профиль компании */
+    Route::get('/company-profile-{id}', [CompanyProfileController::class, 'getCompanyData'])->name('company-profile');
     Route::get('/qr-handler/data={data}', [PromocodeController::class, 'qrHandler'])->name('qr-handler');
     /* Авторизация через социальные сети */
     Route::get('/auth/{driver}', [SocialController::class, 'index']);
@@ -81,13 +83,9 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::get('/history/action-{id}', [HistoryActionController::class, 'getActionDetail']);
         /* Друзья пользователя */
-        Route::get('/friends', function () {
-            return view('pages/userProfile/friends/userFriendsPage');
-        });
+        Route::get('/friends', [\App\Http\Controllers\Users\UserFriendsController::class, 'getUserFriendsPage']);
         /* Дерево друзей пользователя */
-        Route::get('/friends-tree', function () {
-            return view('pages/userProfile/friends/usersFriendsTreePage');
-        });
+        Route::get('/friends-tree/{company}', [\App\Http\Controllers\Users\UserFriendsController::class, 'getUserFriendsTreePage']);
         /* Страница ввода промокода */
         Route::get('/promo-code/{user}/{company}', [PromocodeController::class, 'getUserPromocode'])->name('user-qr');
         /* Регистрация компании */
@@ -102,8 +100,6 @@ Route::group(['middleware' => ['web']], function () {
             return view('auth/companyAuth/LoginCompanyPage');
         });
         /* Надо добавить ещё один middleware для авторизованых пользователей которые авторизовались в компании */
-        /* Профиль компании */
-        Route::get('/company-profile-{id}', [CompanyProfileController::class, 'getCompanyData'])->name('company-profile');
         /* Страница добавления рекламы (Степер) */
         Route::get('/add-advertising-{id}', [StoryController::class, 'getStepperPage']);
         /* Страница редактирования данных о компании */

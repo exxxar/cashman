@@ -73,11 +73,11 @@ class RegisterController extends Controller
             'user_id'=>$user->id,
             'avatar'=>'avatar/avatar1.jpg',
             'messengers'=>[
-                'vk' => '',
-                'telegram' => '',
-                'instagram' => '',
-                'facebook' => '',
-                'youtube' => ''
+                'vk' => null,
+                'telegram' => null,
+                'instagram' => null,
+                'facebook' => null,
+                'youtube' => null
             ]
         ]);
         if($parent_id!=null && $company_id!=null) {

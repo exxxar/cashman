@@ -17,15 +17,10 @@ import Header from "../LayoutComponents/Header";
 export default {
     name: "UserFriendsAddHistory",
     components: {Header, UserFriendsTreeItem},
-    data: function () {
-        return {
-            friends: [
-                {avatar: "assets/sample/avatar/avatar9.jpg", created_at: "06:24 PM"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", created_at: "06:24 PM"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", created_at: "06:24 PM"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", created_at: "06:24 PM"},
-            ]
+    props:{
+        friends:{
+            required: true
         }
-    },
+    }
 }
 </script>

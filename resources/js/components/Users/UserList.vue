@@ -1,7 +1,8 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">Пользователи</h2>
+            <h2 v-if="!showFriends" class="title">Пользователи</h2>
+            <h2 v-if="showFriends" class="title">Друзья по компаниям</h2>
             <a v-if="showFriends" href="friends" class="link">Просмотреть все</a>
         </div>
         <!-- carousel small -->
@@ -22,22 +23,10 @@ export default {
     components: {UserItem,  Splide, SplideSlide},
     data: function () {
         return {
-            users: [
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-                {avatar: "assets/sample/avatar/avatar9.jpg", name: "Alex"},
-            ],
             options: {
                 perPage: 9,
                 rewind: false,
-                type: "loop",
+                type: "slide",
                 gap: 16,
                 padding: 16,
                 arrows: false,
@@ -57,6 +46,9 @@ export default {
         showFriends: {
             required: true,
             type: Boolean
+        },
+        users:{
+            required: true
         }
     }
 }

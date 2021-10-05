@@ -19,8 +19,9 @@
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
             </div>
-
-            <div class="card text-center">
+            <h4 class="text-center" v-if="advertisements.length===0">У вашей компании пока нет ни одной рекламной записи. Нажмите на кнопку
+            "Добавить новую рекламу", чтобы пользователи знали о ваших новостях и акциях</h4>
+            <div v-if="advertisements.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

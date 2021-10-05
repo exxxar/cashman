@@ -29,7 +29,7 @@
             <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
             <ProductTile v-if="products.length>0" :items="products"></ProductTile>
             <CompanyList :user="auth_user" :companies="companies"></CompanyList>
-            <UserList :show-friends="true"></UserList>
+            <UserList v-if="friends.length>0" :show-friends="true" :users="friends"></UserList>
             <NewsList v-if="news.length>0" :items="news"></NewsList>
         </div>
         <Footer class="padding-bottom-70"></Footer>
@@ -78,13 +78,15 @@ export default {
     data(){
         return{
             profile: [],
-            products: []
+            products: [],
+            friends: []
         }
     },
     methods:{
         getProfileData(){
             axios.get('api/profile/'+this.auth_user.id).then(response=>{
                 this.profile = response.data.profile
+                this.friends = response.data.friends
             })
         },
         getProductsData(){

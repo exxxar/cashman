@@ -32,7 +32,7 @@
             <ProductTile v-if="products.length>0" :items="products"></ProductTile>
             <NewsList v-if="news.length>0" :items="news"></NewsList>
             <CompanyList v-if="companies.length>0" :companies="companies" :user="auth_user"></CompanyList>
-            <UserList :show-friends="false"></UserList>
+            <UserList v-if="users.length>0" :show-friends="false" :users="users"></UserList>
             <CallbackForm></CallbackForm>
         </div>
         <Footer class="padding-bottom-70"></Footer>
@@ -80,7 +80,8 @@ export default {
             news: [],
             stories: [],
             profile: [],
-            history: []
+            history: [],
+            users: []
         }
     },
     mounted(){
@@ -103,6 +104,7 @@ export default {
                             vm.news = response.data.news
                             vm.stories = response.data.stories
                             vm.history = response.data.history
+                            vm.users = response.data.users
                         })
                 },
                 error => {

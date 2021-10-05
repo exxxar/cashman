@@ -23,10 +23,10 @@
                         <footer>{{ admin.phone }}</footer>
                     </div>
                     <a v-if="admin.isActive" href="#" class="headerButton">
-                        <ion-icon name="notifications"></ion-icon>
+                        Online
                     </a>
                     <a v-if="!admin.isActive" href="#" class="headerButton">
-                        <ion-icon name="notifications-off"></ion-icon>
+                        Offline
                     </a>
 
                 </div>
@@ -49,9 +49,6 @@ export default {
         admins:{
             required: true
         }
-    },
-    mounted(){
-        console.log(this.admins)
     }
 }
 </script>

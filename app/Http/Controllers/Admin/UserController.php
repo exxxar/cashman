@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyUser;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -10,44 +12,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $users = (object)[
-            ['id'=>1,
-                'name' => 'John',
-                'avatar' => 'assets/sample/photo/4.jpg',
-                'phone' => '+38071476633',
-                'country' => 'Russian',
-                'region' => 'Region',
-                'address' => 'Address 122, 97'
-            ],
-            ['id'=>2,
-                'name' => 'John',
-                'avatar' => 'assets/sample/photo/3.jpg',
-                'phone' => '+38071476633',
-                'country' => 'Russian',
-                'region' => 'Region',
-                'address' => 'Address 122, 97'
-            ],
-            ['id'=>3,
-                'name' => 'John',
-                'avatar' => 'assets/sample/photo/2.jpg',
-                'phone' => '+38071476633',
-                'country' => 'Russian',
-                'region' => 'Region',
-                'address' => 'Address 122, 97'
-            ],
-            ['id'=>4,
-                'name' => 'John',
-                'avatar' => 'assets/sample/photo/1.jpg',
-                'phone' => '+38071476633',
-                'country' => 'Russian',
-                'region' => 'Region',
-                'address' => 'Address 122, 97'
-            ]
-        ];
+        $usersIds = CompanyUser::where('company_id', $id)->pluck('user_id');
+        $users = UserProfile::whereIn('user_id', $usersIds)->get();
         return view('pages/companyProfile/Admin/AdminUsersPage', compact('users'));
     }
 
