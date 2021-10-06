@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Confirm Password
+    Подтверждение пароля
 @endsection
 @section('content')
     <div class="container">

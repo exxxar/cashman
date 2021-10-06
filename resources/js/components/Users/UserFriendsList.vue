@@ -11,8 +11,10 @@
             </template>
         </Header>
         <br/>
-        <div id="appCapsule" class="full-height">
-            <div class="section inset mt-2 mb-2">
+
+        <div  id="appCapsule" class="full-height">
+            <h4 class="text-center" v-if="friends.length===0">Вы пока не пригласили ни одного друга. Приглашайте друзей в компании и получайте приятные бонусы!</h4>
+            <div v-if="friends.length!==0" class="section inset mt-2 mb-2">
                 <div class="accordion" id="accordionExample5">
                     <div class="accordion-item">
                         <h2 class="accordion-header bg-primary">
@@ -29,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <ul class="listview image-listview inset">
+            <ul v-if="friends!==null" class="listview image-listview inset">
                 <li v-for="friend in friends">
                     <FriendItem :user=friend></FriendItem>
                 </li>

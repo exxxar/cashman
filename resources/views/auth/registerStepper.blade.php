@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-   Complete Registration
+   Продолжение регистрации
 @endsection
 @section('content')
     <user-register-stepper :email='{!! json_encode($email) !!}' ></user-register-stepper>

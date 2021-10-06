@@ -66,4 +66,5 @@ Route::post('add/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsContr
 Route::post('delete/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'deleteCompanyAdmin']);
 Route::get('change/active-admin/{admin}/{company}', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'changeActiveAdmin']);
 Route::get('active/admins/company/{id}', [\App\Http\Controllers\Companies\CompanyProfileController::class, 'getActiveAdmins']);
-
+Route::post('change/email', [UserProfileController::class, 'changeUserEmail']);
+Route::post('change/avatar', [UserProfileController::class, 'changeUserAvatar']);

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Registration
+    Регистрация
 @endsection
 @section('content')
     <user-register-component></user-register-component>

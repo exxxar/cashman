@@ -24,7 +24,8 @@ class UserFriendsController extends Controller
 
     public function getUserFriendsTreePage($company)
     {
-        $user = UserProfile::where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $id = Auth::user()->getAuthIdentifier();
+        $user = UserProfile::where('user_id', $id)->first();
         $friendsIds = UsersFriedsByCompany::where(['parent_id'=>$user->user_id, 'company_id'=>$company])->pluck('user_id');
         $userFriends = UserProfile::whereIn('id', $friendsIds)->get();
         $friends = [];
@@ -56,7 +57,8 @@ class UserFriendsController extends Controller
             $treeData = null;
         }
 
-        return view('pages/userProfile/friends/usersFriendsTreePage', compact('treeData'));
+
+        return view('pages/userProfile/friends/usersFriendsTreePage', compact('treeData', 'id', 'company'));
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Reset password
+   Восстановление пароля
 @endsection
 @section('content')
     <!-- App Header -->
@@ -18,8 +18,8 @@
     <!-- App Capsule -->
     <div id="appCapsule">
         <div class="section mt-2 text-center">
-            <h1>Reset password</h1>
-            <h4>Type your new password</h4>
+            <h1>Восстановление пароля</h1>
+            <h4>Введите ваш новый пароль</h4>
         </div>
         <div class="section mb-5 p-2">
             <form method="POST" action="{{ route('password.update') }}">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="form-button-group transparent">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Reset Password</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Сменить пароль</button>
                         </div>
                     </div>
                 </div>

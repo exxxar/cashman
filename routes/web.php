@@ -66,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
     /* Группа авторизованных пользователей */
     Route::group(['middleware' => ['auth']], function () {
         /* Профиль пользователя */
-        Route::get('/user-profile',[UserProfileController::class, 'getAuthUser']);
+        Route::get('/user-profile',[UserProfileController::class, 'getAuthUser'])->name('profile');
         Route::get('/company/add-{id}', [CompanyListController::class, 'addUserCompany']);
         /* Настройки профиля пользователя */
         Route::get('/user-settings', [UserProfileController::class, 'getUserSettings']);
@@ -92,34 +92,35 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/register-company', function () {
             return view('auth/companyAuth/RegistrationCompanyPage');
         });
-        Route::get('/register-complete-company-{id}', [CompanyAuthController::class, 'completeRegistration'])->name('completeCompanyRegistration');
         Route::post('/register-company', [CompanyAuthController::class, 'register']);
         Route::post('/login-company', [CompanyAuthController::class, 'login']);
         /* Авторизация компании */
         Route::get('/login-company', function () {
             return view('auth/companyAuth/LoginCompanyPage');
         });
-        /* Надо добавить ещё один middleware для авторизованых пользователей которые авторизовались в компании */
-        /* Страница добавления рекламы (Степер) */
-        Route::get('/add-advertising-{id}', [StoryController::class, 'getStepperPage']);
-        /* Страница редактирования данных о компании */
-        Route::get('/company-edit-{id}', [CompanyEditSectionController::class, 'index']);
-        /* Меню админа компании */
-        Route::get('/company-admin-menu-{id}', [CompanyActionMenuController::class, 'adminMenu'])->name('company-admin');
-        /*CRUD продукты*/
-        Route::get('/company-admin-products-{id}', [ProductController::class, 'index'])->name('companyProducts');
+        Route::group(['middleware' => ['company.admin']], function () {
+            Route::get('/register-complete-company-{id}', [CompanyAuthController::class, 'completeRegistration'])->name('completeCompanyRegistration');
+            /* Страница добавления рекламы (Степер) */
+            Route::get('/add-advertising-{id}', [StoryController::class, 'getStepperPage']);
+            /* Страница редактирования данных о компании */
+            Route::get('/company-edit-{id}', [CompanyEditSectionController::class, 'index']);
+            /* Меню админа компании */
+            Route::get('/company-admin-menu-{id}', [CompanyActionMenuController::class, 'adminMenu'])->name('company-admin');
+            /*CRUD продукты*/
+            Route::get('/company-admin-products-{id}', [ProductController::class, 'index'])->name('companyProducts');
+            Route::get('/token-company-{id}', [\App\Http\Controllers\Products\ProductController::class, 'getUserToken']);
+            /*CRUD реклама*/
+            Route::get('/company-admin-advertisement-{id}', [AdvertisementController::class, 'index']);
+            /*Просмотр пользователей админом*/
+            Route::get('/company-admin-users-{id}', [UserController::class, 'index']);
+            /*Страница историй админа*/
+            Route::get('/story-admin-menu-{id}', [AdvertisementController::class, 'getAdvertisement']);
+            /*Страница действий компании*/
+            Route::get('/company-action-menu-{id}', [CompanyActionMenuController::class, 'index']);
+            /*Страница списка администраторов компании*/
+            Route::get('/company-group-admin-{id}', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'getCompanyGroupAdmin']);
+        });
         Route::get('/upload-products', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts'])->name('companyUploadProducts');
-        Route::get('/token-company-{id}', [\App\Http\Controllers\Products\ProductController::class, 'getUserToken']);
-        /*CRUD реклама*/
-        Route::get('/company-admin-advertisement-{id}', [AdvertisementController::class, 'index']);
-        /*Просмотр пользователей админом*/
-        Route::get('/company-admin-users-{id}', [UserController::class, 'index']);
-        /*Страница историй админа*/
-        Route::get('/story-admin-menu-{id}', [AdvertisementController::class, 'getAdvertisement']);
-        /*Страница действий компании*/
-        Route::get('/company-action-menu-{id}', [CompanyActionMenuController::class, 'index']);
-        /*Страница списка администраторов компании*/
-        Route::get('/company-group-admin-{id}', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'getCompanyGroupAdmin']);
         /*Страница добавления промокода*/
         Route::get('/add-promocode', [PromocodeController::class, 'index']);
     });

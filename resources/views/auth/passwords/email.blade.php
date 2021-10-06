@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Forgot password
+    Забыли пароль
 @endsection
 @section('content')
     <div class="appHeader no-border transparent position-absolute">
@@ -17,8 +17,8 @@
     <!-- App Capsule -->
     <div id="appCapsule">
         <div class="section mt-2 text-center">
-            <h1>Forgot password</h1>
-            <h4>Type your e-mail to reset your password</h4>
+            <h1>Забыли пароль</h1>
+            <h4>Введите ваш email для восстановления пароля</h4>
         </div>
         <div class="section mb-5 p-2">
             @if (session('status'))
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="form-button-group transparent">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Reset Password</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Восстановить пароль</button>
                         </div>
                     </div>
                 </div>

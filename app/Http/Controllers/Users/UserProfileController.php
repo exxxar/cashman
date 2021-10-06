@@ -87,6 +87,8 @@ class UserProfileController extends Controller
     public function getProfileData($id)
     {
         $profile = (object)UserProfile::where('user_id', $id)->first();
+        $user = User::find($id);
+        $profile['email'] = $user->email;
         $friendsIds = UsersFriedsByCompany::where('parent_id', $id)->pluck('user_id');
         $friends = UserProfile::whereIn('id', $friendsIds)->get();
         return response()->json([
@@ -106,6 +108,30 @@ class UserProfileController extends Controller
         return response()->json([
             'products'=>$products
         ]);
+    }
+    public function changeUserEmail(Request $request){
+        $this->validate($request, [
+            'id'=>['required', 'exists:users'],
+            'email'=>['required', 'string', 'email', 'max:255', 'unique:users']
+        ]);
+        $user = User::find($request->id);
+        $user->email = $request->email;
+        $user->save();
+        return response()->json(['status'=>'success']);
+
+    }
+    public function changeUserAvatar(Request $request){
+        $this->validate($request, [
+            'id'=>['required', 'exists:users'],
+            'avatar'=>['required', 'string']
+        ]);
+        $profile = UserProfile::where('user_id', $request->id)->first();
+        if ($profile->avatar != $request->avatar) {
+            $profile->avatar = 'avatar/' . $request->avatar;
+            $profile->save();
+            return response()->json(['status'=>'success']);
+        }
+        return response()->json(['status'=>'error']);
     }
 
 

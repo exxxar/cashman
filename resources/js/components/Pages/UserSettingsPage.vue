@@ -21,7 +21,7 @@
                 <div class="avatar-section">
                     <a href="#">
                         <img :src="'assets/sample/'+profile.avatar" alt="avatar" class="imaged w100 rounded">
-                        <span class="button">
+                        <span class="button" @click="changeAvatar">
                         <ion-icon name="camera-outline"></ion-icon>
                     </span>
                     </a>
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="item">
+                    <a href="#" @click="changeEmail" class="item">
                         <div class="in">
                             <div>Обновить адрес электронной почты</div>
                         </div>
@@ -89,7 +89,7 @@
             <div class="listview-title mt-1">Безопасность</div>
             <ul class="listview image-listview text mb-2 inset">
                 <li>
-                    <a href="password/reset" class="item">
+                    <a href="#" @click="changePassword" class="item">
                         <div class="in">
                             <div>Обновить пароль</div>
                         </div>
@@ -106,6 +106,8 @@
         </div>
         <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
+        <ChangeEmailModal :id="this.user.id"></ChangeEmailModal>
+       <ChangeAvatarModal :id="this.user.id" @updateParent="getProfileData"></ChangeAvatarModal>
     </fragment>
 </template>
 
@@ -113,10 +115,11 @@
 import Header from "../LayoutComponents/Header";
 import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
-
+import ChangeEmailModal from "../Modals/ChangeEmailModal";
+import ChangeAvatarModal from "../Modals/ChangeAvatarModal";
 export default {
     name: "UserSettingsPage",
-    components: {Header, Footer, BottomMenu},
+    components: {ChangeAvatarModal, ChangeEmailModal, Header, Footer, BottomMenu},
     data: () => ({
         csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         profile: []
@@ -137,6 +140,29 @@ export default {
             axios.get('api/profile/'+this.user.id).then(response=>{
                 this.profile = response.data.profile
             })
+        },
+        changePassword(){
+            let email = {email:this.profile.email}
+            axios.post('password/email', email).then(()=>{
+                Swal.fire({
+                    icon: 'success',
+                    title:   'Проверьте почту!',
+                    text: 'Письмо для подтверждения смены пароля отправлено на вашу почту - '+this.profile.email,
+                })
+            })
+            .catch(()=>{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Что-то пошло не так...',
+                    text: 'Повторите действие позднее',
+                })
+            })
+        },
+        changeEmail(){
+            $('#ChangeEmailModal').modal('show');
+        },
+        changeAvatar(){
+            $('#ChangeAvatarModal').modal('show');
         }
     },
     props:{

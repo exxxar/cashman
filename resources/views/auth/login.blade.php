@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Log in
+    Вход
 @endsection
 @section('content')
     <user-login-component></user-login-component>

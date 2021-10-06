@@ -29,6 +29,9 @@ class ProductController extends Controller
 
     public function uploadProducts(Request $request)
     {
+        if(!session()->has('company')){
+            return redirect()->route('profile');
+        }
         $auth = new Auth('7883909', 'B95nspocgcljhxTATjTN', 'https://your-cashman.com/upload-products', 'market, groups');
         $id = session('company');
         $company = Company::find($id);
