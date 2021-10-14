@@ -6,14 +6,12 @@
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
-            <template v-slot:title>
-                Заполните информацию о Вашем аккаунте для завершения регистрации
-            </template>
             <template v-slot:right>
                 <a href='login' class="headerButton">Login</a>
             </template>
         </Header>
-        <br/>
+        <div class="section mt-2 text-center">
+            <p>Заполните информацию о Вашем аккаунте для завершения регистрации</p>
         <form-wizard @onComplete="onComplete">
             <tab-content title="Почта" :selected="true">
                 <div class="form-group">
@@ -90,6 +88,7 @@
                 </div>
             </tab-content>
         </form-wizard>
+        </div>
         <BottomMenu></BottomMenu>
         <InformModal></InformModal>
     </fragment>

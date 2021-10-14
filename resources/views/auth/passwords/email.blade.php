@@ -3,7 +3,7 @@
     Забыли пароль
 @endsection
 @section('content')
-    <div class="appHeader no-border transparent position-absolute">
+    <div class="appHeader no-border">
         <div class="left">
             <a href="#" class="headerButton goBack">
                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-button-group transparent">
+                        <div class="form-button-group">
                             <button type="submit" class="btn btn-primary btn-block btn-lg">Восстановить пароль</button>
                         </div>
                     </div>

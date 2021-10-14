@@ -21,6 +21,7 @@ class User extends \TCG\Voyager\Models\User
         'email',
         'password',
         'telegram_chat_id',
+        'device_token'
     ];
 
     /**

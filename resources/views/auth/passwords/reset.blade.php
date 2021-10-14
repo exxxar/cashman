@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <!-- App Header -->
-    <div class="appHeader no-border transparent position-absolute">
+    <div class="appHeader no-border">
         <div class="left">
             <a href="#" class="headerButton goBack">
                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -60,7 +60,7 @@
                                        name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        <div class="form-button-group transparent">
+                        <div class="form-button-group">
                             <button type="submit" class="btn btn-primary btn-block btn-lg">Сменить пароль</button>
                         </div>
                     </div>

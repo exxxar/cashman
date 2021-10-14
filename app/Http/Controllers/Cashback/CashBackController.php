@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Cashback;
 
+use App\Notifications\RealTimeNotification;
 use App\Http\Controllers\Controller;
-use App\Models\Company;
-use App\Models\CompanyUser;
 use App\Models\HistoryUsersCompany;
 use App\Models\User;
 use App\Models\UsersFriedsByCompany;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CashBackController extends Controller
 {
@@ -24,6 +22,10 @@ class CashBackController extends Controller
 
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->cashback, $request->sum,
             $request->description, 'Начисление');
+        $user = User::find($request->user);
+        $user->notify(new RealTimeNotification('Начисление кэшбека - '.$request->cashback.'$',
+            'От компании '.$request->company['title'],
+            'assets/sample/'.$request->company['image'], $user->device_token));
         $friends1 = UsersFriedsByCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id']])->get();
         if ($friends1 != null) {
             $cashback_percent_level_1 = $request->company['cashback_percent_level_1'];

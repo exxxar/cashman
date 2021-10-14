@@ -108,6 +108,7 @@ export default {
                     title:   'Кэшбек начислен',
                     text: 'Начисление кэшбека в '+this.company.cashback_percent+'% прошло успешно!',
                 })
+
             })
                 .catch(() => {
 

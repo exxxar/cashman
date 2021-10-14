@@ -1,6 +1,6 @@
 <template>
     <div id="appCapsule" class="full-height">
-        <Header class="bg-transparent border-0">
+        <Header class="border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
@@ -52,7 +52,7 @@
                         <a href="password/reset" class="text-muted">Забыли пароль?</a>
                     </div>
                 </div>
-                <div class="form-button-group transparent">
+                <div class="form-button-group">
                     <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Войти</button>
                 </div>
             </form>

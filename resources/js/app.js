@@ -8,9 +8,9 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 export const eventBus = new Vue()
-
 import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
+
 
 import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
@@ -104,7 +104,7 @@ Vue.component('company-complete-registration', require('./components/Companies/C
 Vue.component('products', require('./components/Products/ProductList').default);
 
 Vue.component('side-menu', require('./components/LayoutComponents/SideMenu').default);
-
+Vue.component('personal-notification', require('./components/Notification/PersonalNotification').default);
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -118,6 +118,7 @@ const Toast = Swal.mixin({
 })
 window.Toast = Toast;
 window.Fire = new Vue();
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

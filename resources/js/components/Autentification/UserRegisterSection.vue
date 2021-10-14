@@ -1,7 +1,7 @@
 <template>
     <!-- App Capsule -->
     <div id="appCapsule" class="full-height">
-        <Header class="bg-transparent border-0">
+        <Header class="border-0">
             <template v-slot:left>
                 <a href="#" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
@@ -75,7 +75,6 @@
                 </div>
                 <div id="social_icon">
                     <div class="section mt-2 text-center border-bottom">
-                        <h2>ИЛИ</h2>
                     </div>
                     <div class="section py-2 px-1 text-center">
                         <a class="btn btn-icon btn-facebook  me-05" href="auth/facebook">
@@ -95,7 +94,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="form-button-group transparent">
+                <div class="form-button-group">
                     <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Зарегистрироваться</button>
                 </div>
             </form>

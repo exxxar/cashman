@@ -11,6 +11,7 @@ use App\Http\Controllers\Companies\CompanyListController;
 use App\Http\Controllers\Companies\CompanyProfileController;
 use App\Http\Controllers\HistoryAction\HistoryActionController;
 use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Promocode\PromocodeController;
 use App\Http\Controllers\Region\RegionMapController;
 use App\Http\Controllers\Social\SocialController;
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/region-map/{id}', [RegionMapController::class, 'getMap']);
     /* Группа авторизованных пользователей */
     Route::group(['middleware' => ['auth']], function () {
+        Route::post('/save-push-notification-token', [NotificationController::class, 'savePushNotificationToken'])->name('save-push-notification-token');
         /* Профиль пользователя */
         Route::get('/user-profile',[UserProfileController::class, 'getAuthUser'])->name('profile');
         Route::get('/company/add-{id}', [CompanyListController::class, 'addUserCompany']);

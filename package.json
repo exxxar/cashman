@@ -13,13 +13,14 @@
         "axios": "^0.21.1",
         "bootstrap": "^4.6.0",
         "cross-env": "^7.0.3",
+        "dotenv": "^10.0.0",
         "jquery": "^3.6",
-        "laravel-echo": "^1.4.0",
+        "laravel-echo": "^1.11.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
         "postcss": "^8.1.14",
-        "pusher-js": "^4.2.2",
+        "pusher-js": "^4.4.0",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
@@ -35,6 +36,7 @@
         "@fortawesome/fontawesome-free": "^5.15.3",
         "@splidejs/splide": "^2.4.21",
         "@splidejs/vue-splide": "^0.3.5",
+        "firebase": "^9.1.2",
         "moment": "^2.29.1",
         "qrcode": "^1.4.4",
         "sweetalert2": "^10.15.5",
@@ -49,6 +51,7 @@
         "vue-step-wizard": "^0.1.17",
         "vue-tree-chart": "^1.2.9",
         "vue-yandex-maps": "^0.10.11",
-        "vue2-dropzone": "^3.6.0"
+        "vue2-dropzone": "^3.6.0",
+        "vuefire": "^3.0.0-alpha.2"
     }
 }
