@@ -42,7 +42,7 @@
         projectId: '{{"PROJECT_ID"}}',
         storageBucket: '{{"STORAGE_BUCKET"}}',
         messagingSenderId: '{{"MESSAGING_SENDER_ID"}}',
-        appId: '{{"APP_ID"}}',
+        appId: '1:291920612530:web:ae679e33f6ced8a6a5cdab',
         measurementId: '{{"MEASURE_ID"}}'
     };
 
