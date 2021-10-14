@@ -37,13 +37,13 @@
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js?version={{env("APP_VERSION")}}"></script>
 <script type="application/javascript">
     var firebaseConfig = {
-        apiKey: '{{"API_KEY"}}',
-        authDomain: '{{"AUTH_DOMAIN"}}',
-        projectId: '{{"PROJECT_ID"}}',
-        storageBucket: '{{"STORAGE_BUCKET"}}',
-        messagingSenderId: '{{"MESSAGING_SENDER_ID"}}',
+        apiKey: 'AIzaSyBy3G_-OGoXyRaCqB4wZJAjrd3QE1PLDa8',
+        authDomain: 'cashman-320612.firebaseapp.com',
+        projectId: 'cashman-320612',
+        storageBucket: 'cashman-320612.appspot.com',
+        messagingSenderId: '291920612530',
         appId: '1:291920612530:web:ae679e33f6ced8a6a5cdab',
-        measurementId: '{{"MEASURE_ID"}}'
+        measurementId: 'G-1MH9VQW03S'
     };
 
     firebase.initializeApp(firebaseConfig);

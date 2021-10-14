@@ -2,13 +2,13 @@ importScripts('https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js');
 
 firebase.initializeApp({
-    apiKey: '{{env("API_KEY")}}',
-    authDomain: '{{env("AUTH_DOMAIN")}}',
-    projectId: '{{env("PROJECT_ID")}}',
-    storageBucket: '{{env("STORAGE_BUCKET")}}',
-    messagingSenderId: '{{env("MESSAGING_SENDER_ID")}}',
+    apiKey: 'AIzaSyBy3G_-OGoXyRaCqB4wZJAjrd3QE1PLDa8',
+    authDomain: 'cashman-320612.firebaseapp.com',
+    projectId: 'cashman-320612',
+    storageBucket: 'cashman-320612.appspot.com',
+    messagingSenderId: '291920612530',
     appId: '1:291920612530:web:ae679e33f6ced8a6a5cdab',
-    measurementId: '{{env("MEASURE_ID")}}'
+    measurementId: 'G-1MH9VQW03S'
 });
 
 const messaging = firebase.messaging();
