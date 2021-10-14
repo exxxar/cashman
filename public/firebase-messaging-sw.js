@@ -2,13 +2,13 @@ importScripts('https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js');
 
 firebase.initializeApp({
-    apiKey: '{{"API_KEY"}}',
-    authDomain: '{{"AUTH_DOMAIN"}}',
-    projectId: '{{"PROJECT_ID"}}',
-    storageBucket: '{{"STORAGE_BUCKET"}}',
-    messagingSenderId: '{{"MESSAGING_SENDER_ID"}}',
-    appId: '{{"APP_ID"}}',
-    measurementId: '{{"MEASURE_ID"}}'
+    apiKey: '{{env("API_KEY")}}',
+    authDomain: '{{env("AUTH_DOMAIN")}}',
+    projectId: '{{env("PROJECT_ID")}}',
+    storageBucket: '{{env("STORAGE_BUCKET")}}',
+    messagingSenderId: '{{env("MESSAGING_SENDER_ID")}}',
+    appId: '{{env("APP_ID")}}',
+    measurementId: '{{env("MEASURE_ID")}}'
 });
 
 const messaging = firebase.messaging();
