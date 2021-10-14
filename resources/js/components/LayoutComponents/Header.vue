@@ -1,4 +1,5 @@
 <template>
+    <fragment>
     <div class="appHeader">
         <div class="left">
             <slot name="left"></slot>
@@ -10,13 +11,29 @@
             <slot name="right"></slot>
         </div>
     </div>
+        <AndroidPreview v-if="title!==null" textApplicationName="CashMan" :textTitle="title" :textBody="message" :image="image"></AndroidPreview>
+    </fragment>
 </template>
 
 <script>
+import { AndroidPreview, IphonePreview } from 'vue-push-notification-preview';
+import 'vue-push-notification-preview/src/assets/devices.scss';
 export default {
     name: "Header",
+    components: {
+        AndroidPreview,
+        IphonePreview
+    },
+    data(){
+        return{
+            title: null,
+            message: null,
+            image: null
+        }
+    },
     methods:{
         getNot(){
+            let vm = this;
             var firebaseConfig = {
                 apiKey: 'AIzaSyBy3G_-OGoXyRaCqB4wZJAjrd3QE1PLDa8',
                 authDomain: 'cashman-320612.firebaseapp.com',
@@ -64,6 +81,9 @@ export default {
                     icon: payload.data.image,
                 };
                 new Notification(noteTitle, noteOptions);
+                vm.title = payload.data.title
+                vm.description = payload.data.body
+                vm.image = payload.data.image
             });
 
         }
