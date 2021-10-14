@@ -7,7 +7,7 @@ firebase.initializeApp({
     projectId: '{{env("PROJECT_ID")}}',
     storageBucket: '{{env("STORAGE_BUCKET")}}',
     messagingSenderId: '{{env("MESSAGING_SENDER_ID")}}',
-    appId: '{{env("APP_ID")}}',
+    appId: '1:291920612530:web:ae679e33f6ced8a6a5cdab',
     measurementId: '{{env("MEASURE_ID")}}'
 });
 
