@@ -35,6 +35,47 @@
     crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js?version={{env("APP_VERSION")}}"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js?version={{env("APP_VERSION")}}"></script>
+<script type="text/javascript">
+    var firebaseConfig = {
+        apiKey: 'AIzaSyBy3G_-OGoXyRaCqB4wZJAjrd3QE1PLDa8',
+        authDomain: 'cashman-320612.firebaseapp.com',
+        projectId: 'cashman-320612',
+        storageBucket: 'cashman-320612.appspot.com',
+        messagingSenderId: '291920612530',
+        appId: '1:291920612530:web:ae679e33f6ced8a6a5cdab',
+        measurementId: 'G-1MH9VQW03S'
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    function initFirebaseMessagingRegistration() {
+        messaging
+            .requestPermission()
+            .then(function () {
+                return messaging.getToken({ vapidKey: 'BL33NB4gjDr1gikXM9k8Np3ZSRmLrAfezQwa40i5P6BIl039XujRTMcTy7ZxbKS3R3L40G0ZPtVG8591Ph47v-o' })
+            })
+            .then(function(token) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ route("save-push-notification-token") }}',
+                    type: 'POST',
+                    data: {
+                        token: token
+                    },
+                    dataType: 'JSON',
+                });
+
+            }).catch(function (err) {
+        });
+    }
+    initFirebaseMessagingRegistration();
+</script>
 <!-- Scripts -->
 <script type="text/javascript" src="{{ asset('js/app.js') }}?version={{env("APP_VERSION")}}"></script>
 <script type="text/javascript" src="{{ asset('js/base.js') }}?version={{env("APP_VERSION")}}"></script>
