@@ -15,21 +15,29 @@
 <script>
 export default {
     name: "Header",
-    methods:{
-        getNot(){
-            messaging.onMessage(function(payload) {
-                const noteTitle = payload.data.title;
+    methods: {
+        getNot() {
+            let vm = this
+            messaging.onMessage(function (payload) {
+                const note = payload.data.title.split(',');
+                const noteTitle = note[0]
+                console.log(payload);
                 const noteOptions = {
                     body: payload.data.body,
                     icon: payload.data.image,
                 };
                 new Notification(noteTitle, noteOptions);
+                vm.$dtoast.pop({
+                    preset: note[1],
+                    heading: noteTitle,
+                    content: payload.data.body,
+                })
             });
-
-        }
+        },
     },
     mounted() {
         this.getNot()
     }
 }
+
 </script>

@@ -4,14 +4,20 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
-
 window.Vue = require('vue').default;
 
 export const eventBus = new Vue()
 import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
+import 'dtoaster/dist/dtoaster.css'
+import DToaster from 'dtoaster'
+import ToasterPresets from './json/toast_presets.json' //Your predefined toasts presets (optionally)
 
-
+Vue.use(DToaster, {
+    presets: ToasterPresets,
+    position: 'top-right',
+    containerOffset: '45px',
+})
 import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
 
@@ -58,7 +64,6 @@ Vue.use(YmapPlugin, settings)
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 //User Authentication
 Vue.component('user-login-component', require('./components/Autentification/UserLoginSection').default);
 Vue.component('user-register-component', require('./components/Autentification/UserRegisterSection').default);

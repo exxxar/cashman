@@ -8,6 +8,8 @@
 @import url("https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css");
 // Font Poppins
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap");
+
+@import '~@mdi/font/scss/materialdesignicons.scss';
 // Variables
 @import 'variables';
 // Styles SCSS
@@ -17,3 +19,4 @@
 @import "users-friends-tree";
 @import "company-profile";
 @import "vue-step-wizard";
+

@@ -43,7 +43,10 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->HasMany(UserCharacteristic::class);
     }
-
+    public function notifications()
+    {
+        return $this->HasMany(Notification::class);
+    }
     public function achievements()
     {
         return $this->belongsToMany(Achievement::class)->using(UserAchievement::class);

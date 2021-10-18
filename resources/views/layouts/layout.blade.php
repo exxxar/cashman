@@ -35,6 +35,7 @@
     crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js?version={{env("APP_VERSION")}}"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js?version={{env("APP_VERSION")}}"></script>
+@if(Illuminate\Support\Facades\Auth::check())
 <script type="text/javascript">
     var firebaseConfig = {
         apiKey: 'AIzaSyBy3G_-OGoXyRaCqB4wZJAjrd3QE1PLDa8',
@@ -74,8 +75,9 @@
             }).catch(function (err) {
         });
     }
-    initFirebaseMessagingRegistration();
+        initFirebaseMessagingRegistration();
 </script>
+@endif
 <!-- Scripts -->
 <script type="text/javascript" src="{{ asset('js/app.js') }}?version={{env("APP_VERSION")}}"></script>
 <script type="text/javascript" src="{{ asset('js/base.js') }}?version={{env("APP_VERSION")}}"></script>

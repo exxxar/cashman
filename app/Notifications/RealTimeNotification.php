@@ -20,6 +20,7 @@ class RealTimeNotification extends Notification
     protected $message;
     protected $fcmToken;
     protected $image;
+    protected $type;
 
     /**
      * Create a new notification instance.
@@ -47,9 +48,11 @@ class RealTimeNotification extends Notification
 
     public function toFirebase($notifiable)
     {
-        return Larafirebase::withTitle($this->title)->withBody($this->message)
+        return Larafirebase::withTitle($this->title)
+            ->withBody($this->message)
             ->withImage($this->image)
-            ->withPriority('high')->sendMessage($this->fcmToken);
+            ->withPriority('high')
+            ->sendMessage($this->fcmToken);
 
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cashback;
 
+use App\Models\Notification;
 use App\Notifications\RealTimeNotification;
 use App\Http\Controllers\Controller;
 use App\Models\HistoryUsersCompany;
@@ -23,9 +24,17 @@ class CashBackController extends Controller
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->cashback, $request->sum,
             $request->description, 'Начисление');
         $user = User::find($request->user);
-        $user->notify(new RealTimeNotification('Начисление кэшбека - '.$request->cashback.'$',
+        $user->notify(new RealTimeNotification('Начисление кэшбека - '.$request->cashback.'$'.',accrual',
             'От компании '.$request->company['title'],
             'assets/sample/'.$request->company['image'], $user->device_token));
+        Notification::create([
+            'title'=>'Начисление кэшбека - '.$request->cashback.'$'.' oт компании - '.$request->company['title'],
+            'description'=>$request->description,
+            'user_id'=>$request->user,
+            'notification_type'=>'Начисление',
+            'object_id'=>$request->company['id'],
+            'object_type'=>'company'
+        ]);
         $friends1 = UsersFriedsByCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id']])->get();
         if ($friends1 != null) {
             $cashback_percent_level_1 = $request->company['cashback_percent_level_1'];
@@ -35,6 +44,10 @@ class CashBackController extends Controller
                     $cashback1 = $request->sum / 100 * $cashback_percent_level_1;
                     $this->debitingMultiLevelCashback($friend1->parent_id, $request->company, $request->admin, $cashback1, $request->sum,
                         'Начисление кэшбека 1 уровня от суммы чека вашего друга по компании', 'Начисление');
+                    $user = User::find($friend1);
+                    $user->notify(new RealTimeNotification('Начисление кэшбека 1 уровня - '.$request->cashback.'$'.',accrual',
+                        'От компании '.$request->company['title'],
+                        'assets/sample/'.$request->company['image'], $user->device_token));
                     $friends2 = UsersFriedsByCompany::where(['user_id' => $friend1->parent_id, 'company_id' => $request->company['id']])->get();
                     if ($friends2 != null) {
                         if (!is_null($cashback_percent_level_2)) {
@@ -42,6 +55,10 @@ class CashBackController extends Controller
                                 $cashback2 = $request->sum / 100 * $cashback_percent_level_2;
                                 $this->debitingMultiLevelCashback($friend2->parent_id, $request->company, $request->admin, $cashback2, $request->sum,
                                     'Начисление кэшбека 2 уровня от суммы чека вашего друга по компании', 'Начисление');
+                                $user = User::find($friend2);
+                                $user->notify(new RealTimeNotification('Начисление кэшбека 2 уровня - '.$request->cashback.'$'.',accrual',
+                                    'От компании '.$request->company['title'],
+                                    'assets/sample/'.$request->company['image'], $user->device_token));
                             }
                         }
                     }
@@ -63,6 +80,10 @@ class CashBackController extends Controller
         }
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->sum, $request->sum,
             $request->description, 'Списание');
+        $user = User::find($request->user);
+        $user->notify(new RealTimeNotification('Списание кэшбека - '.$request->cashback.'$'.',offs',
+            'Компанией '.$request->company['title'],
+            'assets/sample/'.$request->company['image'], $user->device_token));
     }
 
     public function debitingMultiLevelCashback($user, $company, $admin, $cashback, $sum, $description, $type)
