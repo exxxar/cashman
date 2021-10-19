@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Notification;
 use App\Models\UserProfile;
 use App\Models\UsersFriedsByCompany;
+use App\Notifications\RealTimeNotification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -85,6 +88,18 @@ class RegisterController extends Controller
             UsersFriedsByCompany::create(['user_id' => $user->id,
                 'company_id' => $company_id, 'parent_id' => $parent_id]);
             $company->users()->attach(['user_id' => $user->id]);
+            $parent = User::find($parent_id);
+            $parent->notify(new RealTimeNotification('У вас появился новый друг по компании  '.$company['title'],
+                'От компании '.$company['title'],
+                'assets/sample/'.$company['image'], $parent->device_token));
+            Notification::create([
+                'title'=>'У вас появился новый друг!',
+                'description'=>'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                'user_id'=>$parent_id,
+                'notification_type'=>'Добавление рефералла',
+                'object_id'=>$user->id,
+                'object_type'=>'user'
+            ]);
         }
         return $user;
     }

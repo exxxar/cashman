@@ -27,14 +27,6 @@ class CashBackController extends Controller
         $user->notify(new RealTimeNotification('Начисление кэшбека - '.$request->cashback.'$'.',accrual',
             'От компании '.$request->company['title'],
             'assets/sample/'.$request->company['image'], $user->device_token));
-        Notification::create([
-            'title'=>'Начисление кэшбека - '.$request->cashback.'$'.' oт компании - '.$request->company['title'],
-            'description'=>$request->description,
-            'user_id'=>$request->user,
-            'notification_type'=>'Начисление',
-            'object_id'=>$request->company['id'],
-            'object_type'=>'company'
-        ]);
         $friends1 = UsersFriedsByCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id']])->get();
         if ($friends1 != null) {
             $cashback_percent_level_1 = $request->company['cashback_percent_level_1'];
@@ -81,7 +73,7 @@ class CashBackController extends Controller
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->sum, $request->sum,
             $request->description, 'Списание');
         $user = User::find($request->user);
-        $user->notify(new RealTimeNotification('Списание кэшбека - '.$request->cashback.'$'.',offs',
+        $user->notify(new RealTimeNotification('Списание кэшбека - '.$request->sum.'$'.',offs',
             'Компанией '.$request->company['title'],
             'assets/sample/'.$request->company['image'], $user->device_token));
     }
@@ -96,6 +88,14 @@ class CashBackController extends Controller
             'money_in_check' => $sum,
             'description' => $description,
             'type' => $type
+        ]);
+        Notification::create([
+            'title'=>$type.' кэшбека - '.$cashback.'$'.' Компания - '.$company['title'],
+            'description'=>$description,
+            'user_id'=>$user,
+            'notification_type'=>$type,
+            'object_id'=>$company['id'],
+            'object_type'=>'company'
         ]);
 
     }

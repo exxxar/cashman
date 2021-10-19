@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyUser;
+use App\Models\Notification;
+use App\Models\User;
 use App\Models\UserProfile;
+use App\Notifications\RealTimeNotification;
 use Illuminate\Http\Request;
 
 class CompanyAdminsController extends Controller
@@ -36,6 +39,18 @@ class CompanyAdminsController extends Controller
                 'isActive'=>true
             ]);
         }
+        $user = User::find($request->user);
+        $user->notify(new RealTimeNotification('Вы стали администратором компании '.$request->company['title'],
+            'От компании '.$request->company['title'],
+            'assets/sample/'.$request->company['image'], $user->device_token));
+        Notification::create([
+            'title'=>'Вы стали администратором компании!',
+            'description'=>'Теперь у Вас есть доступ к ресурсам компании '.$request->company['title'],
+            'user_id'=>$user,
+            'notification_type'=>'Назначение администратора',
+            'object_id'=>$request->company['id'],
+            'object_type'=>'company'
+        ]);
     }
     public function deleteCompanyAdmin(Request $request){
         $this->validate($request, [
@@ -48,6 +63,18 @@ class CompanyAdminsController extends Controller
         $user->role='user';
         $user->isActive=null;
         $user->save();
+        $user = User::find($request->user);
+        $user->notify(new RealTimeNotification('Вас лишили прав администратора компании  '.$request->company['title'],
+            'От компании '.$request->company['title'],
+            'assets/sample/'.$request->company['image'], $user->device_token));
+        Notification::create([
+            'title'=>'Вас лишили прав администратора компании...',
+            'description'=>'Теперь у Вас нет доступа к ресурсам компании '.$request->company['title'],
+            'user_id'=>$user,
+            'notification_type'=>'Удаление администратора',
+            'object_id'=>$request->company['id'],
+            'object_type'=>'company'
+        ]);
     }
     public function changeActiveAdmin($admin, $company){
         $user = CompanyUser::where(['user_id'=>$admin, 'company_id'=>$company])->first();

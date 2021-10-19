@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Promocode;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyUser;
+use App\Models\Notification;
+use App\Models\User;
 use App\Models\UsersFriedsByCompany;
+use App\Notifications\RealTimeNotification;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +59,18 @@ class PromocodeController extends Controller
             UsersFriedsByCompany::create(['user_id' => Auth::user()->getAuthIdentifier(),
                 'company_id' => $company_id, 'parent_id' => $user_id]);
             $company->users()->attach(['user_id' => Auth::user()->getAuthIdentifier()]);
+            $user = User::find($user_id);
+            $user->notify(new RealTimeNotification('У вас появился новый друг по компании  '.$company['title'],
+                'От компании '.$company['title'],
+                'assets/sample/'.$company['image'], $user->device_token));
+            Notification::create([
+                'title'=>'У вас появился новый друг!',
+                'description'=>'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                'user_id'=>$user_id,
+                'notification_type'=>'Добавление рефералла',
+                'object_id'=>Auth::user()->getAuthIdentifier(),
+                'object_type'=>'user'
+            ]);
              return redirect('/user-profile');
         }
 
