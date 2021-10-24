@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                 Добавить рекламу
+                Добавить рекламу
             </template>
         </Header>
         <br/>
@@ -73,7 +73,7 @@
             <tab-content title="Условия соглашения">
                 <div class="form-group">
                     <label>Ознакомьтесь с условиями соглашения</label>
-                    <div class="form-group form-check" >
+                    <div class="form-group form-check">
                         <div class="custom-control custom-checkbox mt-2 mb-1">
                             <div class="form-check">
                                 <input v-model="formData.terms" type="checkbox" class="form-check-input"
@@ -107,6 +107,7 @@ import BottomMenu from "../../LayoutComponents/BottomMenu";
 import Header from "../../LayoutComponents/Header";
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 const checked = (value) => value === true;
 export default {
     name: "StepFormValidation",
@@ -130,7 +131,7 @@ export default {
             },
             validationRules: [
                 {title: {required}, description: {required}},
-                { images:{required}},
+                {images: {required}},
                 {terms: {checked}}
             ],
             dropzoneOptions: {
@@ -141,35 +142,36 @@ export default {
             }
         }
     },
-    props:{
-        id:{
+    props: {
+        id: {
             required: true
         }
     },
 
     methods: {
         onComplete() {
-            axios.post('api/admin/add-advertisement-'+this.id, this.formData)
-            .then(()=> {
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false
+            axios.post('api/admin/add-advertisement-' + this.id, this.formData)
+                .then(() => {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire(
+                        'Поздравляем!',
+                        'Вы добавили новую рекламу своей компании',
+                        'success',
+                    )
+                    window.location.href = 'company-admin-menu-' + this.id
                 })
-                swalWithBootstrapButtons.fire(
-                    'Поздравляем!',
-                    'Вы добавили новую рекламу своей компании',
-                    'success',
-                )
-                window.location.href = 'company-admin-menu-'+this.id
-            })
         },
         uploadSuccess(file, response) {
             this.formData.images = response.file;
         },
-        fileRemoved() {}
+        fileRemoved() {
+        }
     },
 
 }

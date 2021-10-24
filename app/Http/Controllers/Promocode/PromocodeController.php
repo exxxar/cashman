@@ -23,57 +23,54 @@ class PromocodeController extends Controller
 
     public function getUserPromocode($user, $company)
     {
+        $userr = Auth::user()->getAuthIdentifier();
         $operation_code = '000';
         $user_id = str_pad($user, 10, "0", STR_PAD_LEFT);
         $company_id = str_pad($company, 10, "0", STR_PAD_LEFT);
         $data = 'https://your-cashman.com/qr-handler/data=' . base64_encode($operation_code . $user_id . $company_id);
-        return view('pages/promoCodePage', compact('data'));
+        return view('pages/promoCodePage', compact('data', 'userr'));
     }
 
-    public function qrHandler( $data)
+    public function qrHandler($data)
     {
         $data = base64_decode($data);
         $operation_code = mb_substr($data, 0, 2);
         $user_id = (integer)str_replace('0', '', mb_substr($data, 3, 12));
         $company_id = (integer)str_replace('0', '', mb_substr($data, 13, 22));
         $company = Company::where('id', $company_id)->first();
-        if(!Auth::user()){
-            session(['user' => $user_id, 'company'=>$company_id]);
+        if (!Auth::user()) {
+            session(['user' => $user_id, 'company' => $company_id]);
             return redirect('/register');
         }
-        $isAdmin = CompanyUser::where(['company_id'=>$company->id, 'user_id'=>Auth::user()->getAuthIdentifier(),
-                'role'=>'admin'])->exists()  || $company->creator_id==Auth::user()->getAuthIdentifier();
-        if($isAdmin) {
+        $isAdmin = CompanyUser::where(['company_id' => $company->id, 'user_id' => Auth::user()->getAuthIdentifier(),
+                'role' => 'admin'])->exists() || $company->creator_id == Auth::user()->getAuthIdentifier();
+        if ($isAdmin) {
             $admin = Auth::user()->getAuthIdentifier();
             if ($admin == $user_id) {
                 return redirect()->route('company-admin', $company_id);
+            } else {
+                return redirect()->to('/company-action-menu-' . $company_id . '?user=' . $user_id);
             }
-            else {
-                return redirect()->to('/company-action-menu-'.$company_id.'?user='.$user_id);
-            }
-        }
-        else if ($company->users()->where('user_id', Auth::user()->getAuthIdentifier())->exists()) {
+        } else if ($company->users()->where('user_id', Auth::user()->getAuthIdentifier())->exists()) {
             return redirect()->route('company-profile', $company_id);
-        }
-        else {
+        } else {
             UsersFriedsByCompany::create(['user_id' => Auth::user()->getAuthIdentifier(),
                 'company_id' => $company_id, 'parent_id' => $user_id]);
             $company->users()->attach(['user_id' => Auth::user()->getAuthIdentifier()]);
             $user = User::find($user_id);
-            $user->notify(new RealTimeNotification('У вас появился новый друг по компании  '.$company['title'],
-                'От компании '.$company['title'],
-                'assets/sample/'.$company['image'], $user->device_token));
+            $user->notify(new RealTimeNotification('У вас появился новый друг по компании  ' . $company['title'],
+                'От компании ' . $company['title'],
+                'assets/sample/' . $company['image'], $user->device_token));
             Notification::create([
-                'title'=>'У вас появился новый друг!',
-                'description'=>'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
-                'user_id'=>$user_id,
-                'notification_type'=>'Добавление рефералла',
-                'object_id'=>Auth::user()->getAuthIdentifier(),
-                'object_type'=>'user'
+                'title' => 'У вас появился новый друг!',
+                'description' => 'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                'user_id' => $user_id,
+                'notification_type' => 'Добавление рефералла',
+                'object_id' => Auth::user()->getAuthIdentifier(),
+                'object_type' => 'user'
             ]);
-             return redirect('/user-profile');
+            return redirect('/user-profile');
         }
-
 
 
     }

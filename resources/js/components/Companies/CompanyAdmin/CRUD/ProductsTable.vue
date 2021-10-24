@@ -157,7 +157,7 @@ export default {
             $('#AddNew').modal('show');
         },
         uploadProducts() {
-            axios.get('/token-company-'+this.id).then(function (response) {
+            axios.get('/token-company-' + this.id).then(function (response) {
                 if (response.data.href !== undefined) {
                     location.href = response.data.href
                 }
@@ -220,9 +220,9 @@ export default {
         prevPage() {
             this.pageNumber--;
         },
-        productImage(image){
-            if(image.toString().startsWith('products/')){
-                return './../assets/sample/'+image
+        productImage(image) {
+            if (image.toString().startsWith('products/')) {
+                return './../assets/sample/' + image
             }
             return image
         }
@@ -262,6 +262,7 @@ export default {
     background: #6236FF !important;
     color: #fff !important;
 }
+
 @media (max-width: 375px) {
     .page-link {
         font-size: 70%;

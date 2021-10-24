@@ -31,25 +31,25 @@
             <div class="row mt-2">
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Начисления кэшбека</div>
+                        <div class="title">Начисления</div>
                         <div class="value text-success">{{profile.debitings}} $</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Списания кэшбека</div>
+                        <div class="title">Списания</div>
                         <div class="value text-danger">{{profile.offs}} $</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Вывод кэшбека</div>
-                        <div class="value text-dark">0 $</div>
+                        <div class="title">Вывод</div>
+                        <div class="value">0 $</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Перевод кэшбека</div>
+                        <div class="title">Перевод</div>
                         <div class="value text-info">0 $</div>
                     </div>
                 </div>
@@ -79,10 +79,10 @@ export default {
     data: function () {
         return {
             actions: [
-                {icon: 'withdraw', title: 'Вывод кэшбека'},
-                {icon: 'send', title: 'Отправка кэшбека'},
-                {icon: 'history', title: 'История действий', link: '/history'},
-                {icon: 'exchange', title: 'Обмен кэшбека', exchange: true},
+                {icon: 'withdraw', title: 'Вывод'},
+                {icon: 'send', title: 'Отправка'},
+                {icon: 'history', title: 'История', link: '/history'},
+                {icon: 'exchange', title: 'Обмен', exchange: true},
             ],
             currentTitle: '',
             currentExchange: false,

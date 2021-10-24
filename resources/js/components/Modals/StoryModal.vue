@@ -40,7 +40,7 @@ export default {
 }
 </script>
 <style>
-    .padding-1-2-5-2 {
-        padding: 1% 2% 5% 2% !important;
-    }
+.padding-1-2-5-2 {
+    padding: 1% 2% 5% 2% !important;
+}
 </style>

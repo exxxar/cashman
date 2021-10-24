@@ -17,14 +17,14 @@ export default {
             required: true,
             type: Object
         },
-        action:{
+        action: {
             default: true
         }
     },
-    methods:{
-        productImage(image){
-            if(image.toString().startsWith('products/')){
-                return './../assets/sample/'+image
+    methods: {
+        productImage(image) {
+            if (image.toString().startsWith('products/')) {
+                return './../assets/sample/' + image
             }
             return image
         }
@@ -34,5 +34,22 @@ export default {
 <style>
 .images-product {
     object-fit: contain;
+}
+
+.bill-box {
+    padding: 8px 12px;
+}
+
+.bill-box .img-wrapper {
+    margin-bottom: 10px;
+}
+
+.bill-box .price {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.bill-box p {
+    margin: 0 0 6px 0;
 }
 </style>

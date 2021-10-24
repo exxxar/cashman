@@ -5,9 +5,6 @@
                 <img class="img w-100 fill fixed-height-images" v-lazy="'./../assets/sample/'+item.images.main"
                      alt="image">
             </div>
-            <div class="news-text">
-                <h4 class="news-title">{{ item.title }}</h4>
-            </div>
         </div>
     </a>
 </template>

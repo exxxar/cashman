@@ -13,8 +13,8 @@ class CompanyAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
@@ -22,12 +22,11 @@ class CompanyAdmin
         $company = $request->route()->parameter('id');
         $companyData = Company::find($company);
         $user = Auth::user()->getAuthIdentifier();
-        $isAdmin = CompanyUser::where(['user_id'=>$user, 'company_id'=>$company, 'role'=>'admin'])->exists()
+        $isAdmin = CompanyUser::where(['user_id' => $user, 'company_id' => $company, 'role' => 'admin'])->exists()
             || $companyData->creator_id == $user;
-        if($isAdmin) {
+        if ($isAdmin) {
             return $next($request);
-        }
-        else{
+        } else {
             return redirect()->route('profile');
         }
     }

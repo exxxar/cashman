@@ -26,14 +26,14 @@ class UserFriendsController extends Controller
     {
         $id = Auth::user()->getAuthIdentifier();
         $user = UserProfile::where('user_id', $id)->first();
-        $friendsIds = UsersFriedsByCompany::where(['parent_id'=>$user->user_id, 'company_id'=>$company])->pluck('user_id');
+        $friendsIds = UsersFriedsByCompany::where(['parent_id' => $user->user_id, 'company_id' => $company])->pluck('user_id');
         $userFriends = UserProfile::whereIn('id', $friendsIds)->get();
         $friends = [];
         foreach ($userFriends as $friend) {
             $children = [];
-            $friendsIds2 = UsersFriedsByCompany::where(['parent_id'=> $friend->user_id, 'company_id'=>$company])->pluck('user_id');
+            $friendsIds2 = UsersFriedsByCompany::where(['parent_id' => $friend->user_id, 'company_id' => $company])->pluck('user_id');
             $friends2 = UserProfile::whereIn('id', $friendsIds2)->get();
-            if(UsersFriedsByCompany::where(['parent_id'=> $friend->user_id, 'company_id'=>$company])->exists()) {
+            if (UsersFriedsByCompany::where(['parent_id' => $friend->user_id, 'company_id' => $company])->exists()) {
                 foreach ($friends2 as $friend2) {
                     $children[] = ['name' => $friend2->name,
                         'image_url' => '../assets/sample/' . $friend2->avatar];
@@ -42,18 +42,17 @@ class UserFriendsController extends Controller
             $friends[] = [
                 'name' => $friend->name,
                 'image_url' => '../assets/sample/' . $friend->avatar,
-                'children' =>$children
+                'children' => $children
             ];
         }
-        if(count($friends)>0) {
+        if (count($friends) > 0) {
             $treeData = [
                 'name' => $user->name,
                 'image_url' => '../assets/sample/' . $user->avatar,
                 'class' => ["rootNode"],
                 'children' => $friends
             ];
-        }
-        else{
+        } else {
             $treeData = null;
         }
 

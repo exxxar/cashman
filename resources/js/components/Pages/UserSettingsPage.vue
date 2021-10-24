@@ -107,7 +107,7 @@
         <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
         <ChangeEmailModal :id="this.user.id"></ChangeEmailModal>
-       <ChangeAvatarModal :id="this.user.id" @updateParent="getProfileData"></ChangeAvatarModal>
+        <ChangeAvatarModal :id="this.user.id" @updateParent="getProfileData"></ChangeAvatarModal>
     </fragment>
 </template>
 
@@ -117,6 +117,7 @@ import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import ChangeEmailModal from "../Modals/ChangeEmailModal";
 import ChangeAvatarModal from "../Modals/ChangeAvatarModal";
+
 export default {
     name: "UserSettingsPage",
     components: {ChangeAvatarModal, ChangeEmailModal, Header, Footer, BottomMenu},
@@ -136,37 +137,37 @@ export default {
 
             });
         },
-        getProfileData(){
-            axios.get('api/profile/'+this.user.id).then(response=>{
+        getProfileData() {
+            axios.get('api/profile/' + this.user.id).then(response => {
                 this.profile = response.data.profile
             })
         },
-        changePassword(){
-            let email = {email:this.profile.email}
-            axios.post('password/email', email).then(()=>{
+        changePassword() {
+            let email = {email: this.profile.email}
+            axios.post('password/email', email).then(() => {
                 Swal.fire({
                     icon: 'success',
-                    title:   'Проверьте почту!',
-                    text: 'Письмо для подтверждения смены пароля отправлено на вашу почту - '+this.profile.email,
+                    title: 'Проверьте почту!',
+                    text: 'Письмо для подтверждения смены пароля отправлено на вашу почту - ' + this.profile.email,
                 })
             })
-            .catch(()=>{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Что-то пошло не так...',
-                    text: 'Повторите действие позднее',
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Что-то пошло не так...',
+                        text: 'Повторите действие позднее',
+                    })
                 })
-            })
         },
-        changeEmail(){
+        changeEmail() {
             $('#ChangeEmailModal').modal('show');
         },
-        changeAvatar(){
+        changeAvatar() {
             $('#ChangeAvatarModal').modal('show');
         }
     },
-    props:{
-        user:{
+    props: {
+        user: {
             required: true
         }
     },

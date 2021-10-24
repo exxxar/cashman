@@ -45,7 +45,9 @@
                                 >
                                     <div class="dropzone-custom-content">
                                         <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
+                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего
+                                            компьютера
+                                        </div>
                                     </div>
                                 </vue-dropzone>
                             </div>

@@ -5,7 +5,7 @@
             <a href="/search-company" class="link">Посмотреть все</a>
         </div>
         <splide :slides="companies" :options="options" :key="trigger">
-            <splide-slide v-for="company in companies" :key="company.id" >
+            <splide-slide v-for="company in companies" :key="company.id">
                 <CompanyItem :company="company" :user="user"></CompanyItem>
             </splide-slide>
         </splide>
@@ -18,8 +18,9 @@
 
 <script>
 import CompanyItem from "./CompanyItem";
-import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import {Splide, SplideSlide} from '@splidejs/vue-splide';
 import {eventBus} from '../../../app'
+
 export default {
     name: "CompanyList",
     components: {CompanyItem, Splide, SplideSlide},
@@ -73,17 +74,17 @@ export default {
             trigger: 0
         }
     },
-    props:{
-        user:{
+    props: {
+        user: {
             default: null
         },
-        companies:{
+        companies: {
             type: Array
         }
     },
-    methods:{
-        updateCompanies(number){
-            this.trigger+=number
+    methods: {
+        updateCompanies(number) {
+            this.trigger += number
         }
     },
     mounted() {

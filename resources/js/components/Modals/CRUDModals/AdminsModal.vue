@@ -19,8 +19,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button v-if="operation==='Add'" type="submit" class="btn btn-success" >Добавить администратора</button>
-                        <button v-if="operation==='Delete'" type="submit" class="btn btn-success">Удалить администратора</button>
+                        <button v-if="operation==='Add'" type="submit" class="btn btn-success">Добавить администратора
+                        </button>
+                        <button v-if="operation==='Delete'" type="submit" class="btn btn-success">Удалить
+                            администратора
+                        </button>
                     </div>
                 </form>
             </div>
@@ -31,30 +34,31 @@
 <script>
 import Form from "vform";
 import {HasError} from "vform/src/components/bootstrap5"
+
 export default {
     name: "AdminsModal",
-    components:{HasError},
-    props:{
-        operation:{
+    components: {HasError},
+    props: {
+        operation: {
             required: true,
             type: String
         },
-        company:{
+        company: {
             required: true
         }
     },
-    data(){
-        return{
-            form:new Form({
+    data() {
+        return {
+            form: new Form({
                 user: null,
                 company: 0
             })
         }
     },
-    methods:{
-        deleteAdmin(){
+    methods: {
+        deleteAdmin() {
             this.form.company = this.company
-            this.form.post('api/delete/company/admin') .then((response) => {
+            this.form.post('api/delete/company/admin').then((response) => {
                 $('#AdminsModal').modal('hide')
                 this.form.user = null
                 if (response.data.error !== undefined) {
@@ -63,11 +67,10 @@ export default {
                         title: 'Выполнение операции невозможно!',
                         text: 'Выбранный пользователь не является администратором компании',
                     })
-                }
-                else {
+                } else {
                     Swal.fire({
                         icon: 'success',
-                        title:   'Операция прошла успешно!',
+                        title: 'Операция прошла успешно!',
                         text: 'Администратор успешно удален',
                     })
                 }
@@ -76,14 +79,14 @@ export default {
 
             });
         },
-        addAdmin(){
+        addAdmin() {
             this.form.company = this.company
-            this.form.post('api/add/company/admin') .then(() => {
+            this.form.post('api/add/company/admin').then(() => {
                 $('#AdminsModal').modal('hide')
                 this.form.user = null
                 Swal.fire({
                     icon: 'success',
-                    title:   'Операция прошла успешно!',
+                    title: 'Операция прошла успешно!',
                     text: 'Администратор успешно добавлен',
                 })
             }).catch(() => {

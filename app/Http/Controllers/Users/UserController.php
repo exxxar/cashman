@@ -28,7 +28,7 @@ class UserController extends Controller
         $latitude = $request->lat;
         $longitude = $request->lon;
         $radius = 20; //km
-        if ($latitude!=0 && $longitude!=0){
+        if ($latitude != 0 && $longitude != 0) {
             $companies = Company::selectRaw("id, title, image, latitude, longitude,
                          ( 6371 * acos( cos( radians(?) ) *
                            cos( radians( latitude ) )
@@ -48,9 +48,7 @@ class UserController extends Controller
             $usersIds = CompanyUser::whereIn('company_id', $companiesIds)->pluck('user_id');
             $users = UserProfile::whereIn('id', $usersIds)->latest()->limit(30)->get();
             $history = HistoryUsersCompany::whereIn('company_id', $companiesIds)->latest()->limit(4)->get();
-        }
-        else
-        {
+        } else {
             $companies = Company::latest()->limit(30)->get();
             $products = Product::latest()->limit(30)->get();
             $news = CompanyAdvertising::where('type', 'Баннер')->limit(20)->get();
@@ -58,17 +56,19 @@ class UserController extends Controller
             $history = HistoryUsersCompany::latest()->limit(4)->get();
             $users = UserProfile::latest()->limit(30)->get();
         }
-        return response()->json(['companies' => $companies, 'products'=>$products,
-            'news'=>$news, 'stories'=>$stories, 'history'=>$history, 'users'=>$users]);
+        return response()->json(['companies' => $companies, 'products' => $products,
+            'news' => $news, 'stories' => $stories, 'history' => $history, 'users' => $users]);
     }
 
-    public function getUsersCompanies($id){
+    public function getUsersCompanies($id)
+    {
         $user = User::find($id);
         $companies = $user->companies()->get();
         return response()->json([
-            'companies'=>$companies
-            ]);
+            'companies' => $companies
+        ]);
     }
+
     public function deleteCompany($user, $id)
     {
         $profile = User::find($user);

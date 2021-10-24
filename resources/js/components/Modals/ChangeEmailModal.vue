@@ -28,27 +28,28 @@
 <script>
 import Form from "vform";
 import {HasError} from "vform/src/components/bootstrap5"
+
 export default {
     name: "ChangeEmailModal",
-    components:{HasError},
-    props:{
-        id:{
+    components: {HasError},
+    props: {
+        id: {
             required: true,
             type: Number
         }
     },
-    data(){
-        return{
-            form:new Form({
+    data() {
+        return {
+            form: new Form({
                 id: null,
                 email: ''
             })
         }
     },
-    methods:{
-        changeEmail(){
+    methods: {
+        changeEmail() {
             this.form.id = this.id
-            this.form.post('api/change/email').then((response)=>{
+            this.form.post('api/change/email').then((response) => {
                 if (response.data.status === 'success') {
                     this.form.email = ''
                     $('#ChangeEmailModal').modal('hide')

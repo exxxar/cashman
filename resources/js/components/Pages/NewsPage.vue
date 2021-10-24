@@ -11,15 +11,17 @@
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
-            <div class="section tab-content mt-2 mb-2">
+            <div class="section tab-content mt-2">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mb-2"
+                    <div class="col-4 pl-6px"
                          v-for="item in news">
                         <NewsItem :item="item"></NewsItem>
                     </div>
                 </div>
                 <div>
-                    <button :disabled='this.size >= items.length' href="javascript:;" class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More</button>
+                    <button :disabled='this.size >= items.length' href="javascript:;"
+                            class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More
+                    </button>
                 </div>
             </div>
         </div>
@@ -59,9 +61,9 @@ export default {
 
         }
     },
-    methods:{
-        increaseSize(){
-            this.size+=this.size
+    methods: {
+        increaseSize() {
+            this.size += this.size
         },
     }
 }

@@ -67,16 +67,16 @@ export default {
             type: Object,
             required: true
         },
-        items:{
+        items: {
             type: Object,
             required: true
         },
-        company:{
+        company: {
             type: Object,
             required: true
         }
     },
-    mounted(){
+    mounted() {
         console.log(typeof (this.items))
         console.log(this.items)
     }

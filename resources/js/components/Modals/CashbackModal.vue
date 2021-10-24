@@ -3,7 +3,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 v-if="type==='Начисление'" class="modal-title">Начисление кэшбека {{company.cashback_percent}}%</h5>
+                    <h5 v-if="type==='Начисление'" class="modal-title">Начисление кэшбека
+                        {{company.cashback_percent}}%</h5>
                     <h5 v-if="type==='Списание'" class="modal-title">Списание кэшбека</h5>
                 </div>
                 <form @submit.prevent="type==='Начисление' ? debitingCashback() : offsCashback()">
@@ -29,6 +30,23 @@
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('sum') }">
                             <HasError :form="form" field="sum"></HasError>
                         </div>
+                        <div class="form-group">
+                            <label>Фото чека</label>
+                            <vue-dropzone
+                                ref="myVueDropzone"
+                                id="dropzone"
+                                :options="dropzoneOptions"
+                                :useCustomSlot="true"
+                                v-on:vdropzone-success="uploadSuccess"
+                                v-on:vdropzone-removed-file="fileRemoved"
+                            >
+                                <div class="dropzone-custom-content">
+                                    <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
+                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    </div>
+                                </div>
+                            </vue-dropzone>
+                        </div>
                         <div v-if="type==='Начисление'" class="form-group">
                             <label>Сумма списания</label>
                             <input v-model="calculatedCashBack" type="text" name="cashback"
@@ -38,8 +56,12 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button v-if="type==='Начисление'" type="submit" class="btn btn-success" >Начислить кэшбек {{company.cashback_percent}}%</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="filesRemove">
+                            Закрыть
+                        </button>
+                        <button v-if="type==='Начисление'" type="submit" class="btn btn-success">Начислить кэшбек
+                            {{company.cashback_percent}}%
+                        </button>
                         <button v-if="type==='Списание'" type="submit" class="btn btn-success">Списать кэшбек</button>
                     </div>
                 </form>
@@ -52,61 +74,72 @@
 import Form from "vform";
 import {HasError} from "vform/src/components/bootstrap5"
 import {eventBus} from "../../app";
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
     name: "CashbackModal",
-    components:{HasError},
-    props:{
-        company:{
+    components: {HasError, vueDropzone: vue2Dropzone},
+    props: {
+        company: {
             required: true
         },
-        admin:{
-            required:true,
-            type:Number
+        admin: {
+            required: true,
+            type: Number
         },
-        user:{
-            default:null
+        user: {
+            default: null
         },
-        type:{
+        type: {
             required: true,
             type: String
         }
     },
-    data(){
-        return{
-            form:new Form({
+    data() {
+        return {
+            form: new Form({
                 user: null,
                 description: "",
                 sum: null,
                 cashback: null,
                 company: 0,
-                admin: 0
-            })
+                admin: 0,
+                image: null
+            }),
+            dropzoneOptions: {
+                url: 'api/description/photo',
+                acceptedFiles: ".png, .jpg, .jpeg",
+                addRemoveLinks: true,
+                maxFiles: 1
+            }
         }
     },
-    computed:{
-        calculatedCashBack(){
-            return this.form.cashback = ((this.form.sum/100)*this.company.cashback_percent).toFixed(2)
+    computed: {
+        calculatedCashBack() {
+            return this.form.cashback = ((this.form.sum / 100) * this.company.cashback_percent).toFixed(2)
         }
     },
     mounted() {
         eventBus.$once('userId', this.getUserId)
+        //this.form.user =this.user
     },
-    methods:{
-        debitingCashback(){
+    methods: {
+        debitingCashback() {
             this.form.company = this.company
             this.form.admin = this.admin
-            this.form.cashback=this.calculatedCashBack
-            this.form.post('api/debiting/cashback') .then(() => {
+            this.form.cashback = this.calculatedCashBack
+            this.form.post('api/debiting/cashback').then(() => {
                 $('#CashbackModal').modal('hide')
+                this.filesRemove()
                 this.form.user = null
                 this.form.description = ""
                 this.form.sum = null
                 this.form.cashback = null
                 Swal.fire({
                     icon: 'success',
-                    title:   'Кэшбек начислен',
-                    text: 'Начисление кэшбека в '+this.company.cashback_percent+'% прошло успешно!',
+                    title: 'Кэшбек начислен',
+                    text: 'Начисление кэшбека в ' + this.company.cashback_percent + '% прошло успешно!',
                 })
 
             })
@@ -115,11 +148,12 @@ export default {
                 });
 
         },
-        offsCashback(){
+        offsCashback() {
             this.form.company = this.company
             this.form.admin = this.admin
-            this.form.post('api/offs/cashback') .then((response) => {
+            this.form.post('api/offs/cashback').then((response) => {
                 $('#CashbackModal').modal('hide')
+                this.filesRemove()
                 this.form.user = null
                 this.form.description = ""
                 this.form.sum = null
@@ -129,11 +163,10 @@ export default {
                         title: 'Выполнение списания невозможно!',
                         text: 'Недостаточно средств для выполнения операции',
                     })
-                }
-                else {
+                } else {
                     Swal.fire({
                         icon: 'success',
-                        title:  'Кэшбек списан',
+                        title: 'Кэшбек списан',
                         text: 'Списание кэшбека прошло успешно!',
                     })
                 }
@@ -142,7 +175,16 @@ export default {
 
                 });
         },
-        getUserId(userId){
+        uploadSuccess(file, response) {
+            this.form.image = response.file;
+        },
+        fileRemoved() {
+            this.form.image = null
+        },
+        filesRemove() {
+            this.$refs.myVueDropzone.removeAllFiles()
+        },
+        getUserId(userId) {
             this.form.user = userId
         }
     }

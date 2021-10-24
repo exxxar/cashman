@@ -68,13 +68,13 @@ export default {
         Header,
         SideMenu
     },
-    props:{
-        auth_user:{
+    props: {
+        auth_user: {
             default: null
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             companies: [],
             products: [],
             news: [],
@@ -84,17 +84,16 @@ export default {
             users: []
         }
     },
-    mounted(){
-       this.getCompaniesByCoords()
+    mounted() {
+        this.getCompaniesByCoords()
         this.getProfileData()
     },
-    methods:{
-        getCompaniesByCoords(){
+    methods: {
+        getCompaniesByCoords() {
             let vm = this
             navigator.geolocation.getCurrentPosition(
-                position =>
-                {
-                    axios.post('api/sort/companies',{
+                position => {
+                    axios.post('api/sort/companies', {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude
                     })
@@ -108,7 +107,7 @@ export default {
                         })
                 },
                 error => {
-                    axios.post('api/sort/companies',{
+                    axios.post('api/sort/companies', {
                         lat: 0,
                         lon: 0
                     })
@@ -122,8 +121,8 @@ export default {
             )
 
         },
-        getProfileData(){
-            axios.get('api/profile/'+this.auth_user.id).then(response=>{
+        getProfileData() {
+            axios.get('api/profile/' + this.auth_user.id).then(response => {
                 this.profile = response.data.profile
             })
         }
@@ -137,6 +136,7 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 @media (max-width: 375px) {
     .section-heading .title {
         font-size: 90%;

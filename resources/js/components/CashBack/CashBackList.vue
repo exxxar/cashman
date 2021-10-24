@@ -23,8 +23,8 @@ export default {
     name: "CashBackList",
     components: {CashBackItem},
 
-    props:{
-        cashbacks:{
+    props: {
+        cashbacks: {
             required: true
         }
     }

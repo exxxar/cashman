@@ -1,36 +1,41 @@
 <template>
     <fragment>
-            <Header>
-                <template v-slot:left>
-                    <a href="#" class="headerButton goBack">
-                        <ion-icon name="chevron-back-outline"></ion-icon>
-                    </a>
-                </template>
-                <template v-slot:title>
-                    Акции
-                </template>
-            </Header>
+        <Header>
+            <template v-slot:left>
+                <a href="#" class="headerButton goBack">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </a>
+            </template>
+            <template v-slot:title>
+                Акции
+            </template>
+        </Header>
         <div id="appCapsule" class="full-height">
             <div class="section mt-4">
                 <div class="section-heading padding">
                     <h2 class="title">Категории</h2>
                 </div>
-                <ul class="listview link-listview inset">
-                    <li v-for="category in categories">
-                        <a href="#" @click="sortProducts(category)" v-scroll-to="'#products'">
-                            {{ category.title }}
-                            <span class="badge badge-primary">{{ category.number }}</span>
-                        </a>
-                    </li>
-                </ul>
+                <div class="mb-0 categories-block splide">
+                    <splide :slides="categories" :options="options">
+                        <splide-slide v-for="(category, index) in categories" :key="category.id">
+                            <a href="#" @click="sortProducts(category, index)" v-scroll-to="'#products'"
+                               :class="{ tagActive: index===currentIndex}">
+                                {{ category.title }}
+                                <span :class="{ tagActive: index===currentIndex}"
+                                      class="badge badge-primary">{{ category.number }}</span>
+                            </a>
+                        </splide-slide>
+                    </splide>
+                </div>
             </div>
             <StoryList :stories="stories"></StoryList>
             <div class="section mt-4" :key="trigger">
                 <div class="section-heading padding">
                     <h2 v-if="currentCategory===''" class="title">Акции</h2>
-                    <h2 v-if="currentCategory!==''" class="title" id="products">Акции из категории {{currentCategory}}</h2>
+                    <h2 v-if="currentCategory!==''" class="title" id="products">Акции из категории
+                        {{currentCategory}}</h2>
                 </div>
-                <div class="section tab-content mt-2 mb-1" >
+                <div class="section tab-content mt-2 mb-1">
                     <!-- waiting tab -->
                     <div class="tab-pane fade show active" id="waiting" role="tabpanel">
                         <div class="row d-flex justify-content-center">
@@ -42,7 +47,9 @@
                     </div>
                 </div>
                 <div>
-                    <button :disabled='this.size >= items.length' href="javascript:;" class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More</button>
+                    <button :disabled='this.size >= items.length' href="javascript:;"
+                            class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More
+                    </button>
                 </div>
             </div>
         </div>
@@ -57,10 +64,11 @@ import Header from "../LayoutComponents/Header";
 import StoryList from "../Stories/StoryList";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import Footer from "../LayoutComponents/Footer";
+import {Splide, SplideSlide} from '@splidejs/vue-splide';
 
 export default {
     name: "ProductList",
-    components: {Footer, StoryList, ProductItem, Header, BottomMenu},
+    components: {Footer, StoryList, ProductItem, Header, BottomMenu, Splide, SplideSlide},
     data: function () {
         return {
             items: [],
@@ -69,29 +77,43 @@ export default {
             page: 0,
             size: 12,
             trigger: 0,
-            currentCategory: ''
+            currentCategory: '',
+            options: {
+                rewind: true,
+                gap: 16,
+                padding: 16,
+                arrows: false,
+                pagination: false,
+                cover: true,
+                autoWidth: true,
+                lazyLoad: 'sequential'
+            },
+            isActive: false,
+            currentIndex: -1
         }
     },
-    methods:{
-        getProductsAndCategories(){
+    methods: {
+        getProductsAndCategories() {
             let vm = this
             axios.get('api/products')
-                .then(response=> {
+                .then(response => {
                     vm.items = response.data.products
                     vm.categories = response.data.categories
                     vm.stories = response.data.stories
 
                 })
         },
-        sortProducts(category){
-            axios.get('products/category/'+category.id).then(response=>{
+        sortProducts(category, index) {
+            this.currentIndex = index
+            this.isActive = (this.isActive !== true)
+            axios.get('products/category/' + category.id).then(response => {
                 this.items = response.data.products
                 this.currentCategory = category.title
                 this.trigger++
             })
         },
-        increaseSize(){
-            this.size+=this.size
+        increaseSize() {
+            this.size += this.size
         },
     },
     mounted() {
@@ -110,3 +132,13 @@ export default {
     },
 }
 </script>
+<style>
+.tagActive {
+    border-radius: 100px;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    background: #6236FF !important;
+    color: white !important;
+}
+</style>

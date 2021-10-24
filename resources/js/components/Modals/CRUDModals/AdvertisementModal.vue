@@ -36,13 +36,16 @@
                             >
                                 <div class="dropzone-custom-content">
                                     <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
+                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    </div>
                                 </div>
                             </vue-dropzone>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="filesRemove">Закрыть</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="filesRemove">
+                            Закрыть
+                        </button>
                         <button type="submit" class="btn btn-success">Обновить</button>
                     </div>
                 </form>
@@ -55,6 +58,7 @@
 import {HasError} from "vform/src/components/bootstrap5"
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
     name: "AdvertisementModal",
     components: {HasError, vueDropzone: vue2Dropzone},
@@ -63,8 +67,8 @@ export default {
             required: true
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             dropzoneOptions: {
                 url: 'api/add-story',
                 acceptedFiles: ".png, .jpg, .jpeg",
@@ -82,7 +86,7 @@ export default {
         fileRemoved() {
             this.newImage = ''
         },
-        filesRemove(){
+        filesRemove() {
             this.$refs.myVueDropzone.removeAllFiles()
         },
         updateAdvertisement() {

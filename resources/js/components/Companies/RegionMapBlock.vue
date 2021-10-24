@@ -37,7 +37,7 @@ export default {
         coords: {
             required: true
         },
-        company:{
+        company: {
             required: true
         }
     },

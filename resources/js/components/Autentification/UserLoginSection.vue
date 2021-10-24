@@ -53,7 +53,9 @@
                     </div>
                 </div>
                 <div class="form-button-group">
-                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Войти</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete'
+                            class="btn btn-primary btn-block btn-lg">Войти
+                    </button>
                 </div>
             </form>
         </div>
@@ -79,13 +81,13 @@ export default {
     methods: {
         async loginUser() {
             await this.form.post('login')
-                window.location.href = 'user-profile';
+            window.location.href = 'user-profile';
 
 
         },
     },
     computed: {
-        isComplete () {
+        isComplete() {
             return this.form.email && this.form.password;
         }
     }

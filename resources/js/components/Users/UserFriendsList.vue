@@ -12,8 +12,9 @@
         </Header>
         <br/>
 
-        <div  id="appCapsule" class="full-height">
-            <h4 class="text-center" v-if="friends.length===0">Вы пока не пригласили ни одного друга. Приглашайте друзей в компании и получайте приятные бонусы!</h4>
+        <div id="appCapsule" class="full-height">
+            <h4 class="text-center" v-if="friends.length===0">Вы пока не пригласили ни одного друга. Приглашайте друзей
+                в компании и получайте приятные бонусы!</h4>
             <div v-if="friends.length!==0" class="section inset mt-2 mb-2">
                 <div class="accordion" id="accordionExample5">
                     <div class="accordion-item">

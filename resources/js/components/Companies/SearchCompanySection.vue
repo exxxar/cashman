@@ -26,16 +26,21 @@
                 </div>
             </div>
             <nav>
-                <ul class="pagination pagination-rounded" >
-                    <li >
-                        <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">Предыдущая</button></li>
+                <ul class="pagination pagination-rounded">
+                    <li>
+                        <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
+                            Предыдущая
+                        </button>
+                    </li>
                     <li class="disabled ">
-                        <a class="page-link"  style="background: #fff !important;color: #6236FF !important;">
+                        <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
                             Страница {{ pageNumber+1 }} из {{ pageCount }}
                         </a>
                     </li>
                     <li>
-                        <button class="page-link"  @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">Следующая</button>
+                        <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
+                            Следующая
+                        </button>
                     </li>
                 </ul>
             </nav>
@@ -52,6 +57,7 @@ import SearchComponent from "../LayoutComponents/SearchComponent";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import {mapGetters} from 'vuex'
 import {eventBus} from '../../app'
+
 export default {
     name: "SearchCompanySection",
     components: {BottomMenu, SearchComponent, CompanyItem, Header},
@@ -63,20 +69,20 @@ export default {
 
         }
     },
-    methods:{
-        nextPage(){
+    methods: {
+        nextPage() {
             this.pageNumber++;
         },
-        prevPage(){
+        prevPage() {
             this.pageNumber--;
         },
-        updateCompanies(number){
-            this.trigger+=number
+        updateCompanies(number) {
+            this.trigger += number
         }
 
     },
-    props:{
-        auth_user:{
+    props: {
+        auth_user: {
             default: null
         }
     },
@@ -97,12 +103,12 @@ export default {
         ...mapGetters([
             'companies'
         ]),
-        pageCount(){
+        pageCount() {
             let l = this.groupedCompanies.length,
                 s = this.size;
-            return Math.ceil(l/s);
+            return Math.ceil(l / s);
         },
-        paginatedData(){
+        paginatedData() {
             const start = this.pageNumber * this.size,
                 end = start + this.size;
             return this.groupedCompanies.slice(start, end);
@@ -116,10 +122,12 @@ export default {
 .pagination {
     justify-content: center;
 }
-.page-link{
+
+.page-link {
     background: #6236FF !important;
     color: #fff !important;
 }
+
 @media (max-width: 375px) {
     .page-link {
         font-size: 70%;

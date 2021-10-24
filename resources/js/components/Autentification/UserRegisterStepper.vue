@@ -12,82 +12,86 @@
         </Header>
         <div class="section mt-2 text-center">
             <p>Заполните информацию о Вашем аккаунте для завершения регистрации</p>
-        <form-wizard @onComplete="onComplete">
-            <tab-content title="Почта" :selected="true">
-                <div class="form-group">
-                    <label>Электронная почта</label>
-                    <input
-                        type="email"
-                        class="form-control"
-                        :class="hasError('email') ? 'is-invalid' : ''"
-                        placeholder="Введите E-mail"
-                        v-model="formData.email"
-                        :disabled='isEmail'>
-                    <div v-if="hasError('email')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.email.required">Введите электронную почту</div>
-                        <div class="error" v-if="!$v.formData.email.email">Введенный электронный адрес имеет неверный
-                            формат
+            <form-wizard @onComplete="onComplete">
+                <tab-content title="Почта" :selected="true">
+                    <div class="form-group">
+                        <label>Электронная почта</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            :class="hasError('email') ? 'is-invalid' : ''"
+                            placeholder="Введите E-mail"
+                            v-model="formData.email"
+                            :disabled='isEmail'>
+                        <div v-if="hasError('email')" class="invalid-feedback">
+                            <div class="error" v-if="!$v.formData.email.required">Введите электронную почту</div>
+                            <div class="error" v-if="!$v.formData.email.email">Введенный электронный адрес имеет
+                                неверный
+                                формат
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </tab-content>
-            <tab-content title="Пароль">
-                <div class="form-group">
-                    <label>Пароль</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        :class="hasError('password') ? 'is-invalid' : ''"
-                        placeholder="Введите пароль"
-                        v-model="formData.password">
-                    <div v-if="hasError('password')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.password.required">Введите пароль</div>
-                        <div class="error" v-if="!$v.formData.password.minLength">Пароль должен быть не менее 8
-                            символов
+                </tab-content>
+                <tab-content title="Пароль">
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            :class="hasError('password') ? 'is-invalid' : ''"
+                            placeholder="Введите пароль"
+                            v-model="formData.password">
+                        <div v-if="hasError('password')" class="invalid-feedback">
+                            <div class="error" v-if="!$v.formData.password.required">Введите пароль</div>
+                            <div class="error" v-if="!$v.formData.password.minLength">Пароль должен быть не менее 8
+                                символов
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Подтверждение пароля</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        :class="hasError('password_confirmation') ? 'is-invalid' : ''"
-                        placeholder="Введите подтверждение пароля"
-                        v-model="formData.password_confirmation">
-                    <div v-if="hasError('password_confirmation')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.password_confirmation.required">Введите подтвержение
-                            пароля
+                    <div class="form-group">
+                        <label>Подтверждение пароля</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            :class="hasError('password_confirmation') ? 'is-invalid' : ''"
+                            placeholder="Введите подтверждение пароля"
+                            v-model="formData.password_confirmation">
+                        <div v-if="hasError('password_confirmation')" class="invalid-feedback">
+                            <div class="error" v-if="!$v.formData.password_confirmation.required">Введите подтвержение
+                                пароля
+                            </div>
+                            <div class="error" v-if="!$v.formData.password_confirmation.sameAs">Пароли должны сопадать
+                            </div>
                         </div>
-                        <div class="error" v-if="!$v.formData.password_confirmation.sameAs">Пароли должны сопадать</div>
                     </div>
-                </div>
-            </tab-content>
-            <tab-content title="Условия соглашения">
-                <div class="form-group">
-                    <label>Ознакомьтесь с условиями соглашения</label>
-                    <div class="form-group form-check">
-                        <div class="custom-control custom-checkbox mt-2 mb-1">
-                            <div class="form-check">
-                                <input v-model="formData.submitted" type="checkbox" class="form-check-input"
-                                       :class="hasError('submitted') ? 'is-invalid' : ''"
-                                       id="customCheckb1">
-                                <label class="form-check-label" for="customCheckb1">
-                                    I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
-                                    conditions</a>
-                                </label>
-                                <div v-if="hasError('submitted')" class="invalid-feedback">
-                                    <div class="error" v-if="!$v.formData.submitted.required">Ознакомьтесь с условиями
-                                        соглашения
+                </tab-content>
+                <tab-content title="Условия соглашения">
+                    <div class="form-group">
+                        <label>Ознакомьтесь с условиями соглашения</label>
+                        <div class="form-group form-check">
+                            <div class="custom-control custom-checkbox mt-2 mb-1">
+                                <div class="form-check">
+                                    <input v-model="formData.submitted" type="checkbox" class="form-check-input"
+                                           :class="hasError('submitted') ? 'is-invalid' : ''"
+                                           id="customCheckb1">
+                                    <label class="form-check-label" for="customCheckb1">
+                                        I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms
+                                        and
+                                        conditions</a>
+                                    </label>
+                                    <div v-if="hasError('submitted')" class="invalid-feedback">
+                                        <div class="error" v-if="!$v.formData.submitted.required">Ознакомьтесь с
+                                            условиями
+                                            соглашения
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </tab-content>
-        </form-wizard>
+                </tab-content>
+            </form-wizard>
         </div>
         <BottomMenu></BottomMenu>
         <InformModal></InformModal>
@@ -137,7 +141,7 @@ export default {
         this.formData.email = this.email
     },
     computed: {
-        isEmail () {
+        isEmail() {
             return this.formData.email;
         }
     },

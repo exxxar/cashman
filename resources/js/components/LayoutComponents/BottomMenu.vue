@@ -12,7 +12,7 @@
                 <strong>Акции</strong>
             </div>
         </a>
-        <a href="#" class="item active">
+        <a href="#" class="item default">
             <div class="col">
                 <ion-icon name="apps-outline"></ion-icon>
             </div>
@@ -34,6 +34,20 @@
 
 <script>
 export default {
-    name: "BottomMenu"
+    name: "BottomMenu",
+    mounted() {
+        const path = window.location.href;
+        console.log(path);
+        let tmp = false;
+        $('.appBottomMenu a').each(function () {
+            if (this.href === path) {
+                $(this).addClass('active');
+                tmp = true;
+            }
+        });
+        if (tmp === false) {
+            $('.appBottomMenu .default').addClass('active');
+        }
+    }
 }
 </script>

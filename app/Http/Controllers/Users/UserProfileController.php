@@ -93,10 +93,12 @@ class UserProfileController extends Controller
         $friends = UserProfile::whereIn('id', $friendsIds)->get();
         return response()->json([
             'profile' => $profile,
-            'friends'=>$friends
+            'friends' => $friends
         ]);
     }
-    public function getProducts($id){
+
+    public function getProducts($id)
+    {
         $profile = User::find($id);
         $company = $profile->companies()->get();
         if ($company) {
@@ -106,32 +108,36 @@ class UserProfileController extends Controller
             $products = Product::latest()->limit(30)->get();
         }
         return response()->json([
-            'products'=>$products
+            'products' => $products
         ]);
     }
-    public function changeUserEmail(Request $request){
+
+    public function changeUserEmail(Request $request)
+    {
         $this->validate($request, [
-            'id'=>['required', 'exists:users'],
-            'email'=>['required', 'string', 'email', 'max:255', 'unique:users']
+            'id' => ['required', 'exists:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
         ]);
         $user = User::find($request->id);
         $user->email = $request->email;
         $user->save();
-        return response()->json(['status'=>'success']);
+        return response()->json(['status' => 'success']);
 
     }
-    public function changeUserAvatar(Request $request){
+
+    public function changeUserAvatar(Request $request)
+    {
         $this->validate($request, [
-            'id'=>['required', 'exists:users'],
-            'avatar'=>['required', 'string']
+            'id' => ['required', 'exists:users'],
+            'avatar' => ['required', 'string']
         ]);
         $profile = UserProfile::where('user_id', $request->id)->first();
         if ($profile->avatar != $request->avatar) {
             $profile->avatar = 'avatar/' . $request->avatar;
             $profile->save();
-            return response()->json(['status'=>'success']);
+            return response()->json(['status' => 'success']);
         }
-        return response()->json(['status'=>'error']);
+        return response()->json(['status' => 'error']);
     }
 
 

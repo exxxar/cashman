@@ -17,7 +17,7 @@
                 Клиенты вашей компании
             </div>
             <h4 class="text-center" v-if="users.length===0">У вашей компании пока нет ни одного клиента</h4>
-            <div v-if="users.length>0" class="card text-center" >
+            <div v-if="users.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -37,7 +37,7 @@
                             <td v-if="user.name===null">Нет данных</td>
                             <td><img :src="'assets/sample/' +user.avatar" alt="image"
                                      class="imaged w100 rounded"></td>
-                            <td v-if="user.phone!==null" >{{ user.phone }}</td>
+                            <td v-if="user.phone!==null">{{ user.phone }}</td>
                             <td v-if="user.phone===null">Нет данных</td>
                             <td v-if="user.country!==null">{{ user.country }}</td>
                             <td v-if="user.country===null">Нет данных</td>
@@ -46,7 +46,8 @@
                             <td v-if="user.address!==null">{{ user.address}}</td>
                             <td v-if="user.address===null">Нет данных</td>
                             <td v-if="user.messengers!==null">
-                                <ul class="listview image-listview no-line no-space flush" style="background: none!important">
+                                <ul class="listview image-listview no-line no-space flush"
+                                    style="background: none!important">
                                     <li v-for="(social, key) in user.messengers">
                                         <div class="item" v-if="social!==null">
                                             <div class="icon-box bg-primary">
@@ -97,20 +98,20 @@ import Header from "../../../LayoutComponents/Header";
 
 export default {
     name: "UsersTable",
-    components: { Header},
+    components: {Header},
     props: {
         users: {
             type: Object,
             required: true
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             pageNumber: 0,
             size: 10
         }
     },
-    methods:{
+    methods: {
         nextPage() {
             this.pageNumber++;
         },
@@ -142,6 +143,7 @@ export default {
     background: #6236FF !important;
     color: #fff !important;
 }
+
 @media (max-width: 375px) {
     .page-link {
         font-size: 70%;

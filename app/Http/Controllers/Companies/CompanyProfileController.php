@@ -45,9 +45,20 @@ class CompanyProfileController extends Controller
         }
         $products = Product::where('company_id', $id)->get();
         return response()->json([
-            'admins'=>$admins,
-            'products'=>$products
+            'admins' => $admins,
+            'products' => $products
         ]);
 
+    }
+
+    public function getUserCompanyPromocode($user, $company)
+    {
+        $operation_code = '000';
+        $user_id = str_pad($user, 10, "0", STR_PAD_LEFT);
+        $company_id = str_pad($company, 10, "0", STR_PAD_LEFT);
+        $data = 'https://your-cashman.com/qr-handler/data=' . base64_encode($operation_code . $user_id . $company_id);
+        return response()->json([
+            'code' => $data
+        ]);
     }
 }

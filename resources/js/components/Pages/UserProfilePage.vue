@@ -23,12 +23,12 @@
         <SideMenu :auth_user="auth_user"></SideMenu>
         <div id="appCapsule" class="full-height">
             <StatisticsSummary :profile="profile"></StatisticsSummary>
+            <CompanyList :user="auth_user" :companies="companies"></CompanyList>
             <HistoryActionList :show-detail="false"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
             <CashBackList v-if="cashbacks.length>0" :cashbacks="cashbacks"></CashBackList>
             <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
             <ProductTile v-if="products.length>0" :items="products"></ProductTile>
-            <CompanyList :user="auth_user" :companies="companies"></CompanyList>
             <UserList v-if="friends.length>0" :show-friends="true" :users="friends"></UserList>
             <NewsList v-if="news.length>0" :items="news"></NewsList>
         </div>
@@ -58,39 +58,39 @@ export default {
         CompanyList, NewsList, StatisticsSummary, StoryList, HistoryActionList, BottomMenu, Footer, CashBackList,
         ProductTile, UserList, AchievementList, Header, SideMenu
     },
-    props:{
-        auth_user:{
+    props: {
+        auth_user: {
             default: null
         },
-        companies:{
+        companies: {
             default: null
         },
-        news:{
+        news: {
             required: true
         },
-        stories:{
+        stories: {
             required: true
         },
-        cashbacks:{
+        cashbacks: {
             required: true
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             profile: [],
             products: [],
             friends: []
         }
     },
-    methods:{
-        getProfileData(){
-            axios.get('api/profile/'+this.auth_user.id).then(response=>{
+    methods: {
+        getProfileData() {
+            axios.get('api/profile/' + this.auth_user.id).then(response => {
                 this.profile = response.data.profile
                 this.friends = response.data.friends
             })
         },
-        getProductsData(){
-            axios.get('api/profile/products/'+this.auth_user.id).then(response=>{
+        getProductsData() {
+            axios.get('api/profile/products/' + this.auth_user.id).then(response => {
                 this.products = response.data.products
             })
         }

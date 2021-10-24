@@ -29,7 +29,8 @@
                             >
                                 <div class="dropzone-custom-content">
                                     <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
+                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    </div>
                                 </div>
                             </vue-dropzone>
                             <HasError :form="form" field="image"></HasError>
@@ -158,9 +159,9 @@ export default {
         filesRemove() {
             this.$refs.myVueDropzone.removeAllFiles()
         },
-        productImage(image){
-            if(image.toString().startsWith('products/')){
-                return './../assets/sample/'+image
+        productImage(image) {
+            if (image.toString().startsWith('products/')) {
+                return './../assets/sample/' + image
             }
             return image
         }

@@ -12,73 +12,78 @@ use Illuminate\Http\Request;
 
 class CompanyAdminsController extends Controller
 {
-    public function getCompanyGroupAdmin($id){
-        $adminIds = CompanyUser::where(['company_id'=>$id, 'role'=>'admin'])->pluck('user_id');
+    public function getCompanyGroupAdmin($id)
+    {
+        $adminIds = CompanyUser::where(['company_id' => $id, 'role' => 'admin'])->pluck('user_id');
         $admins = UserProfile::whereIn('id', $adminIds)->get();
-        foreach ($admins as $admin){
-            $admin['isActive'] = CompanyUser::where(['company_id'=>$id, 'user_id'=>$admin->user_id, 'role'=>'admin'])->value('isActive');
+        foreach ($admins as $admin) {
+            $admin['isActive'] = CompanyUser::where(['company_id' => $id, 'user_id' => $admin->user_id, 'role' => 'admin'])->value('isActive');
         }
         return view('pages/companyProfile/Admin/CompanyGroupAdmin', compact('admins'));
     }
 
-    public function addCompanyAdmin(Request $request){
+    public function addCompanyAdmin(Request $request)
+    {
         $this->validate($request, [
             'user' => ['required', 'exists:users,id'],
         ]);
-        if(CompanyUser::where(['user_id'=>$request->user, 'company_id'=>$request->company['id']])->exists()){
-            $admin = CompanyUser::where(['user_id'=>$request->user, 'company_id'=>$request->company['id']])->first();
-            $admin->role='admin';
-            $admin->isActive=true;
+        if (CompanyUser::where(['user_id' => $request->user, 'company_id' => $request->company['id']])->exists()) {
+            $admin = CompanyUser::where(['user_id' => $request->user, 'company_id' => $request->company['id']])->first();
+            $admin->role = 'admin';
+            $admin->isActive = true;
             $admin->save();
-        }
-        else{
+        } else {
             CompanyUser::create([
-               'user_id'=>$request->user,
-               'company_id'=>$request->company['id'],
-               'role'=>'admin',
-                'isActive'=>true
+                'user_id' => $request->user,
+                'company_id' => $request->company['id'],
+                'role' => 'admin',
+                'isActive' => true
             ]);
         }
         $user = User::find($request->user);
-        $user->notify(new RealTimeNotification('Вы стали администратором компании '.$request->company['title'],
-            'От компании '.$request->company['title'],
-            'assets/sample/'.$request->company['image'], $user->device_token));
+        $user->notify(new RealTimeNotification('Вы стали администратором компании ' . $request->company['title'],
+            'От компании ' . $request->company['title'],
+            'assets/sample/' . $request->company['image'], $user->device_token));
         Notification::create([
-            'title'=>'Вы стали администратором компании!',
-            'description'=>'Теперь у Вас есть доступ к ресурсам компании '.$request->company['title'],
-            'user_id'=>$user,
-            'notification_type'=>'Назначение администратора',
-            'object_id'=>$request->company['id'],
-            'object_type'=>'company'
+            'title' => 'Вы стали администратором компании!',
+            'description' => 'Теперь у Вас есть доступ к ресурсам компании ' . $request->company['title'],
+            'user_id' => $user,
+            'notification_type' => 'Назначение администратора',
+            'object_id' => $request->company['id'],
+            'object_type' => 'company'
         ]);
     }
-    public function deleteCompanyAdmin(Request $request){
+
+    public function deleteCompanyAdmin(Request $request)
+    {
         $this->validate($request, [
             'user' => ['required', 'exists:users,id'],
         ]);
-        if(!CompanyUser::where(['user_id'=>$request->user, 'company_id'=>$request->company['id'], 'role'=>'admin'])->exists()){
-           return response()->json(['error'=>'Выбранный пользователь не является администратором компании']);
+        if (!CompanyUser::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'role' => 'admin'])->exists()) {
+            return response()->json(['error' => 'Выбранный пользователь не является администратором компании']);
         }
-        $user = CompanyUser::where(['user_id'=>$request->user, 'company_id'=>$request->company['id'], 'role'=>'admin'])->first();
-        $user->role='user';
-        $user->isActive=null;
+        $user = CompanyUser::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'role' => 'admin'])->first();
+        $user->role = 'user';
+        $user->isActive = null;
         $user->save();
         $user = User::find($request->user);
-        $user->notify(new RealTimeNotification('Вас лишили прав администратора компании  '.$request->company['title'],
-            'От компании '.$request->company['title'],
-            'assets/sample/'.$request->company['image'], $user->device_token));
+        $user->notify(new RealTimeNotification('Вас лишили прав администратора компании  ' . $request->company['title'],
+            'От компании ' . $request->company['title'],
+            'assets/sample/' . $request->company['image'], $user->device_token));
         Notification::create([
-            'title'=>'Вас лишили прав администратора компании...',
-            'description'=>'Теперь у Вас нет доступа к ресурсам компании '.$request->company['title'],
-            'user_id'=>$user,
-            'notification_type'=>'Удаление администратора',
-            'object_id'=>$request->company['id'],
-            'object_type'=>'company'
+            'title' => 'Вас лишили прав администратора компании...',
+            'description' => 'Теперь у Вас нет доступа к ресурсам компании ' . $request->company['title'],
+            'user_id' => $user,
+            'notification_type' => 'Удаление администратора',
+            'object_id' => $request->company['id'],
+            'object_type' => 'company'
         ]);
     }
-    public function changeActiveAdmin($admin, $company){
-        $user = CompanyUser::where(['user_id'=>$admin, 'company_id'=>$company])->first();
-        if($user->role=='admin') {
+
+    public function changeActiveAdmin($admin, $company)
+    {
+        $user = CompanyUser::where(['user_id' => $admin, 'company_id' => $company])->first();
+        if ($user->role == 'admin') {
             $user->isActive = !$user->isActive;
             $user->save();
         }

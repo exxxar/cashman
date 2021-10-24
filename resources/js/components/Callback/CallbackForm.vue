@@ -108,7 +108,7 @@ export default {
         }
     },
     methods: {
-        sendMessage(e){
+        sendMessage(e) {
             e.preventDefault();
             this.cansend = true;
             axios

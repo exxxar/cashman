@@ -17,8 +17,8 @@ import Header from "../LayoutComponents/Header";
 export default {
     name: "UserFriendsAddHistory",
     components: {Header, UserFriendsTreeItem},
-    props:{
-        friends:{
+    props: {
+        friends: {
             required: true
         }
     }

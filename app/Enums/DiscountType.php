@@ -11,9 +11,9 @@ use BenSampo\Enum\Enum;
  */
 final class DiscountType extends Enum
 {
-    const Unset =   0;
-    const Promotion =   1;
-    const InTheTop =   2;
+    const Unset = 0;
+    const Promotion = 1;
+    const InTheTop = 2;
     const BestSeller = 3;
     const NewFood = 4;
     const CustomFood = 5;

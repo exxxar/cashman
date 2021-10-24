@@ -30242,6 +30242,15 @@ textarea, .form-control {
   color: #27173E;
 }
 
+@media (max-width: 480px) {
+  .stat-box {
+    padding: 20px 18px;
+  }
+
+  .stat-box .value {
+    font-size: 16px;
+  }
+}
 .transactions .item {
   background: #ffffff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
@@ -30608,8 +30617,15 @@ textarea, .form-control {
   line-height: 1.2em;
 }
 
+.categories-block .splide__slide {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 26px !important;
+  margin-right: -10px !important;
+}
+
 body.dark-mode {
-  background: #030108;
+  background: #0c051c;
   color: #8f82a5;
 }
 body.dark-mode.bg-white {
@@ -31246,6 +31262,11 @@ body.dark-mode .ios-add-to-home .modal-content:before, body.dark-mode .android-a
 }
 body.dark-mode .ios-add-to-home .modal-content .action-sheet-content, body.dark-mode .android-add-to-home .modal-content .action-sheet-content {
   color: #fff;
+}
+
+.pl-6px {
+  padding-left: 6px;
+  padding-right: 0;
 }
 
 /*Facebook*/

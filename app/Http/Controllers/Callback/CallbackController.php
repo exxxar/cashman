@@ -15,6 +15,7 @@ class CallbackController extends Controller
             'message' => ['required', 'string', 'max:255']
         ]);
     }
+
     public function sendVoiceMessage(Request $request)
     {
         $files = $request->file('files');

@@ -16,7 +16,7 @@ class AdvertisementController extends Controller
      */
     public function index($id)
     {
-        return view('pages/companyProfile/Admin/AdminAdvertisementPage', compact( 'id'));
+        return view('pages/companyProfile/Admin/AdminAdvertisementPage', compact('id'));
     }
 
     public function getAdvertisement($id)
@@ -97,7 +97,7 @@ class AdvertisementController extends Controller
             ];
         }
         $advertisement->save();
-        return ['message'=>'record updated'];
+        return ['message' => 'record updated'];
     }
 
     /**
@@ -108,8 +108,8 @@ class AdvertisementController extends Controller
      */
     public function destroy($id)
     {
-        $advertisement= CompanyAdvertising::find($id);
+        $advertisement = CompanyAdvertising::find($id);
         $advertisement->delete();
-        return ['message'=>'record deleted'];
+        return ['message' => 'record deleted'];
     }
 }

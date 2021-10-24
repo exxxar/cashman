@@ -28,6 +28,7 @@
 
 <script>
 import {eventBus} from '../../../app'
+
 export default {
     name: "CompanyItem",
     props: {
@@ -39,17 +40,17 @@ export default {
             default: null
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             userCompanies: [],
         }
     },
-    mounted(){
-      this.getUserCompanies()
+    mounted() {
+        this.getUserCompanies()
     },
-    computed:{
-        isAdded(){
-            return this.userCompanies.find(item=>item.id===this.company.id)
+    computed: {
+        isAdded() {
+            return this.userCompanies.find(item => item.id === this.company.id)
         }
     },
     methods:
@@ -72,16 +73,16 @@ export default {
                         window.location.href = 'company-profile-' + this.company.id;
                     })
             },
-            getUserCompanies(){
+            getUserCompanies() {
                 let vm = this
-                if(user!==null){
-                    axios.get('api/user/companies/'+ this.user.id).then(response=>{
+                if (user !== null) {
+                    axios.get('api/user/companies/' + this.user.id).then(response => {
                         vm.userCompanies = response.data.companies
                     })
                 }
             },
-            deleteCompany(){
-                axios.delete('api/user/'+ this.user.id + '/company/'+this.company.id).then(()=>{
+            deleteCompany() {
+                axios.delete('api/user/' + this.user.id + '/company/' + this.company.id).then(() => {
                     eventBus.$emit('updateCompanies', 1)
                 })
             }

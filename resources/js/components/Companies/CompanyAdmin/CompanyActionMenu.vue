@@ -17,23 +17,31 @@
 
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showOffsCashBackModal">Списать CashBack</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showOffsCashBackModal">
+                        Списать CashBack
+                    </button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDebitingCashBackModal">Начислить
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDebitingCashBackModal">
+                        Начислить
                         CashBack {{company.cashback_percent}}%
                     </button>
                     <div class="mt-1"></div>
 
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showAddAdminModal">Добавить администратора</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showAddAdminModal">Добавить
+                        администратора
+                    </button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDeleteAdminModal">Убрать администратора</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDeleteAdminModal">Убрать
+                        администратора
+                    </button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="terminate">Завершить работу</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="terminate">Завершить работу
+                    </button>
 
                 </div>
             </div>
@@ -56,15 +64,15 @@ export default {
         company: {
             required: true
         },
-        admin:{
-            required:true,
+        admin: {
+            required: true,
             type: Number
         }
     },
     data() {
         return {
             user: 0,
-            type: '',
+            type: null,
             operation: ''
         }
     },
@@ -73,29 +81,31 @@ export default {
             this.type = 'Начисление'
             $('#CashbackModal').modal('show');
         },
-        showOffsCashBackModal(){
+        showOffsCashBackModal() {
             this.type = 'Списание'
             $('#CashbackModal').modal('show');
         },
-        showAddAdminModal(){
-            this.operation='Add'
+        showAddAdminModal() {
+            this.operation = 'Add'
             $('#AdminsModal').modal('show');
         },
-        showDeleteAdminModal(){
-            this.operation='Delete'
+        showDeleteAdminModal() {
+            this.operation = 'Delete'
             $('#AdminsModal').modal('show');
         },
-        terminate(){
-           window.location.href='/user-profile'
+        terminate() {
+            window.location.href = '/user-profile'
         }
     },
     mounted() {
-            let param = location.search
-            if(param.length>0) {
-                this.type = 'Начисление'
-                eventBus.$emit('userId', param.slice(param.indexOf('=')+1))
-                $('#CashbackModal').modal('show');
-            }
+        let param = location.search
+        if (param.length > 0) {
+            this.type = 'Начисление'
+            //this.user = param.slice(param.indexOf('=')+1)
+            //console.log(this.user)
+            eventBus.$emit('userId', param.slice(param.indexOf('=') + 1))
+            $('#CashbackModal').modal('show');
+        }
 
     }
 }

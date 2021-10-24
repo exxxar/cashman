@@ -31,12 +31,9 @@ export default {
     },
     methods: {
         searchCompanies() {
-            if(this.query.length>0)
-            {
+            if (this.query.length > 0) {
                 this.$store.dispatch('SEARCH_COMPANIES', this.query)
-            }
-            else
-            {
+            } else {
                 this.$store.dispatch('GET_COMPANIES')
             }
         }

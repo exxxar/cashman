@@ -81,7 +81,8 @@
                             >
                                 <div class="dropzone-custom-content">
                                     <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
+                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    </div>
                                 </div>
                             </vue-dropzone>
                             <HasError :form="form" field="image"/>
@@ -113,7 +114,8 @@
                         </div>
                         <div class="form-group basic">
                             <label class="form-check-label" for="customCheckb1">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">Купить подписку</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawActionSheet">Купить
+                                    подписку</a>
                             </label>
                         </div>
                         <div class="custom-control custom-checkbox mt-2 mb-1">
@@ -121,7 +123,8 @@
                                 <input v-model="form.confirmed" type="checkbox" class="form-check-input"
                                        id="customCheckb1">
                                 <label class="form-check-label" for="customCheckb1">
-                                    Я согласен с <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">условиями соглашения</a>
+                                    Я согласен с <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">условиями
+                                    соглашения</a>
                                 </label>
                                 <HasError :form="form" field="confirmed"/>
                             </div>
@@ -129,7 +132,9 @@
                     </div>
                 </div>
                 <div class="form-button-group transparent">
-                    <button type="submit" :disabled='form.errors.any() || !isComplete'  class="btn btn-primary btn-block btn-lg">Зарегистрировать</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete'
+                            class="btn btn-primary btn-block btn-lg">Зарегистрировать
+                    </button>
                 </div>
             </form>
         </div>
@@ -146,11 +151,12 @@ import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
 import TransactionsModal from "../../Modals/TransactionsModal";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
+
 export default {
     name: "CompanyRegisterSection",
     components: {
         InformModal, TransactionsModal, Header,
-        HasError, AlertErrors,  vueDropzone: vue2Dropzone
+        HasError, AlertErrors, vueDropzone: vue2Dropzone
     },
     data: function () {
         return {
@@ -174,7 +180,7 @@ export default {
     },
     methods: {
         registerCompany() {
-            this.form.post('/register-company').then (function (response) {
+            this.form.post('/register-company').then(function (response) {
                 if (response.data.href !== undefined) {
                     location.href = response.data.href
                 } else {
@@ -183,20 +189,22 @@ export default {
 
             })
                 .catch(function (error) {
-                    console.log(error);});
+                    console.log(error);
+                });
 
         },
         uploadSuccess(file, response) {
             this.form.image = response.file;
         },
 
-        fileRemoved() {}
+        fileRemoved() {
+        }
     },
     computed: {
-        isComplete () {
-            return this.form.title  && this.form.domain && this.form.password &&
-                this.form.password_confirmation && this.form.confirmed  && this.form.position
-                && this.form.image  && this.form.description;
+        isComplete() {
+            return this.form.title && this.form.domain && this.form.password &&
+                this.form.password_confirmation && this.form.confirmed && this.form.position
+                && this.form.image && this.form.description;
         }
     }
 }

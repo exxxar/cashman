@@ -78,10 +78,10 @@ import BottomMenu from "../../../LayoutComponents/BottomMenu";
 
 export default {
     name: "CompanyAdminMenu",
-    components: { BottomMenu, Header},
-    props:{
-        id:{
-            type:Number,
+    components: {BottomMenu, Header},
+    props: {
+        id: {
+            type: Number,
             required: true
         }
     }

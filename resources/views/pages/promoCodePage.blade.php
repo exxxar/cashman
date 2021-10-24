@@ -4,5 +4,6 @@
 @endsection
 
 @section('content')
-    <promo-code :code='{!! json_encode($data) !!}'></promo-code>
+    <promo-code :code='{!! json_encode($data) !!}'
+                :user='{!! json_encode($userr) !!}'></promo-code>
 @endsection

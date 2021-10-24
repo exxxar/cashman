@@ -45,7 +45,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -53,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'submitted'=>['accepted']
+            'submitted' => ['accepted']
         ]);
     }
 
@@ -61,7 +61,6 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-
      * @return \App\Models\User
      */
     protected function create(array $data)
@@ -73,9 +72,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $profile = UserProfile::create([
-            'user_id'=>$user->id,
-            'avatar'=>'avatar/avatar1.jpg',
-            'messengers'=>[
+            'user_id' => $user->id,
+            'avatar' => 'avatar/avatar1.jpg',
+            'messengers' => [
                 'vk' => null,
                 'telegram' => null,
                 'instagram' => null,
@@ -83,22 +82,22 @@ class RegisterController extends Controller
                 'youtube' => null
             ]
         ]);
-        if($parent_id!=null && $company_id!=null) {
+        if ($parent_id != null && $company_id != null) {
             $company = Company::where('id', $company_id)->first();
             UsersFriedsByCompany::create(['user_id' => $user->id,
                 'company_id' => $company_id, 'parent_id' => $parent_id]);
             $company->users()->attach(['user_id' => $user->id]);
             $parent = User::find($parent_id);
-            $parent->notify(new RealTimeNotification('У вас появился новый друг по компании  '.$company['title'],
-                'От компании '.$company['title'],
-                'assets/sample/'.$company['image'], $parent->device_token));
+            $parent->notify(new RealTimeNotification('У вас появился новый друг по компании  ' . $company['title'],
+                'От компании ' . $company['title'],
+                'assets/sample/' . $company['image'], $parent->device_token));
             Notification::create([
-                'title'=>'У вас появился новый друг!',
-                'description'=>'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
-                'user_id'=>$parent_id,
-                'notification_type'=>'Добавление рефералла',
-                'object_id'=>$user->id,
-                'object_type'=>'user'
+                'title' => 'У вас появился новый друг!',
+                'description' => 'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                'user_id' => $parent_id,
+                'notification_type' => 'Добавление рефералла',
+                'object_id' => $user->id,
+                'object_type' => 'user'
             ]);
         }
         return $user;

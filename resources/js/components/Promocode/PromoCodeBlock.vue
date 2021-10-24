@@ -6,9 +6,6 @@
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
-            <template v-slot:title>
-                Активация промокода
-            </template>
             <template v-slot:right>
                 <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogNotification">Помощь</a>
             </template>
@@ -16,10 +13,13 @@
         <div id="appCapsule" class="full-height">
             <div class="section">
                 <div class="splash-page mt-5 mb-5">
+                    <h2>Активация промокода</h2>
                     <div class="mb-3">
                         <vue-qrcode :value=code :options="{ width: 200 }"></vue-qrcode>
+                        <h3>ID пользователя</h3>
+                        <h4>{{user}}</h4>
                     </div>
-                    <h2 class="mb-2">Отканируйте QR Код</h2>
+                    <h3 class="mb-2">Отканируйте QR Код</h3>
                     <p>
                         {{ description }}
                     </p>
@@ -45,11 +45,15 @@ import NotificationModal from "../Modals/NotificationModal";
 import Footer from "../LayoutComponents/Footer";
 import BottomMenu from "../LayoutComponents/BottomMenu";
 import VueQrcode from '@chenfengyuan/vue-qrcode';
+
 export default {
     name: "PromoCodeBlock",
-    components: {BottomMenu, Footer, NotificationModal, Header,  VueQrcode},
+    components: {BottomMenu, Footer, NotificationModal, Header, VueQrcode},
     props: {
         code: {
+            required: true
+        },
+        user: {
             required: true
         },
         description: {

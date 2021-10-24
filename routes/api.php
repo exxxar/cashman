@@ -34,7 +34,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('companies', [SearchCompanyController::class, 'index']);
 Route::get('search', [SearchCompanyController::class, 'search']);
-Route::post('files',  [CompanyEditSectionController::class, 'storeFile']);
+Route::post('files', [CompanyEditSectionController::class, 'storeFile']);
 Route::post('avatars', [UserProfileController::class, 'uploadAvatar']);
 Route::post('buy/subscription', [BuySubscriptionController::class, 'index']);
 Route::post('send/message', [CallbackController::class, 'sendTextMessage']);
@@ -56,11 +56,12 @@ Route::resource('admin/users', UserController::class);
 Route::get('upload/products', [\App\Http\Controllers\Products\ProductController::class, 'uploadProducts'])->name('uploadProducts');
 Route::post('sort/companies', [\App\Http\Controllers\Users\UserController::class, 'getCompanies']);
 Route::get('products', [\App\Http\Controllers\Products\ProductController::class, 'getProductsAndCategories']);
-Route::get('products/category/{id}',  [\App\Http\Controllers\Products\ProductController::class, 'getProductsByCategory']);
+Route::get('products/category/{id}', [\App\Http\Controllers\Products\ProductController::class, 'getProductsByCategory']);
 Route::get('user/companies/{id}', [\App\Http\Controllers\Users\UserController::class, 'getUsersCompanies']);
 Route::delete('user/{user}/company/{id}', [\App\Http\Controllers\Users\UserController::class, 'deleteCompany']);
 Route::post('debiting/cashback', [\App\Http\Controllers\Cashback\CashBackController::class, 'debitingCashback']);
 Route::post('offs/cashback', [\App\Http\Controllers\Cashback\CashBackController::class, 'offsCashback']);
+Route::post('description/photo', [\App\Http\Controllers\Cashback\CashBackController::class, 'loadDescriptionPhoto']);
 Route::get('profile/products/{id}', [UserProfileController::class, 'getProducts']);
 Route::post('add/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'addCompanyAdmin']);
 Route::post('delete/company/admin', [\App\Http\Controllers\Admin\CompanyAdminsController::class, 'deleteCompanyAdmin']);
@@ -68,3 +69,4 @@ Route::get('change/active-admin/{admin}/{company}', [\App\Http\Controllers\Admin
 Route::get('active/admins/company/{id}', [\App\Http\Controllers\Companies\CompanyProfileController::class, 'getActiveAdmins']);
 Route::post('change/email', [UserProfileController::class, 'changeUserEmail']);
 Route::post('change/avatar', [UserProfileController::class, 'changeUserAvatar']);
+Route::get('qrcode/{user}/{company}', [\App\Http\Controllers\Companies\CompanyProfileController::class, 'getUserCompanyPromocode']);

@@ -11,7 +11,7 @@
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
-          <ActivityHistoryList :actions="history" :all="false"></ActivityHistoryList>
+            <ActivityHistoryList :actions="history" :all="false"></ActivityHistoryList>
         </div>
         <Footer class="padding-bottom-70"></Footer>
         <BottomMenu></BottomMenu>
@@ -27,8 +27,8 @@ import ActivityHistoryList from "./ActivityHistoryList";
 export default {
     name: "ActivityHistoryPage",
     components: {ActivityHistoryList, BottomMenu, Header},
-    props:{
-        history:{
+    props: {
+        history: {
             required: true
         }
     }

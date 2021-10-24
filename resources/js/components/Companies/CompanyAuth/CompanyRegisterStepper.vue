@@ -22,8 +22,12 @@
                         placeholder="Введите процент кэшбека"
                         v-model="formData.cashback_percent">
                     <div v-if="hasError('cashback_percent')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.cashback_percent.required">Введите процент кэшбека компании</div>
-                        <div class="error" v-if="!$v.formData.cashback_percent.numeric">Процент кэшбека должен быть числом!</div>
+                        <div class="error" v-if="!$v.formData.cashback_percent.required">Введите процент кэшбека
+                            компании
+                        </div>
+                        <div class="error" v-if="!$v.formData.cashback_percent.numeric">Процент кэшбека должен быть
+                            числом!
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,8 +39,12 @@
                         placeholder="Введите процент кэшбека 1 уровня"
                         v-model="formData.cashback_percent_level_1">
                     <div v-if="hasError('cashback_percent_level_1')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.required">Введите процент кэшбека 1 уровня компании</div>
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.numeric">Процент кэшбека 1 уровня должен быть числом!</div>
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.required">Введите процент кэшбека
+                            1 уровня компании
+                        </div>
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.numeric">Процент кэшбека 1 уровня
+                            должен быть числом!
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,8 +56,12 @@
                         placeholder="Введите процент кэшбека 2 уровня"
                         v-model="formData.cashback_percent_level_2">
                     <div v-if="hasError('cashback_percent_level_2')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.required">Введите процент кэшбека 2 уровня компании</div>
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.numeric">Процент кэшбека 2 уровня должен быть числом!</div>
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.required">Введите процент кэшбека
+                            2 уровня компании
+                        </div>
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.numeric">Процент кэшбека 2 уровня
+                            должен быть числом!
+                        </div>
                     </div>
                 </div>
             </tab-content>
@@ -63,7 +75,9 @@
                         placeholder="Введите ссылку для обратной связи с компанией"
                         v-model="formData.callback_url">
                     <div v-if="hasError('callback_url')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.callback_url.required">Введите ссылку для обратной связи с компанией</div>
+                        <div class="error" v-if="!$v.formData.callback_url.required">Введите ссылку для обратной связи с
+                            компанией
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +89,9 @@
                         placeholder="Введите ссылку для загрузки товаров из вк"
                         v-model="formData.upload_vk_url">
                     <div v-if="hasError('upload_vk_url')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.upload_vk_url.required">Введите ссылку для загрузки товаров из вк</div>
+                        <div class="error" v-if="!$v.formData.upload_vk_url.required">Введите ссылку для загрузки
+                            товаров из вк
+                        </div>
                     </div>
                 </div>
             </tab-content>
@@ -155,6 +171,7 @@ import {FormWizard, TabContent, ValidationHelper} from 'vue-step-wizard'
 import {required, numeric} from 'vuelidate/lib/validators';
 import BottomMenu from "../../LayoutComponents/BottomMenu";
 import Header from "../../LayoutComponents/Header";
+
 export default {
     name: "CompanyRegisterStepper",
     components: {
@@ -180,26 +197,30 @@ export default {
                 image: ''
             },
             validationRules: [
-                {cashback_percent: {required, numeric}, cashback_percent_level_1: {required, numeric}, cashback_percent_level_2: {required, numeric}},
-                { callback_url: {required}, upload_vk_url: {required}},
+                {
+                    cashback_percent: {required, numeric},
+                    cashback_percent_level_1: {required, numeric},
+                    cashback_percent_level_2: {required, numeric}
+                },
+                {callback_url: {required}, upload_vk_url: {required}},
                 {}
             ],
             inputs: [],
             type: '',
         }
     },
-    computed:{
-        newKey(){
+    computed: {
+        newKey() {
             return this.type
         }
     },
-    props:{
-        company:{
+    props: {
+        company: {
             required: true
         }
     },
 
-    methods:{
+    methods: {
         onComplete() {
             this.formData.id = this.company.id
             this.formData.title = this.company.title
@@ -207,7 +228,7 @@ export default {
             this.formData.image = this.company.image
             this.formData.socials = this.company.socials
             this.formData.properties = this.company.properties
-            axios.post('api/company/settings', this.formData).then (function (response) {
+            axios.post('api/company/settings', this.formData).then(function (response) {
                 if (response.data.href !== undefined) {
                     location.href = response.data.href
                 } else {
@@ -216,11 +237,12 @@ export default {
 
             })
                 .catch(function (error) {
-                    console.log(error);});
+                    console.log(error);
+                });
         },
         addProperty() {
-            if(this.inputs.length>0) {
-                this.inputs.splice(this.inputs.length-1)
+            if (this.inputs.length > 0) {
+                this.inputs.splice(this.inputs.length - 1)
                 this.type = ''
             }
             this.inputs.push({

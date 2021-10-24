@@ -18,6 +18,7 @@ class SearchEvent implements ShouldBroadcastNow
      * @return void
      */
     public $companies;
+
     public function __construct($companies)
     {
         $this->companies = $companies;
@@ -33,6 +34,7 @@ class SearchEvent implements ShouldBroadcastNow
     {
         return 'searchResults';
     }
+
     /**
      * Get the channels the event should broadcast on.
      *

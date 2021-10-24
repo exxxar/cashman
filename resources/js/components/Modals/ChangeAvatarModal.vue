@@ -20,7 +20,8 @@
                             >
                                 <div class="dropzone-custom-content">
                                     <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
+                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    </div>
                                 </div>
                             </vue-dropzone>
                             <HasError :form="form" field="avatar"></HasError>
@@ -44,9 +45,9 @@ import {HasError} from "vform/src/components/bootstrap5";
 
 export default {
     name: "ChangeAvatarModal",
-    components: { HasError, vueDropzone: vue2Dropzone},
-    props:{
-        id:{
+    components: {HasError, vueDropzone: vue2Dropzone},
+    props: {
+        id: {
             required: true,
             type: Number
         }
@@ -59,14 +60,14 @@ export default {
                 addRemoveLinks: true,
                 maxFiles: 1
             },
-            form:new Form({
+            form: new Form({
                 id: null,
                 avatar: ''
             }),
             image: ''
         }
     },
-    methods:{
+    methods: {
         uploadSuccess(file, response) {
             this.image = response.file;
         },
@@ -77,13 +78,13 @@ export default {
         filesRemove() {
             this.$refs.myVueDropzone.removeAllFiles()
         },
-        changeAvatar(){
+        changeAvatar() {
             this.form.id = this.id
             if (this.image !== '') {
                 this.form.avatar = this.image
                 this.fileRemoved()
             }
-            this.form.post('api/change/avatar').then((response)=>{
+            this.form.post('api/change/avatar').then((response) => {
                 this.filesRemove()
                 if (response.data.status === 'success') {
                     this.$emit('updateParent')

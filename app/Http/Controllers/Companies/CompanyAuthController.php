@@ -45,7 +45,7 @@ class CompanyAuthController extends Controller
             'description' => $request->description,
             'company_group_id' => 1,
             'latitude' => (float)$coordinates[1],
-            'longitude'=>(float)$coordinates[0],
+            'longitude' => (float)$coordinates[0],
             'creator_id' => Auth::user()->getAuthIdentifier(),
             'socials' => [
                 'vk' => '',
@@ -60,9 +60,9 @@ class CompanyAuthController extends Controller
             ]
         ]);
         $companyUser = CompanyUser::create([
-            'user_id'=>Auth::user()->getAuthIdentifier(),
-            'company_id'=>$company->id,
-            'role'=>'admin'
+            'user_id' => Auth::user()->getAuthIdentifier(),
+            'company_id' => $company->id,
+            'role' => 'admin'
         ]);
         $result['href'] = route('completeCompanyRegistration', ['id' => $company->id]);
         return response()->json($result);
@@ -81,9 +81,9 @@ class CompanyAuthController extends Controller
             'password' => ['required', 'string']
         ]);
         $company = Company::where('domain', $request->domain)->first();
-        $isAdmin = CompanyUser::where(['company_id'=>$company->id, 'user_id'=>Auth::user()->getAuthIdentifier(),
-            'role'=>'admin'])->exists();
-        if ($company->password == md5($request->password) && ($isAdmin || $company->creator_id==Auth::user()->getAuthIdentifier())) {
+        $isAdmin = CompanyUser::where(['company_id' => $company->id, 'user_id' => Auth::user()->getAuthIdentifier(),
+            'role' => 'admin'])->exists();
+        if ($company->password == md5($request->password) && ($isAdmin || $company->creator_id == Auth::user()->getAuthIdentifier())) {
             $result['href'] = route('company-profile', ['id' => $company->id]);
             return response()->json($result);
         }
@@ -92,7 +92,8 @@ class CompanyAuthController extends Controller
 
     }
 
-    public function completeRegistration($id){
+    public function completeRegistration($id)
+    {
         $company = Company::find($id);
         return view('auth/companyAuth/RegisterCompanyStepper', compact('company'));
     }

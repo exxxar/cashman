@@ -1,31 +1,31 @@
 <template>
-<fragment>
-    <Stepper :id="id"></Stepper>
-    <div class="listview-title mt-2">Ваши истории</div>
-    <ul class="listview image-listview inset">
-        <li v-for="story in stories">
-            <a href="#" class="item"  v-on:click="showStory(story)" data-bs-toggle="modal" data-component="stories"
-               data-bs-target="#StoryDefault">
-                <img :src="'./../assets/sample/'+story.images.main" alt="image" class="image">
-                <div class="in">
-                    <div>{{story.title}}</div>
-                </div>
-            </a>
-        </li>
-    </ul>
-    <div class="listview-title mt-2">Ваши новости</div>
-    <ul class="listview image-listview inset">
-        <li v-for="item in news" >
-            <a :href="'news/' + item.id" class="item">
-                <img :src="'./../assets/sample/'+item.images.main" alt="image" class="image">
-                <div class="in">
-                    <div>{{ item.title }}</div>
-                </div>
-            </a>
-        </li>
-    </ul>
-    <StoryModal :story="currentStory"/>
-</fragment>
+    <fragment>
+        <Stepper :id="id"></Stepper>
+        <div class="listview-title mt-2">Ваши истории</div>
+        <ul class="listview image-listview inset">
+            <li v-for="story in stories">
+                <a href="#" class="item" v-on:click="showStory(story)" data-bs-toggle="modal" data-component="stories"
+                   data-bs-target="#StoryDefault">
+                    <img :src="'./../assets/sample/'+story.images.main" alt="image" class="image">
+                    <div class="in">
+                        <div>{{story.title}}</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="listview-title mt-2">Ваши новости</div>
+        <ul class="listview image-listview inset">
+            <li v-for="item in news">
+                <a :href="'news/' + item.id" class="item">
+                    <img :src="'./../assets/sample/'+item.images.main" alt="image" class="image">
+                    <div class="in">
+                        <div>{{ item.title }}</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <StoryModal :story="currentStory"/>
+    </fragment>
 </template>
 
 <script>
@@ -35,7 +35,7 @@ import Stepper from "../ADComponents/Stepper";
 
 export default {
     name: "StoryAdminMenu",
-    components:{ StoryModal, Stepper},
+    components: {StoryModal, Stepper},
     data: function () {
         return {
             currentStory: []
@@ -52,16 +52,16 @@ export default {
             eventBus.$emit('showStory', story)
         }
     },
-    props:{
-        stories:{
+    props: {
+        stories: {
             type: Object,
             required: true
         },
-        news:{
+        news: {
             type: Object,
             required: true
         },
-        id:{
+        id: {
             type: Number,
             required: true
         }

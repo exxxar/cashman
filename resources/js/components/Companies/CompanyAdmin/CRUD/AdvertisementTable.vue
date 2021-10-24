@@ -19,8 +19,9 @@
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
             </div>
-            <h4 class="text-center" v-if="advertisements.length===0">У вашей компании пока нет ни одной рекламной записи. Нажмите на кнопку
-            "Добавить новую рекламу", чтобы пользователи знали о ваших новостях и акциях</h4>
+            <h4 class="text-center" v-if="advertisements.length===0">У вашей компании пока нет ни одной рекламной
+                записи. Нажмите на кнопку
+                "Добавить новую рекламу", чтобы пользователи знали о ваших новостях и акциях</h4>
             <div v-if="advertisements.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -182,7 +183,7 @@ export default {
             window.location.href = 'story-admin-menu-' + this.id;
         },
         loadRecords() {
-          axios.get('api/get/advertisement/' + this.id).then((response) => (this.advertisements = response.data.advertisements));
+            axios.get('api/get/advertisement/' + this.id).then((response) => (this.advertisements = response.data.advertisements));
         },
         nextPage() {
             this.pageNumber++;
@@ -194,8 +195,8 @@ export default {
 
     mounted() {
         this.loadRecords();
-       Fire.$on('AfterCreate', () => {
-           this.loadRecords();
+        Fire.$on('AfterCreate', () => {
+            this.loadRecords();
         });
     },
     computed: {
@@ -222,6 +223,7 @@ export default {
     background: #6236FF !important;
     color: #fff !important;
 }
+
 @media (max-width: 375px) {
     .page-link {
         font-size: 70%;

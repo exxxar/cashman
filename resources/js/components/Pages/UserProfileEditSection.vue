@@ -45,7 +45,9 @@
                                 >
                                     <div class="dropzone-custom-content">
                                         <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера</div>
+                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего
+                                            компьютера
+                                        </div>
                                     </div>
                                 </vue-dropzone>
 
@@ -54,7 +56,8 @@
                                 <div class="input-wrapper">
                                     <label class="label" for="password1">Номер телефона</label>
                                     <input type="text" class="form-control" id="password1" autocomplete="off"
-                                           placeholder="Введите ваш номер телефона" v-model="profile.phone" name="phone">
+                                           placeholder="Введите ваш номер телефона" v-model="profile.phone"
+                                           name="phone">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
@@ -145,8 +148,8 @@ export default {
             required: true
         }
     },
-    data(){
-        return{
+    data() {
+        return {
             dropzoneOptions: {
                 url: "api/avatars",
                 acceptedFiles: ".png, .jpg, .jpeg",
@@ -159,8 +162,8 @@ export default {
         updateSettings() {
             axios.post('api/user/settings', this.profile)
                 .then(function (response) {
-                   // if(response.status === 200 || 302 || 401) {
-                        window.location.href = 'user-profile';
+                    // if(response.status === 200 || 302 || 401) {
+                    window.location.href = 'user-profile';
                     //}
                 })
                 .catch(function (error) {
@@ -172,7 +175,8 @@ export default {
             this.profile.avatar = response.file;
         },
 
-        fileRemoved() {}
+        fileRemoved() {
+        }
     }
 }
 </script>

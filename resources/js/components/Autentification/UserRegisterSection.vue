@@ -24,7 +24,8 @@
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="email">Электронная почта</label>
-                                <input type="email" class="form-control" id="email" placeholder="Введите Ваш адрес электронной почты"
+                                <input type="email" class="form-control" id="email"
+                                       placeholder="Введите Ваш адрес электронной почты"
                                        v-model="form.email" name="email">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -95,7 +96,9 @@
                     </div>
                 </div>
                 <div class="form-button-group">
-                    <button type="submit" :disabled='form.errors.any() || !isComplete' class="btn btn-primary btn-block btn-lg">Зарегистрироваться</button>
+                    <button type="submit" :disabled='form.errors.any() || !isComplete'
+                            class="btn btn-primary btn-block btn-lg">Зарегистрироваться
+                    </button>
                 </div>
             </form>
         </div>
@@ -129,7 +132,7 @@ export default {
         }
     },
     computed: {
-        isComplete () {
+        isComplete() {
             return this.form.email && this.form.password && this.form.password_confirmation && this.form.submitted;
         }
     }

@@ -27,7 +27,7 @@ class RealTimeNotification extends Notification
      *
      * @return void
      */
-    public function __construct($title,$message,$image, $fcmToken)
+    public function __construct($title, $message, $image, $fcmToken)
     {
         $this->title = $title;
         $this->message = $message;
@@ -38,7 +38,7 @@ class RealTimeNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)

@@ -121,6 +121,6 @@ import BottomMenu from "../LayoutComponents/BottomMenu";
 
 export default {
     name: "AboutPage",
-    components: { BottomMenu, Footer, CallbackForm, Header}
+    components: {BottomMenu, Footer, CallbackForm, Header}
 }
 </script>

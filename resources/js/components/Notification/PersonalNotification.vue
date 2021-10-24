@@ -30,19 +30,19 @@ import {eventBus} from "../../app";
 
 export default {
     name: "PersonalNotification",
-   /* data: function () {
-        return {
-            message: [],
-        }
-    },
-    mounted() {
-        eventBus.$on('showNotification', this.getCurrentMessage)
-    },
-    methods: {
-        getCurrentMessage(message) {
-            this.message = message
-        }
-    }*/
+    /* data: function () {
+         return {
+             message: [],
+         }
+     },
+     mounted() {
+         eventBus.$on('showNotification', this.getCurrentMessage)
+     },
+     methods: {
+         getCurrentMessage(message) {
+             this.message = message
+         }
+     }*/
 }
 </script>
 

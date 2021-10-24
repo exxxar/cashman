@@ -16,35 +16,37 @@ class CompanyListController extends Controller
         return Company::orderBy('created_at', 'DESC')->get();
 
     }
+
     public function getSearchPage()
     {
         $user = Auth::user();
         return view('pages/companies/searchCompanyPage', compact('user'));
     }
+
     public function search()
     {
         return Company::latest()->paginate(8);
 
     }
+
     public function userCompanies($id)
     {
         $user = User::find($id);
         return $user->companies;
     }
+
     public function addUserCompany($id)
     {
         $company = Company::where('id', $id)->first();
         if (!$company->users()->where('user_id', Auth::user()->getAuthIdentifier())->exists()) {
-            if($company->creator_id ===  Auth::user()->getAuthIdentifier())
-            {
-               $companyUser = CompanyUser::create([
-                   'user_id'=>Auth::user()->getAuthIdentifier(),
-                   'company_id'=>$id,
-                   'role'=>'admin'
-               ]);
+            if ($company->creator_id === Auth::user()->getAuthIdentifier()) {
+                $companyUser = CompanyUser::create([
+                    'user_id' => Auth::user()->getAuthIdentifier(),
+                    'company_id' => $id,
+                    'role' => 'admin'
+                ]);
 
-            }
-            else {
+            } else {
                 $company->users()->attach(['user_id' => Auth::user()->getAuthIdentifier()]);
             }
         }

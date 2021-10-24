@@ -12,7 +12,7 @@
             <h4>Заполните форму для входа в компанию</h4>
         </div>
         <div class="section mb-5 p-2">
-            <AlertErrors :form="form"  class="mb-2"></AlertErrors>
+            <AlertErrors :form="form" class="mb-2"></AlertErrors>
             <form @submit.prevent="loginCompany" @keydown="form.onKeydown($event)">
                 <div class="card">
                     <div class="card-body pb-1">
@@ -59,6 +59,7 @@
 import Header from "../../LayoutComponents/Header";
 import Form from "vform"
 import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
+
 const swal = Swal.mixin()
 export default {
     name: "CompanyLoginSection",
@@ -77,8 +78,7 @@ export default {
             this.form.post('/login-company').then(function (response) {
                 if (response.data.href !== undefined) {
                     location.href = response.data.href
-                }
-                else if(response.data.error !== undefined) {
+                } else if (response.data.error !== undefined) {
                     swal.fire({
                         title: 'Вам отказано в доступе к данной компании!',
                         text: "Неправильно введенный домен ли пароль компании",

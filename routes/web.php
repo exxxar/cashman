@@ -68,7 +68,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::post('/save-push-notification-token', [NotificationController::class, 'savePushNotificationToken'])->name('save-push-notification-token');
         /* Профиль пользователя */
-        Route::get('/user-profile',[UserProfileController::class, 'getAuthUser'])->name('profile');
+        Route::get('/user-profile', [UserProfileController::class, 'getAuthUser'])->name('profile');
         Route::get('/company/add-{id}', [CompanyListController::class, 'addUserCompany']);
         /* Настройки профиля пользователя */
         Route::get('/user-settings', [UserProfileController::class, 'getUserSettings']);

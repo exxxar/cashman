@@ -21,10 +21,10 @@
                     </li>
 
                 </ul>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
 
-                    </div>
+                </div>
 
             </div>
         </div>
@@ -35,8 +35,8 @@
 <script>
 export default {
     name: "ShowAdminsModal",
-    props:{
-        admins:{
+    props: {
+        admins: {
             required: true
         }
     }

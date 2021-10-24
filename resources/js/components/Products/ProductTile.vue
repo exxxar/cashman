@@ -17,12 +17,13 @@
 
 <script>
 import ProductItem from "./ProductItem";
-import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import {Splide, SplideSlide} from '@splidejs/vue-splide';
+
 export default {
     name: "ProductTile",
     components: {ProductItem, Splide, SplideSlide},
-    props:{
-        items:{
+    props: {
+        items: {
             required: true
         }
     },

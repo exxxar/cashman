@@ -19,11 +19,11 @@ class SocialController extends Controller
     {
         $userSocial = Socialite::driver($driver)->stateless()->user();
         $user = User::where(['email' => $userSocial->getEmail()])->first();
-        if($user){
+        if ($user) {
             Auth::login($user);
             return redirect("/user-profile");
         }
-        return redirect("/complete-register-".$userSocial->getEmail());
+        return redirect("/complete-register-" . $userSocial->getEmail());
     }
 
     public function complete($email)

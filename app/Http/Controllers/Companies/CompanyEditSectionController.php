@@ -17,7 +17,7 @@ class CompanyEditSectionController extends Controller
 
     public function storeFile(Request $request)
     {
-        $fileName = time() . '.' . $request->file->getClientOriginalExtension();
+        $fileName = time() . rand() . '.' . $request->file->getClientOriginalExtension();
         $request->file->move(public_path('assets/sample/companyLogos'), $fileName);
 
         return response()->json(['file' => $fileName]);
@@ -38,7 +38,7 @@ class CompanyEditSectionController extends Controller
         ]);
 
         $company = Company::find($request->id);
-        if($company->image != $request->image) {
+        if ($company->image != $request->image) {
             $company->image = 'companyLogos/' . $request->image;
         }
         $company->title = $request->title;

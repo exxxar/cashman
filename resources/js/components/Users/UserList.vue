@@ -17,10 +17,11 @@
 
 <script>
 import UserItem from "./UserItem";
-import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import {Splide, SplideSlide} from '@splidejs/vue-splide';
+
 export default {
     name: "UserList",
-    components: {UserItem,  Splide, SplideSlide},
+    components: {UserItem, Splide, SplideSlide},
     data: function () {
         return {
             options: {
@@ -47,7 +48,7 @@ export default {
             required: true,
             type: Boolean
         },
-        users:{
+        users: {
             required: true
         }
     }
