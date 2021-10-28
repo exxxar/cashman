@@ -80,9 +80,7 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::get('/achievements/achievements-{id}', [AchievementController::class, 'getAchievement']);
         /* История действий пользователя */
-        Route::get('/history', function () {
-            return view('pages/userProfile/actions/userActionHistoryPage');
-        });
+        Route::get('/history',[HistoryActionController::class, 'getActionsPage']);
         Route::get('/history/action-{id}', [HistoryActionController::class, 'getActionDetail']);
         /* Друзья пользователя */
         Route::get('/friends', [\App\Http\Controllers\Users\UserFriendsController::class, 'getUserFriendsPage']);

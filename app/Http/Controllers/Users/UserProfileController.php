@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\CompanyAdvertising;
 use App\Models\CompanyUser;
 use App\Models\HistoryUsersCompany;
+use App\Models\Notification;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -65,9 +66,28 @@ class UserProfileController extends Controller
             $news = CompanyAdvertising::where('type', 'Баннер')->get();
             $stories = CompanyAdvertising::where('type', 'Сторис')->get();
         }
-        $cashback = HistoryUsersCompany::where('user_id', $profile->id)->limit(30)->get();
+        $cashbackCompanies = HistoryUsersCompany::where('user_id', $profile->id)->distinct('company_id')->pluck('company_id');
+        $actions = Notification::where('user_id', $profile->id)->latest()->limit(6)->get();
+        $cashback = [];
+        foreach($cashbackCompanies as $c){
+            $debitings = HistoryUsersCompany::where(['user_id'=>$profile->id, 'company_id'=>$c, 'type'=>'Начисление'])->sum('value');
+            $offs = HistoryUsersCompany::where(['user_id'=>$profile->id, 'company_id'=>$c, 'type'=>'Списание'])->sum('value');
+            $score = 0;
+            $money = HistoryUsersCompany::where(['user_id'=>$profile->id,'company_id'=>$c ])->sum('money_in_check');
+            if($debitings>$offs){
+                $score = round($debitings-$offs,2);
+            }
+            $cashback[] = [
+                'company_id'=>$c,
+                'image'=>Company::where('id', $c)->value('image'),
+                'value'=>$score,
+                'money_in_check'=>$money,
+                'description'=>'Суммарный кэшбек от компании',
+                'type'=>$offs
+            ];
+        }
         return view('pages/userProfile/userProfilePage', compact('profile', 'company',
-            'news', 'stories', 'cashback'));
+            'news', 'stories', 'cashback', 'actions'));
     }
 
     public function getUserSettings()

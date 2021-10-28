@@ -9,13 +9,21 @@
                 </div>
                 <form @submit.prevent="type==='Начисление' ? debitingCashback() : offsCashback()">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div v-if="type==='Начисление'" class="form-group">
                             <label>Код пользователя</label>
-                            <input v-model="form.user" type="text" name="user"
+                            <input  v-model="form.user" type="text" name="user"
                                    placeholder="Код пользователя"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
                             <HasError :form="form" field="user"></HasError>
                         </div>
+                        <div  v-if="type==='Списание'"  class="form-group">
+                            <label>Код пользователя</label>
+                            <input v-model="form.user" type="text" name="user"
+                                    placeholder="Код пользователя" v-on:blur="getUserBalance"
+                                    class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
+                            <HasError :form="form" field="user"></HasError>
+                        </div>
+                        <p v-if="score!==null">Доступная сумма для списания - {{score}}</p>
                         <div class="form-group">
                             <label>Номер чека</label>
                             <input v-model="form.description" type="text" name="description"
@@ -112,7 +120,8 @@ export default {
                 acceptedFiles: ".png, .jpg, .jpeg",
                 addRemoveLinks: true,
                 maxFiles: 1
-            }
+            },
+            score: null
         }
     },
     computed: {
@@ -122,7 +131,7 @@ export default {
     },
     mounted() {
         eventBus.$once('userId', this.getUserId)
-        //this.form.user =this.user
+        this.getUserBalance()
     },
     methods: {
         debitingCashback() {
@@ -157,6 +166,7 @@ export default {
                 this.form.user = null
                 this.form.description = ""
                 this.form.sum = null
+                this.score = null;
                 if (response.data.error !== undefined) {
                     Swal.fire({
                         icon: 'error',
@@ -186,6 +196,14 @@ export default {
         },
         getUserId(userId) {
             this.form.user = userId
+        },
+        getUserBalance(){
+            if(this.form.user!==null && this.type==='Списание') {
+                axios.get('api/balance/user/' + this.form.user + '/' + this.company['id']).then((response) => {
+                    this.score = response.data.score
+                })
+            }
+
         }
     }
 }

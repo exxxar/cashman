@@ -13,7 +13,7 @@ class UserProfile extends Model
     protected $casts = [
         'messengers' => 'array'
     ];
-    protected $appends = ["score", 'debitings', 'offs'];
+    protected $appends = ["score", 'debitings', 'offs', 'notifications'];
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -41,5 +41,12 @@ class UserProfile extends Model
         }
         return 0;
 
+    }
+    public function getNotificationsAttribute(){
+        $count = Notification::where(['user_id'=> $this->user_id, 'is_seen'=>false])->count();
+        if(!is_null($count)){
+            return $count;
+        }
+        return 0;
     }
 }

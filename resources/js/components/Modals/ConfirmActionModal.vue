@@ -15,7 +15,7 @@
                             <ion-icon name="close-outline"></ion-icon>
                             ОТМЕНА
                         </a>
-                        <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal">
+                        <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal" @click="deleteAction()">
                             <ion-icon name="checkmark-outline"></ion-icon>
                             ДА
                         </a>
@@ -33,6 +33,17 @@ export default {
         action: {
             required: true,
             type: String
+        },
+        id:{
+            required: true,
+            type: Number
+        }
+    },
+    methods:{
+        deleteAction(){
+            axios.delete('../api/action/delete/'+this.id).then(()=>{
+                window.location.href = '/history';
+            })
         }
     }
 }

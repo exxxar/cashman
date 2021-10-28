@@ -4,5 +4,5 @@
 @endsection
 
 @section('content')
-    <history></history>
+    <history :id={!! json_encode($id) !!}></history>
 @endsection

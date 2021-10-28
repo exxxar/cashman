@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="right">
-            <div v-if="activity.type==='Начисление'" class="price text-danger">+ {{ activity.value }} $</div>
-            <div v-if="activity.type==='Списание'" class="price text-black-50">- {{ activity.value }} $</div>
+            <div v-if="activity.type==='Начисление'" class="price text-danger">+{{ activity.value }}$</div>
+            <div v-if="activity.type==='Списание'" class="price text-black-50">-{{ activity.value }}$</div>
         </div>
     </fragment>
 </template>

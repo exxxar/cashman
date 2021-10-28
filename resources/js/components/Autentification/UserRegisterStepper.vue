@@ -11,8 +11,8 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <p>Заполните информацию о Вашем аккаунте для завершения регистрации</p>
             <form-wizard @onComplete="onComplete">
+                <p>Заполните информацию о Вашем аккаунте для завершения регистрации</p>
                 <tab-content title="Почта" :selected="true">
                     <div class="form-group">
                         <label>Электронная почта</label>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label>Пароль</label>
                         <input
-                            type="text"
+                            type="password"
                             class="form-control"
                             :class="hasError('password') ? 'is-invalid' : ''"
                             placeholder="Введите пароль"
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label>Подтверждение пароля</label>
                         <input
-                            type="text"
+                            type="password"
                             class="form-control"
                             :class="hasError('password_confirmation') ? 'is-invalid' : ''"
                             placeholder="Введите подтверждение пароля"

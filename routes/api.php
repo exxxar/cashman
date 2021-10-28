@@ -70,3 +70,6 @@ Route::get('active/admins/company/{id}', [\App\Http\Controllers\Companies\Compan
 Route::post('change/email', [UserProfileController::class, 'changeUserEmail']);
 Route::post('change/avatar', [UserProfileController::class, 'changeUserAvatar']);
 Route::get('qrcode/{user}/{company}', [\App\Http\Controllers\Companies\CompanyProfileController::class, 'getUserCompanyPromocode']);
+Route::get('balance/user/{id}/{company}', [\App\Http\Controllers\Cashback\CashBackController::class, 'getUserBalance']);
+Route::delete('action/delete/{id}', [\App\Http\Controllers\HistoryAction\HistoryActionController::class, 'deleteAction']);
+Route::get('actions/{id}', [\App\Http\Controllers\HistoryAction\HistoryActionController::class, 'getActions']);

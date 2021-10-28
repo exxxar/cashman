@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cashback;
 
 use App\Models\Notification;
+use App\Models\UserProfile;
 use App\Notifications\RealTimeNotification;
 use App\Http\Controllers\Controller;
 use App\Models\HistoryUsersCompany;
@@ -23,7 +24,7 @@ class CashBackController extends Controller
             'cashback' => ['required']
         ]);
         if (!is_null($request->image)) {
-            $request->description = $request->description . '. Прикрепленный документ доступен по ссылке - ' . $request->image;
+            $request->description = $request->description . '. Прикрепленный документ доступен по <a href="'.$request->image.'">ссылке</a>';
         }
 
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->cashback, $request->sum,
@@ -73,10 +74,11 @@ class CashBackController extends Controller
             'sum' => ['required']
         ]);
         if (!is_null($request->image)) {
-            $request->description = $request->description . '. Прикрепленный документ доступен по ссылке - ' . $request->image;
+            $request->description = $request->description . '. Прикрепленный документ доступен по <a href="'.$request->image.'">ссылке</a>';
         }
         $score = HistoryUsersCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'type' => 'Начисление'])->sum('value');
-        if ($score < $request->sum) {
+        $offs = HistoryUsersCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'type'=>'Списание'])->sum('value');
+        if ($score-$offs < $request->sum) {
             return response()->json(['error' => 'Недостаточно средств для выполнения списания!']);
         }
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->sum, $request->sum,
@@ -113,5 +115,15 @@ class CashBackController extends Controller
     {
         $path = Storage::disk('public')->put('images/descriptions', $request->file);
         return response()->json(['file' => URL::to('/') . '/storage/' . $path]);
+    }
+    public function getUserBalance($id, $company)
+    {
+        $score = 0;
+        $debitings = HistoryUsersCompany::where(['user_id'=>$id, 'company_id'=>$company, 'type'=>'Начисление'])->sum('value');
+        $offs = HistoryUsersCompany::where(['user_id'=>$id, 'company_id'=>$company, 'type'=>'Списание'])->sum('value');
+        if($debitings>$offs){
+            $score = round($debitings-$offs,2);
+        }
+        return response()->json(['score'=>$score]);
     }
 }
