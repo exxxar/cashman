@@ -63,14 +63,14 @@ export default {
                 if (response.data.error !== undefined) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Выполнение операции невозможно!',
-                        text: 'Выбранный пользователь не является администратором компании',
+                        title: this.$trans('strings.The operation cannot be performed'),
+                        text: this.$trans('strings.The selected user is not an administrator of the company'),
                     })
                 } else {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Операция прошла успешно!',
-                        text: 'Администратор успешно удален',
+                        title: this.$trans('strings.The operation was successful!'),
+                        text: this.$trans('strings.The administrator has been successfully removed'),
                     })
                 }
 
@@ -85,8 +85,8 @@ export default {
                 this.form.user = null
                 Swal.fire({
                     icon: 'success',
-                    title: 'Операция прошла успешно!',
-                    text: 'Администратор успешно добавлен',
+                    title: this.$trans('strings.The operation was successful!'),
+                    text: this.$trans('Administrator successfully added'),
                 })
             }).catch(() => {
 

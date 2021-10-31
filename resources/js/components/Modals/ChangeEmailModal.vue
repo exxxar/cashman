@@ -55,8 +55,8 @@ export default {
                     $('#ChangeEmailModal').modal('hide')
                     Swal.fire({
                         icon: 'success',
-                        title: 'Операция прошла успешно!',
-                        text: 'Почта вашего аккаунта изменена на ' + this.form.email,
+                        title: this.$trans('strings.The operation was successful!'),
+                        text: this.$trans('strings.Your account\'s email has been changed to') + this.form.email,
                     })
                 }
             })

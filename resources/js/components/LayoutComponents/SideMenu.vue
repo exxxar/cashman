@@ -191,6 +191,11 @@
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <div class="item">
+                                <LangSwitcher></LangSwitcher>
+                                </div>
+                            </li>
                         </ul>
                         <!-- * others -->
                     </div>
@@ -206,10 +211,10 @@
 
 <script>
 import TransactionsModal from "../Modals/TransactionsModal";
-
+import LangSwitcher from "./LangSwitcher";
 export default {
     name: "SideMenu",
-    components: {TransactionsModal},
+    components: {LangSwitcher, TransactionsModal},
     props: {
         auth_user: {
             default: null

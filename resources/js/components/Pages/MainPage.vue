@@ -17,11 +17,10 @@
                 </a>
                 <a v-if="auth_user!==null" href="/history" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                    <span class="badge badge-danger">1</span>
+                    <span v-if="profile.notifications>0" class="badge badge-danger">{{profile.notifications}}</span>
                 </a>
                 <a v-if="auth_user!==null" href="/user-profile" class="headerButton">
                     <img :src="'assets/sample/' + profile.avatar" alt="image" class="imaged w32">
-                    <span class="badge badge-danger">2</span>
                 </a>
             </template>
         </Header>
@@ -52,10 +51,12 @@ import UserList from "../Users/UserList";
 import NewsList from "../News/NewsList";
 import CompanyList from "../Companies/CompanyList/CompanyList";
 import SideMenu from "../LayoutComponents/SideMenu";
+import LangSwitcher from "../LayoutComponents/LangSwitcher";
 
 export default {
     name: "MainPageComponent",
     components: {
+        LangSwitcher,
         CompanyList,
         NewsList,
         UserList,

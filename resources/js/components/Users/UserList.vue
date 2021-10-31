@@ -25,20 +25,48 @@ export default {
     data: function () {
         return {
             options: {
-                perPage: 9,
-                rewind: false,
-                type: "slide",
+                perPage: 10,
+                rewind: true,
                 gap: 16,
                 padding: 16,
                 arrows: false,
                 pagination: false,
+                cover: true,
+                lazyLoad: 'sequential',
                 breakpoints: {
-                    768: {
-                        perPage: 4
+                    320: {
+                        perPage: 2,
                     },
-                    991: {
-                        perPage: 7
-                    }
+                    375: {
+                        perPage: 2,
+                    },
+                    425: {
+                        perPage: 2,
+                    },
+                    600: {
+                        perPage: 2,
+                    },
+                    768: {
+                        perPage: 3,
+                    },
+                    1024: {
+                        perPage: 4,
+                    },
+                    1440: {
+                        perPage: 5,
+                    },
+                    1600: {
+                        perPage: 6,
+                    },
+                    1680: {
+                        perPage: 6,
+                    },
+                    1920: {
+                        perPage: 8,
+                    },
+                    2500: {
+                        perPage: 10,
+                    },
                 }
             },
         }

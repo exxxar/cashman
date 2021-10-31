@@ -12,11 +12,10 @@
             <template v-slot:right>
                 <a href="/history" class="headerButton">
                     <ion-icon class="icon" name="notifications-outline"></ion-icon>
-                    <span class="badge badge-danger">1</span>
+                    <span v-if="profile.notifications>0" class="badge badge-danger">{{profile.notifications}}</span>
                 </a>
                 <a href="/user-profile" class="headerButton">
                     <img :src="'assets/sample/' + profile.avatar" alt="image" class="imaged w32">
-                    <span class="badge badge-danger">2</span>
                 </a>
             </template>
         </Header>
@@ -24,7 +23,7 @@
         <div id="appCapsule" class="full-height">
             <StatisticsSummary :profile="profile"></StatisticsSummary>
             <CompanyList :user="auth_user" :companies="companies"></CompanyList>
-            <HistoryActionList :show-detail="false"></HistoryActionList>
+            <HistoryActionList v-if="actions.length>0" :show-detail="false" :actions="actions"></HistoryActionList>
             <AchievementList :show-detail="false"></AchievementList>
             <CashBackList v-if="cashbacks.length>0" :cashbacks="cashbacks"></CashBackList>
             <StoryList v-if="stories.length>0" :stories="stories"></StoryList>
@@ -72,6 +71,9 @@ export default {
             required: true
         },
         cashbacks: {
+            required: true
+        },
+        actions:{
             required: true
         }
     },

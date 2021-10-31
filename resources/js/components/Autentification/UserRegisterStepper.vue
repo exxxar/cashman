@@ -11,8 +11,8 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <p>{{$trans('strings.Fill in your account information to complete registration')}}</p>
             <form-wizard @onComplete="onComplete">
+                <p>{{$trans('strings.Fill in your account information to complete registration')}}</p>
                 <tab-content :title="$trans('strings.Email')" :selected="true">
                     <div class="form-group">
                         <label>{{$trans('strings.Email')}}</label>
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label>{{$trans('strings.Password')}}</label>
                         <input
-                            type="text"
+                            type="password"
                             class="form-control"
                             :class="hasError('password') ? 'is-invalid' : ''"
                             :placeholder="$trans('strings.Enter your password')"
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label>{{$trans('strings.Confirm Password')}}</label>
                         <input
-                            type="text"
+                            type="password"
                             class="form-control"
                             :class="hasError('password_confirmation') ? 'is-invalid' : ''"
                             :placeholder="$trans('strings.Enter password confirmation')"
@@ -72,7 +72,7 @@
                                            :class="hasError('submitted') ? 'is-invalid' : ''"
                                            id="customCheckb1">
                                     <label class="form-check-label" for="customCheckb1">
-                                        <a>{{$trans('strings.I agree with')}}</a>
+                                        {{$trans('strings.I agree with')}}
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
                                             {{$trans('strings.terms of the agreement')}}
                                         </a>

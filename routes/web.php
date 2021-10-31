@@ -18,6 +18,7 @@ use App\Http\Controllers\Social\SocialController;
 use App\Http\Controllers\Stories\StoryController;
 use App\Http\Controllers\Users\UserProfileController;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
@@ -33,11 +34,15 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 /* Группа всех пользователей */
-Route::group(['middleware' => ['web']], function () {
+//Route::group(['middleware' => ['web', 'setLocale'], 'prefix' => '{locale}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
+Route::group(['middleware' => ['web', 'setLocale']], function () {
     /* Рекламная страница приложения */
     Route::get('/landing-page', function () {
         return view('pages/landingPage');
     });
+    Route::get('/locale', [\App\Http\Controllers\LangController::class, 'getLang']);
+    Route::get('/locales', [\App\Http\Controllers\LangController::class, 'getLocales']);
+    Route::get('/locale/{lang}', [\App\Http\Controllers\LangController::class, 'setLang']);
     /* Главная страница */
     Route::get('/', [\App\Http\Controllers\Users\UserController::class, 'getAuthUser']);
     Route::get('/activity-history', [\App\Http\Controllers\ActivityHistory\ActivityHistoryController::class, 'getActivityHistory']);

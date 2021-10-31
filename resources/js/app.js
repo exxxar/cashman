@@ -123,7 +123,7 @@ Vue.component('company-complete-registration', require('./components/Companies/C
 Vue.component('products', require('./components/Products/ProductList').default);
 
 Vue.component('side-menu', require('./components/LayoutComponents/SideMenu').default);
-Vue.component('personal-notification', require('./components/Notification/PersonalNotification').default);
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -148,16 +148,17 @@ const app = new Vue({
     el: '#app',
     store
 });
-
+axios.get('/locale').then((response)=>{
+    localStorage.setItem('locale', response.data.locale);
+});
+console.log(localStorage.getItem('locale'))
 if (localStorage.getItem('locale')) {
     app.$lang.setLocale(localStorage.getItem('locale'));
-    //app.$moment.locale(localStorage.getItem('locale'));
     localize(localStorage.getItem('locale'));
     localeChanged();
 } else {
     localStorage.setItem('locale', 'en');
     app.$lang.setLocale('en');
-    //app.$moment.locale('en');
     localize('en');
     localeChanged();
 }

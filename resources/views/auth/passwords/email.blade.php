@@ -17,8 +17,8 @@
     <!-- App Capsule -->
     <div id="appCapsule">
         <div class="section mt-2 text-center">
-            <h1>Забыли пароль</h1>
-            <h4>Введите ваш email для восстановления пароля</h4>
+            <h1>{{__('Forgot Your Password?')}}</h1>
+            <h4>{{__('Enter your email address')}}</h4>
         </div>
         <div class="section mb-5 p-2">
             @if (session('status'))
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="form-button-group">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Восстановить пароль</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">{{__('Reset Password')}}</button>
                         </div>
                     </div>
                 </div>

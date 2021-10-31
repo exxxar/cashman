@@ -87,12 +87,6 @@ export default {
         isComplete() {
             return this.form.email && this.form.password;
         }
-    },
-    mounted(){
-        localStorage.setItem('locale', 'en');
-        this.$lang.setLocale('en');
-        console.log(localStorage.getItem('locale'))
-        console.log(this.$trans('strings.Authorization'))
     }
 }
 </script>

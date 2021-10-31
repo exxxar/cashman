@@ -176,12 +176,12 @@ export default {
             })
 
             swalWithBootstrapButtons.fire({
-                title: 'Вы уверены?',
-                text: "Отменить действие будет невозможно",
+                title: this.$trans('strings.Are you sure?'),
+                text: this.$trans('strings.It will be impossible to cancel the action'),
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Да, удалить',
-                cancelButtonText: 'Отмена',
+                confirmButtonText: this.$trans('strings.Yes'),
+                cancelButtonText: this.$trans('strings.Cancel'),
                 reverseButtons: true
             }).then((result) => {
                 //send request to the server
@@ -189,8 +189,8 @@ export default {
                     this.form.delete('api/admin/products/' + id).then(() => {
 
                         swalWithBootstrapButtons.fire(
-                            'Удалено',
-                            'Выбранная запись была удалена',
+                            this.$trans('strings.Deleted'),
+                            this.$trans('strings.The selected entry has been deleted'),
                             'success'
                         )
                         Fire.$emit('AfterCreate');
@@ -200,14 +200,14 @@ export default {
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons.fire(
-                        'Отменено',
-                        'Удаление было отменено',
+                        this.$trans('strings.Cancelled'),
+                        this.$trans('strings.The deletion was canceled'),
                         'error'
                     )
                 }
 
             }).catch(() => {
-                swal("Ошибка", "Что-то пошло не так ):", "warning")
+                swal(this.$trans('strings.Error'), this.$trans('strings.Something went wrong'), "warning")
             });
         },
         loadRecords() {

@@ -94,16 +94,16 @@ export default {
                     $('#ChangeAvatarModal').modal('hide')
                     Swal.fire({
                         icon: 'success',
-                        title: 'Операция прошла успешно!',
-                        text: 'Аватар вашего аккаунта успешно изменен!',
+                        title: this.$trans('strings.The operation was successful!'),
+                        text: this.$trans('strings.The avatar of your account has been successfully changed!'),
                     })
                 }
                 if (response.data.status === 'error') {
                     $('#ChangeAvatarModal').modal('hide')
                     Swal.fire({
                         icon: 'error',
-                        title: 'Операция не может быть выполнена',
-                        text: 'Нельзя заменить аватар на ту же фотографию',
+                        title: this.$trans('strings.The operation cannot be performed'),
+                        text: this.$trans('strings.You can\'t replace an avatar with the same photo'),
                     })
                 }
             })

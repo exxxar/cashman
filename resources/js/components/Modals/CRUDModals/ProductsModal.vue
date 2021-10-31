@@ -123,8 +123,8 @@ export default {
                         buttonsStyling: false
                     })
                     swalWithBootstrapButtons.fire(
-                        'Обновлено',
-                        'Выбранная запись была обновлена',
+                        this.$trans('strings.Updated'),
+                        this.$trans('strings.The selected record has been updated'),
                         'success'
                     )
                     Fire.$emit('AfterCreate');
@@ -145,7 +145,7 @@ export default {
 
                     Toast.fire({
                         icon: 'success',
-                        title: 'Запись успешно добавлена'
+                        title: this.$trans('strings.Record successfully added')
                     });
                 })
                 .catch(() => {

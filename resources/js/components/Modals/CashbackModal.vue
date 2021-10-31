@@ -9,13 +9,21 @@
                 </div>
                 <form @submit.prevent="type==='Начисление' ? debitingCashback() : offsCashback()">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>{{$trans('strings.User Code')}}</label>
-                            <input v-model="form.user" type="text" name="user"
-                                   :placeholder="$trans('strings.User Code')"
-                                   class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
-                            <HasError :form="form" field="user"></HasError>
-                        </div>
+                            <div v-if="type==='Начисление'" class="form-group">
+                                <label>{{$trans('strings.User Code')}}</label>
+                                <input v-model="form.user" type="text" name="user"
+                                       :placeholder="$trans('strings.User Code')"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
+                                <HasError :form="form" field="user"></HasError>
+                            </div>
+                            <div  v-if="type==='Списание'"  class="form-group">
+                                <label>{{$trans('strings.User Code')}}</label>
+                                <input v-model="form.user" type="text" name="user"
+                                       :placeholder="$trans('strings.User Code')" v-on:blur="getUserBalance"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
+                                <HasError :form="form" field="user"></HasError>
+                            </div>
+                            <p v-if="score!==null">{{$trans('Available amount for debiting')}} - {{score}}</p>
                         <div class="form-group">
                             <label>{{$trans('strings.Receipt number')}}</label>
                             <input v-model="form.description" type="text" name="description"
@@ -114,7 +122,8 @@ export default {
                 acceptedFiles: ".png, .jpg, .jpeg",
                 addRemoveLinks: true,
                 maxFiles: 1
-            }
+            },
+            score: null
         }
     },
     computed: {
@@ -124,7 +133,7 @@ export default {
     },
     mounted() {
         eventBus.$once('userId', this.getUserId)
-        //this.form.user =this.user
+        this.getUserBalance()
     },
     methods: {
         debitingCashback() {
@@ -140,8 +149,8 @@ export default {
                 this.form.cashback = null
                 Swal.fire({
                     icon: 'success',
-                    title: 'Кэшбек начислен',
-                    text: 'Начисление кэшбека в ' + this.company.cashback_percent + '% прошло успешно!',
+                    title: this.$trans('strings.Cashback accrued'),
+                    text: this.$trans('strings.Cashback accrual in') + this.company.cashback_percent + this.trans('strings.% passed successfully!'),
                 })
 
             })
@@ -162,14 +171,14 @@ export default {
                 if (response.data.error !== undefined) {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Выполнение списания невозможно!',
-                        text: 'Недостаточно средств для выполнения операции',
+                        title: this.$trans('strings.It is impossible to make a write-off!'),
+                        text: this.$trans('strings.Insufficient funds to perform the operation'),
                     })
                 } else {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Кэшбек списан',
-                        text: 'Списание кэшбека прошло успешно!',
+                        title: this.$trans('strings.Cashback debited'),
+                        text: this.$trans('strings.Cashback debiting was successful!'),
                     })
                 }
             })
@@ -188,6 +197,13 @@ export default {
         },
         getUserId(userId) {
             this.form.user = userId
+        },
+        getUserBalance(){
+            if(this.form.user!==null && this.type==='Списание') {
+                axios.get('api/balance/user/' + this.form.user + '/' + this.company['id']).then((response) => {
+                    this.score = response.data.score
+                })
+            }
         }
     }
 }
