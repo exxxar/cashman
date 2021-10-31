@@ -7,40 +7,40 @@
                 </a>
             </template>
             <template v-slot:title>
-                Добавить рекламу
+                {{$trans('strings.Add Ads')}}
             </template>
         </Header>
         <br/>
         <form-wizard @onComplete="onComplete" enctype="multipart/form-data">
-            <tab-content title="Название и описание рекламы" :selected="true">
+            <tab-content :title="$trans('strings.Name and description of the ad')" :selected="true">
                 <div class="form-group">
-                    <label>Название</label>
+                    <label>{{$trans('strings.Title')}}</label>
                     <input
                         type="text"
                         class="form-control"
                         :class="hasError('title') ? 'is-invalid' : ''"
-                        placeholder="Введите название"
+                        :placeholder="$trans('strings.Enter the title of the ad')"
                         v-model="formData.title">
                     <div v-if="hasError('title')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.title.required">Введите название рекламы</div>
+                        <div class="error" v-if="!$v.formData.title.required">{{$trans('strings.Enter the title of the ad')}}</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Описание</label>
+                    <label>{{$trans('strings.Description')}}</label>
                     <input
                         type="text"
                         class="form-control"
                         :class="hasError('description') ? 'is-invalid' : ''"
-                        placeholder="Введите описание рекламы"
+                        :placeholder="$trans('strings.Enter a description of the ad')"
                         v-model="formData.description">
                     <div v-if="hasError('description')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.description.required">Введите описание рекламы</div>
+                        <div class="error" v-if="!$v.formData.description.required">{{$trans('strings.Enter a description of the ad')}}</div>
                     </div>
                 </div>
             </tab-content>
-            <tab-content title="Изображение и тип рекламы">
+            <tab-content :title="$trans('strings.Image and type of advertisement')">
                 <div class="form-group">
-                    <label class="control-label col-lg-1 text-semibold">Images</label>
+                    <label class="control-label col-lg-1 text-semibold">{{$trans('strings.Image')}}</label>
                     <vue-dropzone
                         ref="myVueDropzone"
                         id="dropzone"
@@ -51,41 +51,42 @@
                         v-on:vdropzone-removed-file="fileRemoved"
                     >
                         <div class="dropzone-custom-content">
-                            <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
-                            <div class="subtitle">...or click to select a file from your computer</div>
+                            <h3 class="dropzone-custom-title">{{$trans('strings.Drag and drop to upload content!')}}</h3>
+                            <div class="subtitle">{{$trans('strings....or click to select a file from your computer')}}</div>
                         </div>
                     </vue-dropzone>
                     <div v-if="hasError('image')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.image.required">Добавьте изображение рекламы
+                        <div class="error" v-if="!$v.formData.image.required">{{$trans('strings.Add an ad image')}}
                         </div>
                     </div>
                 </div>
                 <div class="form-group basic">
                     <div class="input-wrapper">
-                        <label class="label" for="select4">Выберите тип рекламы</label>
+                        <label class="label" for="select4">{{$trans('strings.Select the type of ad')}}</label>
                         <select class="form-control custom-select" id="select4" v-model="formData.type">
-                            <option value="Сторис">История</option>
-                            <option value="Баннер">Новость</option>
+                            <option value="Сторис">{{$trans('strings.History')}}</option>
+                            <option value="Баннер">{{$trans('strings.News')}}</option>
                         </select>
                     </div>
                 </div>
             </tab-content>
-            <tab-content title="Условия соглашения">
+            <tab-content :title="$trans('strings.Terms of the agreement')">
                 <div class="form-group">
-                    <label>Ознакомьтесь с условиями соглашения</label>
+                    <label>{{$trans('strings.Read the terms of the agreement')}}</label>
                     <div class="form-group form-check">
                         <div class="custom-control custom-checkbox mt-2 mb-1">
                             <div class="form-check">
-                                <input v-model="formData.terms" type="checkbox" class="form-check-input"
-                                       :class="hasError('terms') ? 'is-invalid' : ''"
+                                <input v-model="formData.submitted" type="checkbox" class="form-check-input"
+                                       :class="hasError('submitted') ? 'is-invalid' : ''"
                                        id="customCheckb1">
                                 <label class="form-check-label" for="customCheckb1">
-                                    I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
-                                    conditions</a>
+                                    <a>{{$trans('strings.I agree with')}}</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                        {{$trans('strings.terms of the agreement')}}
+                                    </a>
                                 </label>
-                                <div v-if="hasError('terms')" class="invalid-feedback">
-                                    <div class="error" v-if="!$v.formData.terms.required">Please select terms and
-                                        conditions.
+                                <div v-if="hasError('submitted')" class="invalid-feedback">
+                                    <div class="error" v-if="!$v.formData.submitted.required">{{$trans('strings.Read the terms of the agreement')}}
                                     </div>
                                 </div>
                             </div>

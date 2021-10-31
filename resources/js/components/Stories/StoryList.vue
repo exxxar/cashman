@@ -1,7 +1,7 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">Истории</h2>
+            <h2 class="title">{{ $trans('strings.Stories') }}</h2>
         </div>
         <!-- story-block -->
         <div class="mb-0 story-block splide">

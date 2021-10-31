@@ -7,7 +7,7 @@
             </div>
             <div class="price">$ {{ achievement.value }}
                 <a :href="'achievements/achievements-' + this.achievement.id" v-if="showDetail" type="button"
-                   class="btn btn-text-primary me-1 mb-1" @click="showAchievementDetail">View</a>
+                   class="btn btn-text-primary me-1 mb-1" @click="showAchievementDetail">{{$trans('strings.View')}}}</a>
             </div>
 
         </div>

@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                About us
+                {{$trans('strings.About us')}}
             </template>
             <template v-slot:right>
                 <a href="history" class="headerButton">
@@ -23,7 +23,7 @@
             <div class="section mt-3 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">About us</h2>
+                        <h2 class="card-title">{{$trans('strings.About us')}}</h2>
                         Finapp is Bootstrap 5 based template for your wallet, banking, financial mobile projects.
                     </div>
                 </div>
@@ -31,7 +31,7 @@
             <div class="section mt-3 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">Learn More</h2>
+                        <h2 class="card-title">{{$tans('Learn More')}}</h2>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis iaculis aliquet. Duis
                         euismod
                         nibh at neque gravida tincidunt. Nunc vitae fringilla augue. Nunc blandit tempor enim porttitor
@@ -68,7 +68,7 @@
                     <div class="card-body">
                         <div class="p-1">
                             <div class="text-center">
-                                <h2 class="text-primary">Our Address</h2>
+                                <h2 class="text-primary">{{$trans('strings.Our Address')}}</h2>
                                 <p class="card-text">
                                     PO Box 16122 Collins Street West<br>
                                     Victoria 8007 Australia
@@ -83,7 +83,7 @@
                     <div class="card-body">
                         <div class="p-1">
                             <div class="text-center">
-                                <h2 class="text-primary mb-2">Social Profiles</h2>
+                                <h2 class="text-primary mb-2">{{$trans('strings.Social Network')}}</h2>
                                 <a class="btn btn-icon btn-facebook  me-05" href="#">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>

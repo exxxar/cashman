@@ -7,21 +7,22 @@
                 </a>
             </template>
             <template v-slot:title>
-                Ваши друзья
+                {{ $trans('strings.Your friends') }}
             </template>
         </Header>
         <br/>
 
         <div id="appCapsule" class="full-height">
-            <h4 class="text-center" v-if="friends.length===0">Вы пока не пригласили ни одного друга. Приглашайте друзей
-                в компании и получайте приятные бонусы!</h4>
+            <h4 class="text-center" v-if="friends.length===0">
+                {{ $trans('strings.You haven\'t invited any friends yet. Invite friends to the company and get nice bonuses!') }}
+            </h4>
             <div v-if="friends.length!==0" class="section inset mt-2 mb-2">
                 <div class="accordion" id="accordionExample5">
                     <div class="accordion-item">
                         <h2 class="accordion-header bg-primary">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#accordiond1">
-                                История добавления друзей
+                                {{ $trans('strings.History of adding friends') }}
                             </button>
                         </h2>
                         <div id="accordiond1" class="accordion-collapse collapse" data-bs-parent="#accordionExample5">

@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 v-if="all" class="title">История активности</h2>
-            <a v-if="all" href="/activity-history" class="link">Посмотреть все</a>
+            <h2 v-if="all" class="title">{{$trans('strings.Activity history')}}</h2>
+            <a v-if="all" href="/activity-history" class="link">{{$trans('strings.View all')}}</a>
         </div>
         <div class="transactions mx-3">
             <a href="#" class="item" v-for="item in actions">

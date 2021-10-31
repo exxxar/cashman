@@ -36,11 +36,11 @@
             <div class="section">
                 <button class="btn btn-block btn-primary" data-bs-toggle="modal" data-bs-target="#actionSheetShare">
                     <ion-icon name="share-outline"></ion-icon>
-                    Share This Post
+                    {{$trans('strings.Share This Post')}}
                 </button>
             </div>
             <div class="section mt-3">
-                <h2>Related Posts</h2>
+                <h2>{{$trans('strings.Related Posts')}}</h2>
                 <div class="row mt-3">
                     <div class="col-6 mb-2" v-for="item in items">
                         <NewsItem :item="item"></NewsItem>

@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">Последние новости</h2>
-            <a href="news" class="link">Посмотреть все</a>
+            <h2 class="title">{{$trans('strings.Latest news')}}</h2>
+            <a href="news" class="link">{{$trans('strings.View all')}}</a>
         </div>
         <splide :slides="items" :options="options">
             <splide-slide v-for="item in items" :key="item.id">

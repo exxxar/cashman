@@ -3,7 +3,6 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css);
-@charset "UTF-8";
 .list__wrapper {
   height: 30px;
   overflow: hidden;
@@ -1022,7 +1021,7 @@ div.content div.ninth div.content div.item {
     display: flex;
   }
   div.content div.ninth div.content div.item {
-    width: calc(100vw * 0.35);
+    width: 35vw;
   }
 }
 div.content div.second div.text div.image img {
@@ -1096,7 +1095,7 @@ div.content div.sixth div.content ul li.donthave:before {
     display: none;
   }
   div.content div.sixth div.content ul:not(#services) li:not(:first-child):before {
-    content: "";
+    content: "\f00c";
     font-weight: bold;
     font-family: "Font Awesome 5 Free", serif;
   }

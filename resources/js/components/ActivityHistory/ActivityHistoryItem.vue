@@ -4,13 +4,13 @@
             <img :src="'assets/sample/'+activity.company.image" alt="img" class="image-block imaged w48">
             <div>
                 <strong>{{ activity.company.title }}</strong>
-                <p v-if="activity.type==='Начисление'">Начисление кэшбека пользователю {{activity.user.name}}</p>
-                <p v-if="activity.type==='Списание'">Списание кэшбека с пользователя {{activity.user.name}}</p>
+                <p v-if="activity.type==='Начисление'">{{$trans('strings.Accrual of cashback to the user')}} {{activity.user.name}}</p>
+                <p v-if="activity.type==='Списание'">{{$trans('strings.Debiting cashback from the user')}} {{activity.user.name}}</p>
             </div>
         </div>
         <div class="right">
-            <div v-if="activity.type==='Начисление'" class="price text-danger">+{{ activity.value }}$</div>
-            <div v-if="activity.type==='Списание'" class="price text-black-50">-{{ activity.value }}$</div>
+            <div v-if="activity.type==='Начисление'" class="price text-danger">+ {{ activity.value }} $</div>
+            <div v-if="activity.type==='Списание'" class="price text-black-50">- {{ activity.value }} $</div>
         </div>
     </fragment>
 </template>

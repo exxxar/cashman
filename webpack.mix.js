@@ -9,6 +9,15 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
+mix.webpackConfig({
+    plugins:
+        [
+            // new WebpackShellPluginNext({onBuildStart:{scripts: ['php artisan lang:js resources/js/vue-translations.js --no-lib --quiet']}, onBuildEnd:{scripts: []}})
+            new WebpackShellPluginNext({onBuildStart:{scripts: ['php artisan lang:js resources/js/vue-translations.json --json --quiet"']}, onBuildEnd:{scripts: []}})
+        ]
+});
+
 mix.copyDirectory('resources/assets/icons', 'public/images/icons');
 mix.copyDirectory('resources/assets/img', 'public/assets');
 mix.copyDirectory('resources/assets/landing-img', 'public/assets/landing-img');

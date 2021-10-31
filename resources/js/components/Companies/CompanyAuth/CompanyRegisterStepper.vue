@@ -7,14 +7,14 @@
                 </a>
             </template>
             <template v-slot:title>
-                Заполните дополнительную информацию о своей компании
+               {{$trans('strings.Fill in additional information about your company')}}
             </template>
         </Header>
         <br/>
         <form-wizard @onComplete="onComplete" enctype="multipart/form-data">
-            <tab-content title="Проценты кэшбека" :selected="true">
+            <tab-content :title="trans('Cashback percentages')" :selected="true">
                 <div class="form-group">
-                    <label>Процент кэшбека</label>
+                    <label>{{$trans('strings.Cashback percentage')}}</label>
                     <input
                         type="text"
                         class="form-control"
@@ -22,82 +22,74 @@
                         placeholder="Введите процент кэшбека"
                         v-model="formData.cashback_percent">
                     <div v-if="hasError('cashback_percent')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.cashback_percent.required">Введите процент кэшбека
-                            компании
+                        <div class="error" v-if="!$v.formData.cashback_percent.required">{{$trans("Enter the company's cashback percentage")}}
                         </div>
-                        <div class="error" v-if="!$v.formData.cashback_percent.numeric">Процент кэшбека должен быть
-                            числом!
+                        <div class="error" v-if="!$v.formData.cashback_percent.numeric">{{$trans('strings.The percentage of cashback must be a number!')}}
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Процент кэшбека 1 уровня</label>
+                    <label>{{$trans('strings.Level 1 Cashback percentage')}}</label>
                     <input
                         type="text"
                         class="form-control"
                         :class="hasError('cashback_percent_level_1') ? 'is-invalid' : ''"
-                        placeholder="Введите процент кэшбека 1 уровня"
+                        :placeholder="$trans('strings.Enter the level 1 cashback percentage')"
                         v-model="formData.cashback_percent_level_1">
                     <div v-if="hasError('cashback_percent_level_1')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.required">Введите процент кэшбека
-                            1 уровня компании
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.required">{{$trans('strings.Enter the level 1 cashback percentage')}}
                         </div>
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.numeric">Процент кэшбека 1 уровня
-                            должен быть числом!
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_1.numeric">{{$trans('strings.The level 1 cashback percentage should be a number!')}}
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Процент кэшбека 2 уровня</label>
+                    <label>{{$trans('strings.Level 1 Cashback percentage')}}</label>
                     <input
                         type="text"
                         class="form-control"
                         :class="hasError('cashback_percent_level_2') ? 'is-invalid' : ''"
-                        placeholder="Введите процент кэшбека 2 уровня"
+                        :placeholder="$trans('strings.Enter the level 2 cashback percentage')"
                         v-model="formData.cashback_percent_level_2">
                     <div v-if="hasError('cashback_percent_level_2')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.required">Введите процент кэшбека
-                            2 уровня компании
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.required">{{$trans('strings.Enter the level 1 cashback percentage')}}
                         </div>
-                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.numeric">Процент кэшбека 2 уровня
-                            должен быть числом!
+                        <div class="error" v-if="!$v.formData.cashback_percent_level_2.numeric">{{$trans('strings.The level 1 cashback percentage should be a number!')}}
                         </div>
                     </div>
                 </div>
             </tab-content>
-            <tab-content title="Ссылки компании">
+            <tab-content :title="$trans('strings.Company Links')">
                 <div class="form-group">
-                    <label>Ссылка для обратной связи</label>
+                    <label>{{$trans('strings.Link for feedback')}}}</label>
                     <input
                         type="text"
                         class="form-control"
                         :class="hasError('callback_url') ? 'is-invalid' : ''"
-                        placeholder="Введите ссылку для обратной связи с компанией"
+                        :placeholder="$trans('strings.Enter the link for feedback from the company')"
                         v-model="formData.callback_url">
                     <div v-if="hasError('callback_url')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.callback_url.required">Введите ссылку для обратной связи с
-                            компанией
+                        <div class="error" v-if="!$v.formData.callback_url.required">{{$trans('strings.Enter the link for feedback from the company')}}
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Ссылка для загрузки товаров из ВКонтакте</label>
+                    <label>{{$trans('strings.Link to download products from VK')}}</label>
                     <input
                         type="text"
                         class="form-control"
                         :class="hasError('upload_vk_url') ? 'is-invalid' : ''"
-                        placeholder="Введите ссылку для загрузки товаров из вк"
+                        :placeholder="$trans('strings.Enter a link to download products from VK')"
                         v-model="formData.upload_vk_url">
                     <div v-if="hasError('upload_vk_url')" class="invalid-feedback">
-                        <div class="error" v-if="!$v.formData.upload_vk_url.required">Введите ссылку для загрузки
-                            товаров из вк
+                        <div class="error" v-if="!$v.formData.upload_vk_url.required">{{$trans('strings.Enter a link to download products from VK')}}}
                         </div>
                     </div>
                 </div>
             </tab-content>
-            <tab-content title="Дополнительная информация">
+            <tab-content :title="$trans('strings.Additional information')">
                 <div class="form-group">
-                    <label class="label">Дополнительная информация
+                    <label class="label">{{$trans('strings.Additional information')}}
                         <button @click="addProperty" type="button" class="btn btn-icon btn-info me-1">
                             <ion-icon name="add-outline"></ion-icon>
                         </button>
@@ -121,7 +113,7 @@
                         <li v-for="input in inputs">
                             <div class="input-wrapper w-100" style="display: flex!important; margin: 10px 0!important;">
                                 <input type="text" class="form-control"
-                                       placeholder="Вид информации"
+                                       :placeholder="$trans('strings.Type of information')"
                                        v-model="type">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -139,7 +131,7 @@
                     </ul>
                 </div>
                 <div class="form-group basic">
-                    <label class="label">Социальные сети</label>
+                    <label class="label">{{$trans('strings.Social network')}}</label>
                     <ul class="listview image-listview no-line no-space flush">
                         <li v-for="(social, key) in company.socials">
                             <div class="item">
@@ -149,7 +141,7 @@
                                 <div class="in">
                                     <div class="input-wrapper w-100">
                                         <input type="text" class="form-control" id="socials1"
-                                               :placeholder="'Ссылка на профиль в '+key"
+                                               :placeholder="$trans('strings.Link to the profile in')+key"
                                                v-model="company.socials[key]">
                                         <i class="clear-input">
                                             <ion-icon name="close-circle"></ion-icon>

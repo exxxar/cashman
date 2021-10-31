@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">Акции</h2>
-            <a href="products" class="link">Посмотреть все</a>
+            <h2 class="title">{{ $trans('strings.Stocks') }}</h2>
+            <a href="products" class="link">{{ $trans('strings.View all') }}</a>
         </div>
         <!-- carousel multiple -->
         <splide :slides="items" :options="options">

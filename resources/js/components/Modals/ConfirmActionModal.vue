@@ -7,17 +7,17 @@
                     <h5 class="modal-title">{{ action }}</h5>
                 </div>
                 <div class="modal-body">
-                    Вы уверены? Отменить действие будет невозможно
+                   {{$trans('strings.Are you sure? It will be impossible to cancel the action')}}
                 </div>
                 <div class="modal-footer">
                     <div class="btn-inline">
                         <a href="#" class="btn btn-text-danger" data-bs-dismiss="modal">
                             <ion-icon name="close-outline"></ion-icon>
-                            ОТМЕНА
+                            {{$trans('strings.Cancel')}}
                         </a>
-                        <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal" @click="deleteAction()">
+                        <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal">
                             <ion-icon name="checkmark-outline"></ion-icon>
-                            ДА
+                            {{$trans('strings.Yes')}}
                         </a>
                     </div>
                 </div>
@@ -33,17 +33,6 @@ export default {
         action: {
             required: true,
             type: String
-        },
-        id:{
-            required: true,
-            type: Number
-        }
-    },
-    methods:{
-        deleteAction(){
-            axios.delete('../api/action/delete/'+this.id).then(()=>{
-                window.location.href = '/history';
-            })
         }
     }
 }

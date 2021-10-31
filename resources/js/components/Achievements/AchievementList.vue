@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4">
         <div v-if="!showDetail" class="section-heading padding">
-            <h2 class="title">Достижения</h2>
-            <a href="achievements" class="link">Посмотреть все</a>
+            <h2 class="title">{{$trans('strings.Achievements')}}</h2>
+            <a href="achievements" class="link">{{$trans('strings.View all')}}</a>
         </div>
         <div class="goals">
             <div class="item" v-for="achievement in achievements">

@@ -7,12 +7,12 @@
                 </a>
             </template>
             <template v-slot:title>
-                Меню админа компании
+                {{$trans('strings.Company Admin menu')}}
             </template>
         </Header>
         <br/>
         <br/>
-        <div class="listview-title mt-2">Данные вашей компании</div>
+        <div class="listview-title mt-2">{{$trans("Your company's data")}}</div>
         <ul class="listview image-listview inset">
             <li>
                 <a :href="'/company-admin-products-' + id" class="item">
@@ -20,7 +20,7 @@
                         <ion-icon name="wallet-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>Товары</div>
+                        <div>{{trans('Products')}}</div>
                     </div>
                 </a>
             </li>
@@ -30,7 +30,7 @@
                         <ion-icon name="newspaper-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>Реклама</div>
+                        <div>{{$trans('strings.Advertisement')}}</div>
                     </div>
                 </a>
             </li>
@@ -40,12 +40,12 @@
                         <ion-icon name="people-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>Пользователи</div>
+                        <div>{{$trans('strings.Users')}}</div>
                     </div>
                 </a>
             </li>
         </ul>
-        <div class="listview-title mt-2">Данные вашей компании</div>
+        <div class="listview-title mt-2">{{$trans("Your company's data")}}</div>
         <ul class="listview image-listview inset">
             <li>
                 <a :href="'/company-action-menu-'+id" class="item">
@@ -53,7 +53,7 @@
                         <ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>Меню действий</div>
+                        <div>{{$trans('strings.Action Menu')}}</div>
                     </div>
                 </a>
             </li>
@@ -63,7 +63,7 @@
                         <ion-icon name="person-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>Администраторы компании</div>
+                        <div>{{trans('Company Administrators')}}</div>
                     </div>
                 </a>
             </li>

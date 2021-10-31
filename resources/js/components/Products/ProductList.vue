@@ -7,13 +7,13 @@
                 </a>
             </template>
             <template v-slot:title>
-                Акции
+                {{ $trans('strings.Stocks') }}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
             <div class="section mt-4">
                 <div class="section-heading padding">
-                    <h2 class="title">Категории</h2>
+                    <h2 class="title">{{ $trans('strings.Categories') }}</h2>
                 </div>
                 <div class="mb-0 categories-block splide">
                     <splide :slides="categories" :options="options">
@@ -31,9 +31,10 @@
             <StoryList :stories="stories"></StoryList>
             <div class="section mt-4" :key="trigger">
                 <div class="section-heading padding">
-                    <h2 v-if="currentCategory===''" class="title">Акции</h2>
-                    <h2 v-if="currentCategory!==''" class="title" id="products">Акции из категории
-                        {{currentCategory}}</h2>
+                    <h2 v-if="currentCategory===''" class="title">{{ $trans('strings.Stocks') }}</h2>
+                    <h2 v-if="currentCategory!==''" class="title" id="products">
+                        {{ $trans('strings.Promotions from the category') }} {{currentCategory}}
+                    </h2>
                 </div>
                 <div class="section tab-content mt-2 mb-1">
                     <!-- waiting tab -->
@@ -48,7 +49,8 @@
                 </div>
                 <div>
                     <button :disabled='this.size >= items.length' href="javascript:;"
-                            class="btn btn-block btn-primary btn-lg" @click="increaseSize">Load More
+                            class="btn btn-block btn-primary btn-lg" @click="increaseSize">
+                        {{ $trans('strings.Load More') }}
                     </button>
                 </div>
             </div>

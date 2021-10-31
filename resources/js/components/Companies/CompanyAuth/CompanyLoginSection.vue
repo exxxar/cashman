@@ -8,8 +8,8 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Войдите в аккаунт Вашей компании</h1>
-            <h4>Заполните форму для входа в компанию</h4>
+            <h1>{{$trans('strings.Log in to your company account')}}</h1>
+            <h4>{{$trans('strings.Fill out the form to enter the company')}}</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form" class="mb-2"></AlertErrors>
@@ -18,9 +18,11 @@
                     <div class="card-body pb-1">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="domain">Домен</label>
+                                <label class="label" for="domain">{{$trans('strings.Domain')}}</label>
                                 <input v-model="form.domain" type="text" class="form-control"
-                                       id="domain" placeholder="Введите домен Вашей компании" name="domain">
+                                       id="domain"
+                                       :placeholder="$trans('strings.Enter your company domain')"
+                                name="domain">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
@@ -29,11 +31,11 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">Пароль</label>
+                                <label class="label" for="password">{{$trans('strings.Password')}}</label>
                                 <input v-model="form.password" type="password" class="form-control"
                                        id="password"
                                        autocomplete="off"
-                                       placeholder="Введите пароль Вашей компании" name="password">
+                                       :placeholder="trans('Enter your company\'s password')" name="password">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle-outline"></ion-icon>
                                 </i>
@@ -44,11 +46,11 @@
                 </div>
                 <div class="form-links mt-2">
                     <div>
-                        <a href="register-company">Зарегистрировать компанию</a>
+                        <a href="register-company">{{$trans('strings.Register company')}}</a>
                     </div>
                 </div>
                 <div class="form-button-group  transparent">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Войти</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">{{$trans('strings.Login')}}</button>
                 </div>
             </form>
         </div>

@@ -10,19 +10,18 @@
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             id="dropdownSelectCompany" aria-expanded="false">
-                        Действия
+                     {{$trans('strings.Actions')}}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownSelectCompany">
                         <li>
-                            <a v-if="admins.length>0" class="dropdown-item" href="#" @click="showAdminsModal">Администраторы</a>
+                            <a v-if="admins.length>0" class="dropdown-item" href="#" @click="showAdminsModal">{{$trans('strings.Administrators')}}</a>
                         </li>
                         <li>
                             <a v-if="user!==null" :href="'/promo-code/'+user.id + '/' + company.id"
-                               class="dropdown-item">Пригласить друга</a>
+                               class="dropdown-item">{{$trans('strings.Invite a friend')}}</a>
                         </li>
                         <li>
-                            <a v-if="user!==null" :href="'/friends-tree/'+ company.id" class="dropdown-item">Дерево
-                                друзей</a>
+                            <a v-if="user!==null" :href="'/friends-tree/'+ company.id" class="dropdown-item">{{$trans('strings.Tree of Friends')}}</a>
                         </li>
                     </ul>
                 </div>
@@ -53,19 +52,19 @@
             <div class="section full mt-2">
                 <div class="profile-stats pl-2 pr-2">
                     <a href="#" class="item">
-                        <strong>{{ products.length }}</strong>products
+                        <strong>{{ products.length }}</strong>{{$trans('strings.products')}}
                     </a>
                     <a href="#" class="item">
-                        <strong>{{ users.length }}</strong>users
+                        <strong>{{ users.length }}</strong>{{$trans('strings.users')}}
 
                     </a>
                     <a href="#" class="item">
-                        <strong>{{ stories.length }}</strong>stories
+                        <strong>{{ stories.length }}</strong>{{$trans('strings.stories')}}
 
                     </a>
 
                     <a href="#" class="item">
-                        <strong>{{ news.length }}</strong>news
+                        <strong>{{ news.length }}</strong>{{$trans('strings.news')}}
 
                     </a>
                 </div>
@@ -74,18 +73,16 @@
             <div class="section mt-1 mb-2">
                 <div class="profile-info">
                     <div class="bio subtext">
-                        <h3 v-if="company.description">О нас:</h3>
+                        <h3 v-if="company.description">{{$trans('strings.About us:')}}</h3>
                         <h5 v-if="company.description">{{ company.description }}</h5>
-                        <h3 v-if="company.properties.time">Время работы:</h3>
+                        <h3 v-if="company.properties.time">{{$trans('strings.Working hours:')}}</h3>
                         <h4 v-if="company.properties.time">{{ company.properties.time }}</h4>
-                        <h3 v-if="typeof(company.properties.address)!=='string' && company.properties.address">Наши
-                            адреса:</h3>
+                        <h3 v-if="typeof(company.properties.address)!=='string' && company.properties.address">{{$trans('strings.Our addresses:')}}</h3>
                         <div v-if="typeof(company.properties.address)!=='string'&& company.properties.address"
                              v-for="address in company.properties.address">
                             <h4> {{ address }}</h4>
                         </div>
-                        <h3 v-if="typeof(company.properties.address)==='string' && company.properties.address">Наш
-                            адрес:</h3>
+                        <h3 v-if="typeof(company.properties.address)==='string' && company.properties.address">{{$trans('strings.Our address:')}}</h3>
                         <h4 v-if="typeof(company.properties.address)==='string' && company.properties.address">
                             {{ company.properties.address }}</h4>
                         <div v-for="(property, key) in company.properties">
@@ -94,7 +91,7 @@
                         </div>
                     </div>
                     <div class="link" v-if="company.socials">
-                        <h3>Социальные сети</h3>
+                        <h3>{{$trans('strings.Social network')}}</h3>
                         <ul class="listview image-listview no-line no-space flush">
                             <li v-for="(social, key) in company.socials">
                                 <div class="item" v-if="social!==null">
@@ -104,7 +101,7 @@
                                     <div class="in">
                                         <div class="input-wrapper w-100">
                                             <a :href="social"
-                                               target="_blank"><label>{{ 'Ссылка на профиль в ' + key }}</label></a>
+                                               target="_blank"><label>{{ $trans('strings.Link to the profile in') + key }}</label></a>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +111,7 @@
                 </div>
             </div>
             <div class="section mt-1 mb-2">
-                <h3>Промокод пользователя в компании</h3>
+                <h3>{{$trans('strings.Promo code of the user in the company')}}</h3>
                 <div class="splash-page mt-5 mb-5">
                     <div class="d-flex">
                         <vue-qrcode :value=code :options="{ width: 200 }"></vue-qrcode>
@@ -185,16 +182,16 @@
                             <div class="col-6">
                                 <button :disabled='sizeNews >= news.length' :href="'#'"
                                         class="btn btn-outline-primary btn-block"
-                                        @click="increaseSize">Больше новостей
+                                        @click="increaseSize">{{$trans('strings.More news')}}
                                 </button>
                             </div>
                             <div class="col-6">
-                                <a :href="'/add-advertising-'+this.company.id" class="btn btn-primary btn-block">Добавить</a>
+                                <a :href="'/add-advertising-'+this.company.id" class="btn btn-primary btn-block">{{$trans('strings.Add')}}</a>
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
                             <button :disabled='sizeNews >= news.length' href="#" class="btn btn-primary btn-block"
-                                    @click="increaseSize">Больше новостей
+                                    @click="increaseSize">{{$trans('strings.More news')}}
                             </button>
                         </div>
                     </div>
@@ -230,17 +227,16 @@
                         <div v-if="isAdmin" class="row" style="margin-left: 4px; margin-right: 5px">
                             <div class="col-6">
                                 <button :disabled='this.sizeProduct >= products.length' :href="'#'"
-                                        class="btn btn-outline-primary btn-block" @click="increaseProductSize">Больше
-                                    товаров
+                                        class="btn btn-outline-primary btn-block" @click="increaseProductSize">{{$trans('strings.More products')}}
                                 </button>
                             </div>
                             <div class="col-6">
-                                <a :href="'#'" class="btn  btn-primary btn-block">Добавить</a>
+                                <a :href="'#'" class="btn  btn-primary btn-block">{{$trans('strings.Add')}}</a>
                             </div>
                         </div>
                         <div v-if="!isAdmin" class="pr-2 pl-2">
                             <button :disabled='this.sizeProduct >= products.length' href="#"
-                                    class="btn btn-primary btn-block" @click="increaseProductSize">Больше товаров
+                                    class="btn btn-primary btn-block" @click="increaseProductSize">{{$trans('strings.More products')}}
                             </button>
                         </div>
                     </div>
@@ -251,14 +247,14 @@
                             <li>
                                 <a :href="'/company-edit-'+company.id" class="item">
                                     <div class="in">
-                                        <div class="text-danger">Настройки профиля компании</div>
+                                        <div class="text-danger">{{$trans('strings.Company Profile Settings')}}</div>
                                     </div>
                                 </a>
                             </li>
                             <li>
                                 <a :href="'/company-admin-menu-'+company.id" class="item">
                                     <div class="in">
-                                        <div class="text-danger">Меню админа компании</div>
+                                        <div class="text-danger">{{$trans('strings.Company Admin menu')}}</div>
                                     </div>
                                 </a>
                             </li>
@@ -266,7 +262,7 @@
                             <li>
                                 <a href="#" class="item">
                                     <div class="in">
-                                        <div>История начисления/списания</div>
+                                        <div>{{$trans('strings.Accrual/write-off history')}}</div>
                                     </div>
                                 </a>
                             </li>

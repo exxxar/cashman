@@ -82,6 +82,7 @@ return [
 
     'locale' => 'en',
 
+    'locales'=>['en','ru'],
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -93,7 +94,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'ru',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Yandex\Geocode\YandexGeocodeServiceProvider::class,
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -179,7 +181,7 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        Stevebauman\Location\LocationServiceProvider::class
+        Stevebauman\Location\LocationServiceProvider::class,
 
     ],
 

@@ -41,7 +41,7 @@
                                     <div class="iconbox">
                                         <ion-icon name="add-outline"></ion-icon>
                                     </div>
-                                    Добавить
+                                  {{$trans('strings.Add')}}
                                 </div>
                             </a>
                             <a href="#" class="action-button" data-bs-toggle="modal"
@@ -50,7 +50,7 @@
                                     <div class="iconbox">
                                         <ion-icon name="arrow-down-outline"></ion-icon>
                                     </div>
-                                    Вывод
+                                    {{$trans('strings.Withdrawal')}}
                                 </div>
                             </a>
                             <a href="#" class="action-button" data-bs-toggle="modal"
@@ -59,7 +59,7 @@
                                     <div class="iconbox">
                                         <ion-icon name="arrow-forward-outline"></ion-icon>
                                     </div>
-                                    Отправить
+                                    {{$trans('strings.Send')}}
                                 </div>
                             </a>
                             <a href="history" class="action-button">
@@ -67,13 +67,13 @@
                                     <div class="iconbox">
                                         <ion-icon name="card-outline"></ion-icon>
                                     </div>
-                                    Мои действия
+                                    {{$trans('strings.My actions')}}
                                 </div>
                             </a>
                         </div>
                         <!-- * action group -->
                         <!-- menu -->
-                        <div class="listview-title mt-1">Меню</div>
+                        <div class="listview-title mt-1">{{$trans('strings.Menu')}}</div>
                         <ul class="listview flush transparent no-line image-listview">
                             <li v-if="auth_user!==null">
                                 <a href='user-profile' class="item">
@@ -81,7 +81,7 @@
                                         <ion-icon name="person-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Профиль пользователя
+                                       {{$trans('strings.User Profile')}}
                                     </div>
                                 </a>
                             </li>
@@ -91,7 +91,7 @@
                                         <ion-icon name="receipt-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        История действий
+                                       {{$trans('strings.History of actions')}}
                                     </div>
                                 </a>
                             </li>
@@ -101,7 +101,7 @@
                                         <ion-icon name="medal-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Достижения
+                                       {{$trans('strings.Achievements')}}
                                     </div>
                                 </a>
                             </li>
@@ -111,7 +111,7 @@
                                         <ion-icon name="cash-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Акции
+                                        {{$trans('strings.Stocks')}}
                                     </div>
                                 </a>
                             </li>
@@ -121,7 +121,7 @@
                                         <ion-icon name="grid-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Компании
+                                        {{$trans('strings.Companies')}}
                                     </div>
                                 </a>
                             </li>
@@ -131,7 +131,7 @@
                                         <ion-icon name="people-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Друзья
+                                        {{$trans('strings.Friends')}}
                                     </div>
                                 </a>
                             </li>
@@ -141,7 +141,7 @@
                                         <ion-icon name="newspaper-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Новости
+                                        {{$trans('strings.News')}}
                                     </div>
                                 </a>
                             </li>
@@ -149,7 +149,7 @@
                         <!-- * menu -->
 
                         <!-- others -->
-                        <div class="listview-title mt-1">Разное</div>
+                        <div class="listview-title mt-1">{{$trans('strings.Various')}}</div>
                         <ul class="listview flush transparent no-line image-listview">
                             <li v-if="auth_user!==null">
                                 <a href="user-settings" class="item">
@@ -157,7 +157,7 @@
                                         <ion-icon name="settings-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Настройки профиля
+                                        {{$trans('strings.Profile Settings')}}
                                     </div>
                                 </a>
                             </li>
@@ -167,7 +167,7 @@
                                         <ion-icon name="help-circle-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        О нас
+                                        {{$trans('strings.About us')}}
                                     </div>
                                 </a>
                             </li>
@@ -177,7 +177,7 @@
                                         <ion-icon name="log-out-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Выйти
+                                        {{$trans('strings.Log out')}}
                                     </div>
                                 </a>
                             </li>
@@ -187,7 +187,7 @@
                                         <ion-icon name="log-in-outline"></ion-icon>
                                     </div>
                                     <div class="in">
-                                        Войти в аккаунт
+                                        {{$trans('strings.Log in to your account')}}
                                     </div>
                                 </a>
                             </li>
@@ -197,9 +197,9 @@
                 </div>
             </div>
         </div>
-        <TransactionsModal title="Вывод кэшбека" modalID="withdrawActionSheet1"></TransactionsModal>
-        <TransactionsModal title="Отправка кэшбека" modalID="withdrawActionSheet2"></TransactionsModal>
-        <TransactionsModal title="Увеличение суммарного кэшбека" modalID="depositActionSheet"
+        <TransactionsModal :title="$trans('strings.Cashback withdrawal')" modalID="withdrawActionSheet1"></TransactionsModal>
+        <TransactionsModal :title="$trans('strings.Sending cashback')" modalID="withdrawActionSheet2"></TransactionsModal>
+        <TransactionsModal :title="$trans('strings.Increase in total cashback')" modalID="depositActionSheet"
                            :recipient=false></TransactionsModal>
     </fragment>
 </template>

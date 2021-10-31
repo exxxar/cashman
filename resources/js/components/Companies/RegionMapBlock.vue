@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Адрес компании
+               {{$trans('strings.Company address')}}
             </template>
         </Header>
         <div class="py-5">

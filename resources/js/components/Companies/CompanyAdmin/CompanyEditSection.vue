@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Изменение данных компании
+                {{$trans('strings.Changing company data')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -17,8 +17,8 @@
                         <img :src="'assets/sample/'+company.image" alt="avatar" class="imaged w100 rounded">
                     </a>
                 </div>
-                <h1>Данные о компании</h1>
-                <h4>Заполните данные о вашей компании</h4>
+                <h1>{{$trans('strings.Company information')}}</h1>
+                <h4>{{$trans('strings.Fill in your company details')}}</h4>
             </div>
             <div class="section mb-5 p-2">
                 <form @submit.prevent="updateSettings" @keydown="company.onKeydown($event)">
@@ -26,8 +26,8 @@
                         <div class="card-body">
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="title">Название</label>
-                                    <input type="text" class="form-control" placeholder="Название компании"
+                                    <label class="label" for="title">{{$trans('strings.Ttitle')}}</label>
+                                    <input type="text" class="form-control" :placeholder="$trans('strings.Company name')"
                                            v-model="company.title" name="title" id="title">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -44,10 +44,8 @@
                                     v-on:vdropzone-removed-file="fileRemoved"
                                 >
                                     <div class="dropzone-custom-content">
-                                        <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего
-                                            компьютера
-                                        </div>
+                                        <h3 class="dropzone-custom-title">{{$trans('strings.Drag and drop to upload content!')}}</h3>
+                                        <div class="subtitle">{{$trans('strings.or click to select a file from your computer')}}</div>
                                     </div>
                                 </vue-dropzone>
                             </div>
@@ -55,9 +53,9 @@
 
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="percent">Процент кэшбека</label>
+                                    <label class="label" for="percent">{{$trans('strings.Cashback percentage')}}</label>
                                     <input type="text" class="form-control" id="percent"
-                                           placeholder="Процент кэшбека" v-model="company.cashback_percent"
+                                           :placeholder="$trans('strings.Cashback percentage')" v-model="company.cashback_percent"
                                            name="cashback_percent">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -66,9 +64,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="percent1">Процент кэшбека 1 уровня</label>
+                                    <label class="label" for="percent1">{{$trans('strings.Level 1 Cashback percentage')}}</label>
                                     <input type="text" class="form-control" id="percent1"
-                                           placeholder="Процент кэшбека 1 уровня"
+                                           :placeholder="$trans('strings.Level 1 Cashback percentage')"
                                            v-model="company.cashback_percent_level_1" name="cashback_percent_level_1">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -77,9 +75,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="percent2">Процент кэшбека 2 уровня</label>
+                                    <label class="label" for="percent2">{{$trans('strings.Level 2 Cashback percentage')}}</label>
                                     <input type="text" class="form-control" id="percent2"
-                                           placeholder="Процент кэшбека 2 уровня"
+                                           :placeholder="$trans('strings.Level 2 Cashback percentage')"
                                            v-model="company.cashback_percent_level_2" name="cashback_percent_level_2">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -88,9 +86,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="description">Описание компании</label>
+                                    <label class="label" for="description">{{$trans('strings.Company Description')}}</label>
                                     <textarea type="text" class="form-control" id="description"
-                                              placeholder="Описание компании" v-model="company.description"
+                                              :placeholder="$trans('strings.Company Description')" v-model="company.description"
                                               name="description" @onKeyUp="SetNewSize(this)" cols="5"
                                               rows="6"></textarea>
                                     <i class="clear-input">
@@ -100,9 +98,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="callback">Ссылка для обратной связи</label>
+                                    <label class="label" for="callback">{{$trans('strings.Link for feedback')}}</label>
                                     <input type="text" class="form-control" id="callback"
-                                           placeholder="Ссылка для обратной связи" v-model="company.callback_url"
+                                           :placeholder="$trans('strings.Link for feedback')" v-model="company.callback_url"
                                            name="callback_url">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -111,9 +109,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="vk-url">Ссылка для загрузки товаров из VK</label>
+                                    <label class="label" for="vk-url">{{$trans('strings.Link to download products from VK')}}</label>
                                     <input type="text" class="form-control" id="vk-url"
-                                           placeholder="Ссылка для загрузки товаров из VK"
+                                           :placeholder="$trans('strings.Link to download products from VK')"
                                            v-model="company.upload_vk_url" name="upload_vk_url">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -121,7 +119,7 @@
                                 </div>
                             </div>
                             <div class="form-group basic">
-                                <label class="label">Дополнительная информация
+                                <label class="label">{{$trans('strings.Additional information')}}
                                     <button @click="addProperty" type="button" class="btn btn-icon btn-info me-1">
                                         <ion-icon name="add-outline"></ion-icon>
                                     </button>
@@ -164,7 +162,7 @@
                                 </ul>
                             </div>
                             <div class="form-group basic">
-                                <label class="label">Социальные сети</label>
+                                <label class="label">{{$trans('strings.Social network')}}</label>
                                 <ul class="listview image-listview no-line no-space flush">
                                     <li v-for="(social, key) in company.socials">
                                         <div class="item">
@@ -174,7 +172,7 @@
                                             <div class="in">
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control" id="socials1"
-                                                           :placeholder="'Ссылка на профиль в '+key"
+                                                           :placeholder="$trans('strings.Link to the profile in')+key"
                                                            v-model="company.socials[key]">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>
@@ -189,7 +187,7 @@
                     </div>
                     <div class="form-button-group transparent">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">
-                            Обновить
+                            {{$trans('strings.Update')}}
                         </button>
                     </div>
 

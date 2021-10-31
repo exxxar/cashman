@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Меню действий
+                {{$trans('strings.Action Menu')}}
             </template>
         </Header>
         <div class="section mt-2">
@@ -18,29 +18,26 @@
                     <div class="mt-1"></div>
 
                     <button type="button" class="btn btn-primary btn-lg btn-block" @click="showOffsCashBackModal">
-                        Списать CashBack
+                        {{$trans('strings.Debit CashBack')}}
                     </button>
                     <div class="mt-1"></div>
 
                     <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDebitingCashBackModal">
-                        Начислить
-                        CashBack {{company.cashback_percent}}%
+                        {{$trans('strings.Add CashBack')}} {{company.cashback_percent}}%
                     </button>
                     <div class="mt-1"></div>
 
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showAddAdminModal">Добавить
-                        администратора
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showAddAdminModal">{{$trans('strings.Add an Administrator')}}
                     </button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDeleteAdminModal">Убрать
-                        администратора
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="showDeleteAdminModal">{{$trans('strings.Remove the administrator')}}
                     </button>
                     <div class="mt-1"></div>
 
-                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="terminate">Завершить работу
+                    <button type="button" class="btn btn-primary btn-lg btn-block" @click="terminate">{{$trans('strings.Finish the job')}}
                     </button>
 
                 </div>

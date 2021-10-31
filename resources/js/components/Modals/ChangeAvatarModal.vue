@@ -3,13 +3,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ChangeAvatarLabel">Изменение фотографии аккаунта</h5>
+                    <h5 class="modal-title" id="ChangeAvatarLabel">{{$trans('strings.Changing the account photo')}}</h5>
 
                 </div>
                 <form @submit.prevent="changeAvatar">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Добавьте новую фотографию</label>
+                            <label>{{$trans('strings.Add a new photo')}}</label>
                             <vue-dropzone
                                 ref="myVueDropzone"
                                 id="dropzone"
@@ -19,8 +19,10 @@
                                 v-on:vdropzone-removed-file="fileRemoved"
                             >
                                 <div class="dropzone-custom-content">
-                                    <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    <h3 class="dropzone-custom-title">
+                                        {{ $trans('strings.Drag and drop to upload content!') }}</h3>
+                                    <div class="subtitle">
+                                        {{ $trans('strings.or click to select a file from your computer') }}
                                     </div>
                                 </div>
                             </vue-dropzone>
@@ -28,8 +30,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="btn btn-success">Обновить</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{$trans('strings.Close')}}</button>
+                        <button type="submit" class="btn btn-success">{{$trans('strings.Update')}}</button>
                     </div>
                 </form>
             </div>

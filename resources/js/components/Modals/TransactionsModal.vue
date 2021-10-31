@@ -14,7 +14,7 @@
                             <div class="form-group basic">
                                 <div class="input-wrapper">
                                     <slot name="first">
-                                        <label class="label" for="account2d">From</label>
+                                        <label class="label" for="account2d">{{$trans('strings.From')}}</label>
                                         <input v-model="form.from" type="email" class="form-control" id="account2d"
                                                placeholder="Enter IBAN">
                                         <i class="clear-input">
@@ -27,7 +27,7 @@
                             <div v-if="recipient && exchange===false" class="form-group basic">
                                 <div class="input-wrapper">
                                     <slot name="second">
-                                        <label class="label" for="text11d">To</label>
+                                        <label class="label" for="text11d">{{$trans('strings.To')}}</label>
                                         <input v-model="form.to" type="email" class="form-control" id="text11d"
                                                placeholder="Enter IBAN">
                                         <i class="clear-input">
@@ -39,7 +39,7 @@
                             </div>
                             <div v-if="exchange ===true" class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="currency1">From</label>
+                                    <label class="label" for="currency1">{{$trans('strings.From')}}</label>
                                     <select class="form-control custom-select" id="currency1">
                                         <option value="1">EUR</option>
                                         <option value="2">USD</option>
@@ -50,11 +50,11 @@
                             </div>
                             <div class="form-group basic">
                                 <slot name="third">
-                                    <label class="label">Enter Amount</label>
+                                    <label class="label">{{$trans('strings.Enter Amount')}}</label>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text" id="basic-addonb1">$</span>
                                         <input v-model="form.amount" type="text" class="form-control"
-                                               placeholder="Enter an amount"
+                                               :placeholder="$trans('strings.Enter Amount')"
                                                value="100">
                                     </div>
                                 </slot>

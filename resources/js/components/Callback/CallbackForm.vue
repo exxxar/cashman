@@ -4,17 +4,17 @@
             <div class="card-body">
                 <div class="p-1">
                     <div class="text-center">
-                        <h2 class="text-primary">Напишите нам</h2>
-                        <p>Заполните данную форму для начала общения</p>
+                        <h2 class="text-primary">{{$trans('strings.Write to us')}}</h2>
+                        <p>{{$trans('strings.Fill out this form to start communication')}}</p>
                     </div>
                     <AlertErrors :form="form" class="mb-2"></AlertErrors>
                     <form @submit="sendMessage"
                           @keydown="form.onKeydown($event)">
                         <div class="form-group basic animated">
                             <div class="input-wrapper">
-                                <label class="label" for="name2">Ваше имя</label>
+                                <label class="label" for="name2">{{$trans('strings.Please provide your name.')}}</label>
                                 <input v-model="form.name" type="text" class="form-control" id="name2"
-                                       placeholder="Ваше имя">
+                                       :placeholder="$trans('strings.Please provide your name.')">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -23,9 +23,9 @@
                         </div>
                         <div class="form-group basic animated">
                             <div class="input-wrapper">
-                                <label class="label" for="email2">Номер телефона</label>
+                                <label class="label" for="email2">{{$trans('strings.Phone number')}}</label>
                                 <input v-model="form.phone" type="text" class="form-control" id="email2"
-                                       placeholder="Номер телефона">
+                                       :placeholder="$trans('strings.Phone number')">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -34,9 +34,9 @@
                         </div>
                         <div class="form-group basic animated">
                             <div class="input-wrapper">
-                                <label class="label" for="textarea2">Сообщение</label>
+                                <label class="label" for="textarea2">{{$trans('strings.Message')}}</label>
                                 <textarea v-model="form.message" id="textarea2" rows="4" class="form-control"
-                                          placeholder="Сообщение"></textarea>
+                                          :placeholder="$trans('strings.Message')"></textarea>
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group boxed">
                             <div class="input-wrapper">
-                                <h4 class="text-center">Выберите месенджеры для ответа</h4>
+                                <h4 class="text-center">{{$trans('strings.Select messengers to respond to')}}</h4>
                                 <ul class="messagers">
                                     <li>
 
@@ -79,7 +79,7 @@
                             <VoiceCallbackForm :phone="form.phone" :cansend="cansend"></VoiceCallbackForm>
                         </div>
                         <div class="mt-2">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Отправить</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{$trans('strings.Send')}}</button>
                         </div>
                     </form>
                 </div>

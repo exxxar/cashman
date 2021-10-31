@@ -3,26 +3,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 v-if="operation==='Add'" class="modal-title">Добавление администратора компании</h5>
-                    <h5 v-if="operation==='Delete'" class="modal-title">Удаление администратора компании</h5>
+                    <h5 v-if="operation==='Add'" class="modal-title">{{$trans('strings.Adding a company Administrator')}}</h5>
+                    <h5 v-if="operation==='Delete'" class="modal-title">{{$trans('strings.Deleting a company administrator')}}</h5>
                 </div>
                 <form @submit.prevent="operation==='Add' ? addAdmin() : deleteAdmin()">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Код пользователя</label>
+                            <label>{{$trans('strings.User Code')}}</label>
                             <input v-model="form.user" type="text" name="user"
-                                   placeholder="Код пользователя"
+                                   :placeholder="$trans('strings.User Code')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
                             <HasError :form="form" field="user"></HasError>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button v-if="operation==='Add'" type="submit" class="btn btn-success">Добавить администратора
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{$trans('strings.Close')}}</button>
+                        <button v-if="operation==='Add'" type="submit" class="btn btn-success">{{$trans('strings.Add an Administrator')}}
                         </button>
-                        <button v-if="operation==='Delete'" type="submit" class="btn btn-success">Удалить
-                            администратора
+                        <button v-if="operation==='Delete'" type="submit" class="btn btn-success">{{$trans('strings.Remove the administrator')}}
                         </button>
                     </div>
                 </form>

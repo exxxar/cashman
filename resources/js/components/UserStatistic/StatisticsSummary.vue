@@ -5,8 +5,8 @@
                 <!-- Balance -->
                 <div class="balance">
                     <div class="left">
-                        <span class="title">Суммарный кэшбек</span>
-                        <h1 class="total">$ {{ profile.score }}</h1>
+                        <span class="title">{{ $trans('strings.Total cashback') }}</span>
+                        <h1 class="total">{{ $trans('strings.$') }} {{ profile.score }}</h1>
                     </div>
                     <div class="right">
                         <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
@@ -31,26 +31,26 @@
             <div class="row mt-2">
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Начисления</div>
-                        <div class="value text-success">{{profile.debitings}} $</div>
+                        <div class="title">{{ $trans('strings.Accruals') }}</div>
+                        <div class="value text-success">{{profile.debitings}} {{ $trans('strings.$') }}</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Списания</div>
-                        <div class="value text-danger">{{profile.offs}} $</div>
+                        <div class="title">{{ $trans('strings.Write-downs') }}</div>
+                        <div class="value text-danger">{{profile.offs}} {{ $trans('strings.$') }}</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Вывод</div>
-                        <div class="value">0 $</div>
+                        <div class="title">{{ $trans('strings.Withdrawal') }}</div>
+                        <div class="value">0 {{ $trans('strings.$') }}</div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="stat-box">
-                        <div class="title">Перевод</div>
-                        <div class="value text-info">0 $</div>
+                        <div class="title">{{ $trans('strings.Transfer') }}</div>
+                        <div class="value text-info">0 {{ $trans('strings.$') }}</div>
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@
         </div>
 
         <TransactionsModal :title="currentTitle" :exchange=currentExchange></TransactionsModal>
-        <TransactionsModal title="Увеличение суммарного кэшбека" modalID="depositActionSheet"
+        <TransactionsModal :title="$trans('strings.Increase in total cashback')" modalID="depositActionSheet"
                            :recipient=false></TransactionsModal>
     </fragment>
 </template>

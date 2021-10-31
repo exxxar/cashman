@@ -7,14 +7,14 @@
                 </a>
             </template>
             <template v-slot:title>
-                Ваши товары
+                {{$trans('strings.Your products')}}
             </template>
         </Header>
         <br/>
         <br/>
         <div class="section mt-2 mb-2">
             <div class="section-title">
-                Добавить новый товар
+               {{$trans('strings.Add a new product')}}
                 <button @click="newModal" type="button" class="btn btn-icon btn-info me-1">
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
@@ -22,22 +22,21 @@
                     <ion-icon name="download-outline"></ion-icon>
                 </button>
             </div>
-            <h4 class="text-center" v-if="products.length===0">Вы пока не добавили ни одного продукта своей компании.
-                Нажмите кнопку "Загрузить товары из ВК" или добавьте товар вручную.</h4>
+            <h4 class="text-center" v-if="products.length===0">{{$trans('strings.You haven\'t added any of your company\'s products yet.\n Click the \"Upload products from VK\" button or add the product manually.')}}</h4>
             <div v-if="products.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Код</th>
-                            <th>Название</th>
-                            <th>Изображение</th>
-                            <th>Описание</th>
-                            <th>Цена</th>
-                            <th>Цена по скидке</th>
-                            <th>Тип акции</th>
-                            <th>Действие</th>
-                            <th>Промокод</th>
+                            <th>{{$trans('strings.Code')}}</th>
+                            <th>{{$trans('strings.Title')}}</th>
+                            <th>{{$trans('strings.Images')}}</th>
+                            <th>{{$trans('strings.Description')}}</th>
+                            <th>{{$trans('strings.Price')}}</th>
+                            <th>{{$trans('strings.Discount price')}}</th>
+                            <th>{{$trans('strings.Type of promotion')}}</th>
+                            <th>{{$trans('strings.Action')}}</th>
+                            <th>{{$trans('strings.Promo code')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -89,17 +88,17 @@
                 <ul class="pagination pagination-rounded">
                     <li>
                         <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
-                            Предыдущая
+                            {{$trans('strings.Previous')}}
                         </button>
                     </li>
                     <li class="disabled ">
                         <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
-                            Страница {{ pageNumber + 1 }} из {{ pageCount }}
+                            {{$trans('strings.Page')}} {{ pageNumber + 1 }} {{$trans('strings.from')}} {{ pageCount }}
                         </a>
                     </li>
                     <li>
                         <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
-                            Следующая
+                            {{$trans('strings.Next')}}
                         </button>
                     </li>
                 </ul>

@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center">Администраторы компании</h5>
+                    <h5 class="modal-title text-center">{{$trans('strings.Company Administrators')}}</h5>
                 </div>
                 <ul class="listview image-listview inset">
                     <li v-for="admin in admins">
@@ -22,7 +22,7 @@
 
                 </ul>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{$trans('strings.Close')}}</button>
 
                 </div>
 

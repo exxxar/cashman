@@ -1,6 +1,6 @@
 <template>
     <div class="mt-2 mb-2">
-        <h6 class="text-center">Запиши голосовое сообщение</h6>
+        <h6 class="text-center">{{$trans('strings.Record a voice message')}}</h6>
         <div class="d-flex justify-content-center mt-2">
             <VueRecordAudio mode="hold" @stream="onStream" @result="onResult"/>
         </div>

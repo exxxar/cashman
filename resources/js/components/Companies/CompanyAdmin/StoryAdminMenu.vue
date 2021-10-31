@@ -1,7 +1,7 @@
 <template>
     <fragment>
         <Stepper :id="id"></Stepper>
-        <div class="listview-title mt-2">Ваши истории</div>
+        <div class="listview-title mt-2">{{$trans('strings.Your Stories')}}</div>
         <ul class="listview image-listview inset">
             <li v-for="story in stories">
                 <a href="#" class="item" v-on:click="showStory(story)" data-bs-toggle="modal" data-component="stories"
@@ -13,7 +13,7 @@
                 </a>
             </li>
         </ul>
-        <div class="listview-title mt-2">Ваши новости</div>
+        <div class="listview-title mt-2">{{$trans('strings.Your news')}}</div>
         <ul class="listview image-listview inset">
             <li v-for="item in news">
                 <a :href="'news/' + item.id" class="item">

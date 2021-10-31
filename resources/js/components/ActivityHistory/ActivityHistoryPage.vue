@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                История активности
+                {{$trans('strings.Activity history')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">

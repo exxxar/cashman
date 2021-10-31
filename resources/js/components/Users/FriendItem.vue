@@ -4,7 +4,7 @@
             <img :src="'assets/sample/' +user.avatar" alt="image" class="imaged w86 rounded">
             <div class="in">
                 <div>
-                    <header>Пользователь</header>
+                    <header>{{ $trans('strings.User') }}</header>
                     <header>{{ user.name }}</header>
                     <footer>{{ user.region }}</footer>
                 </div>

@@ -7,44 +7,44 @@
                 </a>
             </template>
             <template v-slot:title>
-                Ваши клиенты
+                {{$trans('strings.Your customers')}}
             </template>
         </Header>
         <br/>
         <br/>
         <div class="section mt-2 mb-2">
             <div class="section-title">
-                Клиенты вашей компании
+               {{$trans('strings.Your company\'s customers')}}
             </div>
-            <h4 class="text-center" v-if="users.length===0">У вашей компании пока нет ни одного клиента</h4>
+            <h4 class="text-center" v-if="users.length===0">{{$trans('strings.Your company doesn\'t have a single client yet')}}</h4>
             <div v-if="users.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Имя</th>
-                            <th>Аватар</th>
-                            <th>Мобильный телефон</th>
-                            <th>Страна</th>
-                            <th>Регион</th>
-                            <th>Адрес</th>
-                            <th>Социальные сети</th>
+                            <th>{{$trans('strings.Action Name')}}</th>
+                            <th>{{$trans('strings.Avatar')}}</th>
+                            <th>{{$trans('strings.Phone number')}}</th>
+                            <th>{{$trans('strings.Country')}}</th>
+                            <th>{{$trans('strings.Region')}}</th>
+                            <th>{{$trans('strings.Address')}}</th>
+                            <th>{{$trans('strings.Social network')}}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="user in paginatedData" :key="user.id">
                             <td v-if="user.name!==null">{{ user.name }}</td>
-                            <td v-if="user.name===null">Нет данных</td>
+                            <td v-if="user.name===null">{{$trans('strings.No data available')}}</td>
                             <td><img :src="'assets/sample/' +user.avatar" alt="image"
                                      class="imaged w100 rounded"></td>
                             <td v-if="user.phone!==null">{{ user.phone }}</td>
-                            <td v-if="user.phone===null">Нет данных</td>
+                            <td v-if="user.phone===null">{{$trans('strings.No data available')}}</td>
                             <td v-if="user.country!==null">{{ user.country }}</td>
-                            <td v-if="user.country===null">Нет данных</td>
+                            <td v-if="user.country===null">{{$trans('strings.No data available')}}</td>
                             <td v-if="user.region!==null">{{ user.region}}</td>
-                            <td v-if="user.region===null">Нет данных</td>
+                            <td v-if="user.region===null">{{$trans('strings.No data available')}}</td>
                             <td v-if="user.address!==null">{{ user.address}}</td>
-                            <td v-if="user.address===null">Нет данных</td>
+                            <td v-if="user.address===null">{{$trans('strings.No data available')}}</td>
                             <td v-if="user.messengers!==null">
                                 <ul class="listview image-listview no-line no-space flush"
                                     style="background: none!important">
@@ -62,7 +62,7 @@
                                     </li>
                                 </ul>
                             </td>
-                            <td v-if="user.messengers===null">Нет данных</td>
+                            <td v-if="user.messengers===null">{{$trans('strings.No data available')}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -72,17 +72,17 @@
                 <ul class="pagination pagination-rounded">
                     <li>
                         <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
-                            Предыдущая
+                            {{$trans('strings.Previous')}}
                         </button>
                     </li>
                     <li class="disabled ">
                         <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
-                            Страница {{ pageNumber + 1 }} из {{ pageCount }}
+                            {{$trans('strings.Page')}} {{ pageNumber + 1 }} {{$trans('strings.from')}} {{ pageCount }}
                         </a>
                     </li>
                     <li>
                         <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
-                            Следующая
+                            {{$trans('strings.Next')}}
                         </button>
                     </li>
                 </ul>

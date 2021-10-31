@@ -3,6 +3,9 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+import {localeChanged, localize} from "vee-validate";
+
 require('./bootstrap');
 window.Vue = require('vue').default;
 
@@ -12,7 +15,6 @@ Vue.use(LoadScript);
 import 'dtoaster/dist/dtoaster.css'
 import DToaster from 'dtoaster'
 import ToasterPresets from './json/toast_presets.json' //Your predefined toasts presets (optionally)
-
 Vue.use(DToaster, {
     presets: ToasterPresets,
     position: 'top-right',
@@ -54,6 +56,18 @@ const settings = {
     version: '2.1'
 }
 Vue.use(YmapPlugin, settings)
+
+require('lang.js');
+import VueLang from '@eli5/vue-lang-js'
+import translations from './vue-translations.json';
+
+Vue.use(VueLang, {
+    messages: translations, // Provide locale file
+    locale: 'en', // Set locale
+    fallback: 'ru' // Set fallback locale
+});
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -134,3 +148,16 @@ const app = new Vue({
     el: '#app',
     store
 });
+
+if (localStorage.getItem('locale')) {
+    app.$lang.setLocale(localStorage.getItem('locale'));
+    //app.$moment.locale(localStorage.getItem('locale'));
+    localize(localStorage.getItem('locale'));
+    localeChanged();
+} else {
+    localStorage.setItem('locale', 'en');
+    app.$lang.setLocale('en');
+    //app.$moment.locale('en');
+    localize('en');
+    localeChanged();
+}

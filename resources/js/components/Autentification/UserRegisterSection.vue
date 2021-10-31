@@ -8,12 +8,12 @@
                 </a>
             </template>
             <template v-slot:right>
-                <a href="login" class="headerButton">Авторизация</a>
+                <a href="login" class="headerButton">{{$trans('strings.Authorization')}}</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Регистрация</h1>
-            <h4>Создайте аккаунт в Cashman!</h4>
+            <h1>{{$trans('strings.Register')}}</h1>
+            <h4>{{$trans('strings.Create an account in Cashman!')}}</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form" class="mb-2"></AlertErrors>
@@ -23,9 +23,9 @@
                     <div class="card-body">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="email">Электронная почта</label>
+                                <label class="label" for="email">{{$trans('strings.Email')}}</label>
                                 <input type="email" class="form-control" id="email"
-                                       placeholder="Введите Ваш адрес электронной почты"
+                                       :placeholder="$trans('strings.Enter your email address')"
                                        v-model="form.email" name="email">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -35,9 +35,9 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">Пароль</label>
+                                <label class="label" for="password">{{$trans('strings.Password')}}</label>
                                 <input type="password" class="form-control" id="password" autocomplete="new-password"
-                                       placeholder="Введите Ваш пароль" name="password"
+                                       :placeholder="$trans('strings.Enter your password')" name="password"
                                        v-model="form.password">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -47,10 +47,10 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password-confirmation">Повторите пароль</label>
+                                <label class="label" for="password-confirmation">{{$trans('strings.Repeat the password')}}</label>
                                 <input type="password" class="form-control" id="password-confirmation"
                                        autocomplete="new-password"
-                                       placeholder="Повторите Ваш пароль"
+                                       :placeholder="$trans('strings.Repeat the password')"
                                        name="password_confirmation"
                                        v-model="form.password_confirmation">
                                 <i class="clear-input">
@@ -64,9 +64,9 @@
                                 <input type="checkbox" class="form-check-input" id="customCheckb1"
                                        v-model="form.submitted">
                                 <label class="form-check-label" for="customCheckb1">
-                                    <a>Я согласен с</a>
+                                    <a>{{$trans('strings.I agree with')}}</a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
-                                        условиями соглашения
+                                        {{$trans('strings.terms of the agreement')}}
                                     </a>
                                 </label>
                                 <HasError :form="form" field="submitted"/>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="form-button-group">
                     <button type="submit" :disabled='form.errors.any() || !isComplete'
-                            class="btn btn-primary btn-block btn-lg">Зарегистрироваться
+                            class="btn btn-primary btn-block btn-lg">{{$trans('strings.Register')}}
                     </button>
                 </div>
             </form>

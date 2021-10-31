@@ -3,27 +3,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="UpdateLabel">Редактировать рекламу</h5>
+                    <h5 class="modal-title" id="UpdateLabel">{{ $trans('strings.Edit advertisement') }}</h5>
                 </div>
                 <form @submit.prevent="updateAdvertisement()">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Название рекламы</label>
+                            <label>{{ $trans('strings.Advertisement title') }}</label>
                             <input v-model="form.title" type="text" name="title"
-                                   placeholder="Название рекламы"
+                                   :placeholder="$trans('strings.Advertisement title')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
                             <HasError :form="form" field="title"></HasError>
                         </div>
                         <div class="form-group">
-                            <label>Описание рекламы</label>
+                            <label>{{ $trans('strings.Advertisement description') }}</label>
                             <input v-model="form.description" type="text" name="description"
-                                   placeholder="Описание рекламы"
+                                   :placeholder="$trans('strings.Advertisement description')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
                             <HasError :form="form" field="description"></HasError>
                         </div>
 
                         <div class="form-group">
-                            <label>Изображение рекламы</label>
+                            <label>{{$trans('strings.Add an ad image')}}</label>
                             <img :src="'./../assets/sample/'+form.images.main" alt="image"
                                  class="imaged w100">
                             <vue-dropzone
@@ -35,8 +35,10 @@
                                 v-on:vdropzone-removed-file="fileRemoved"
                             >
                                 <div class="dropzone-custom-content">
-                                    <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    <h3 class="dropzone-custom-title">
+                                        {{ $trans('strings.Drag and drop to upload content!') }}</h3>
+                                    <div class="subtitle">
+                                        {{ $trans('strings.or click to select a file from your computer') }}
                                     </div>
                                 </div>
                             </vue-dropzone>
@@ -44,9 +46,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="filesRemove">
-                            Закрыть
+                            {{$trans('strings.Close')}}
                         </button>
-                        <button type="submit" class="btn btn-success">Обновить</button>
+                        <button type="submit" class="btn btn-success">{{$trans('strings.Update')}}</button>
                     </div>
                 </form>
             </div>

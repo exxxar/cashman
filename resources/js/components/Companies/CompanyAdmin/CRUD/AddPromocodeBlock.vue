@@ -7,13 +7,13 @@
                 </a>
             </template>
             <template v-slot:title>
-                Добавить промокод
+                {{$trans('strings.Add a promo code')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
             <div class="section mt-2 text-center">
-                <h1>Введите символы для промокода</h1>
-                <h4>Количество символов не должно превышать 12</h4>
+                <h1>{{$trans('strings.Enter the characters for the promo code')}}</h1>
+                <h4>{{$trans('strings.The number of characters must not exceed 12')}}</h4>
             </div>
             <div class="section mb-5 p-2">
                 <form action="/company-admin-menu">
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-button-group transparent">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">Создать промокод</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">{{$trans('strings.Create a promo code')}}</button>
                     </div>
 
                 </form>

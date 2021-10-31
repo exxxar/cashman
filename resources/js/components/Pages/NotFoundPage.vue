@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                404 - Not found
+                404 - {{$trans('strings.Not found')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -15,12 +15,9 @@
                 <div class="splash-page mt-5 mb-5">
                     <img src="assets/logo-icon.png" alt="image" class="imaged w140">
                     <h1>404</h1>
-                    <h2 class="mb-2">Страница не найдена</h2>
-                    <p v-if="company===null">Подождите несколько минут и совершите повторную попытку загрузки страницы
-                        или свяжитесь со
-                        администрацией сайта</p>
-                    <p v-if="company!==null">Ошибка при подключении! Для подключения к компании перейдите по ссылке
-                        ниже</p>
+                    <h2 class="mb-2">{{$trans('strings.Page not found')}}</h2>
+                    <p v-if="company===null">{{$trans('strings.Wait a few minutes and retry loading the page or contact the site administration')}}</p>
+                    <p v-if="company!==null">{{$trans('strings.Connection error! To connect to the company, follow the link below')}}</p>
                     <strong v-if="company!==null">{{company}}</strong>
                 </div>
             </div>
@@ -28,12 +25,12 @@
                 <div class="row">
                     <div class="col-6">
                         <a href="#" class="btn btn-lg btn-outline-secondary btn-block goBack">
-                            Назад
+                           {{$trans('strings.Back')}}
                         </a>
                     </div>
                     <div class="col-6">
                         <a href="#" v-on:click="reloadPage" class="btn btn-lg btn-primary btn-block">
-                            Попробовать снова
+                            {{$trans('strings.Try again')}}
                         </a>
                     </div>
                 </div>

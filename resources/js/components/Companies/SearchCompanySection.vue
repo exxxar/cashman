@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Компании
+                {{$trans('strings.Companies')}}
             </template>
             <template v-slot:right>
                 <a href="javascript:;" class="headerButton toggle-searchbox">
@@ -29,17 +29,17 @@
                 <ul class="pagination pagination-rounded">
                     <li>
                         <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
-                            Предыдущая
+                            {{$trans('strings.Previous')}}
                         </button>
                     </li>
                     <li class="disabled ">
                         <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
-                            Страница {{ pageNumber+1 }} из {{ pageCount }}
+                            {{$trans('strings.Page')}} {{ pageNumber + 1 }} {{$trans('strings.from')}} {{ pageCount }}
                         </a>
                     </li>
                     <li>
                         <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
-                            Следующая
+                            {{$trans('strings.Next')}}
                         </button>
                     </li>
                 </ul>

@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Настройки
+               {{$trans('strings.Settings')}}
             </template>
             <template v-slot:right>
                 <a href="#" class="headerButton">
@@ -27,12 +27,12 @@
                     </a>
                 </div>
             </div>
-            <div class="listview-title mt-1">Тема</div>
+            <div class="listview-title mt-1">{{$trans('strings.Theme')}}</div>
             <ul class="listview image-listview text inset">
                 <li>
                     <div class="item">
                         <div class="in">
-                            <div>Темная тема</div>
+                            <div>{{$trans('strings.Dark theme')}}</div>
                             <div class="form-check form-switch  ms-2">
                                 <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
                                 <label class="form-check-label" for="darkmodeSwitch"></label>
@@ -41,15 +41,15 @@
                     </div>
                 </li>
             </ul>
-            <div class="listview-title mt-1">Компании</div>
+            <div class="listview-title mt-1">{{$trans('strings.Companies')}}</div>
             <ul class="listview image-listview text inset">
                 <li>
                     <a href="register-company" class="item">
                         <div class="in">
                             <div>
-                                Регистрация компании
+                                {{$trans('strings.Company registration')}}
                                 <div class="text-muted">
-                                    Здесь вы можете добавить свою новую компанию
+                                    {{$trans('strings.Here you can add your new company')}}
                                 </div>
                             </div>
                         </div>
@@ -59,46 +59,46 @@
                     <a href="login-company" class="item">
                         <div class="in">
                             <div>
-                                Авторизация компании
+                                {{$trans('strings.Company authorization')}}
                                 <div class="text-muted">
-                                    Здесь вы можете войти в свою новую компанию
+                                   {{$trans('strings.Here you can log in to your company')}}
                                 </div>
                             </div>
                         </div>
                     </a>
                 </li>
             </ul>
-            <div class="listview-title mt-1">Настройки профиля</div>
+            <div class="listview-title mt-1">{{$trans('strings.Profile Settings')}}</div>
             <ul class="listview image-listview text inset">
                 <li>
                     <a href="/user-edit" class="item">
                         <div class="in">
-                            <div>Изменить настройки профиля</div>
+                            <div>{{$trans('strings.Change Profile Settings')}}</div>
                         </div>
                     </a>
                 </li>
                 <li>
                     <a href="#" @click="changeEmail" class="item">
                         <div class="in">
-                            <div>Обновить адрес электронной почты</div>
+                            <div>{{ $trans('strings.Update Email Address') }}</div>
                         </div>
                     </a>
                 </li>
 
             </ul>
-            <div class="listview-title mt-1">Безопасность</div>
+            <div class="listview-title mt-1">{{$trans('strings.Security')}}</div>
             <ul class="listview image-listview text mb-2 inset">
                 <li>
                     <a href="#" @click="changePassword" class="item">
                         <div class="in">
-                            <div>Обновить пароль</div>
+                            <div>{{ $trans('strings.Update Password') }}</div>
                         </div>
                     </a>
                 </li>
                 <li>
                     <a href="#" @click.prevent="logout" class="item">
                         <div class="in">
-                            <div>Выйти со всех устройств</div>
+                            <div>{{ $trans('strings.Log out from all devices') }}</div>
                         </div>
                     </a>
                 </li>

@@ -1,10 +1,10 @@
 <template>
-    <div class="bill-box users-item">
-        <div class="img-wrapper">
-            <img :src="'assets/sample/' +user.avatar" alt="img" class="image-block imaged w-100 images-users">
+    <a href="#">
+        <div class="user-card">
+            <img :src="'assets/sample/' +user.avatar" alt="img" class="imaged w-100">
+            <strong>{{ user.name }}</strong>
         </div>
-        <strong>{{ user.name }}</strong>
-    </div>
+    </a>
 </template>
 
 <script>
@@ -19,22 +19,3 @@ export default {
     }
 }
 </script>
-<style>
-.images-users {
-    object-fit: contain;
-}
-.users-item{
-    height: 200px;
-}
-.bill-box {
-    padding: 8px 12px;
-}
-
-.bill-box .img-wrapper {
-    margin-bottom: 10px;
-}
-
-.bill-box strong {
-    margin: 0 0 6px 0;
-}
-</style>

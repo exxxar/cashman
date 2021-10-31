@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                News
+                {{$trans('strings.newss')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">

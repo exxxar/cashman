@@ -7,16 +7,17 @@
                 </a>
             </template>
             <template v-slot:title>
-                Дерево друзей
+                {{ $trans('strings.Tree of Friends') }}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
             <br/>
-            <h4 class="text-center" v-if="treeData===null">Пригласите друзей в одну из ваших компаний, чтобы построить
-                дерево друзей!</h4>
+            <h4 class="text-center" v-if="treeData===null">
+                {{ $trans('strings.Invite friends to one of your companies to build a tree of friends!') }}
+            </h4>
             <div v-if="treeData===null" class="d-flex justify-content-center">
                 <button @click="addFriends" type="button" class="btn btn-inline btn-primary me-1">
-                    Пригласить друзей
+                    {{ $trans('strings.Invite friends') }}
                 </button>
             </div>
             <div id="UsersFriendsTree" v-if="treeData!==null">

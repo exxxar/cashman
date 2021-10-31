@@ -1,8 +1,8 @@
 <template>
     <div class="section mt-4" id="splide-slider">
         <div class="section-heading padding">
-            <h2 class="title">Компании</h2>
-            <a href="/search-company" class="link">Посмотреть все</a>
+            <h2 class="title">{{$trans('strings.Companies')}}</h2>
+            <a href="/search-company" class="link">{{$trans('strings.View all')}}}</a>
         </div>
         <splide :slides="companies" :options="options" :key="trigger">
             <splide-slide v-for="company in companies" :key="company.id">
@@ -10,8 +10,7 @@
             </splide-slide>
         </splide>
 
-        <h4 class="text-center" v-if="companies.length===0">Вы пока не зарегистрировались ни в одной компании.
-            Нажмите "Посмотреть все" для отображения списка компаний</h4>
+        <h4 class="text-center" v-if="companies.length===0">{{$trans("You haven't registered with any company yet. Click \"View All\" to display a list of companies")}}</h4>
         <!-- * carousel single -->
     </div>
 </template>

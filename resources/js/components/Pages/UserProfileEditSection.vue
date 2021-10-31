@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Изменение данных профиля
+                {{$trans('strings.Changing Profile data')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -17,8 +17,8 @@
                         <img :src="'assets/sample/'+profile.avatar" alt="avatar" class="imaged w100 rounded">
                     </a>
                 </div>
-                <h1>Данные профиля</h1>
-                <h4>Заполните данные вашего профиля</h4>
+                <h1>{{$trans('strings.Profile Data')}}</h1>
+                <h4>{{$trans('strings.Fill in your profile details')}}</h4>
             </div>
             <div class="section mb-5 p-2">
                 <form @submit.prevent="updateSettings">
@@ -26,8 +26,8 @@
                         <div class="card-body">
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="name">Имя</label>
-                                    <input type="text" class="form-control" placeholder="Введите ваше имя"
+                                    <label class="label" for="name">{{$trans('strings.Action Name')}}</label>
+                                    <input type="text" class="form-control" :placeholder="$trans('strings.Enter your name')"
                                            v-model="profile.name" name="name" id="name">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -44,9 +44,9 @@
                                     v-on:vdropzone-removed-file="fileRemoved"
                                 >
                                     <div class="dropzone-custom-content">
-                                        <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                        <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего
-                                            компьютера
+                                        <div class="dropzone-custom-content">
+                                            <h3 class="dropzone-custom-title">{{$trans('strings.Drag and drop to upload content!')}}</h3>
+                                            <div class="subtitle">{{$trans('strings.or click to select a file from your computer')}}</div>
                                         </div>
                                     </div>
                                 </vue-dropzone>
@@ -54,9 +54,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="password1">Номер телефона</label>
+                                    <label class="label" for="password1">{{$trans('strings.Phone Number')}}</label>
                                     <input type="text" class="form-control" id="password1" autocomplete="off"
-                                           placeholder="Введите ваш номер телефона" v-model="profile.phone"
+                                           :placeholder="$trans('strings.Enter your phone number')" v-model="profile.phone"
                                            name="phone">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -66,9 +66,9 @@
 
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="country">Страна</label>
+                                    <label class="label" for="country">{{$trans('strings.Country')}}</label>
                                     <input type="text" class="form-control" id="country"
-                                           placeholder="Страна" v-model="profile.country"
+                                           :placeholder="$trans('strings.Country')" v-model="profile.country"
                                            name="country">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -77,9 +77,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="region">Регион</label>
+                                    <label class="label" for="region">{{$trans('strings.Region')}}</label>
                                     <input type="text" class="form-control" id="region"
-                                           placeholder="Регион"
+                                           :placeholder="$trans('strings.Region')"
                                            v-model="profile.region" name="region">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -88,9 +88,9 @@
                             </div>
                             <div class="form-group basic">
                                 <div class="input-wrapper">
-                                    <label class="label" for="address">Адрес</label>
+                                    <label class="label" for="address">{{$trans('strings.Address')}}</label>
                                     <input type="text" class="form-control" id="address"
-                                           placeholder="Адрес"
+                                           :placeholder="$trans('strings.Address')"
                                            v-model="profile.address" name="address">
                                     <i class="clear-input">
                                         <ion-icon name="close-circle"></ion-icon>
@@ -99,7 +99,7 @@
                             </div>
 
                             <div class="form-group basic">
-                                <label class="label">Социальные сети</label>
+                                <label class="label">{{$trans('strings.Social Network')}}</label>
                                 <ul class="listview image-listview no-line no-space flush">
                                     <li v-for="(messenger, key) in profile.messengers">
                                         <div class="item">
@@ -109,7 +109,7 @@
                                             <div class="in">
                                                 <div class="input-wrapper w-100">
                                                     <input type="text" class="form-control" id="socials1"
-                                                           :placeholder="'Ссылка на '+key"
+                                                           :placeholder="$trans('strings.Link to the profile in')+key"
                                                            v-model="profile.messengers[key]">
                                                     <i class="clear-input">
                                                         <ion-icon name="close-circle"></ion-icon>
@@ -125,7 +125,7 @@
 
                     <div class="form-button-group transparent">
                         <button type="submit" class="btn btn-primary btn-block btn-lg">
-                            Обновить
+                            {{$trans('strings.Update')}}
                         </button>
                     </div>
 

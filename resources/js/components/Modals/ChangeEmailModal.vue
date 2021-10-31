@@ -3,21 +3,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Изменение почты аккаунта</h5>
+                    <h5 class="modal-title">{{$trans('strings.Changing account email')}}</h5>
                 </div>
                 <form @submit.prevent="changeEmail">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Новая почта</label>
+                            <label>{{$trans('strings.New Mail')}}</label>
                             <input v-model="form.email" type="email" name="email"
-                                   placeholder="Введите новую почту"
+                                   :placeholder="$trans('strings.New Mail')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
                             <HasError :form="form" field="email"></HasError>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="submit" class="btn btn-success">Изменить почту</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{$trans('strings.Close')}}</button>
+                        <button type="submit" class="btn btn-success">{{$trans('strings.Change Email')}}</button>
                     </div>
                 </form>
             </div>

@@ -3,21 +3,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" v-show="!editmode" id="AddNewLabel">Добавить новый товар</h5>
-                    <h5 class="modal-title" v-show="editmode" id="UpdateLabel">Редактировать запись о товаре</h5>
+                    <h5 class="modal-title" v-show="!editmode" id="AddNewLabel">{{$trans('strings.Add a new product')}}</h5>
+                    <h5 class="modal-title" v-show="editmode" id="UpdateLabel">{{$trans('strings.Edit a product entry')}}</h5>
 
                 </div>
                 <form @submit.prevent="editmode ? updateProduct() : createProduct()">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Название товара</label>
+                            <label>{{$trans('strings.Product title')}}</label>
                             <input v-model="form.title" type="text" name="title"
-                                   placeholder="Название товара"
+                                   :placeholder="$trans('strings.Product title')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
                             <HasError :form="form" field="title"></HasError>
                         </div>
                         <div class="form-group">
-                            <label>Изображение рекламы</label>
+                            <label>{{$trans('strings.Product Image')}}</label>
                             <img v-if="editmode" :src="productImage(form.image)" alt="image" class="imaged w100">
                             <vue-dropzone
                                 ref="myVueDropzone"
@@ -28,46 +28,48 @@
                                 v-on:vdropzone-removed-file="fileRemoved"
                             >
                                 <div class="dropzone-custom-content">
-                                    <h3 class="dropzone-custom-title">Перетащите файлы для загрузки</h3>
-                                    <div class="subtitle">...или нажмите, чтобы загрузить файлы с Вашего компьютера
+                                    <h3 class="dropzone-custom-title">
+                                        {{ $trans('strings.Drag and drop to upload content!') }}</h3>
+                                    <div class="subtitle">
+                                        {{ $trans('strings.or click to select a file from your computer') }}
                                     </div>
                                 </div>
                             </vue-dropzone>
                             <HasError :form="form" field="image"></HasError>
                         </div>
                         <div class="form-group">
-                            <label>Описание товара</label>
+                            <label>{{$trans('strings.Product Description')}}</label>
                             <input v-model="form.description" type="text" name="description"
-                                   placeholder="Описание товара"
+                                   :placeholder="$trans('strings.Product Description')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
                             <HasError :form="form" field="description"></HasError>
                         </div>
                         <div class="form-group">
-                            <label>Цена</label>
+                            <label>{{$trans('strings.Price')}}</label>
                             <input v-model="form.price" type="number" name="price"
-                                   placeholder="Цена"
+                                   :placeholder="$trans('strings.Price')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('price') }">
                             <HasError :form="form" field="price"></HasError>
                         </div>
                         <div class="form-group">
-                            <label>Цена по акции</label>
+                            <label>{{$trans('strings.Discount price')}}</label>
                             <input v-model="form.discount_price" type="number" name="discount_price"
-                                   placeholder="Цена по акции"
+                                   :placeholder="$trans('strings.Discount price')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('discount_price') }">
                             <HasError :form="form" field="discount_price"></HasError>
                         </div>
                         <div class="form-group">
-                            <label>Тип акции</label>
+                            <label>{{$trans('strings.Type of promotion')}}</label>
                             <input v-model="form.type" type="text" name="type"
-                                   placeholder="Тип акции"
+                                   :placeholder="$trans('strings.Type of promotion')"
                                    class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
                             <HasError :form="form" field="type"></HasError>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
-                        <button v-show="editmode" type="submit" class="btn btn-success">Обновить</button>
-                        <button v-show="!editmode" type="submit" class="btn btn-primary">Создать</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{$trans('strings.Close')}}</button>
+                        <button v-show="editmode" type="submit" class="btn btn-success">{{$trans('strings.Update')}}</button>
+                        <button v-show="!editmode" type="submit" class="btn btn-primary">{{$trans('strings.Create')}}</button>
                     </div>
                 </form>
             </div>

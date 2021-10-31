@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport"
@@ -36,6 +36,9 @@
     crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js?version={{env("APP_VERSION")}}"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-messaging.js?version={{env("APP_VERSION")}}"></script>
+<script>
+    localStorage.setItem('locale', 'ru');
+</script>
 @if(Illuminate\Support\Facades\Auth::check())
 <script type="text/javascript">
     var firebaseConfig = {

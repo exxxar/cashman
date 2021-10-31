@@ -1,7 +1,7 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 class="title">История начисления/списания</h2>
+            <h2 class="title">{{$trans('strings.Accrual/write-off history')}}</h2>
         </div>
         <!-- carousel single -->
         <div class="carousel-single splide">

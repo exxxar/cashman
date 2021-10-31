@@ -7,68 +7,64 @@
                 </a>
             </template>
             <template v-slot:right>
-                <a href='login' class="headerButton">Login</a>
+                <a href='login' class="headerButton">{{$trans('strings.Login')}}</a>
             </template>
         </Header>
         <div class="section mt-2 text-center">
+            <p>{{$trans('strings.Fill in your account information to complete registration')}}</p>
             <form-wizard @onComplete="onComplete">
-                <p>Заполните информацию о Вашем аккаунте для завершения регистрации</p>
-                <tab-content title="Почта" :selected="true">
+                <tab-content :title="$trans('strings.Email')" :selected="true">
                     <div class="form-group">
-                        <label>Электронная почта</label>
+                        <label>{{$trans('strings.Email')}}</label>
                         <input
                             type="email"
                             class="form-control"
                             :class="hasError('email') ? 'is-invalid' : ''"
-                            placeholder="Введите E-mail"
+                            :placeholder="$trans('strings.Enter your email address')"
                             v-model="formData.email"
                             :disabled='isEmail'>
                         <div v-if="hasError('email')" class="invalid-feedback">
-                            <div class="error" v-if="!$v.formData.email.required">Введите электронную почту</div>
-                            <div class="error" v-if="!$v.formData.email.email">Введенный электронный адрес имеет
-                                неверный
-                                формат
+                            <div class="error" v-if="!$v.formData.email.required">{{$trans('strings.Enter your email address')}}</div>
+                            <div class="error" v-if="!$v.formData.email.email">{{$trans('strings.The entered email address has an incorrect format')}}
                             </div>
                         </div>
                     </div>
 
                 </tab-content>
-                <tab-content title="Пароль">
+                <tab-content :title="$trans('strings.Password')">
                     <div class="form-group">
-                        <label>Пароль</label>
+                        <label>{{$trans('strings.Password')}}</label>
                         <input
-                            type="password"
+                            type="text"
                             class="form-control"
                             :class="hasError('password') ? 'is-invalid' : ''"
-                            placeholder="Введите пароль"
+                            :placeholder="$trans('strings.Enter your password')"
                             v-model="formData.password">
                         <div v-if="hasError('password')" class="invalid-feedback">
-                            <div class="error" v-if="!$v.formData.password.required">Введите пароль</div>
-                            <div class="error" v-if="!$v.formData.password.minLength">Пароль должен быть не менее 8
-                                символов
+                            <div class="error" v-if="!$v.formData.password.required">{{$trans('strings.Enter your password')}}</div>
+                            <div class="error" v-if="!$v.formData.password.minLength">{{$trans('strings.The password must be at least 8 characters long')}}
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Подтверждение пароля</label>
+                        <label>{{$trans('strings.Confirm Password')}}</label>
                         <input
-                            type="password"
+                            type="text"
                             class="form-control"
                             :class="hasError('password_confirmation') ? 'is-invalid' : ''"
-                            placeholder="Введите подтверждение пароля"
+                            :placeholder="$trans('strings.Enter password confirmation')"
                             v-model="formData.password_confirmation">
                         <div v-if="hasError('password_confirmation')" class="invalid-feedback">
-                            <div class="error" v-if="!$v.formData.password_confirmation.required">Введите подтвержение
-                                пароля
+                            <div class="error" v-if="!$v.formData.password_confirmation.required">{{$trans('strings.Enter password confirmation')}}
                             </div>
-                            <div class="error" v-if="!$v.formData.password_confirmation.sameAs">Пароли должны сопадать
+                            <div class="error" v-if="!$v.formData.password_confirmation.sameAs">{{$trans('strings.Passwords must match')}}
                             </div>
                         </div>
                     </div>
                 </tab-content>
-                <tab-content title="Условия соглашения">
+                <tab-content :title="$trans('strings.Terms of the agreement')">
                     <div class="form-group">
-                        <label>Ознакомьтесь с условиями соглашения</label>
+                        <label>{{$trans('strings.Read the terms of the agreement')}}</label>
                         <div class="form-group form-check">
                             <div class="custom-control custom-checkbox mt-2 mb-1">
                                 <div class="form-check">
@@ -76,14 +72,13 @@
                                            :class="hasError('submitted') ? 'is-invalid' : ''"
                                            id="customCheckb1">
                                     <label class="form-check-label" for="customCheckb1">
-                                        I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms
-                                        and
-                                        conditions</a>
+                                        <a>{{$trans('strings.I agree with')}}</a>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                            {{$trans('strings.terms of the agreement')}}
+                                        </a>
                                     </label>
                                     <div v-if="hasError('submitted')" class="invalid-feedback">
-                                        <div class="error" v-if="!$v.formData.submitted.required">Ознакомьтесь с
-                                            условиями
-                                            соглашения
+                                        <div class="error" v-if="!$v.formData.submitted.required">{{$trans('strings.Read the terms of the agreement')}}
                                         </div>
                                     </div>
                                 </div>

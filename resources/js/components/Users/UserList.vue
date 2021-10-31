@@ -1,9 +1,9 @@
 <template>
     <div class="section mt-4">
         <div class="section-heading padding">
-            <h2 v-if="!showFriends" class="title">Пользователи</h2>
-            <h2 v-if="showFriends" class="title">Друзья по компаниям</h2>
-            <a v-if="showFriends" href="friends" class="link">Просмотреть все</a>
+            <h2 v-if="!showFriends" class="title">{{ $trans('strings.Users') }}</h2>
+            <h2 v-if="showFriends" class="title">{{ $trans('strings.Company Friends') }}</h2>
+            <a v-if="showFriends" href="friends" class="link">{{ $trans('strings.View all') }}</a>
         </div>
         <!-- carousel small -->
         <splide :slides="users" :options="options">
@@ -25,48 +25,20 @@ export default {
     data: function () {
         return {
             options: {
-                perPage: 10,
-                rewind: true,
+                perPage: 9,
+                rewind: false,
+                type: "slide",
                 gap: 16,
                 padding: 16,
                 arrows: false,
                 pagination: false,
-                cover: true,
-                lazyLoad: 'sequential',
                 breakpoints: {
-                    320: {
-                        perPage: 2,
-                    },
-                    375: {
-                        perPage: 2,
-                    },
-                    425: {
-                        perPage: 2,
-                    },
-                    600: {
-                        perPage: 2,
-                    },
                     768: {
-                        perPage: 3,
+                        perPage: 4
                     },
-                    1024: {
-                        perPage: 4,
-                    },
-                    1440: {
-                        perPage: 5,
-                    },
-                    1600: {
-                        perPage: 6,
-                    },
-                    1680: {
-                        perPage: 6,
-                    },
-                    1920: {
-                        perPage: 8,
-                    },
-                    2500: {
-                        perPage: 10,
-                    },
+                    991: {
+                        perPage: 7
+                    }
                 }
             },
         }

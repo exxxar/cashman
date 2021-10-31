@@ -4,9 +4,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <slot name="header">
-                        <h5 class="modal-title">Terms and Conditions</h5>
+                        <h5 class="modal-title">{{$trans('strings.Terms of the agreement')}}</h5>
                     </slot>
-                    <a href="javascript:;" data-bs-dismiss="modal">Close</a>
+                    <a href="javascript:;" data-bs-dismiss="modal">{{$trans('strings.Close')}}</a>
                 </div>
                 <div class="modal-body">
                     <slot name="body">

@@ -13,10 +13,9 @@
                     <div class="col  col-1 col-lg-6 menu order2 toorder1 inmedium ">
                         <div id="trigger" class="triger"></div>
                         <ul class="nav navbar justify-content-end" id="menu">
-                            <li class="light todark inmedium"><a href="#writetodeveloper"><h5>НАПИСАТЬ
-                                РАЗРАБОТЧИКАМ</h5></a></li>
-                            <li class="dark notdisplay inlarge"><a onclick="redirectTo('logo');"><h5>Бот
-                                <b>Переводчик</b></h5></a></li>
+                            <li class="light todark inmedium"><a href="#writetodeveloper"><h5>{{$trans('strings.WRITE TO DEVELOPERS')}}</h5></a></li>
+                            <li class="dark notdisplay inlarge"><a onclick="redirectTo('logo');"><h5>{{$trans('strings.Bot')}}
+                                <b>{{$trans('strings.Translator')}}</b></h5></a></li>
                         </ul>
                     </div>
                 </div>
@@ -24,25 +23,24 @@
                 <div class="content container-fluid p-0 py-lg-5 m-0 mb-lg-5">
                     <div class="row">
                         <div class="col text pb-5 p-lg-0 col-12 col-lg-6">
-                            <h2 class="dark tolight inmedium m-0 pb-4 pb-lg-3 col-11">Ваш лучший инструмент для
-                                привлечения доходов</h2>
+                            <h2 class="dark tolight inmedium m-0 pb-4 pb-lg-3 col-11">{{$trans('strings.Your best tool for raising revenue')}}</h2>
                             <h4 class="dark tolight inmedium p-0 m-0 pt-md-3 pb-lg-5 mb-lg-5 col-12 col-md-6 col-lg-12">
-                                Используйте наш кэшбек-сервис для
+                                {{$trans('strings.Use our cashback service to')}}
                                 <!--<div class="rw-words text-typing" id="text-typing"></div>-->
                                 <div class="list__wrapper">
                                     <ul class="p-0">
-                                        <li><h4>экономных покупок</h4></li>
-                                        <li><h4>привличения клиентов</h4></li>
-                                        <li><h4>поиска лучших скидок и распродажах</h4></li>
+                                        <li><h4>{{$trans('strings.economical shopping')}}</h4></li>
+                                        <li><h4>{{$trans('strings.attracting customers')}}</h4></li>
+                                        <li><h4>{{$trans('strings.search for the best discounts and sales')}}</h4></li>
                                     </ul>
                                 </div>
                             </h4>
                         </div>
                         <div class="col button mt-5 m-lg-0  pt-5 pb-lg-5 col-12  ">
-                            <button class="yellow" onclick="redirectTo('freeaccess')">Бесплатный доступ на 3 дня
+                            <button class="yellow" onclick="redirectTo('freeaccess')">{{$trans('strings.Free access for 3 days')}}
                             </button>
                             <a href="#writetodeveloper">
-                                <button class="white toblue notdisplay inmedium">Хочу воспользоваться ботом</button>
+                                <button class="white toblue notdisplay inmedium">{{$trans('strings.I want to use a bot')}}</button>
                             </a>
                         </div>
                     </div>
@@ -135,9 +133,8 @@
                         </div>
                         <div class="col text col-12 col-lg-7">
                             <div class="header row ">
-                                <h2 class="dark mb-4">Используйте удобную ссылку-приглашение для вовлечения друзей</h2>
-                                <p class="lightgray mb-4">Реферальная ссылка, в любом удобном мессенджере, поможет
-                                    увеличить Вашу прибыль</p>
+                                <h2 class="dark mb-4">{{$trans('strings.Use a convenient invitation link to get your friends involved')}}</h2>
+                                <p class="lightgray mb-4">{{$trans('strings.Referral link, in any convenient messenger, will help to increase your profit')}}</p>
                             </div>
                             <div class="content row  row-cols-3 row-cols-md-4 row-cols-lg-3 p-0 m-s-0 ml-md-n3 mr-md-0">
                                 <div class="col mb-4 px-4 px-md-3  ">
@@ -257,7 +254,7 @@
                                             <div class="col logo p-0 text-end" style="font-weight: bold;color:#003399;">
                                                 +
                                             </div>
-                                            <div class="col p-0">Добавить свой</div>
+                                            <div class="col p-0">{{$trans('strings.Add your own')}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -344,38 +341,38 @@
                 <div class="wrapper small medium">
                     <div class="row ">
                         <div class="col text col-12 col-lg-7">
-                            <div class="header pb-5"><h2 class="dark">Почему именно мы?</h2></div>
+                            <div class="header pb-5"><h2 class="dark">{{$trans('strings.Why us?')}}</h2></div>
                             <div class="notdisplay insmall content row row-cols-1 row-cols-md-2 ">
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon1.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Выгодно</h3>
-                                        <p class="lightgray">Верните часть потраченных денег за покупки</p>
+                                        <h3 class="gray">{{$trans('strings.Profitably')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.Return part of the money spent for purchases')}}</p>
                                     </div>
                                 </div>
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon2.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Удобно</h3>
-                                        <p class="lightgray">Один кэшбек-сервис для всех покупок</p>
+                                        <h3 class="gray">{{$trans('strings.Comfortable')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.One cashback service for all purchases')}}</p>
                                     </div>
                                 </div>
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon3.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Разумно</h3>
-                                        <p class="lightgray">Используйте наш сервис для привлечения клиентов</p>
+                                        <h3 class="gray">{{$trans('strings.Reasonable')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.Use our service to attract customers')}}</p>
                                     </div>
                                 </div>
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon4.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Полезно</h3>
-                                        <p class="lightgray">Узнавайте первыми об акциях и скидках</p>
+                                        <h3 class="gray">{{$trans('strings.Useful')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.Be the first to know about promotions and discounts')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -385,32 +382,32 @@
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon1.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Выгодно</h3>
-                                        <p class="lightgray">Верните часть потраченных денег за покупки</p>
+                                        <h3 class="gray">{{$trans('strings.Profitably')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.Return part of the money spent for purchases')}}</p>
                                     </div>
                                 </div>
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon2.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Удобно</h3>
-                                        <p class="lightgray">Один кэшбек-сервис для всех покупок</p>
+                                        <h3 class="gray">{{$trans('strings.Comfortable')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.One cashback service for all purchases')}}</p>
                                     </div>
                                 </div>
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon3.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Разумно</h3>
-                                        <p class="lightgray">Используйте наш сервис для привлечения клиентов</p>
+                                        <h3 class="gray">{{$trans('strings.Reasonable')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.Use our service to attract customers')}}</p>
                                     </div>
                                 </div>
                                 <div class="col pb-lg-5 px-lg-3 item">
                                     <div class="image pb-lg-5"><img :src="'assets/landing-img/Content/SecondIcon4.webp'"
                                                                     alt=""></div>
                                     <div class="text pb-lg-3">
-                                        <h3 class="gray">Полезно</h3>
-                                        <p class="lightgray">Узнавайте первыми об акциях и скидках</p>
+                                        <h3 class="gray">{{$trans('strings.Useful')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.Be the first to know about promotions and discounts')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -514,8 +511,7 @@
                                     </div>
                                     <div class="contentChat" id="messageBox">
                                         <div class="botmessage ">
-                                            <div class="text">Здавствуйте, Вас приветсвует лучший кэшбек-сервис в мире!
-                                                Чем могу помочь?
+                                            <div class="text">{{$trans('strings.Hello, the best cashback service in the world welcomes you! How can I help you?')}}
                                             </div>
                                         </div>
                                     </div>
@@ -531,34 +527,31 @@
                             </div>
                         </div>
                         <div class="col col-12 col-lg-7 text">
-                            <div class="header pb-4 pb-md-5"><h2 class="dark">Вы не один</h2></div>
+                            <div class="header pb-4 pb-md-5"><h2 class="dark">{{$trans('strings.You are not alone')}}</h2></div>
                             <div class="notdisplay insmall">
                                 <div class="row top pb-lg-5 item">
                                     <div class="col col-12 col-md-4 image"><img
                                         :src="'assets/landing-img/Content/ThirdIcon1.webp'" alt=""></div>
                                     <div class="col col-12 col-md-8 text">
-                                        <h3 class="gray">Поддержка без выходных и праздников</h3>
-                                        <p class="lightgray">В случае возникновения нештатной ситуации Вы не останетесь
-                                            с ней один на один. Наши специалисты работают ежедневно с 9 до 21 по МСК</p>
+                                        <h3 class="gray">{{$trans('strings.Support without weekends and holidays')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.In case of an emergency situation, you will not be left alone with her. Our specialists work daily from 9 to 21 Moscow time')}}</p>
                                     </div>
                                 </div>
                                 <div class="row middle pb-lg-5 item">
                                     <div class="col col-12  col-md-4 image"><img
                                         :src="'assets/landing-img/Content/ThirdIcon2.png'" alt=""></div>
                                     <div class="col col-12 col-md-8 text">
-                                        <h3 class="gray">Активное сообщество</h3>
-                                        <p class="lightgray">Количество пользователей растет с каждым днем в нереально
-                                            быстрых темпах</p>
+                                        <h3 class="gray">{{$trans('strings.Active community')}}</h3>
+                                        <p class="lightgray">{{$trans('strings.The number of users is growing every day at an unrealistically fast pace')}}</p>
                                     </div>
                                 </div>
                                 <div class="row bottom pb-lg-5 item">
                                     <div class="col col-12 col-md-4 image"><img
                                         :src="'assets/landing-img/Content/ThirdIcon3.png'" alt=""></div>
                                     <div class="col col-12 col-md-8 text">
-                                        <h3 class="gray">Доступность</h3>
+                                        <h3 class="gray">{{$trans('strings.Availability')}}</h3>
                                         <p class="lightgray">
-                                            У вас свой бизнес?<br>Используйте SKIDKA SERVICE для привличения новых
-                                            клиентов</p>
+                                            {{$trans('strings.Do you have your own business?')}}<br>{{$trans('strings.Use SKIDKA SERVICE to attract new customers')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -568,27 +561,24 @@
                                 <div class="col col-12 col-md-4 image"><img
                                     :src="'assets/landing-img/Content/ThirdIcon1.webp'" alt=""></div>
                                 <div class="col col-12 col-md-8 text">
-                                    <h3 class="gray">Поддержка без выходных и праздников</h3>
-                                    <p class="lightgray">В случае возникновения нештатной ситуации Вы не останетесь с
-                                        ней один на один. Наши специалисты работают ежедневно с 9 до 21 по МСК</p>
+                                    <h3 class="gray">{{$trans('strings.Support without weekends and holidays')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.In case of an emergency situation, you will not be left alone with her. Our specialists work daily from 9 to 21 Moscow time')}}</p>
                                 </div>
                             </div>
                             <div class="row middle pb-lg-5 item">
                                 <div class="col col-12  col-md-4 image"><img
                                     :src="'assets/landing-img/Content/ThirdIcon2.png'" alt=""></div>
                                 <div class="col col-12 col-md-8 text">
-                                    <h3 class="gray">Активное сообщество</h3>
-                                    <p class="lightgray">Количество пользователей растет с каждым днем в нереально
-                                        быстрых темпах</p>
+                                    <h3 class="gray">{{$trans('strings.Active community')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.The number of users is growing every day at an unrealistically fast pace')}}</p>
                                 </div>
                             </div>
                             <div class="row bottom pb-lg-5 item">
                                 <div class="col col-12 col-md-4 image"><img
                                     :src="'assets/landing-img/Content/ThirdIcon3.png'" alt=""></div>
                                 <div class="col col-12 col-md-8 text">
-                                    <h3 class="gray">Доступность</h3>
-                                    <p class="lightgray">Необходим быстрый перевод?<br>Используйте Бот-Переводчик в
-                                        любой социальной сети или мессенджере</p>
+                                    <h3 class="gray">{{$trans('strings.Availability')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.Do you have your own business?')}}<br>{{$trans('strings.Use SKIDKA SERVICE to attract new customers')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -672,22 +662,15 @@
                 <div class="wrapper pt-md-5 medium">
                     <div class="row block">
                         <div class="row  px-4 pt-4 pt-lg-5 px-lg-5 title col-md-12 col-lg-7">
-                            <h2 class="light pb-md-3">Присоединяйтесь к SKIDKA SERVICE и получите свой первый
-                                кэшбэк!</h2>
+                            <h2 class="light pb-md-3">{{$trans('strings.Join SKIDKA SERVICE and get your first cashback!')}}</h2>
                         </div>
                         <div class="row px-md-4  px-lg-5  text m-auto ">
                             <div class="col content mt-5 p-0 col-12 col-md-8 col-lg-7 pb-lg-5 toorder2 insmall">
-                                <p class="light ">Наши пользователи первыми узнают о лучших скидках, акциях и
-                                    мероприятиях.
+                                <p class="light ">{{$trans('strings.Our users will be the first to know about the best discounts, promotions and events.')}}
                                     <br><br>
-                                    SKIDKA SERVICE - это кэшбэк-сервис для выгодных и комфортных онлайн покупок. Мы
-                                    заботимся о своих активных пользователях и покупателях, которые пользуются сервисом
-                                    впервые. Наша техподдержка отвечает на вопросы круглосуточно и без выходных.
-                                    Любители максимальной выгоды точно останутся довольны: мы часто дарим клиентам
-                                    скидки для повышения кэшбека и другие приятные бонусы. С нами ты точно сможешь
-                                    сэкономить достойную сумму!
+                                    {{$trans("SKIDKA SERVICE is a cashback service for profitable and comfortable online purchases.")}}
                                     <br><br>
-                                    Станьте пользователем SKIDKA SERVICE и возвращайте деньги за покупки уже сегодня!
+                                    {{$trans('strings.Become a SKIDKA SERVICE user and return money for purchases today!')}}
                                 </p>
                             </div>
                             <div class="relative col image col-12 col-md-4 col-lg-5">
@@ -696,10 +679,9 @@
                         <div
                             class="row  p-4 py-md-0  px-lg-5  bottom col-md-12 col-lg-7 m-auto m-md-0 toorder2 insmall">
                             <div class="col-12 col-md-5 button toorder2 insmall p-0">
-                                <button class="yellow w-100 ">Написать чат-боту</button>
+                                <button class="yellow w-100 ">{{$trans('strings.Write to a chatbot')}}</button>
                             </div>
-                            <div class="col-12 col-md-7"><h3 class="light pt-1 text-center">Добро пожаловать в
-                                семью!</h3></div>
+                            <div class="col-12 col-md-7"><h3 class="light pt-1 text-center">{{$trans('strings.Welcome to the family!')}}</h3></div>
                         </div>
                         <div class="row m-auto m-md-0 p-md-0">
                             <div class="box row mt-5 p-2 p-md-1 p-lg-4">
@@ -708,8 +690,8 @@
                                         <div class="col icon p-0 col-2 col-md-3"><img class="w-100"
                                                                                       :src="'assets/landing-img/Content/FourthIcon1.webp'"
                                                                                       alt=""></div>
-                                        <div class="col col-10 col-md-9"><p class="light ">Выгодно для <br
-                                            class="notdisplay insmall"> клиента</p></div>
+                                        <div class="col col-10 col-md-9"><p class="light ">{{$trans('strings.Beneficial for')}}<br
+                                            class="notdisplay insmall">{{$trans('strings.the client')}}</p></div>
                                     </div>
                                 </div>
                                 <div class="col col-12 col-md-3 part">
@@ -717,8 +699,8 @@
                                         <div class="col icon p-0 col-2 col-md-3"><img class="w-100"
                                                                                       :src="'assets/landing-img/Content/FourthIcon2.webp'"
                                                                                       alt=""></div>
-                                        <div class="col col-9"><p class="light  ">Удобно для <br
-                                            class="notdisplay insmall"> пользователя</p></div>
+                                        <div class="col col-9"><p class="light  ">{{$trans('strings.Convenient for')}}<br
+                                            class="notdisplay insmall">{{$trans('strings.user')}}</p></div>
                                     </div>
                                 </div>
 
@@ -727,8 +709,8 @@
                                         <div class="col icon p-0 col-2 col-md-3"><img class="w-100"
                                                                                       :src="'assets/landing-img/Content/FourthIcon3.webp'"
                                                                                       alt=""></div>
-                                        <div class="col col-9"><p class="light ">Разумно для <br
-                                            class="notdisplay insmall"> прибыли</p></div>
+                                        <div class="col col-9"><p class="light ">{{$trans('strings.Reasonable for')}}<br
+                                            class="notdisplay insmall">{{$trans('strings.profits')}}</p></div>
                                     </div>
                                 </div>
                                 <div class="col col-12 col-md-3 part">
@@ -736,8 +718,8 @@
                                         <div class="col icon p-0 col-2 col-md-3"><img class="w-100"
                                                                                       :src="'assets/landing-img/Content/FourthIcon4.webp'"
                                                                                       alt=""></div>
-                                        <div class="col col-9"><p class="light ">Полезно для <br
-                                            class="notdisplay insmall"> бизнеса</p></div>
+                                        <div class="col col-9"><p class="light ">{{$trans('strings.Useful for')}}<br
+                                            class="notdisplay insmall">{{$trans('strings.business')}}</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -821,33 +803,31 @@
                 </div>
                 <div class="wrapper medium small">
                     <div class="row">
-                        <div class="title textincenter pb-md-5 mb-md-5"><h2 class="dark">Выбирайте Бот-Переводчик</h2>
+                        <div class="title textincenter pb-md-5 mb-md-5"><h2 class="dark">{{$trans('strings.Choose a Bot Translator')}}</h2>
                         </div>
                         <div class="notdisplay insmall">
                             <div class="item row mb-md-5">
                                 <div class="col image col-12 col-md-6 p-5 px-3 p-lg-0"><img
                                     :src="'assets/landing-img/Content/FifthImage1.webp'" alt=""></div>
                                 <div class="col text col-12 col-md-6 pr-md-5">
-                                    <h3 class="gray">Начните свой бизнес без команды</h3>
-                                    <p class="lightgray">Вы можете подключить свой бизнес к нашей системе для
-                                        привличения новых клиентов и увеличения заработка. </p>
+                                    <h3 class="gray">{{$trans('strings.Start your business without a team')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.You can connect your business to our system to attract new customers and increase earnings.')}} </p>
                                 </div>
                             </div>
                             <div class="item row mb-md-5">
                                 <div class="col image col-12 col-md-6 pl-md-5 order2 toorder1 insmall"><img
                                     :src="'assets/landing-img/Content/FifthImage2.webp'" alt=""></div>
                                 <div class="col text col-12 col-md-6 pr-md-5 order1 toorder2 insmall">
-                                    <h3 class="gray">Воспользуйтесь!</h3>
-                                    <p class="lightgray">Используйте наш сервис для возврата потраченных денег.</p>
+                                    <h3 class="gray">{{$trans('strings.Take advantage!')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.Use our service to return the money spent.')}}</p>
                                 </div>
                             </div>
                             <div class="item row mb-md-5">
                                 <div class="col image col-12 col-md-6 pl-md-5"><img
                                     :src="'assets/landing-img/Content/FifthImage3.webp'" alt=""></div>
                                 <div class="col text col-12 col-md-6 pr-md-5">
-                                    <h3 class="gray">Держите все в одном месте!</h3>
-                                    <p class="lightgray">Одна система скидок и акций для всех любимых магазинов, кафе и
-                                        ресторанов, а так же популярных сервисов услуг.</p>
+                                    <h3 class="gray">{{$trans('strings.Keep everything in one place!')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.One system of discounts and promotions for all your favorite shops, cafes and restaurants, as well as popular services')}}</p>
                                 </div>
                             </div>
                             <div class="item row mb-md-5">
@@ -856,18 +836,16 @@
                                          style="width: 100%;">
                                 </div>
                                 <div class="col text col-12 col-md-6 pr-md-5 order1 toorder2 insmall">
-                                    <h3 class="gray">Поднимите конверсию!</h3>
-                                    <p class="lightgray">Наш сервис увеличит покупательскую заинтересованности в товарах
-                                        и услугах Вашего бизнеса.</p>
+                                    <h3 class="gray">{{$trans('strings.Raise the conversion rate!')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.Our service will increase customer interest in the goods and services of your business.')}}</p>
                                 </div>
                             </div>
                             <div class="item row mb-md-5">
                                 <div class="col image col-12 col-md-6 pl-md-5"><img
                                     :src="'assets/landing-img/Content/FifthImage5.webp'" alt=""></div>
                                 <div class="col text col-12 col-md-6 pr-md-5">
-                                    <h3 class="gray">Вовлекайте!</h3>
-                                    <p class="lightgray">Привликайте друзей в нашу систему и получайте кэшбек за каждую
-                                        их покупку.</p>
+                                    <h3 class="gray">{{$trans('strings.Get involved!')}}</h3>
+                                    <p class="lightgray">{{$trans('strings.Invite your friends to our system and get cashback for each of their purchases.')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -877,26 +855,24 @@
                             <div class="col image col-12 col-md-6 p-5 px-3 p-lg-0"><img
                                 :src="'assets/landing-img/Content/FifthImage1.webp'" alt=""></div>
                             <div class="col text col-12 col-md-6 pr-md-5">
-                                <h3 class="gray">Начните свой бизнес без команды</h3>
-                                <p class="lightgray">Вы можете подключить свой бизнес к нашей системе для привличения
-                                    новых клиентов и увеличения заработка.</p>
+                                <h3 class="gray">{{$trans('strings.Start your business without a team')}}</h3>
+                                <p class="lightgray">{{$trans('strings.You can connect your business to our system to attract new customers and increase earnings.')}}.</p>
                             </div>
                         </div>
                         <div class="item row mb-md-5">
                             <div class="col image col-12 col-md-6 pl-md-5 order2 toorder1 insmall"><img
                                 :src="'assets/landing-img/Content/FifthImage2.webp'" alt=""></div>
                             <div class="col text col-12 col-md-6 pr-md-5 order1 toorder2 insmall">
-                                <h3 class="gray">Воспользуйтесь!</h3>
-                                <p class="lightgray">Используйте наш сервис для возврата потраченных денег.</p>
+                                <h3 class="gray">{{$trans('strings.Take advantage!')}}</h3>
+                                <p class="lightgray">{{$trans('strings.Use our service to return the money spent.')}}</p>
                             </div>
                         </div>
                         <div class="item row mb-md-5">
                             <div class="col image col-12 col-md-6 pl-md-5"><img
                                 :src="'assets/landing-img/Content/FifthImage3.webp'" alt=""></div>
                             <div class="col text col-12 col-md-6 pr-md-5">
-                                <h3 class="gray">Держите все в одном месте!</h3>
-                                <p class="lightgray">Одна система скидок и акций для всех любимых магазинов, кафе и
-                                    ресторанов, а так же популярных сервисов услуг.</p>
+                                <h3 class="gray">{{$trans('strings.Keep everything in one place!')}}</h3>
+                                <p class="lightgray">{{$trans('strings.One system of discounts and promotions for all your favorite shops, cafes and restaurants, as well as popular services')}}</p>
                             </div>
                         </div>
                         <div class="item row mb-md-5">
@@ -905,18 +881,16 @@
         width: 100%;
     "></div>
                             <div class="col text col-12 col-md-6 pr-md-5 order1 toorder2 insmall">
-                                <h3 class="gray">Поднимите конверсию!</h3>
-                                <p class="lightgray">Наш сервис увеличит покупательскую заинтересованности в товарах и
-                                    услугах Вашего бизнеса.</p>
+                                <h3 class="gray">{{$trans('strings.Raise the conversion rate!')}}</h3>
+                                <p class="lightgray">{{$trans('strings.Our service will increase customer interest in the goods and services of your business.')}}</p>
                             </div>
                         </div>
                         <div class="item row mb-md-5">
                             <div class="col image col-12 col-md-6 pl-md-5"><img
                                 :src="'assets/landing-img/Content/FifthImage5.webp'" alt=""></div>
                             <div class="col text col-12 col-md-6 pr-md-5">
-                                <h3 class="gray">Вовлекайте!</h3>
-                                <p class="lightgray">Привликайте друзей в нашу систему и получайте кэшбек за каждую их
-                                    покупку.</p>
+                                <h3 class="gray">{{$trans('strings.Get involved!')}}</h3>
+                                <p class="lightgray">{{$trans('strings.Invite your friends to our system and get cashback for each of their purchases.')}}</p>
                             </div>
                         </div>
                     </div>
@@ -932,76 +906,76 @@
                 <div class="wrapper medium small">
                     <div class="row textincenter">
                         <div class="header textincenter pb-4 p-md-0">
-                            <div class="title  "><h2 class="dark">Выберите свой тариф</h2></div>
+                            <div class="title  "><h2 class="dark">{{$trans('strings.Choose your tariff')}}</h2></div>
                             <div class="row content d-inline lightgray">
-                                <a>За месяц </a>
-                                <a>За 1 год (-20%)</a>
+                                <a>{{$trans('strings.Per month')}} </a>
+                                <a>{{$trans('strings.For 1 year (-20%)')}}</a>
                             </div>
                         </div>
                         <div class="content wrapperbox row row-cols-1 row-cols-md-4 p-0 p-lg-4 mt-md-5">
                             <div class="col box p-md-0 toorder2 insmall mt-4 mt-md-0">
                                 <div class="header p-4 p-md-0 p-lg-4 mb-4 row">
-                                    <div class="title pb-3 pb-md-4"><h3 class="light">Индивидуальный</h3></div>
+                                    <div class="title pb-3 pb-md-4"><h3 class="light">{{$trans('strings.Individual')}}</h3></div>
                                     <div class="content">
-                                        <p class="light pb-3 pb-md-4">Соберем тариф под Ваши нужды</p>
-                                        <p class="light pb-3 pb-md-4">Рассылки неограничены</p>
+                                        <p class="light pb-3 pb-md-4">{{$trans('strings.We will assemble a tariff for your needs')}}</p>
+                                        <p class="light pb-3 pb-md-4">{{$trans('strings.Mailing lists are unlimited')}}</p>
                                     </div>
                                     <div class="button">
-                                        <button class="blue towhite">Обсудить тариф</button>
+                                        <button class="blue towhite">{{$trans('strings.Discuss the tariff')}}</button>
                                     </div>
                                 </div>
                                 <div class="content notdisplay insmall">
                                     <ul id="services" class="p-0 text-md-end">
-                                        <li><h3 class="dark"> Список услуг</h3></li>
+                                        <li><h3 class="dark">{{$trans('strings.List of services')}}</h3></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="header p-4 p-md-0 p-lg-4 mb-4 row">
-                                    <div class="title  "><h3 class="dark">Базовый</h3></div>
-                                    <p class="dark mb-md-5">Многоуровневые автоворонки</p>
+                                    <div class="title  "><h3 class="dark">{{$trans('strings.Basic')}}</h3></div>
+                                    <p class="dark mb-md-5">{{$trans('strings.Multilevel autoworks')}}</p>
                                     <h2 class="gray mb-4" style="font-size: 28px!important;">1099 <span
                                         class="lightgray" style="font-size: 20px!important;">руб / мес</span></h2>
                                     <div class="button">
-                                        <button class="blue towhite">Попробовать бесплатно</button>
+                                        <button class="blue towhite">{{$trans('strings.Try it for free')}}</button>
                                     </div>
                                 </div>
                                 <div class="content">
                                     <ul id="base">
-                                        <li><h3 class="blue notdisplay insmall">для старта</h3></li>
+                                        <li><h3 class="blue notdisplay insmall">{{$trans('strings.to start')}}</h3></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="header p-4 p-md-0 p-lg-4 mb-4 row">
-                                    <div class="title "><h3 class="dark">Стандартный</h3></div>
-                                    <p class="dark mb-md-5">Автоворонки и рассылки</p>
+                                    <div class="title "><h3 class="dark">{{$trans('strings.Standard')}}</h3></div>
+                                    <p class="dark mb-md-5">{{$trans('strings.Autoworks and mailing lists')}}</p>
                                     <h2 class="gray mb-4" style="font-size: 28px!important; margin: auto">1099 <span
                                         class="lightgray" style="font-size: 20px!important;">руб / мес</span></h2>
                                     <div class="button">
-                                        <button class="blue towhite">Попробовать бесплатно</button>
+                                        <button class="blue towhite">{{$trans('strings.Try it for free')}}</button>
                                     </div>
                                 </div>
                                 <div class="content">
                                     <ul id="standart">
-                                        <li><h3 class="blue notdisplay insmall">для малого бизнеса</h3></li>
+                                        <li><h3 class="blue notdisplay insmall">{{$trans('strings.for small businesses')}}</h3></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="header p-4 p-md-0 p-lg-4 mb-4 row">
-                                    <div class="title "><h3 class="dark">Премиум</h3></div>
-                                    <p class="dark mb-md-5">Полная автоматизация Вашего бизнеса</p>
+                                    <div class="title "><h3 class="dark">{{$trans('strings.Premium')}}</h3></div>
+                                    <p class="dark mb-md-5">{{$trans('strings.Complete automation of your business')}}</p>
                                     <h2 class="gray mb-4" style="font-size: 28px!important; margin: auto">1099 <span
                                         class="lightgray" style="font-size: 20px!important;">руб / мес</span></h2>
 
                                     <div class="button">
-                                        <button class="blue towhite">Попробовать бесплатно</button>
+                                        <button class="blue towhite">{{$trans('strings.Try it for free')}}</button>
                                     </div>
                                 </div>
                                 <div class="content">
                                     <ul id="premium">
-                                        <li><h3 class="blue notdisplay insmall">для компаний</h3></li>
+                                        <li><h3 class="blue notdisplay insmall">{{$trans('strings.for companies')}}</h3></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1199,8 +1173,8 @@
                 <div class="wrapper">
                     <div class="row mx-0 px-0 mx-md-5 px-md-5">
                         <div class="header textincenter">
-                            <h2 class="dark">Внедрите сервис в Ваш бизнесс</h2>
-                            <p class="dark">Увеличьте число покупателей с помощью SKIDKA SERVICE</p>
+                            <h2 class="dark">{{$trans('strings.Implement the service into your business')}}</h2>
+                            <p class="dark">{{$trans('strings.Increase the number of customers with SKIDKA SERVICE')}}</p>
                         </div>
                         <div class="content row row-cols-1 p-0 justify-content-center">
                             <div class="col p-0 w-100">
@@ -1210,8 +1184,8 @@
                                                                                                   :src="'assets/landing-img/Content/Ninth1.svg'"
                                                                                                   alt=""></div>
                                         <div class="col col-9 text">
-                                            <h3 class="dark" style="font-weight: 800">Шаг 1</h3>
-                                            <p>Вы подключаете свой бизнесс к сервису SKIDKA SERVICE
+                                            <h3 class="dark" style="font-weight: 800">{{$trans('strings.Step 1')}}</h3>
+                                            <p>{{$trans('strings.You are connecting your business to the SKIDKA SERVICE')}}
                                             </p>
                                         </div>
                                     </div>
@@ -1224,8 +1198,8 @@
                                             class="pt-2 w-100 mt-1" :src="'assets/landing-img/Content/Ninth2.svg'"
                                             alt=""></div>
                                         <div class="col col-9 text">
-                                            <h3 class="dark" style="font-weight: 800">Шаг 2</h3>
-                                            <p>Клиент, подключенный к кэшбек-сервису, совершает покупку у Вас</p>
+                                            <h3 class="dark" style="font-weight: 800">{{$trans('strings.Step 2')}}</h3>
+                                            <p>{{$trans('strings.A client connected to the cashback service makes a purchase from you')}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1237,8 +1211,8 @@
                                             class="pt-2 w-100 mt-1" :src="'assets/landing-img/Content/Ninth3.svg'"
                                             alt=""></div>
                                         <div class="col col-9 text ">
-                                            <h3 class="dark" style="font-weight: 800">Шаг 3</h3>
-                                            <p>кэшбек-сервис возвращает часть стоимости покупки на счет покупателя</p>
+                                            <h3 class="dark" style="font-weight: 800">{{$trans('strings.Step 3')}}</h3>
+                                            <p>{{$trans("cashback service returns part of the purchase price to the buyer's account")}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1250,9 +1224,8 @@
                                             class="pt-2 mt-1  w-100" :src="'assets/landing-img/Content/Ninth4.svg'"
                                             alt=""></div>
                                         <div class="col col-9 text">
-                                            <h3 class="dark" style="font-weight: 800">Шаг 4</h3>
-                                            <p>С помощью реферальной ссылки пользователь приводит в нашу систему
-                                                друзьями</p>
+                                            <h3 class="dark" style="font-weight: 800">{{$trans('strings.Step 4')}}</h3>
+                                            <p>{{$trans('strings.With the help of a referral link, the user leads friends to our system')}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1264,8 +1237,8 @@
                                             class="pt-2 w-100 mt-1" :src="'assets/landing-img/Content/Ninth5.svg'"
                                             alt=""></div>
                                         <div class="col col-9 text">
-                                            <h3 class="dark" style="font-weight: 800">Шаг 5</h3>
-                                            <p>Количество клиентов Вашего бизнеса растет</p>
+                                            <h3 class="dark" style="font-weight: 800">{{$trans('strings.Step 5')}}</h3>
+                                            <p>{{$trans('strings.The number of customers of your business is growing')}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1281,31 +1254,31 @@
                     <a name="writetodeveloper"></a>
                     <div class="row">
                         <div class="title textincenter dark pb-md-5">
-                            <h2>Остались вопросы?</h2>
-                            <h2> Обратитесь к нам за помощью</h2></div>
+                            <h2>{{$trans('strings.Any other questions?')}}</h2>
+                            <h2> {{$trans('strings.Contact us for help')}}</h2></div>
                         <div class="content">
                             <div class="row mt-4">
                                 <div class="col col-12 col-md-4">
-                                    <label for="username">Ваше имя?</label><br/>
+                                    <label for="username">{{$trans('strings.Your name?')}}</label><br/>
                                     <input class="gray w-100 mt-2" type="text" id="username"
-                                           placeholder="Как к Вам обращаться?">
+                                           :placeholder="$trans('strings.How to contact you?')">
                                 </div>
                                 <div class="col col-12 col-md-4 mt-4 mt-md-0">
-                                    <label for="usernumber">Ваш номер телефона?</label><br/>
+                                    <label for="usernumber">{{$trans('strings.Your phone number?')}}</label><br/>
                                     <input class="gray w-100 mt-2" type="text" id="usernumber"
-                                           placeholder="Как с Вами связаться?">
+                                           :placeholder="$trans('strings.How can I contact you?')">
                                 </div>
                                 <div class="col-4"></div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col col-12 col-md-8">
-                                    <label for="usertext">Сообщение</label><br/>
+                                    <label for="usertext">{{$trans('strings.Message')}}</label><br/>
                                     <input class="gray w-100 mt-2" type="text" id="usertext"
-                                           placeholder="Вопрос к разработчикам">
+                                           :placeholder="$trans('strings.Question to the developers')">
                                 </div>
                                 <div class="col col-12 col-md-4">
                                     <button class="white toblue mt-4 w-100 w-md-75 "
-                                            onclick="redirectTo('sendmessage')">Отправить
+                                            onclick="redirectTo('sendmessage')">$trans('strings.Send')
                                     </button>
                                 </div>
                             </div>
@@ -1331,8 +1304,7 @@
                         </div>
                         <div class="contentChat">
                             <div class="botmessage ">
-                                <div class="text">Здавствуйте, Вас приветсвует лучший кэшбек-сервис в мире! Чем могу
-                                    помочь?
+                                <div class="text">{{$trans('strings.Hello, the best cashback service in the world welcomes you! How can I help you?')}}
                                 </div>
                             </div>
                         </div>
@@ -1351,15 +1323,14 @@
             </div>
             <div class="wrapper textincenter">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 pb-md-5 mb-md-5">
-                    <div class="col notdisplay insmall text-start text-lg-end gray"><p class="m-auto">Хотите получать
-                        кэшбек уже сейчас?</p></div>
+                    <div class="col notdisplay insmall text-start text-lg-end gray"><p class="m-auto">{{$trans('strings.Do you want to receive cashback now?')}}</p></div>
                     <div class="col p-0 ">
                         <button class="yellow order1 toorder2 insmall px-md-5 w-100 "
-                                onclick="redirectTo('writetobot')">Написать боту
+                                onclick="redirectTo('writetobot')">{{$trans('strings.Write to the bot')}}
                         </button>
                     </div>
                     <div class="col notdisplay inxsmall order2 toorder1 inxsmall  text-lg-start gray"><h3
-                        class="m-auto">Попробуйте это просто!</h3></div>
+                        class="m-auto">{{$trans('strings.Try it easy!')}}</h3></div>
                 </div>
                 <div class="row row-cols-1 row-cols-md-3">
                     <div class="col logo p-5 m-0">
@@ -1367,7 +1338,7 @@
                                                                                    :src="'assets/landing-img/IconStroke.png'"
                                                                                    alt=""></a>
                     </div>
-                    <div class="col gray"><a href="#writetodeveloper"><h3>Написать разработчикам</h3></a></div>
+                    <div class="col gray"><a href="#writetodeveloper"><h3>{{$trans('strings.Write to developers')}}</h3></a></div>
                     <div class="col links row">
                         <a class="facebook p-0 col-md-12 col-lg-6" onclick="redirectTo('facebook')"><i
                             class="fab fa-facebook-square " style="color:#3b5998"></i>

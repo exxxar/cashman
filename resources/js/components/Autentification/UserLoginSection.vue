@@ -8,8 +8,8 @@
             </template>
         </Header>
         <div class="section mt-2 text-center">
-            <h1>Авторизация</h1>
-            <h4>Заполните форму для авторизации</h4>
+            <h1>{{$trans('strings.Authorization')}}</h1>
+            <h4>{{$trans('strings.Fill out the authorization form')}}</h4>
         </div>
         <div class="section mb-5 p-2">
             <AlertErrors :form="form" class="mb-2"></AlertErrors>
@@ -19,9 +19,9 @@
                     <div class="card-body pb-1">
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="email">Электронная почта</label>
+                                <label class="label" for="email">{{$trans('strings.Email')}}</label>
                                 <input v-model="form.email" type="email" name="email" id="email"
-                                       placeholder="Введите Вашу электронную почту"
+                                       :placeholder="$trans('strings.Enter your email address')"
                                        class="form-control">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -31,10 +31,10 @@
                         </div>
                         <div class="form-group basic">
                             <div class="input-wrapper">
-                                <label class="label" for="password">Пароль</label>
+                                <label class="label" for="password">{{$trans('strings.Password')}}</label>
                                 <input v-model="form.password" type="password" id="password" name="password"
                                        autocomplete="off"
-                                       placeholder="Введите Ваш пароль"
+                                       :placeholder="$trans('strings.Enter your email address')"
                                        class="form-control">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
@@ -46,15 +46,15 @@
                 </div>
                 <div class="form-links mt-2">
                     <div>
-                        <a href="register">Регистрация</a>
+                        <a href="register">{{ $trans('strings.Register') }}</a>
                     </div>
                     <div>
-                        <a href="password/reset" class="text-muted">Забыли пароль?</a>
+                        <a href="password/reset" class="text-muted">{{$trans('strings.Forgot Your Password?')}}</a>
                     </div>
                 </div>
                 <div class="form-button-group">
                     <button type="submit" :disabled='form.errors.any() || !isComplete'
-                            class="btn btn-primary btn-block btn-lg">Войти
+                            class="btn btn-primary btn-block btn-lg">{{$trans('strings.Login')}}
                     </button>
                 </div>
             </form>
@@ -66,7 +66,6 @@
 import Header from "../LayoutComponents/Header";
 import Form from "vform"
 import {AlertErrors, HasError} from "vform/src/components/bootstrap5"
-
 export default {
     name: "UserLoginSection",
     components: {Header, HasError, AlertErrors},
@@ -82,14 +81,18 @@ export default {
         async loginUser() {
             await this.form.post('login')
             window.location.href = 'user-profile';
-
-
         },
     },
     computed: {
         isComplete() {
             return this.form.email && this.form.password;
         }
+    },
+    mounted(){
+        localStorage.setItem('locale', 'en');
+        this.$lang.setLocale('en');
+        console.log(localStorage.getItem('locale'))
+        console.log(this.$trans('strings.Authorization'))
     }
 }
 </script>

@@ -5,7 +5,7 @@
         </div>
         <div class="price">{{items.price}}</div>
         <p v-html="items.title"></p>
-        <a v-if="action" href="#" class="btn btn-primary btn-block btn-sm">Купить</a>
+        <a v-if="action" href="#" class="btn btn-primary btn-block btn-sm">{{ $trans('strings.Buy') }}</a>
     </div>
 </template>
 

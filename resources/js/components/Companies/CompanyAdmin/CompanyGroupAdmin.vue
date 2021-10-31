@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Администраторы компании
+                {{$trans('strings.Company Administrators')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -18,7 +18,7 @@
                             <img :src="'assets/sample/' + admin.avatar" alt="image" class="imaged w86 rounded">
                             <div class="in">
                                 <div style="margin: 0 0 0 2%;">
-                                    <header>Код администратора - {{admin.id}}</header>
+                                    <header>{{$trans('strings.Admin Code')}} - {{admin.id}}</header>
                                     <header>{{ admin.name }}</header>
                                     <footer>{{ admin.phone }}</footer>
                                 </div>

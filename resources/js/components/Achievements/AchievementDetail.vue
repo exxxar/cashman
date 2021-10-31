@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Achievement — {{ achievement.title }}
+                {{$trans('strings.strings.Achievement')}} — {{ achievement.title }}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">
@@ -22,15 +22,15 @@
                 </div>
                 <ul class="listview simple-listview no-space mt-3">
                     <li>
-                        <strong>Position</strong>
+                        <strong>{{$trans('strings.strings.Position')}}</strong>
                         <span class="text-success">{{ achievement.position }}</span>
                     </li>
                     <li>
-                        <strong>Description</strong>
+                        <strong>{{$trans('strings.strings.Description')}}</strong>
                         <span>{{ achievement.description }}</span>
                     </li>
                     <li>
-                        <strong>Prize image</strong>
+                        <strong>{{$trans('strings.strings.Prize image')}}</strong>
                         <div class="icon-wrapper">
                             <div class="iconbox">
                                 <img :src="achievement.prize_image_url" alt="image" class="imaged w200 square">
@@ -38,19 +38,19 @@
                         </div>
                     </li>
                     <li>
-                        <strong>Prize Description</strong>
+                        <strong>{{$trans('strings.strings.Prize Description')}}</strong>
                         <span>{{ achievement.prize_description }}</span>
                     </li>
                     <li>
-                        <strong>Active</strong>
+                        <strong>{{$trans('strings.strings.Active')}}</strong>
                         <span>Yes</span>
                     </li>
                     <li>
-                        <strong>Date</strong>
+                        <strong>{{$trans('strings.strings.Date')}}</strong>
                         <span>{{ achievement.created_at }}</span>
                     </li>
                     <li>
-                        <strong>Amount</strong>
+                        <strong>{{$trans('strings.strings.Amount')}}</strong>
                         <h3 class="m-0">$ {{ achievement.value }}</h3>
                     </li>
                 </ul>

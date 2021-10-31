@@ -7,33 +7,31 @@
                 </a>
             </template>
             <template v-slot:title>
-                Ваша реклама
+                {{$trans('strings.Your advertisement')}}
             </template>
         </Header>
         <br/>
         <br/>
         <div class="section mt-2 mb-2">
             <div class="section-title">
-                Добавить новую рекламу
+               {{$trans('strings.Add Ads')}}
                 <button @click="getStoryAdminMenu" type="button" class="btn btn-icon btn-info me-1">
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
             </div>
-            <h4 class="text-center" v-if="advertisements.length===0">У вашей компании пока нет ни одной рекламной
-                записи. Нажмите на кнопку
-                "Добавить новую рекламу", чтобы пользователи знали о ваших новостях и акциях</h4>
+            <h4 class="text-center" v-if="advertisements.length===0">{{$trans('strings.Your company doesn\'t have any advertising records yet. Click on the \"Add new Ads\" button to let users know about your news and promotions')}}</h4>
             <div v-if="advertisements.length>0" class="card text-center">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Код</th>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Создатель</th>
-                            <th>Изображение</th>
-                            <th>Тип рекламы</th>
-                            <th>Действие</th>
+                            <th>{{$trans('strings.Code')}}</th>
+                            <th>{{$trans('strings.Title')}}</th>
+                            <th>{{$trans('strings.Description')}}</th>
+                            <th>{{$trans('strings.Creator')}}</th>
+                            <th>{{$trans('strings.Images')}}</th>
+                            <th>{{$trans('strings.Type of advertisement')}}</th>
+                            <th>{{$trans('strings.Action')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -77,17 +75,17 @@
                 <ul class="pagination pagination-rounded">
                     <li>
                         <button class="page-link" @click="prevPage" :disabled="pageNumber===0" type="button">
-                            Предыдущая
+                            {{$trans('strings.Previous')}}
                         </button>
                     </li>
                     <li class="disabled ">
                         <a class="page-link" style="background: #fff !important;color: #6236FF !important;">
-                            Страница {{ pageNumber + 1 }} из {{ pageCount }}
+                            {{$trans('strings.Page')}} {{ pageNumber + 1 }} {{$trans('strings.from')}} {{ pageCount }}
                         </a>
                     </li>
                     <li>
                         <button class="page-link" @click="nextPage" :disabled="pageNumber >= pageCount-1" type="button">
-                            Следующая
+                            {{$trans('strings.Next')}}
                         </button>
                     </li>
                 </ul>

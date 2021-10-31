@@ -6,6 +6,9 @@
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
             </template>
+            <template v-slot:title>
+                {{$trans('strings.History Action')}} — {{ action.type }}
+            </template>
             <template v-slot:right>
                 <a href="javascript:;" class="headerButton" data-bs-toggle="modal"
                    data-bs-target="#DialogIconedButtonInline">
@@ -18,29 +21,33 @@
                 <div class="listed-detail mt-3">
                     <div class="icon-wrapper">
                         <div class="iconbox">
-                            <img :src="'../assets/sample/' + action.image" alt="image" class="imaged w76 rounded">
+                            <img :src="action.logo" alt="image" class="imaged w76 rounded">
                         </div>
                     </div>
-                    <h3 class="text-center mt-2">{{ action.title }}</h3>
+                    <h3 class="text-center mt-2">{{ action.value }}</h3>
                 </div>
                 <ul class="listview simple-listview no-space mt-3">
                     <li>
-                        <span class="me-5">Description</span>
-                        <strong class="h-100" v-html="action.description"></strong>
+                        <span>{{$trans('strings.Description')}}</span>
+                        <strong>{{ action.description }}</strong>
                     </li>
                     <li>
-                        <span>Date</span>
-                        <strong>{{ action.created_at|myDate() }}</strong>
+                        <span>{{$trans('strings.Money in Check')}}</span>
+                        <strong>{{ action.money_in_check }}</strong>
                     </li>
                     <li>
-                        <span>Type</span>
-                        <strong>{{ action.notification_type }}</strong>
+                        <span>{{$trans('strings.Date')}}</span>
+                        <strong>{{ action.created_at }}</strong>
+                    </li>
+                    <li>
+                        <span>{{$trans('strings.Type')}}</span>
+                        <strong>{{ action.type }}</strong>
                     </li>
                 </ul>
             </div>
         </div>
         <BottomMenu></BottomMenu>
-        <ConfirmActionModal :action="'Удалить ' + action.title + ' из истории действий?' " :id="action.id"></ConfirmActionModal>
+        <ConfirmActionModal :action="$trans('strings.Remove') + action.value + $trans('strings.from the history of actions?') "></ConfirmActionModal>
     </fragment>
 </template>
 

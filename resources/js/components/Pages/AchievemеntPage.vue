@@ -7,7 +7,7 @@
                 </a>
             </template>
             <template v-slot:title>
-                Achievements
+                {{$trans('strings.Achievements')}}
             </template>
         </Header>
         <div id="appCapsule" class="full-height">

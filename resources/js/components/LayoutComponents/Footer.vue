@@ -1,7 +1,7 @@
 <template>
     <div class="appFooter mt-4">
         <div class="footer-title">
-            Cashman © 2021. Все права защищены.
+            {{$trans('strings.Cashman © 2021. All rights reserved.')}}
         </div>
         Cashman
     </div>
