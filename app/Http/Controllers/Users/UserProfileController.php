@@ -70,8 +70,8 @@ class UserProfileController extends Controller
         $actions = Notification::where('user_id', $profile->id)->latest()->limit(6)->get();
         $cashback = [];
         foreach($cashbackCompanies as $c){
-            $debitings = HistoryUsersCompany::where(['user_id'=>$profile->id, 'company_id'=>$c, 'type'=>'Начисление'])->sum('value');
-            $offs = HistoryUsersCompany::where(['user_id'=>$profile->id, 'company_id'=>$c, 'type'=>'Списание'])->sum('value');
+            $debitings = HistoryUsersCompany::where(['user_id'=>$profile->id, 'company_id'=>$c, 'type->ru'=>'Начисление'])->sum('value');
+            $offs = HistoryUsersCompany::where(['user_id'=>$profile->id, 'company_id'=>$c, 'type->ru'=>'Списание'])->sum('value');
             $score = 0;
             $money = HistoryUsersCompany::where(['user_id'=>$profile->id,'company_id'=>$c ])->sum('money_in_check');
             if($debitings>$offs){

@@ -23,7 +23,7 @@
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('user') }">
                                 <HasError :form="form" field="user"></HasError>
                             </div>
-                            <p v-if="score!==null">{{$trans('Available amount for debiting')}} - {{score}}</p>
+                            <p v-if="score!==null">{{$trans('strings.Available amount for debiting')}} - {{score}}</p>
                         <div class="form-group">
                             <label>{{$trans('strings.Receipt number')}}</label>
                             <input v-model="form.description" type="text" name="description"
@@ -115,7 +115,8 @@ export default {
                 cashback: null,
                 company: 0,
                 admin: 0,
-                image: null
+                image: null,
+                lang: null
             }),
             dropzoneOptions: {
                 url: 'api/description/photo',
@@ -140,6 +141,7 @@ export default {
             this.form.company = this.company
             this.form.admin = this.admin
             this.form.cashback = this.calculatedCashBack
+            this.form.lang = localStorage.getItem('locale')
             this.form.post('api/debiting/cashback').then(() => {
                 $('#CashbackModal').modal('hide')
                 this.filesRemove()
@@ -162,6 +164,7 @@ export default {
         offsCashback() {
             this.form.company = this.company
             this.form.admin = this.admin
+            this.form.locale = localStorage.getItem('locale')
             this.form.post('api/offs/cashback').then((response) => {
                 $('#CashbackModal').modal('hide')
                 this.filesRemove()

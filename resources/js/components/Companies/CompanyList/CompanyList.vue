@@ -2,7 +2,7 @@
     <div class="section mt-4" id="splide-slider">
         <div class="section-heading padding">
             <h2 class="title">{{$trans('strings.Companies')}}</h2>
-            <a href="/search-company" class="link">{{$trans('strings.View all')}}}</a>
+            <a href="/search-company" class="link">{{$trans('strings.View all')}}</a>
         </div>
         <splide :slides="companies" :options="options" :key="trigger">
             <splide-slide v-for="company in companies" :key="company.id">

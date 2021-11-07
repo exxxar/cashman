@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Translatable\HasTranslations;
 
 class HistoryUsersCompany extends Model
 {
-    use HasFactory;
+    use HasTranslations, HasFactory;
     protected $table = 'history_users_companies';
     protected $fillable = ['user_id', 'company_id', 'company_admin_id',
         'value', 'money_in_check', 'description', 'type'];
+    public $translatable = ['description','type'];
     protected $appends = ['company', 'user'];
     public function user()
     {

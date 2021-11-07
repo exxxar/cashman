@@ -35,7 +35,7 @@ import store from './store/index'
 
 import moment from 'moment';
 Vue.filter('myDate', function(date){
-    moment.locale('ru');
+    moment.locale(localStorage.getItem('locale'));
     return moment(date).format("LL");
 });
 
@@ -48,15 +48,6 @@ var VueScrollTo = require('vue-scrollto');
 Vue.use(VueScrollTo)
 
 
-import YmapPlugin from 'vue-yandex-maps'
-const settings = {
-    apiKey: '865b6aaf-1477-4185-ac17-c503079aa759',
-    lang: 'ru_RU',
-    coordorder: 'latlong',
-    version: '2.1'
-}
-Vue.use(YmapPlugin, settings)
-
 require('lang.js');
 import VueLang from '@eli5/vue-lang-js'
 import translations from './vue-translations.json';
@@ -66,7 +57,14 @@ Vue.use(VueLang, {
     locale: 'en', // Set locale
     fallback: 'ru' // Set fallback locale
 });
-
+import YmapPlugin from 'vue-yandex-maps'
+const settings = {
+    apiKey: '865b6aaf-1477-4185-ac17-c503079aa759',
+    lang: localStorage.getItem('faker_locale'),
+    coordorder: 'latlong',
+    version: '2.1'
+}
+Vue.use(YmapPlugin, settings)
 
 /**
  * The following block of code may be used to automatically register your
@@ -150,8 +148,12 @@ const app = new Vue({
 });
 axios.get('/locale').then((response)=>{
     localStorage.setItem('locale', response.data.locale);
+    if(response.data.locale === 'ru'){
+        localStorage.setItem('faker_locale', 'ru_RU');
+    }else{
+        localStorage.setItem('faker_locale', 'en_US');
+    }
 });
-console.log(localStorage.getItem('locale'))
 if (localStorage.getItem('locale')) {
     app.$lang.setLocale(localStorage.getItem('locale'));
     localize(localStorage.getItem('locale'));
@@ -162,3 +164,6 @@ if (localStorage.getItem('locale')) {
     localize('en');
     localeChanged();
 }
+
+
+

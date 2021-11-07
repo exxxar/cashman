@@ -12,7 +12,7 @@
         </Header>
         <br/>
         <br/>
-        <div class="listview-title mt-2">{{$trans("Your company's data")}}</div>
+        <div class="listview-title mt-2">{{$trans('strings.Your company\'s data')}}</div>
         <ul class="listview image-listview inset">
             <li>
                 <a :href="'/company-admin-products-' + id" class="item">
@@ -20,7 +20,7 @@
                         <ion-icon name="wallet-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>{{trans('Products')}}</div>
+                        <div>{{$trans('strings.Products')}}</div>
                     </div>
                 </a>
             </li>
@@ -45,7 +45,7 @@
                 </a>
             </li>
         </ul>
-        <div class="listview-title mt-2">{{$trans("Your company's data")}}</div>
+        <div class="listview-title mt-2">{{$trans("strings.Your company's data")}}</div>
         <ul class="listview image-listview inset">
             <li>
                 <a :href="'/company-action-menu-'+id" class="item">
@@ -63,7 +63,7 @@
                         <ion-icon name="person-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        <div>{{trans('Company Administrators')}}</div>
+                        <div>{{$trans('strings.Company Administrators')}}</div>
                     </div>
                 </a>
             </li>
@@ -81,7 +81,6 @@ export default {
     components: {BottomMenu, Header},
     props: {
         id: {
-            type: Number,
             required: true
         }
     }

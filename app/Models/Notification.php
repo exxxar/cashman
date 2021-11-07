@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpKernel\Profiler\Profile;
-
+use Spatie\Translatable\HasTranslations;
 class Notification extends Model
 {
-    use HasFactory;
+    use HasTranslations, HasFactory;
     protected $table = 'notifications';
     protected $fillable = ['title', 'description', 'notification_type', 'user_id', 'object_id', 'object_type', 'is_seen'];
+    public $translatable = ['title', 'description', 'notification_type'];
     protected $appends = ['image'];
     public function user()
     {
@@ -26,4 +28,18 @@ class Notification extends Model
         }
         return $image;
     }
+    /**
+     * Convert the model instance to an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $attributes = parent::toArray();
+        foreach ($this->getTranslatableAttributes() as $field) {
+            $attributes[$field] = $this->getTranslation($field, App::getLocale());
+        }
+        return $attributes;
+    }
+
 }
