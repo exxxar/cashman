@@ -122,11 +122,13 @@ export default {
                 password: '',
                 password_confirmation: '',
                 submitted: '',
+                lang: null
             })
         }
     },
     methods: {
         async registerUser() {
+            this.form.lang = localStorage.getItem('locale')
             await this.form.post('/register')
             window.location.href = 'user-profile';
         }

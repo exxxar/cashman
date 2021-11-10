@@ -11,6 +11,7 @@ use App\Models\UsersFriedsByCompany;
 use App\Notifications\RealTimeNotification;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -58,14 +59,21 @@ class PromocodeController extends Controller
                 'company_id' => $company_id, 'parent_id' => $user_id]);
             $company->users()->attach(['user_id' => Auth::user()->getAuthIdentifier()]);
             $user = User::find($user_id);
+            if(App::getLocale() == 'ru'){
             $user->notify(new RealTimeNotification('У вас появился новый друг по компании  ' . $company['title'],
                 'От компании ' . $company['title'],
                 'assets/sample/' . $company['image'], $user->device_token));
+            }else{
+                $user->notify(new RealTimeNotification('You have a new friend in the company  ' . $company['title'],
+                    'Company ' . $company['title'],
+                    'assets/sample/' . $company['image'], $user->device_token));
+            }
             Notification::create([
-                'title' => 'У вас появился новый друг!',
-                'description' => 'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                'title' => ['ru'=>'У вас появился новый друг по компании  '. $company['title'], 'en'=>'You have a new friend in the company '. $company['title']],
+                'description' => ['ru'=>'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                    'en'=>'You will be able to receive multi-level cashback from purchases of this user in this company'],
                 'user_id' => $user_id,
-                'notification_type' => 'Добавление рефералла',
+                'notification_type' => ['ru'=>'Добавление рефералла', 'en'=>'Adding a referral'],
                 'object_id' => Auth::user()->getAuthIdentifier(),
                 'object_type' => 'user'
             ]);

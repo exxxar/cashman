@@ -88,14 +88,23 @@ class RegisterController extends Controller
                 'company_id' => $company_id, 'parent_id' => $parent_id]);
             $company->users()->attach(['user_id' => $user->id]);
             $parent = User::find($parent_id);
-            $parent->notify(new RealTimeNotification('У вас появился новый друг по компании  ' . $company['title'],
-                'От компании ' . $company['title'],
-                'assets/sample/' . $company['image'], $parent->device_token));
+            if (!is_null($user->device_token)) {
+                if ($data['lang'] == 'ru') {
+                    $parent->notify(new RealTimeNotification('У вас появился новый друг по компании  ' . $company['title'],
+                        'От компании ' . $company['title'],
+                        'assets/sample/' . $company['image'], $parent->device_token));
+                } else {
+                    $parent->notify(new RealTimeNotification('You have a new friend in the company  ' . $company['title'],
+                        'Company ' . $company['title'],
+                        'assets/sample/' . $company['image'], $parent->device_token));
+                }
+            }
             Notification::create([
-                'title' => 'У вас появился новый друг!',
-                'description' => 'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                'title' => ['ru'=>'У вас появился новый друг!', 'en'=>'You have a new friend!'],
+                'description' => ['ru'=>'Вы сможете получать многоуровневый кэшбек от покупок данного пользователя в данной компании',
+                    'en'=>'You will be able to receive multi-level cashback from purchases of this user in this company'],
                 'user_id' => $parent_id,
-                'notification_type' => 'Добавление рефералла',
+                'notification_type' => ['ru'=>'Добавление рефералла', 'en'=>'Adding a referral'],
                 'object_id' => $user->id,
                 'object_type' => 'user'
             ]);

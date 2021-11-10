@@ -41,14 +41,23 @@ class CompanyAdminsController extends Controller
             ]);
         }
         $user = User::find($request->user);
-        $user->notify(new RealTimeNotification('Вы стали администратором компании ' . $request->company['title'],
-            'От компании ' . $request->company['title'],
-            'assets/sample/' . $request->company['image'], $user->device_token));
+        if (!is_null($user->device_token)) {
+            if ($request->lang == 'ru') {
+                $user->notify(new RealTimeNotification('Вы стали администратором компании ' . $request->company['title'],
+                    'От компании ' . $request->company['title'],
+                    'assets/sample/' . $request->company['image'], $user->device_token));
+            } else {
+                $user->notify(new RealTimeNotification('You have become an administrator of the company ' . $request->company['title'],
+                    'Company ' . $request->company['title'],
+                    'assets/sample/' . $request->company['image'], $user->device_token));
+            }
+        }
         Notification::create([
-            'title' => 'Вы стали администратором компании!',
-            'description' => 'Теперь у Вас есть доступ к ресурсам компании ' . $request->company['title'],
-            'user_id' => $user,
-            'notification_type' => 'Назначение администратора',
+            'title' => ['ru'=>'Вы стали администратором компании!', 'en'=>'You have become the company administrator!'],
+            'description' => ['ru'=>'Теперь у Вас есть доступ к ресурсам компании ' . $request->company['title'],
+                'en'=>'Now you have access to the company\'s resources ' . $request->company['title']],
+            'user_id' => $user->id,
+            'notification_type' => ['ru'=>'Назначение администратора', 'en'=>'Appointment of an administrator'],
             'object_id' => $request->company['id'],
             'object_type' => 'company'
         ]);
@@ -67,14 +76,23 @@ class CompanyAdminsController extends Controller
         $user->isActive = null;
         $user->save();
         $user = User::find($request->user);
-        $user->notify(new RealTimeNotification('Вас лишили прав администратора компании  ' . $request->company['title'],
-            'От компании ' . $request->company['title'],
-            'assets/sample/' . $request->company['image'], $user->device_token));
+        if (!is_null($user->device_token)) {
+            if ($request->lang == 'ru') {
+                $user->notify(new RealTimeNotification('Вас лишили прав администратора компании ' . $request->company['title'],
+                    'От компании ' . $request->company['title'],
+                    'assets/sample/' . $request->company['image'], $user->device_token));
+            } else {
+                $user->notify(new RealTimeNotification('You have been stripped of your company administrator rights ' . $request->company['title'],
+                    'Company ' . $request->company['title'],
+                    'assets/sample/' . $request->company['image'], $user->device_token));
+            }
+        }
         Notification::create([
-            'title' => 'Вас лишили прав администратора компании...',
-            'description' => 'Теперь у Вас нет доступа к ресурсам компании ' . $request->company['title'],
-            'user_id' => $user,
-            'notification_type' => 'Удаление администратора',
+            'title' => ['ru'=>'Вас лишили прав администратора компании...', 'en'=>'You have been stripped of your company administrator rights...'],
+            'description' => ['ru'=>'Теперь у Вас нет доступа к ресурсам компании ' . $request->company['title'],
+                'en'=>'Now you don\'t have access to the company\'s resources ' . $request->company['title']],
+            'user_id' => $user->id,
+            'notification_type' => ['ru'=>'Удаление администратора', 'en'=>'Deleting an Administrator'],
             'object_id' => $request->company['id'],
             'object_type' => 'company'
         ]);

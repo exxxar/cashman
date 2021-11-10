@@ -21,7 +21,6 @@ export default {
             messaging.onMessage(function (payload) {
                 const note = payload.data.title.split(',');
                 const noteTitle = note[0]
-                console.log(payload);
                 const noteOptions = {
                     body: payload.data.body,
                     icon: payload.data.image,

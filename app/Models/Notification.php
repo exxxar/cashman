@@ -24,7 +24,7 @@ class Notification extends Model
             $image = Company::where('id', $this->object_id)->value('image');
         }
         if($this->object_type == 'user'){
-            $image = Profile::where('user_id', $this->object_id)->value('avatar');
+            $image = UserProfile::where('user_id', $this->object_id)->value('avatar');
         }
         return $image;
     }

@@ -25,20 +25,22 @@ class CashBackController extends Controller
             'cashback' => ['required']
         ]);
         if (!is_null($request->image)) {
-            $request->description = ['en' =>$request->description . '. The attached document is available at <a href="' . $request->image . '">link</a>',
+            $request->description = ['en' => $request->description . '. The attached document is available at <a href="' . $request->image . '">link</a>',
                 'ru' => $request->description . '. Прикрепленный документ доступен по <a href="' . $request->image . '">ссылке</a>'];
         }
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->cashback, $request->sum,
-                $request->description, ['ru'=>'Начисление', 'en'=>'Accrual']);
+            $request->description, ['ru' => 'Начисление', 'en' => 'Accrual']);
         $user = User::find($request->user);
-        if ($request->lang == 'ru') {
-            $user->notify(new RealTimeNotification('Начисление кэшбека - ' . $request->cashback . '$' . ',accrual',
-                'От компании ' . $request->company['title'],
-                'assets/sample/' . $request->company['image'], $user->device_token));
-        }else{
-            $user->notify(new RealTimeNotification('Cashback accrual - ' . $request->cashback . '$' . ',accrual',
-                'From the company ' . $request->company['title'],
-                'assets/sample/' . $request->company['image'], $user->device_token));
+        if (!is_null($user->device_token)) {
+            if ($request->lang == 'ru') {
+                $user->notify(new RealTimeNotification('Начисление кэшбека - ' . $request->cashback . '$' . ',accrual',
+                    'От компании ' . $request->company['title'],
+                    'assets/sample/' . $request->company['image'], $user->device_token));
+            } else {
+                $user->notify(new RealTimeNotification('Cashback accrual - ' . $request->cashback . '$' . ',accrual',
+                    'From the company ' . $request->company['title'],
+                    'assets/sample/' . $request->company['image'], $user->device_token));
+            }
         }
         $friends1 = UsersFriedsByCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id']])->get();
         if ($friends1 != null) {
@@ -48,17 +50,19 @@ class CashBackController extends Controller
                 foreach ($friends1 as $friend1) {
                     $cashback1 = $request->sum / 100 * $cashback_percent_level_1;
                     $this->debitingMultiLevelCashback($friend1->parent_id, $request->company, $request->admin, $cashback1, $request->sum,
-                        ['ru'=>'Начисление кэшбека 1 уровня от суммы чека вашего друга по компании', 'en'=>'Accrual of level 1 cashback from the amount of your friend\'s check for the company'],
-                        ['ru'=>'Начисление', 'en'=>'Accrual']);
-                    $user = User::find($friend1);
-                    if ($request->lang == 'ru') {
-                        $user->notify(new RealTimeNotification('Начисление кэшбека 1 уровня - ' . $request->cashback . '$' . ',accrual',
-                            'От компании ' . $request->company['title'],
-                            'assets/sample/' . $request->company['image'], $user->device_token));
-                    }else{
-                        $user->notify(new RealTimeNotification('Accrual of level 1 cashback - ' . $request->cashback . '$' . ',accrual',
-                            'From the company ' . $request->company['title'],
-                            'assets/sample/' . $request->company['image'], $user->device_token));
+                        ['ru' => 'Начисление кэшбека 1 уровня от суммы чека вашего друга по компании', 'en' => 'Accrual of level 1 cashback from the amount of your friend\'s check for the company'],
+                        ['ru' => 'Начисление', 'en' => 'Accrual']);
+                    $user = User::find($friend1->parent_id);
+                    if (!is_null($user->device_token)) {
+                        if ($request->lang == 'ru') {
+                            $user->notify(new RealTimeNotification('Начисление кэшбека 1 уровня - ' . $request->cashback . '$' . ',accrual',
+                                'От компании ' . $request->company['title'],
+                                'assets/sample/' . $request->company['image'], $user->device_token));
+                        } else {
+                            $user->notify(new RealTimeNotification('Accrual of level 1 cashback - ' . $request->cashback . '$' . ',accrual',
+                                'From the company ' . $request->company['title'],
+                                'assets/sample/' . $request->company['image'], $user->device_token));
+                        }
                     }
                     $friends2 = UsersFriedsByCompany::where(['user_id' => $friend1->parent_id, 'company_id' => $request->company['id']])->get();
                     if ($friends2 != null) {
@@ -66,17 +70,19 @@ class CashBackController extends Controller
                             foreach ($friends2 as $friend2) {
                                 $cashback2 = $request->sum / 100 * $cashback_percent_level_2;
                                 $this->debitingMultiLevelCashback($friend2->parent_id, $request->company, $request->admin, $cashback2, $request->sum,
-                                    ['ru'=>'Начисление кэшбека 2 уровня от суммы чека вашего друга по компании', 'en'=>'Accrual of level 2 cashback from the amount of your friend\'s check for the company'],
-                                    ['ru'=>'Начисление', 'en'=>'Accrual']);
-                                $user = User::find($friend2);
-                                if ($request->lang == 'ru') {
-                                    $user->notify(new RealTimeNotification('Начисление кэшбека 2 уровня - ' . $request->cashback . '$' . ',accrual',
-                                        'От компании ' . $request->company['title'],
-                                        'assets/sample/' . $request->company['image'], $user->device_token));
-                                }else{
-                                    $user->notify(new RealTimeNotification('Accrual of level 2 cashback - ' . $request->cashback . '$' . ',accrual',
-                                        'From the company ' . $request->company['title'],
-                                        'assets/sample/' . $request->company['image'], $user->device_token));
+                                    ['ru' => 'Начисление кэшбека 2 уровня от суммы чека вашего друга по компании', 'en' => 'Accrual of level 2 cashback from the amount of your friend\'s check for the company'],
+                                    ['ru' => 'Начисление', 'en' => 'Accrual']);
+                                $user = User::find($friend2->parent_id);
+                                if (!is_null($user->device_token)) {
+                                    if ($request->lang == 'ru') {
+                                        $user->notify(new RealTimeNotification('Начисление кэшбека 2 уровня - ' . $request->cashback . '$' . ',accrual',
+                                            'От компании ' . $request->company['title'],
+                                            'assets/sample/' . $request->company['image'], $user->device_token));
+                                    } else {
+                                        $user->notify(new RealTimeNotification('Accrual of level 2 cashback - ' . $request->cashback . '$' . ',accrual',
+                                            'From the company ' . $request->company['title'],
+                                            'assets/sample/' . $request->company['image'], $user->device_token));
+                                    }
                                 }
                             }
                         }
@@ -95,23 +101,23 @@ class CashBackController extends Controller
             'sum' => ['required']
         ]);
         if (!is_null($request->image)) {
-            $request->description = ['en' =>$request->description . '. The attached document is available at <a href="' . $request->image . '">link</a>',
+            $request->description = ['en' => $request->description . '. The attached document is available at <a href="' . $request->image . '">link</a>',
                 'ru' => $request->description . '. Прикрепленный документ доступен по <a href="' . $request->image . '">ссылке</a>'];
         }
         $score = HistoryUsersCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'type->ru' => 'Начисление'])->sum('value');
-        $offs = HistoryUsersCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'type->ru'=>'Списание'])->sum('value');
-        if ($score-$offs < $request->sum) {
+        $offs = HistoryUsersCompany::where(['user_id' => $request->user, 'company_id' => $request->company['id'], 'type->ru' => 'Списание'])->sum('value');
+        if ($score - $offs < $request->sum) {
             return response()->json(['error' => 'Недостаточно средств для выполнения списания!']);
         }
 
         $this->debitingMultiLevelCashback($request->user, $request->company, $request->admin, $request->sum, $request->sum,
-            $request->description, ['ru'=>'Списание', 'en'=>'Offs']);
+            $request->description, ['ru' => 'Списание', 'en' => 'Offs']);
         $user = User::find($request->user);
         if ($request->lang == 'ru') {
             $user->notify(new RealTimeNotification('Списание кэшбека - ' . $request->sum . '$' . ',offs',
                 'Компанией ' . $request->company['title'],
                 'assets/sample/' . $request->company['image'], $user->device_token));
-        }else{
+        } else {
             $user->notify(new RealTimeNotification('Cashback debiting - ' . $request->sum . '$' . ',offs',
                 'Company ' . $request->company['title'],
                 'assets/sample/' . $request->company['image'], $user->device_token));
@@ -129,10 +135,10 @@ class CashBackController extends Controller
             'description' => $description,
             'type' => $type
         ]);
-        $title = ['en'=>$type['en'] . '  cashback - ' . $cashback . '$' . ' Company - ' . $company['title'],
-            'ru'=>$type['ru'] . ' кэшбека - ' . $cashback . '$' . ' Компания - ' . $company['title']];
+        $title = ['en' => $type['en'] . '  cashback - ' . $cashback . '$' . ' Company - ' . $company['title'],
+            'ru' => $type['ru'] . ' кэшбека - ' . $cashback . '$' . ' Компания - ' . $company['title']];
         Notification::create([
-            'title' =>$title,
+            'title' => $title,
             'description' => $description,
             'user_id' => $user,
             'notification_type' => $type,
@@ -146,14 +152,15 @@ class CashBackController extends Controller
         $path = Storage::disk('public')->put('images/descriptions', $request->file);
         return response()->json(['file' => URL::to('/') . '/storage/' . $path]);
     }
+
     public function getUserBalance($id, $company)
     {
         $score = 0;
-        $debitings = HistoryUsersCompany::where(['user_id'=>$id, 'company_id'=>$company, 'type->ru'=>'Начисление'])->sum('value');
-        $offs = HistoryUsersCompany::where(['user_id'=>$id, 'company_id'=>$company, 'type->ru'=>'Списание'])->sum('value');
-        if($debitings>$offs){
-            $score = round($debitings-$offs,2);
+        $debitings = HistoryUsersCompany::where(['user_id' => $id, 'company_id' => $company, 'type->ru' => 'Начисление'])->sum('value');
+        $offs = HistoryUsersCompany::where(['user_id' => $id, 'company_id' => $company, 'type->ru' => 'Списание'])->sum('value');
+        if ($debitings > $offs) {
+            $score = round($debitings - $offs, 2);
         }
-        return response()->json(['score'=>$score]);
+        return response()->json(['score' => $score]);
     }
 }

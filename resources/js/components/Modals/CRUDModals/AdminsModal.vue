@@ -19,7 +19,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{$trans('strings.Close')}}</button>
-                        <button v-if="operation==='Add'" type="submit" class="btn btn-success">{{$trans('strings.Add an Administrator')}}
+                        <button v-if="operation==='Add'" type="submit" class="btn btn-success" >{{$trans('strings.Add an Administrator')}}
                         </button>
                         <button v-if="operation==='Delete'" type="submit" class="btn btn-success">{{$trans('strings.Remove the administrator')}}
                         </button>
@@ -50,13 +50,15 @@ export default {
         return {
             form: new Form({
                 user: null,
-                company: 0
+                company: 0,
+                lang: null
             })
         }
     },
     methods: {
         deleteAdmin() {
             this.form.company = this.company
+            this.form.lang = localStorage.getItem('locale')
             this.form.post('api/delete/company/admin').then((response) => {
                 $('#AdminsModal').modal('hide')
                 this.form.user = null
@@ -80,13 +82,14 @@ export default {
         },
         addAdmin() {
             this.form.company = this.company
+            this.form.lang = localStorage.getItem('locale')
             this.form.post('api/add/company/admin').then(() => {
                 $('#AdminsModal').modal('hide')
                 this.form.user = null
                 Swal.fire({
                     icon: 'success',
                     title: this.$trans('strings.The operation was successful!'),
-                    text: this.$trans('Administrator successfully added'),
+                    text: this.$trans('strings.Administrator successfully added'),
                 })
             }).catch(() => {
 
